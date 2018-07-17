@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_gallery_outer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ctj_bg_2"
+    android:clipChildren="false"
+    tools:context=".fragment.home.ErrorExercisesFragment">
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_gallery_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="50dp"
+        android:clipChildren="false" />
+
+    <com.huisu.iyoox.views.ExercisesErrorEmptyView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/tab_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_24"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:layout_below="@id/tab_view">
+
+        <TextView
+            android:id="@+id/title_bar_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="错题集"
+            android:textColor="@color/white"
+            android:textSize="@dimen/f_21" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

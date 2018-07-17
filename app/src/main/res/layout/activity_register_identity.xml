@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/icon_login_bg"
+    android:orientation="vertical"
+    tools:context="com.huisu.iyoox.activity.LoginActivity">
+
+    <include layout="@layout/layout_title_bar_all_trans" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dip_27"
+            android:text="请选择身份"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_30" />
+
+        <LinearLayout
+            android:id="@+id/register_identity_content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/select_student_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dip_27"
+                android:layout_marginRight="@dimen/dip_27"
+                android:background="@drawable/select_trans_bg"
+                android:descendantFocusability="blocksDescendants">
+
+                <ImageView
+                    android:id="@+id/icon_student_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/reg_student" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dip_8"
+                    android:layout_toRightOf="@id/icon_student_iv"
+                    android:padding="@dimen/dip_8"
+                    android:text="我是学生"
+                    android:textColor="@color/black_87"
+                    android:textSize="@dimen/f_18" />
+
+                <CheckBox
+                    android:id="@+id/identity_select_student_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:button="@drawable/select_check_box_bg"
+                    android:enabled="false" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/select_teacher_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dip_27"
+                android:layout_marginRight="@dimen/dip_27"
+                android:layout_marginTop="@dimen/dip_24"
+                android:background="@drawable/select_trans_bg"
+                android:descendantFocusability="blocksDescendants">
+
+                <ImageView
+                    android:id="@+id/icon_teacher_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/reg_teacher" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dip_8"
+                    android:layout_toRightOf="@id/icon_teacher_iv"
+                    android:padding="@dimen/dip_8"
+                    android:text="我是老师"
+                    android:textColor="@color/black_87"
+                    android:textSize="@dimen/f_18" />
+
+                <CheckBox
+                    android:id="@+id/identity_select_teahcer_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:button="@drawable/select_check_box_bg"
+                    android:enabled="false" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/register_identity_next_bt"
+                android:layout_width="@dimen/dip_320"
+                android:layout_height="@dimen/dip_40"
+                android:layout_below="@id/register_identity_content_layout"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dip_24"
+                android:background="@drawable/select_button_bg_maincolor"
+                android:text="马上注册"
+                android:textColor="@drawable/select_button_text_whit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dip_34"
+                android:layout_marginTop="@dimen/dip_10"
+                android:text="用户注册代表同意《艾优学服务条款》"
+                android:textColor="@color/color999"
+                android:textSize="@dimen/f_11" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

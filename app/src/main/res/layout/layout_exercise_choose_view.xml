@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:overScrollMode="never"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_8"
+                android:background="@drawable/shape_exercises_sign"
+                android:paddingBottom="@dimen/dip_8"
+                android:paddingLeft="@dimen/dip_20"
+                android:paddingRight="@dimen/dip_12"
+                android:paddingTop="@dimen/dip_8"
+                android:text="选择题"
+                android:textColor="@color/white" />
+        </FrameLayout>
+
+        <WebView
+            android:id="@+id/content_webview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dip_8"
+            android:paddingRight="@dimen/dip_8"
+            android:paddingTop="16dp"
+            android:scrollbars="none"
+            android:visibility="visible" />
+
+
+        <LinearLayout
+            android:id="@+id/option_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical" />
+
+        <!--解析-->
+        <LinearLayout
+            android:id="@+id/help_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/windowsbg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dip_27"
+                    android:gravity="center"
+                    android:text="名师解析"
+                    android:textColor="@color/color333"
+                    android:textSize="@dimen/f_18" />
+
+                <com.huisu.iyoox.views.HtmlTextView
+                    android:id="@+id/daan_html_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_20"
+                    android:layout_marginRight="@dimen/dip_16"
+                    android:layout_marginTop="@dimen/dip_26"
+                    android:textColor="@color/color333"
+                    android:textSize="@dimen/f_14" />
+
+                <com.huisu.iyoox.views.HtmlTextView
+                    android:id="@+id/analysis_html_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_20"
+                    android:layout_marginRight="@dimen/dip_16"
+                    android:layout_marginTop="@dimen/dip_26"
+                    android:textColor="@color/color333"
+                    android:textSize="@dimen/f_14" />
+
+                <com.huisu.iyoox.views.HtmlTextView
+                    android:id="@+id/fenxi_html_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_20"
+                    android:layout_marginRight="@dimen/dip_16"
+                    android:layout_marginTop="@dimen/dip_26"
+                    android:textColor="@color/color333"
+                    android:textSize="@dimen/f_14" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

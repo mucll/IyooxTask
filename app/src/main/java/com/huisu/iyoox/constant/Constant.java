@@ -1,0 +1,109 @@
+package com.huisu.iyoox.constant;
+
+import android.Manifest;
+import android.os.Environment;
+
+/**
+ * @author: vision
+ * @function:
+ * @date: 16/6/16
+ */
+public class Constant {
+
+    /**
+     * 网络请求成功
+     */
+    public static final int POST_SUCCESS_CODE = 1;
+    /**
+     * 一些失败的统一code
+     */
+    public static final int ERROR_CODE = -1;
+
+//----------------------------------密码界面根据type显示不同的界面---------------------------------------
+    /**
+     * 注册设置密码
+     */
+    public static final int PASSWORD_REGISTER = 0;
+    /**
+     * 登陆输入密码
+     */
+    public static final int PASSWORD_LOGIN = 1;
+    /**
+     * 重置密码
+     */
+    public static final int PASSWORD_RESET = 2;
+
+//----------------------------------发送短信的type---------------------------------------
+    /**
+     * 注册 请求验证码
+     */
+    public static final String MSG_CODE_REGISTER = "0";
+    /**
+     * 忘记密码 请求验证码
+     */
+    public static final String MSG_CODE_FORGET = "3";
+
+
+//----------------------------------用户身份---------------------------------------
+    /**
+     * 学生身份
+     */
+    public static final int STUDENT_TYPE = 1;
+    /**
+     * 老师身份
+     */
+    public static final int TEACHER_TYPE = 2;
+
+//----------------------------------学生做题状态或查看状态---------------------------------------
+    /**
+     * 学生做题
+     */
+    public static final int STUDENT_DOING = 1;
+
+    /**
+     * 解析查看
+     */
+    public static final int STUDENT_ANALYSIS = 2;
+
+    /**
+     * 解析查看
+     */
+    public static final int STUDENT_ERROR_DOING = 3;
+
+//----------------------------------科目ID---------------------------------------
+    /**
+     * 语文ID
+     */
+    public static final int SUBJECT_YUWEN = 1;
+    /**
+     * 数学ID
+     */
+    public static final int SUBJECT_SHUXU = 2;
+    /**
+     * 英语ID
+     */
+    public static final int SUBJECT_ENGLISH = 3;
+    /**
+     * 物理ID
+     */
+    public static final int SUBJECT_WULI = 4;
+    /**
+     * 化学ID
+     */
+    public static final int SUBJECT_HUAXUE = 5;
+
+    /**
+     * 权限常量相关
+     */
+    public static final int WRITE_READ_EXTERNAL_CODE = 0x01;
+    public static final String[] WRITE_READ_EXTERNAL_PERMISSION = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE};
+
+    public static final int HARDWEAR_CAMERA_CODE = 0x02;
+    public static final String[] HARDWEAR_CAMERA_PERMISSION = new String[]{Manifest.permission.CAMERA};
+
+    //整个应用文件下载保存路径
+    public static String APP_PHOTO_DIR = Environment.
+            getExternalStorageDirectory().getAbsolutePath().
+            concat("/imooc_business/photo/");
+}

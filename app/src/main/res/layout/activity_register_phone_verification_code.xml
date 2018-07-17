@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/icon_login_bg"
+    android:orientation="vertical"
+    tools:context="com.huisu.iyoox.activity.LoginActivity">
+
+    <include layout="@layout/layout_title_bar_all_trans" />
+
+    <TextView
+        android:id="@+id/register_phone_code_hint_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_27"
+        android:text="@string/send_msg_title_code_text"
+        android:textColor="@color/black_87"
+        android:textSize="@dimen/f_32" />
+
+    <RelativeLayout
+        android:id="@+id/phone_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_phone_code_hint_text"
+        android:layout_marginLeft="@dimen/dip_30"
+        android:layout_marginTop="@dimen/dip_40">
+
+        <TextView
+            android:id="@+id/register_code_phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dip_4"
+            android:textColor="@color/black_54"
+            android:textSize="@dimen/f_18" />
+
+
+        <TextView
+            android:id="@+id/register_send_code_tv"
+            android:layout_width="@dimen/dip_94"
+            android:layout_height="@dimen/dip_27"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dip_27"
+            android:background="@drawable/select_trans_r4_onclick"
+            android:gravity="center"
+            android:text="@string/send_msg_title_code_text"
+            android:textColor="@drawable/select_text_color_onclick"
+            android:textSize="@dimen/f_15" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/register_edit_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phone_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dip_105">
+
+        <EditText
+            android:id="@+id/register_phone_code_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dip_27"
+            android:layout_marginRight="@dimen/dip_27"
+            android:hint="@string/send_msg_edit_hint_text"
+            android:inputType="phone|number"
+            android:maxLength="4"
+            android:singleLine="true"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_16" />
+
+        <Button
+            android:id="@+id/register_phone_code_next_bt"
+            android:layout_width="@dimen/dip_320"
+            android:layout_height="@dimen/dip_40"
+            android:layout_marginTop="@dimen/dip_24"
+            android:background="@drawable/select_button_bg_maincolor"
+            android:enabled="false"
+            android:text="@string/next_bt_text"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

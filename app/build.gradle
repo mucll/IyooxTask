@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    signingConfigs {
+        config {
+            keyAlias 'iyoox'
+            keyPassword 'huisu123'
+            storeFile file('src/main/iyoox.jks')
+            storePassword 'huisu123'
+        }
+    }
+
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+    defaultConfig {
+        applicationId "com.huisu.iyoox"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            signingConfig signingConfigs.config
+            buildConfigField("boolean", "LOGSHOW", "false")
+            buildConfigField("String", "CHANNEL", "\"0\"")//渠道号
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            signingConfig signingConfigs.config
+            buildConfigField("String", "CHANNEL", "\"0\"")//渠道号
+            buildConfigField("boolean", "LOGSHOW", "true")
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    dexOptions {
+        javaMaxHeapSize "2g"  //设定java的堆内存为4g,如果电脑可以可设置更大
+        preDexLibraries = false //
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            jniLibs.srcDirs = ['libs']  //**在libs文件夹下找so文件*/
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs' //**在libs文件夹下找aar文件*/
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'com.jakewharton:butterknife:7.+'
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    //方法数超过了64K
+    implementation 'com.android.support:multidex:1.0.1'
+    //添加友盟统计
+    implementation 'com.umeng.analytics:analytics:latest.integration'
+    //okttp依赖
+    implementation 'com.squareup.okhttp3:okhttp:3.3.0'
+    implementation 'com.android.support:design:27.+'
+    implementation 'com.android.support:support-v4:27.+'
+    implementation files('libs/glide.jar')
+    implementation files('libs/umeng-share-core-6.9.2.jar')
+    implementation files('libs/umeng-share-wechat-simplify-6.9.2.jar')
+    implementation files('libs/wechat-sdk-android-without-mta-5.1.4.jar')
+    implementation files('libs/umeng-sharetool-6.9.2.jar')
+    implementation files('libs/umeng-common-1.5.3.jar')
+    implementation files('libs/renderscript-v8.jar')
+    implementation files('libs/mpchartlib.jar')
+    implementation files('libs/gson-2.2.2.jar')
+    implementation 'me.panavtec:drawableview:0.6.0'
+    implementation 'org.litepal.android:core:2.0.0'
+    implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
+}

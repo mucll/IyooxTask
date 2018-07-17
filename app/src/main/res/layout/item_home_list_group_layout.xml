@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dip_53">
+
+    <TextView
+        android:id="@+id/item_book_chapter_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/dip_4"
+        android:background="@drawable/icon_chapter"
+        android:text="第一单元"
+        android:textColor="@color/white"
+        android:textSize="@dimen/f_14" />
+</RelativeLayout>

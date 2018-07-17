@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/item_choose_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dip_13"
+        android:layout_marginLeft="@dimen/dip_16"
+        android:layout_marginRight="@dimen/dip_16"
+        android:layout_marginTop="@dimen/dip_13"
+        android:background="@drawable/select_exercises_item_bg"
+        android:descendantFocusability="blocksDescendants"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="1dp">
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/select_checkbox"
+            android:layout_width="@dimen/dip_40"
+            android:layout_height="match_parent"
+            android:background="@drawable/select_exercises_bg"
+            android:button="@null"
+            android:clickable="false"
+            android:drawablePadding="4dp"
+            android:enabled="false"
+            android:gravity="center"
+            android:textColor="@drawable/select_button_text_whit_check"
+            android:textSize="@dimen/f_16" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/dip_40"
+            android:orientation="vertical">
+
+            <com.huisu.iyoox.views.HtmlTextView
+                android:id="@+id/answer_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:clickable="false"
+                android:focusable="false"
+                android:paddingLeft="@dimen/dip_16"
+                android:textColor="@color/color333"
+                android:textSize="@dimen/f_16" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

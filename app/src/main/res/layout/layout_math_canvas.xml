@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_40"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_close"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/select_maincolor_bg2"
+            android:src="@drawable/icon_close" />
+
+        <ImageButton
+            android:id="@+id/btn_clear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/select_maincolor_bg2"
+            android:src="@drawable/icon_delete_white" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="@dimen/dip_80"
+        android:padding="@dimen/dip_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="预览"
+            android:textColor="@color/maincolor"
+            android:textSize="@dimen/f_15" />
+
+        <com.huisu.iyoox.views.HtmlTextView
+            android:id="@+id/mathView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/white"></com.huisu.iyoox.views.HtmlTextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/canvas_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/windowsbg">
+
+        <!--<com.sundata.views.canvasview.MyDrawableView-->
+            <!--android:id="@+id/paintView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="@dimen/dip_110"
+            android:layout_height="@dimen/dip_36"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dip_16"
+            android:background="@drawable/select_maincolor_r4_bg"
+            android:text="插入"
+            android:textColor="@color/white"
+            android:textSize="@dimen/f_16" />
+    </RelativeLayout>
+</LinearLayout>

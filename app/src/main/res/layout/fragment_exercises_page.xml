@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.exercisespager.ExercisesPageFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_2"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/zhishidian_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dip_8"
+                    android:textColor="@color/black_87"
+                    android:textSize="@dimen/f_18" />
+
+                <TextView
+                    android:id="@+id/fragment_exercises_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dip_8"
+                    android:textColor="@color/black_54"
+                    android:textSize="@dimen/f_16" />
+
+                <TextView
+                    android:id="@+id/fragment_current_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/fragment_exercises_count"
+                    android:textColor="@color/black_87"
+                    android:textSize="@dimen/f_18" />
+            </RelativeLayout>
+
+            <ProgressBar
+                android:id="@+id/exercises_progress_bar"
+                style="@style/InitProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.huisu.iyoox.views.TagViewPager
+                android:id="@+id/fragment_exercises_pager_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/student_home_work_floating_action_bt"
+            android:layout_width="@dimen/dip_50"
+            android:layout_height="@dimen/dip_50"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/stl_float_btn_cg" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/submit_bt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_48"
+        android:background="@color/maincolor"
+        android:text="提交答案"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+</LinearLayout>

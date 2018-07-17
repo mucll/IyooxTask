@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/shape_divider_line_1px"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <LinearLayout
+        android:id="@+id/mine_personal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_53"
+        android:background="@drawable/select_white_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dip_13"
+        android:paddingRight="@dimen/dip_13">
+
+        <ImageView
+            android:layout_width="@dimen/dip_23"
+            android:layout_height="@dimen/dip_23" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:drawableRight="@drawable/icon_next_black"
+            android:text="个人资料"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mine_interest_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_53"
+        android:background="@drawable/select_white_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dip_13"
+        android:paddingRight="@dimen/dip_13">
+
+        <ImageView
+            android:layout_width="@dimen/dip_23"
+            android:layout_height="@dimen/dip_23" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:drawableRight="@drawable/icon_next_black"
+            android:text="学习兴趣修改"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mine_record_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_53"
+        android:background="@drawable/select_white_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dip_13"
+        android:paddingRight="@dimen/dip_13">
+
+        <ImageView
+            android:layout_width="@dimen/dip_23"
+            android:layout_height="@dimen/dip_23" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:drawableRight="@drawable/icon_next_black"
+            android:text="购买记录"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mine_remind_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_53"
+        android:background="@drawable/select_white_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dip_13"
+        android:paddingRight="@dimen/dip_13">
+
+        <ImageView
+            android:layout_width="@dimen/dip_23"
+            android:layout_height="@dimen/dip_23" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:drawableRight="@drawable/icon_next_black"
+            android:text="学习提醒"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mine_contact_way_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_53"
+        android:background="@drawable/select_white_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dip_13"
+        android:paddingRight="@dimen/dip_13">
+
+        <ImageView
+            android:layout_width="@dimen/dip_23"
+            android:layout_height="@dimen/dip_23" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:drawableRight="@drawable/icon_next_black"
+            android:text="联系我们"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mine_setting_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_53"
+        android:background="@drawable/select_white_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dip_13"
+        android:paddingRight="@dimen/dip_13">
+
+        <ImageView
+            android:layout_width="@dimen/dip_23"
+            android:layout_height="@dimen/dip_23" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:drawableRight="@drawable/icon_next_black"
+            android:text="设置"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_16" />
+    </LinearLayout>
+
+</LinearLayout>

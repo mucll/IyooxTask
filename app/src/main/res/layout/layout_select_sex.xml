@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:id="@+id/register_sex_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/select_man_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/select_white_bg"
+            android:drawableLeft="@drawable/reg_boy"
+            android:drawableRight="@drawable/select_checkbox_onlyone"
+            android:gravity="center"
+            android:padding="@dimen/dip_12"
+            android:text="我是男生"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_18" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/black_12" />
+
+        <TextView
+            android:id="@+id/select_woman_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/select_white_bg"
+            android:drawableLeft="@drawable/reg_girl"
+            android:drawableRight="@drawable/select_checkbox_onlyone"
+            android:gravity="center"
+            android:padding="@dimen/dip_12"
+            android:text="我是女生"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_18" />
+    </LinearLayout>
+</RelativeLayout>

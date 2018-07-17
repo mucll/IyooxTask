@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ctj_bg_1">
+
+    <ImageView
+        android:id="@+id/item_exercises_error_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/icon_ctj_emptyview" />
+
+    <TextView
+        android:id="@+id/item_exercises_error_tv"
+        android:layout_width="@dimen/dip_130"
+        android:layout_height="@dimen/dip_32"
+        android:layout_below="@id/item_exercises_error_iv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dip_60"
+        android:background="@drawable/select_trans_r4_white"
+        android:gravity="center"
+        android:text="马上去学习"
+        android:textColor="@color/white"
+        android:textSize="@dimen/f_16" />
+</RelativeLayout>

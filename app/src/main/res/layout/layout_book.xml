@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+    >
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        >
+
+        <RadioGroup
+            android:id="@+id/book_view_gradiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <RadioButton
+                android:id="@+id/all_book_bt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/select_res_tab_btn_left"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dip_12"
+                android:paddingTop="@dimen/dip_12"
+                android:text="全部课程"
+                android:textSize="@dimen/f_13"
+                />
+
+            <RadioButton
+                android:id="@+id/pay_book_bt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/select_res_tab_btn_left"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dip_12"
+                android:paddingTop="@dimen/dip_12"
+                android:text="已购课程"
+                android:textSize="@dimen/f_13"
+                />
+
+            <RadioButton
+                android:id="@+id/cache_book_bt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/select_res_tab_btn_left"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dip_12"
+                android:paddingTop="@dimen/dip_12"
+                android:text="已缓存课程"
+                android:textSize="@dimen/f_13"
+                />
+        </RadioGroup>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="@color/white"
+        >
+
+        <ListView
+            android:id="@+id/book_view_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#00000000"
+            android:dividerHeight="0dip"
+            android:fadeScrollbars="false"
+            android:scrollbars="none"
+            />
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/top_show_msg_layout"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#eeFFEDD3"
+              android:gravity="center"
+              android:minHeight="@dimen/dip_40"
+              android:orientation="vertical"
+              android:visibility="visible">
+
+    <TextView
+        android:id="@+id/top_show_msg_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_top_msg"
+        android:drawablePadding="@dimen/dip_4"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dip_4"
+        android:paddingTop="@dimen/dip_4"
+        android:text="提醒消息"
+        android:textColor="#FF9900"
+        android:textSize="@dimen/f_16"/>
+</LinearLayout>

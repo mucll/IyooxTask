@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dip_12"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="@dimen/dip_2"
+            android:layout_height="match_parent"
+            android:background="@color/ex_right_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dip_4"
+            android:text="@string/item_answer_card_text"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_15" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dip_8"
+        android:layout_marginTop="@dimen/dip_8"
+        android:layout_weight="1">
+
+        <com.huisu.iyoox.views.EbagGridView
+            android:id="@+id/item_answer_card_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:numColumns="5"
+            android:verticalSpacing="@dimen/dip_12" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/black_12" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_answer_card_hint_text" />
+
+        <TextView
+            android:id="@+id/item_answer_card_error_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawableLeft="@drawable/shape_oval_exercises_error_color_8dp"
+            android:drawablePadding="@dimen/dip_4"
+            android:text="@string/error_text"
+            android:textSize="@dimen/f_12" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dip_8"
+            android:layout_toLeftOf="@id/item_answer_card_error_tv"
+            android:drawableLeft="@drawable/shape_oval_exercises_right_color_8dp"
+            android:drawablePadding="@dimen/dip_4"
+            android:text="@string/success_text"
+            android:textSize="@dimen/f_12" />
+    </RelativeLayout>
+</LinearLayout>

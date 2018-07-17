@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_canvas_view_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/select_white_bg"
+            android:paddingLeft="@dimen/dip_16"
+            android:paddingRight="@dimen/dip_16"
+            android:src="@drawable/stl_cg_del_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/drafts_text"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_18" />
+
+        <ImageButton
+            android:id="@+id/btn_canvas_view_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/select_white_bg"
+            android:paddingLeft="@dimen/dip_16"
+            android:paddingRight="@dimen/dip_16"
+            android:src="@drawable/stl_cg_clear_btn" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/canvas_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <me.panavtec.drawableview.DrawableView
+            android:id="@+id/paintView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_12" />
+
+    </RelativeLayout>
+</LinearLayout>

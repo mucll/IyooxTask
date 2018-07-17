@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dip_30"
+    android:background="@drawable/shape_main_tab"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/dip_20"
+    android:orientation="horizontal"
+    android:paddingTop="1px">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_main_tab_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="2dp">
+
+
+        <TextView
+            android:id="@+id/tab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="学习"
+            android:textColor="@color/maincolor"
+            android:textSize="@dimen/f_12" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_main_tab_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="2dp">
+
+
+        <TextView
+            android:id="@+id/tab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="错题集"
+            android:textColor="@color/black_26"
+            android:textSize="@dimen/f_12" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mine"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_main_tab_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="2dp">
+
+        <TextView
+            android:id="@+id/tab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="作业"
+            android:textColor="@color/black_26"
+            android:textSize="@dimen/f_12" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_main_tab_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="2dp">
+
+
+        <TextView
+            android:id="@+id/tab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="班级"
+            android:textColor="@color/black_26"
+            android:textSize="@dimen/f_12" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mine"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_main_tab_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="2dp">
+
+        <TextView
+            android:id="@+id/tab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="我的"
+            android:textColor="@color/black_26"
+            android:textSize="@dimen/f_12" />
+    </LinearLayout>
+
+</LinearLayout>
