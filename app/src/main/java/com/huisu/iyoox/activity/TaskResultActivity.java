@@ -3,8 +3,11 @@ package com.huisu.iyoox.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -17,6 +20,14 @@ import com.huisu.iyoox.activity.student.TaskStudentHomeWorkActivity;
 import com.huisu.iyoox.adapter.AnswerResultNumberAdapter;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.ExercisesModel;
+import com.huisu.iyoox.entity.ExercisesResultModel;
+import com.huisu.iyoox.entity.TaskResultModel;
+import com.huisu.iyoox.entity.User;
+import com.huisu.iyoox.entity.base.BaseTaskResultModel;
+import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.manager.UserManager;
+import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.JsonUtils;
 import com.huisu.iyoox.views.EbagGridView;
 
 import java.util.ArrayList;
@@ -32,36 +43,123 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
     private EbagGridView mGridView;
     private AnswerResultNumberAdapter mNumberAdapter;
     private PieChart mPieChart;
-    private Button resultAnalysis;
+    private Button resultAnalysis, refreshBt;
     private ArrayList<ExercisesModel> exercisesModels = new ArrayList<>();
-    private String zhishidianName;
+    private String zhishidianName, zhishiId, timeString;
+    private User user;
+    private TextView zhishidianTv, scoreTv, commentTv, jianyiTv, sortTv, timesTv, exercisesCountTv;
+    private RatingBar nanduBar;
 
     @Override
     protected void initView() {
         mGridView = findViewById(R.id.item_answer_card_grid_view);
         mPieChart = findViewById(R.id.item_answer_total_analysis_chart_view);
         resultAnalysis = findViewById(R.id.result_analysis_bt);
+        refreshBt = findViewById(R.id.refresh_bt);
+
+        zhishidianTv = findViewById(R.id.task_result_zhishi_name_tv);
+        scoreTv = findViewById(R.id.task_result_score_tv);
+        commentTv = findViewById(R.id.task_result_comment_tv);
+        jianyiTv = findViewById(R.id.task_result_jianyi);
+        sortTv = findViewById(R.id.task_result_sort);
+        timesTv = findViewById(R.id.task_result_times);
+        exercisesCountTv = findViewById(R.id.task_result_exercises_count_tv);
+        nanduBar = findViewById(R.id.task_result_nandu);
+
         mNumberAdapter = new AnswerResultNumberAdapter(context, exercisesModels);
         mGridView.setAdapter(mNumberAdapter);
-        initChart(mPieChart, 66);
     }
 
     @Override
     protected void initData() {
+        user = UserManager.getInstance().getUser();
         exercisesModels.clear();
         setTitle("答题报告");
         ArrayList<ExercisesModel> models = (ArrayList<ExercisesModel>) getIntent().getSerializableExtra("data");
         zhishidianName = getIntent().getStringExtra("zhishidianName");
+        zhishiId = getIntent().getStringExtra("zhishiId");
+        timeString = getIntent().getStringExtra("time");
+
+        //不是从完成作业界面点击进来的
         if (models != null && models.size() > 0) {
             exercisesModels.addAll(models);
+            mNumberAdapter.notifyDataSetChanged();
+            if (!TextUtils.isEmpty(zhishiId)) {
+                setPostInitData();
+            }
         }
-        mNumberAdapter.notifyDataSetChanged();
+
+    }
+
+    /**
+     * 初始化请求参数
+     */
+    private void setPostInitData() {
+        List<ExercisesResultModel> resultModels = new ArrayList<>();
+        for (ExercisesModel model : exercisesModels) {
+            ExercisesResultModel resultModel = new ExercisesResultModel();
+            resultModel.setTimu_id(Integer.parseInt(model.getTimu_id()));
+            resultModel.setIs_correct(model.getAnswersModel().isCorrect() ? 1 : 0);
+            resultModels.add(resultModel);
+        }
+        String json = JsonUtils.jsonFromObject(resultModels);
+        postResultData(json);
+    }
+
+    /**
+     * 请求报告数据
+     *
+     * @param resultJson
+     */
+    private void postResultData(String resultJson) {
+        RequestCenter.getTaskResultData(user.getId(), zhishiId, timeString, resultJson, new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                BaseTaskResultModel resultModel = (BaseTaskResultModel) responseObj;
+                if (resultModel.data != null) {
+                    setResultData(resultModel.data);
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
+    }
+
+    /**
+     * 初始化 数据
+     *
+     * @param data
+     */
+    private void setResultData(TaskResultModel data) {
+        //正确率
+        initChart(mPieChart, data.getCorrect_rate());
+        //知识点
+        zhishidianTv.setText(data.getZhishidian_name());
+        //得分比
+        scoreTv.setText(data.getCorrect_rate() + "%");
+        //难度
+        nanduBar.setRating(data.getNanyi_level());
+        //掌握
+        commentTv.setText(data.getZhangwo_level());
+        //学习建议
+        jianyiTv.setText(data.getSuggest());
+        //排比
+        sortTv.setText(data.getSort_rate());
+        //时间
+        timesTv.setText(data.getTimes());
+        //时间
+        exercisesCountTv.setText(data.getTimu_count()+"");
+
     }
 
     @Override
     protected void setEvent() {
         setBack();
         resultAnalysis.setOnClickListener(this);
+        refreshBt.setOnClickListener(this);
     }
 
     @Override
@@ -75,6 +173,9 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.result_analysis_bt:
                 startAnalysis();
+                break;
+            case R.id.refresh_bt:
+                finish();
                 break;
             default:
                 break;

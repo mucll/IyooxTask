@@ -103,7 +103,10 @@
     <color name="colore9">#E9E9E9</color>
     <color name="coloref6">#F6F6F6</color>
     <color name="coloreddd">#dddddd</color>
+    <color name="colorf0">#f0f0f0</color>
+    <color name="colorf7">#f7f7f7</color>
     <color name="colorf9">#f9f9f9</color>
+    <color name="colore7">#e7e7e7</color>
     <color name="btn_blue_normal">#1e90ff</color>
     <color name="green">#008000</color>
     <color name="blue_56">#5695E2</color>

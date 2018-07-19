@@ -9,7 +9,7 @@
     <string name="item_answer_proposal_text">学习建议</string>
     <string name="success_text">正确</string>
     <string name="error_text">错误</string>
-    <string name="item_total_exercises_count_text">总体数</string>
+    <string name="item_total_exercises_count_text">总题数</string>
     <string name="item_total_exercises_time_text">总用时</string>
     <string name="item_total_exercises_ranking_text">总排比</string>
 

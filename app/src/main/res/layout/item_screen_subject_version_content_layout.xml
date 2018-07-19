@@ -22,10 +22,11 @@
     </LinearLayout>
 
     <com.huisu.iyoox.views.EbagGridView
-        android:id="@+id/screen_stubject_version_grid_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:numColumns="3"
-        android:verticalSpacing="@dimen/dip_12" />
+    android:id="@+id/screen_stubject_version_grid_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:numColumns="3"
+    android:verticalSpacing="@dimen/dip_12" />
+
 </LinearLayout>

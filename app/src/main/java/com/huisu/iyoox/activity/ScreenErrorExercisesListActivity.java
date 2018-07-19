@@ -3,20 +3,22 @@ package com.huisu.iyoox.activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.adapter.ScreenTimeAdapter;
 import com.huisu.iyoox.adapter.ScreenVersionAdapter;
-import com.huisu.iyoox.adapter.ScreenZhiShiDianAdapter;
 import com.huisu.iyoox.entity.ScreenSubjectVersionModel;
 import com.huisu.iyoox.entity.ScreenZhiShiDianModel;
 import com.huisu.iyoox.entity.base.BaseScreenSubjectVersionModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.views.EbagGridView;
+import com.huisu.iyoox.views.FlowViewGroup;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,29 +32,28 @@ import java.util.List;
  */
 public class ScreenErrorExercisesListActivity extends BaseActivity {
 
-    private EbagGridView timeGridView, versionGridView, zhishiGridView;
-
+    private EbagGridView timeGridView, versionGridView;
+    private FlowViewGroup zhishiGroupView;
     private ArrayList<String> timeList = new ArrayList<>();
-    private ArrayList<ScreenSubjectVersionModel> subjectList = new ArrayList<>();
-    private ArrayList<ScreenZhiShiDianModel> zhiShiList = new ArrayList<>();
+    private ArrayList<ScreenSubjectVersionModel> versionList = new ArrayList<>();
     private ScreenTimeAdapter timeAdapter;
     private ScreenVersionAdapter versionAdapter;
-    private ScreenZhiShiDianAdapter zhishiAdapter;
-    private int setSelectTimePosition, setSelectVersionPosition, setSelectZhiShiPosition;
-    private Button submitBt;
+    private int selectTimePosition, selectVersionPosition, selectZhiShiPosition;
+    private View submitBt;
 
     @Override
     protected void initView() {
         setTimeData();
+        //时间
         timeGridView = findViewById(R.id.screen_time_grid_view);
         timeAdapter = new ScreenTimeAdapter(context, timeList);
         timeGridView.setAdapter(timeAdapter);
+        //版本
         versionGridView = findViewById(R.id.screen_stubject_version_grid_view);
-        versionAdapter = new ScreenVersionAdapter(context, subjectList);
+        versionAdapter = new ScreenVersionAdapter(context, versionList);
         versionGridView.setAdapter(versionAdapter);
-        zhishiGridView = findViewById(R.id.screen_zhishidian_grid_view);
-        zhishiAdapter = new ScreenZhiShiDianAdapter(context, zhiShiList);
-        zhishiGridView.setAdapter(zhishiAdapter);
+        //知识点
+        zhishiGroupView = findViewById(R.id.screen_zhishidian_grid_view);
         submitBt = findViewById(R.id.submit_bt);
     }
 
@@ -99,12 +100,10 @@ public class ScreenErrorExercisesListActivity extends BaseActivity {
      * @param data
      */
     private void setResultData(List<ScreenSubjectVersionModel> data) {
-        subjectList.clear();
-        zhiShiList.clear();
-        subjectList.addAll(data);
-        zhiShiList.addAll(subjectList.get(0).getZhishidian_list());
+        versionList.clear();
+        versionList.addAll(data);
         versionAdapter.notifyDataSetChanged();
-        zhishiAdapter.notifyDataSetChanged();
+        addFlow(versionList.get(0).getZhishidian_list(), zhishiGroupView);
     }
 
     @Override
@@ -113,46 +112,68 @@ public class ScreenErrorExercisesListActivity extends BaseActivity {
         timeGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setSelectTimePosition = position;
-                timeAdapter.setSelectPosition(setSelectTimePosition);
+                selectTimePosition = position;
+                timeAdapter.setSelectPosition(selectTimePosition);
                 timeAdapter.notifyDataSetChanged();
             }
         });
         versionGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setSelectVersionPosition = position;
-                versionAdapter.setSelectPosition(setSelectVersionPosition);
+                selectVersionPosition = position;
+                versionAdapter.setSelectPosition(selectVersionPosition);
                 versionAdapter.notifyDataSetChanged();
 
                 //刷新知识点数据
-                zhiShiList.clear();
-                zhiShiList.addAll(subjectList.get(setSelectVersionPosition).getZhishidian_list());
-                setSelectZhiShiPosition = 0;
-                zhishiAdapter.setSelectPosition(setSelectZhiShiPosition);
-                zhishiAdapter.notifyDataSetChanged();
-            }
-        });
-        zhishiGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setSelectZhiShiPosition = position;
-                zhishiAdapter.setSelectPosition(setSelectZhiShiPosition);
-                zhishiAdapter.notifyDataSetChanged();
+                selectZhiShiPosition = 0;
+                addFlow(versionList.get(selectVersionPosition).getZhishidian_list(), zhishiGroupView);
             }
         });
         submitBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra("time", setSelectTimePosition + 1 + "");
-                intent.putExtra("version", subjectList.get(setSelectVersionPosition).getJiaocai_id() + "");
-                intent.putExtra("zhishi", subjectList.get(setSelectVersionPosition)
-                        .getZhishidian_list().get(setSelectZhiShiPosition).getZhishidian_id() + "");
+                intent.putExtra("time", selectTimePosition + 1 + "");
+                intent.putExtra("version", versionList.get(selectVersionPosition).getJiaocai_id() + "");
+                intent.putExtra("zhishi", versionList.get(selectVersionPosition)
+                        .getZhishidian_list().get(selectZhiShiPosition).getZhishidian_id() + "");
                 setResult(RESULT_OK, intent);
                 finish();
             }
         });
+    }
+
+    /**
+     * 添加小类容
+     */
+    private void addFlow(final List<ScreenZhiShiDianModel> zhiShiList, final FlowViewGroup layout) {
+        layout.removeAllViews();
+        for (int i = 0; i < zhiShiList.size(); i++) {
+            final int j = i;
+            View view = View.inflate(context, R.layout.item_screen_zhishi_layout, null);
+            TextView text = view.findViewById(R.id.item_screen_time_tv);
+            layout.addView(view);
+            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) text.getLayoutParams();
+            lp.bottomMargin = 8;
+            lp.topMargin = 8;
+            lp.rightMargin = 10;
+            lp.leftMargin = 10;
+            view.setLayoutParams(lp);
+            ScreenZhiShiDianModel model = zhiShiList.get(i);
+            text.setText(model.getZhishidian_name());
+            if (i == selectZhiShiPosition) {
+                view.setSelected(true);
+            } else {
+                view.setSelected(false);
+            }
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectZhiShiPosition = j;
+                    addFlow(zhiShiList, layout);
+                }
+            });
+        }
     }
 
     @Override

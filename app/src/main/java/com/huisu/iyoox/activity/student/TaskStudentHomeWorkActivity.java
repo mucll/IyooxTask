@@ -2,9 +2,12 @@ package com.huisu.iyoox.activity.student;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.Chronometer;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.TaskResultActivity;
@@ -16,6 +19,7 @@ import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
 import com.huisu.iyoox.fragment.exercisespager.ExercisesPageFragment;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.DateUtils;
 import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.views.Loading;
 
@@ -30,12 +34,14 @@ import java.util.List;
  */
 public class TaskStudentHomeWorkActivity extends BaseActivity implements ExercisesPageFragment.OnStudentAnswerResultListener {
 
-    private String videoId;
+    private String videoId, zhishiId;
     private Loading loading;
     private String zhishidianName;
+    private Chronometer chronometer;
 
     @Override
     protected void initView() {
+        chronometer = findViewById(R.id.tv_time);
     }
 
     @Override
@@ -60,6 +66,7 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
     private void studentDoing() {
         setTitle("课后习题");
         videoId = getIntent().getStringExtra("videoId");
+        zhishiId = getIntent().getStringExtra("zhishiId");
         if (!TextUtils.isEmpty(videoId)) {
             postExercisesData();
         }
@@ -90,6 +97,10 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
                 if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE && baseVideoUrlModel.data != null) {
                     VideoTimuModel urlModel = baseVideoUrlModel.data;
                     if (urlModel.getTimu_list() != null && urlModel.getTimu_list().size() > 0) {
+                        //计时器清零
+                        chronometer.setVisibility(View.VISIBLE);
+                        chronometer.setBase(SystemClock.elapsedRealtime());
+                        chronometer.start();
                         initFragment(urlModel.getTimu_list(), baseVideoUrlModel.data.getShipin_name(), Constant.STUDENT_DOING);
                     }
                 }
@@ -145,6 +156,9 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
      * @param exercisesData 题目信息
      */
     private void judgeExercisesCorrect(ArrayList<ExercisesModel> exercisesData) {
+        chronometer.stop();
+        long time = SystemClock.elapsedRealtime() - chronometer.getBase();
+        String timeString = DateUtils.formatmmss(time);
         for (ExercisesModel model : exercisesData) {
             if (model.getAnswersModel().getChooseAnswer().equals(model.getDaan())) {
                 //正确
@@ -156,8 +170,16 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
         }
         Intent intent = new Intent(this, TaskResultActivity.class);
         intent.putExtra("data", exercisesData);
+        intent.putExtra("zhishiId", zhishiId);
+        intent.putExtra("time", timeString);
         intent.putExtra("zhishidianName", zhishidianName);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        chronometer.stop();
     }
 }

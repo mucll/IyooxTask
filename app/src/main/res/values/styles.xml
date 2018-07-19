@@ -210,4 +210,12 @@
         <item name="android:textColor">@color/grey</item>
         <item name="android:textSize">@dimen/textSize_small</item>
     </style>
+
+    <style name="RadingStyle" parent="@android:style/Widget.Holo.RatingBar.Small">
+        <!-- 定义星星图片 -->
+        <item name="android:progressDrawable">@drawable/rating_bar</item>
+        <!-- 根据自定义星星图片的大小,设置相应的值,否则可能显示不全 -->
+        <item name="android:minHeight">20px</item>
+        <item name="android:isIndicator">true</item>
+    </style>
 </resources>

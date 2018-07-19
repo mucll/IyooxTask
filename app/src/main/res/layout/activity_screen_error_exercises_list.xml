@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorf7"
     android:orientation="vertical"
     tools:context=".activity.ScreenErrorExercisesListActivity">
 
@@ -24,11 +25,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dip_26" />
 
+            <View
+                android:layout_width="@dimen/dip_280"
+                android:layout_height="0.5dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="@dimen/dip_13"
+                android:background="@color/colore7" />
+
             <include
                 layout="@layout/item_screen_subject_version_content_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dip_26" />
+
+            <View
+                android:layout_width="@dimen/dip_280"
+                android:layout_height="0.5dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="@dimen/dip_13"
+                android:background="@color/colore7" />
 
             <include
                 layout="@layout/item_screen_zhishidian_content_layout"
@@ -36,16 +51,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dip_26" />
 
-            <Button
+            <View
+                android:layout_width="@dimen/dip_280"
+                android:layout_height="0.5dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="@dimen/dip_13"
+                android:background="@color/colore7" />
+
+            <RelativeLayout
                 android:id="@+id/submit_bt"
-                android:layout_width="@dimen/dip_320"
+                android:layout_width="@dimen/dip_213"
                 android:layout_height="@dimen/dip_40"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dip_22"
-                android:background="@drawable/select_button_bg_maincolor"
-                android:text="选好了,开始复习"
-                android:textColor="@color/white"
-                android:textSize="@dimen/f_16" />
+                android:background="@drawable/select_screen_submit_bt_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="@dimen/dip_9"
+                    android:drawableRight="@drawable/ctj_icon_sx_mood"
+                    android:text="选好了,开始复习"
+                    android:textColor="@color/main_text_color"
+                    android:textSize="@dimen/f_16" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

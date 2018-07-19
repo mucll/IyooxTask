@@ -8,6 +8,7 @@ package com.huisu.iyoox.entity;
 public class VideoTitleModel {
     private int shipin_id;
     private String shipin_name;
+    private int zhishidian_id;
 
     public int getShipin_id() {
         return shipin_id;
@@ -23,5 +24,13 @@ public class VideoTitleModel {
 
     public void setShipin_name(String shipin_name) {
         this.shipin_name = shipin_name;
+    }
+
+    public int getZhishidian_id() {
+        return zhishidian_id;
+    }
+
+    public void setZhishidian_id(int zhishidian_id) {
+        this.zhishidian_id = zhishidian_id;
     }
 }

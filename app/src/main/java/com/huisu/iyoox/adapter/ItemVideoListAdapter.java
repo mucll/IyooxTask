@@ -66,6 +66,7 @@ public class ItemVideoListAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, TaskStudentHomeWorkActivity.class);
                 intent.putExtra("videoId", titleModel.getShipin_id() + "");
+                intent.putExtra("zhishiId", titleModel.getZhishidian_id() + "");
                 intent.putExtra("type", Constant.STUDENT_DOING);
                 context.startActivity(intent);
             }

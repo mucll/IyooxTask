@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/colorf7"
     android:orientation="vertical"
     android:padding="@dimen/dip_12">
 
@@ -11,18 +11,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <View
-            android:layout_width="@dimen/dip_2"
-            android:layout_height="match_parent"
-            android:background="@color/ex_right_color" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dip_4"
+            android:drawableLeft="@drawable/stl_dtbg_icon_zsdfx"
+            android:drawablePadding="@dimen/dip_10"
             android:text="@string/item_answer_knowledge_text"
-            android:textColor="@color/black_87"
-            android:textSize="@dimen/f_15" />
+            android:textColor="@color/color333"
+            android:textSize="@dimen/f_16" />
     </LinearLayout>
 
     <LinearLayout
@@ -82,10 +79,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@drawable/shape_divider_line_1dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:showDividers="middle">
 
             <TextView
+                android:id="@+id/task_result_zhishi_name_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,19 +92,10 @@
                 android:gravity="center"
                 android:lines="1"
                 android:padding="@dimen/dip_8"
-                android:text="一元一次方程"
                 android:textSize="@dimen/f_14" />
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/dip_8"
-                android:text="66%"
-                android:textSize="@dimen/f_14" />
-
-            <TextView
+                android:id="@+id/task_result_score_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -113,13 +103,30 @@
                 android:padding="@dimen/dip_8"
                 android:textSize="@dimen/f_14" />
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <RatingBar
+                    android:id="@+id/task_result_nandu"
+                    style="@style/RadingStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="3"
+                    android:rating="2"
+                    android:stepSize="1" />
+            </LinearLayout>
+
+
             <TextView
+                android:id="@+id/task_result_comment_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:padding="@dimen/dip_8"
-                android:text="一般"
                 android:textSize="@dimen/f_14" />
         </LinearLayout>
     </LinearLayout>

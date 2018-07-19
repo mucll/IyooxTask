@@ -72,6 +72,11 @@ public class HttpConstants {
      */
     public static String getscreenErrorListData = ROOT_URL + "/work/get_jiaocai_zhishidian";
 
+    /**
+     * 做完题库题目返回报告
+     */
+    public static String getTaskResultData = ROOT_URL + "/zhishidian/submit_answer";
+
 }
 
 

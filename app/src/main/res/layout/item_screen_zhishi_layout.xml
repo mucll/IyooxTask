@@ -7,10 +7,12 @@
 
     <TextView
         android:id="@+id/item_screen_time_tv"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/dip_29"
         android:background="@drawable/select_screen_zhishi_r14_bg"
         android:gravity="center"
+        android:paddingLeft="@dimen/dip_12"
+        android:paddingRight="@dimen/dip_12"
         android:textColor="@color/screen_zhishidian_text_color"
         android:textSize="@dimen/f_13" />
 

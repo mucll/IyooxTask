@@ -21,12 +21,8 @@
             android:textSize="@dimen/f_13" />
     </LinearLayout>
 
-    <com.huisu.iyoox.views.EbagGridView
+    <com.huisu.iyoox.views.FlowViewGroup
         android:id="@+id/screen_zhishidian_grid_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:horizontalSpacing="@dimen/f_12"
-        android:numColumns="2"
-        android:verticalSpacing="@dimen/dip_12" />
+        android:layout_height="match_parent" />
 </LinearLayout>

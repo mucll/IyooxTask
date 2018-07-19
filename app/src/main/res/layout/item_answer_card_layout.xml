@@ -2,27 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/dip_12"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@color/colorf7"
+    android:orientation="vertical"
+    android:padding="@dimen/dip_12">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <View
-            android:layout_width="@dimen/dip_2"
-            android:layout_height="match_parent"
-            android:background="@color/ex_right_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dip_4"
+            android:drawableLeft="@drawable/stl_dtbg_icon_dtk"
+            android:drawablePadding="@dimen/dip_10"
             android:text="@string/item_answer_card_text"
-            android:textColor="@color/black_87"
-            android:textSize="@dimen/f_15" />
+            android:textColor="@color/color333"
+            android:textSize="@dimen/f_16" />
     </LinearLayout>
 
     <FrameLayout
@@ -54,7 +52,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/item_answer_card_hint_text" />
+            android:text="@string/item_answer_card_hint_text"
+            android:textSize="@dimen/f_11" />
 
         <TextView
             android:id="@+id/item_answer_card_error_tv"
@@ -64,9 +63,10 @@
             android:drawableLeft="@drawable/shape_oval_exercises_error_color_8dp"
             android:drawablePadding="@dimen/dip_4"
             android:text="@string/error_text"
-            android:textSize="@dimen/f_12" />
+            android:textSize="@dimen/f_11" />
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dip_8"
@@ -74,6 +74,6 @@
             android:drawableLeft="@drawable/shape_oval_exercises_right_color_8dp"
             android:drawablePadding="@dimen/dip_4"
             android:text="@string/success_text"
-            android:textSize="@dimen/f_12" />
+            android:textSize="@dimen/f_11" />
     </RelativeLayout>
 </LinearLayout>

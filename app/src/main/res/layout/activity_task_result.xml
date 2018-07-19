@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorf0"
     android:orientation="vertical"
     tools:context=".activity.TaskResultActivity">
 
@@ -63,15 +64,16 @@
             android:background="@drawable/select_maincolor_bg"
             android:text="查看答案解析"
             android:textColor="@color/white"
-            android:textSize="@dimen/f_15" />
+            android:textSize="@dimen/f_16" />
 
         <Button
+            android:id="@+id/refresh_bt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/select_white_bg"
+            android:background="@drawable/select_f7_bg"
             android:text="继续学习课程"
-            android:textColor="@color/black_87"
-            android:textSize="@dimen/f_15" />
+            android:textColor="@color/color666"
+            android:textSize="@dimen/f_16" />
     </LinearLayout>
 </LinearLayout>

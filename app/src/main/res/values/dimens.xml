@@ -86,7 +86,9 @@
     <dimen name="dip_192">192dip</dimen>
     <dimen name="dip_200">200dip</dimen>
     <dimen name="dip_210">210dip</dimen>
+    <dimen name="dip_213">213dip</dimen>
     <dimen name="dip_254">254dip</dimen>
+    <dimen name="dip_280">280dip</dimen>
     <dimen name="dip_320">320dip</dimen>
     <dimen name="dip_322">322dip</dimen>
     <dimen name="textSize_small">14sp</dimen>

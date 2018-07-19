@@ -9,6 +9,7 @@ import com.huisu.iyoox.entity.base.BaseRegisterResultModel;
 import com.huisu.iyoox.entity.base.BaseScreenSubjectVersionModel;
 import com.huisu.iyoox.entity.base.BaseSendMsgCodeModel;
 import com.huisu.iyoox.entity.base.BaseSubjectModel;
+import com.huisu.iyoox.entity.base.BaseTaskResultModel;
 import com.huisu.iyoox.entity.base.BaseUser;
 import com.huisu.iyoox.entity.base.BaseVideoModel;
 import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
@@ -254,5 +255,17 @@ public class RequestCenter {
         params.put("student_id", studentId);
         params.put("kemu_id", subjectId);
         RequestCenter.postRequest(HttpConstants.getscreenErrorListData, params, listener, BaseScreenSubjectVersionModel.class);
+    }
+
+    /**
+     * 做完题库题目返回报告
+     */
+    public static void getTaskResultData(String studentId, String zhishiId, String times, String json, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("student_id", studentId);
+        params.put("zhishidian_id", zhishiId);
+        params.put("answer_times", times);
+        params.put("answer_details", json);
+        RequestCenter.postRequest(HttpConstants.getTaskResultData, params, listener, BaseTaskResultModel.class);
     }
 }
