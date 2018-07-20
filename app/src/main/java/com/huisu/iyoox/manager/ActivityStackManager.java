@@ -28,7 +28,9 @@ public class ActivityStackManager {
      * @param activity
      */
     public void popActivity(Activity activity) {
-        if (activityStack == null) return;
+        if (activityStack == null) {
+            return;
+        }
         if (activity != null) {
             activity.finish();
             activity.overridePendingTransition(0, 0);
@@ -44,7 +46,10 @@ public class ActivityStackManager {
      * @return
      */
     public Activity currentActivity() {
-        if (activityStack == null || activityStack.isEmpty()) return null;
+        if (activityStack == null || activityStack.isEmpty()) {
+            return null;
+        }
+
         Activity activity = (Activity) activityStack.lastElement();
         return activity;
     }
@@ -56,7 +61,9 @@ public class ActivityStackManager {
      * @return
      */
     public Activity firstActivity() {
-        if (activityStack == null || activityStack.isEmpty()) return null;
+        if (activityStack == null || activityStack.isEmpty()) {
+            return null;
+        }
         Activity activity = (Activity) activityStack.firstElement();
         return activity;
     }
@@ -80,7 +87,9 @@ public class ActivityStackManager {
      * remove all activity.
      */
     public void popAllActivity() {
-        if (activityStack == null) return;
+        if (activityStack == null) {
+            return;
+        }
         while (true) {
             if (activityStack.empty()) {
                 break;

@@ -10,6 +10,7 @@ package com.huisu.iyoox.entity;
 public class ExercisesResultModel {
     private int timu_id;
     private int is_correct;
+    private String chooseanswer;
 
     public int getTimu_id() {
         return timu_id;
@@ -25,5 +26,13 @@ public class ExercisesResultModel {
 
     public void setIs_correct(int is_correct) {
         this.is_correct = is_correct;
+    }
+
+    public String getChooseanswer() {
+        return chooseanswer;
+    }
+
+    public void setChooseanswer(String chooseanswer) {
+        this.chooseanswer = chooseanswer;
     }
 }

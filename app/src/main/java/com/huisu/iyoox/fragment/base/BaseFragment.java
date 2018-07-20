@@ -16,7 +16,6 @@ import com.huisu.iyoox.util.StatusBarUtil;
  */
 public class BaseFragment extends Fragment {
 
-    protected Activity mContext;
 
     /**
      * 申请指定的权限.

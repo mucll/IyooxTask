@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class StudentAnswersModel implements Serializable {
     private String tiMuId;
     private String chooseAnswer;
+    private int correct;
     private boolean isCorrect;
 
     public String getTiMuId() {
@@ -34,5 +35,13 @@ public class StudentAnswersModel implements Serializable {
 
     public void setCorrect(boolean correct) {
         isCorrect = correct;
+    }
+
+    public int getCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(int correct) {
+        this.correct = correct;
     }
 }

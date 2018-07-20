@@ -65,6 +65,22 @@ public class DateUtils {
     }
 
     /**
+     * 返回MM-dd HH:mm
+     *
+     * @param time
+     * @return
+     */
+    public static String formatTimesMDHm(String time) {
+        try {
+            long time1 = Long.parseLong(time);
+            return sdf7.format(new Date(time1));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
      * "yyyy-MM-dd"字符串返回时间戳
      *
      * @param time

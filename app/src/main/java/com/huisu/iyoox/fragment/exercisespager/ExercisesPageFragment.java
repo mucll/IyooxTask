@@ -92,6 +92,13 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
                 showHelp = View.GONE;
                 showStudentAnswer = false;
                 break;
+            case Constant.STUDENT_HOME_WORK:
+                isSroll = true;
+                setEnable = true;
+                showHelp = View.GONE;
+                showStudentAnswer = false;
+                isResultShowAnalysis = false;
+                break;
             default:
                 break;
         }

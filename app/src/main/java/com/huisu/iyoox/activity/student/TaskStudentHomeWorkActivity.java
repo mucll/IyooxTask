@@ -15,6 +15,7 @@ import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.ExercisesModel;
 import com.huisu.iyoox.entity.VideoTimuModel;
+import com.huisu.iyoox.entity.base.BaseExercisesModel;
 import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
 import com.huisu.iyoox.fragment.exercisespager.ExercisesPageFragment;
 import com.huisu.iyoox.http.RequestCenter;
@@ -22,6 +23,8 @@ import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.DateUtils;
 import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.views.Loading;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,6 +41,9 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
     private Loading loading;
     private String zhishidianName;
     private Chronometer chronometer;
+    private int type;
+    private String work_id;
+    private String homeWorkTitle;
 
     @Override
     protected void initView() {
@@ -46,10 +52,13 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
 
     @Override
     protected void initData() {
-        int type = getIntent().getIntExtra("type", Constant.ERROR_CODE);
+        type = getIntent().getIntExtra("type", Constant.ERROR_CODE);
         switch (type) {
             case Constant.STUDENT_DOING:
                 studentDoing();
+                break;
+            case Constant.STUDENT_HOME_WORK:
+                studentHomeWork();
                 break;
             case Constant.STUDENT_ANALYSIS:
                 studentAnalysis();
@@ -61,7 +70,7 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
     }
 
     /**
-     * 做题目
+     * 知识点下的题目
      */
     private void studentDoing() {
         setTitle("课后习题");
@@ -70,6 +79,49 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
         if (!TextUtils.isEmpty(videoId)) {
             postExercisesData();
         }
+    }
+
+    /**
+     * 老师布置的作业
+     */
+    private void studentHomeWork() {
+        work_id = getIntent().getStringExtra("work_id");
+        homeWorkTitle = getIntent().getStringExtra("title");
+        if (!TextUtils.isEmpty(work_id) && !TextUtils.isEmpty(homeWorkTitle)) {
+            setTitle(homeWorkTitle);
+            postHomeWorkData(work_id, homeWorkTitle);
+        }
+    }
+
+    /**
+     * 学生作业详情
+     *
+     * @param work_id
+     * @param title
+     */
+    private void postHomeWorkData(String work_id, final String title) {
+        loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
+        RequestCenter.getStudentTaskDetails(work_id, new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                loading.dismiss();
+                BaseExercisesModel baseVideoUrlModel = (BaseExercisesModel) responseObj;
+                if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE && baseVideoUrlModel.data != null) {
+                    if (baseVideoUrlModel.data != null && baseVideoUrlModel.data.size() > 0) {
+                        //计时器清零
+                        chronometer.setVisibility(View.VISIBLE);
+                        chronometer.setBase(SystemClock.elapsedRealtime());
+                        chronometer.start();
+                        initFragment(baseVideoUrlModel.data, title, Constant.STUDENT_HOME_WORK);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                loading.dismiss();
+            }
+        });
     }
 
     /**
@@ -85,7 +137,7 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
     }
 
     /**
-     * 获取题目信息
+     * 获取知识点作业题目信息
      */
     private void postExercisesData() {
         loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
@@ -145,6 +197,11 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
         return R.layout.activity_task_student_home_work;
     }
 
+    /**
+     * 提交答案的回调
+     *
+     * @param exercisesData
+     */
     @Override
     public void studentAnswerResult(ArrayList<ExercisesModel> exercisesData) {
         judgeExercisesCorrect(exercisesData);
@@ -170,9 +227,17 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
         }
         Intent intent = new Intent(this, TaskResultActivity.class);
         intent.putExtra("data", exercisesData);
-        intent.putExtra("zhishiId", zhishiId);
         intent.putExtra("time", timeString);
-        intent.putExtra("zhishidianName", zhishidianName);
+        intent.putExtra("type", type);
+        if (type == Constant.STUDENT_DOING) {
+            intent.putExtra("zhishiId", zhishiId);
+            intent.putExtra("zhishidianName", zhishidianName);
+        } else if (type == Constant.STUDENT_HOME_WORK) {
+            intent.putExtra("workId", work_id);
+            intent.putExtra("homeWorkTitle", homeWorkTitle);
+            //发消息刷新作业列表界面
+            EventBus.getDefault().post("home_work");
+        }
         startActivity(intent);
         finish();
     }

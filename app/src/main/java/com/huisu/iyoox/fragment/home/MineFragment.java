@@ -13,15 +13,22 @@ import android.widget.RelativeLayout;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.ConfigMainActivity;
 import com.huisu.iyoox.activity.ContactWayActivity;
+import com.huisu.iyoox.activity.LoginActivity;
 import com.huisu.iyoox.activity.PersonalDataActivity;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.activity.student.StudentInterestActivity;
 import com.huisu.iyoox.activity.student.StudentLearningRemindingActivity;
 import com.huisu.iyoox.activity.student.StudentPurchaseRecordActivity;
+import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.fragment.base.BaseFragment;
+import com.huisu.iyoox.manager.ActivityStackManager;
+import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.util.StatusBarUtil;
 import com.huisu.iyoox.views.ChangeHeaderImgDialog;
 import com.huisu.iyoox.views.HeadView;
+
+import org.litepal.LitePal;
+import org.litepal.crud.LitePalSupport;
 
 import java.io.File;
 
@@ -107,7 +114,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.mine_setting_layout:
                 //设置
-                ConfigMainActivity.start(getContext());
+//                ConfigMainActivity.start(getContext());
+                LitePal.delete(User.class, 1);
+                ActivityStackManager.getActivityStackManager().popAllActivity();
+                LoginActivity.start(getContext());
                 break;
             default:
                 break;

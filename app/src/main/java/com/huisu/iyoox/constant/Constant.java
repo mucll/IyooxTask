@@ -66,9 +66,19 @@ public class Constant {
     public static final int STUDENT_ANALYSIS = 2;
 
     /**
-     * 解析查看
+     * 错题本
      */
     public static final int STUDENT_ERROR_DOING = 3;
+
+    /**
+     * 老师布置作业
+     */
+    public static final int STUDENT_HOME_WORK = 4;
+
+    /**
+     * 学生查看已完成的作业
+     */
+    public static final int STUDENT_TASK_FINISHED = 5;
 
 //----------------------------------科目ID---------------------------------------
     /**

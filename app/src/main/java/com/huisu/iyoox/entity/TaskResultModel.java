@@ -1,5 +1,7 @@
 package com.huisu.iyoox.entity;
 
+import java.util.List;
+
 /**
  * Function:
  * Date: 2018/7/18
@@ -15,8 +17,9 @@ public class TaskResultModel {
     private int nanyi_level;
     private String zhangwo_level;
     private String suggest;
-    private String sort_rate;
+    private int sort_rate;
     private int timu_count;
+    private List<ExercisesModel> timu_list;
 
     public int getStudent_id() {
         return student_id;
@@ -74,11 +77,11 @@ public class TaskResultModel {
         this.suggest = suggest;
     }
 
-    public String getSort_rate() {
+    public int getSort_rate() {
         return sort_rate;
     }
 
-    public void setSort_rate(String sort_rate) {
+    public void setSort_rate(int sort_rate) {
         this.sort_rate = sort_rate;
     }
 
@@ -88,5 +91,13 @@ public class TaskResultModel {
 
     public void setTimu_count(int timu_count) {
         this.timu_count = timu_count;
+    }
+
+    public List<ExercisesModel> getTimu_list() {
+        return timu_list;
+    }
+
+    public void setTimu_list(List<ExercisesModel> timu_list) {
+        this.timu_list = timu_list;
     }
 }

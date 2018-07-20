@@ -37,6 +37,7 @@ public class HomeWorkFragment extends BaseFragment {
     private MyFragmentLayout_line myFragmentLayout;
     private ArrayList<BaseFragment> fragments = new ArrayList();
     private String taskType = "";
+    private boolean init;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class HomeWorkFragment extends BaseFragment {
                                 .setTextColor(getResources().getColor(R.color.color333));
                         ((TextView) currentTabView.findViewById(R.id.tab_text))
                                 .setTextColor(getResources().getColor(R.color.main_text_color));
+                        fragments.get(positon).onShow();
                     }
                 });
         myFragmentLayout.setAdapter(fragments, R.layout.tablayout_student_task, 0x203);
@@ -95,6 +97,14 @@ public class HomeWorkFragment extends BaseFragment {
         b.putString("task_type", taskType);
         fragment.setArguments(b);
         return fragment;
+    }
+
+    @Override
+    public void onShow() {
+        if (!init) {
+            fragments.get(myFragmentLayout.getCurrentPosition()).onShow();
+            init = true;
+        }
     }
 
     private void initTab() {

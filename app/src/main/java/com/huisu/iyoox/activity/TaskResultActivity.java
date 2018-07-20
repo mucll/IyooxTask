@@ -1,8 +1,6 @@
 package com.huisu.iyoox.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +26,7 @@ import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.JsonUtils;
+import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.views.EbagGridView;
 
 import java.util.ArrayList;
@@ -45,10 +44,11 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
     private PieChart mPieChart;
     private Button resultAnalysis, refreshBt;
     private ArrayList<ExercisesModel> exercisesModels = new ArrayList<>();
-    private String zhishidianName, zhishiId, timeString;
+    private String title, zhishiId, timeString, workId;
     private User user;
     private TextView zhishidianTv, scoreTv, commentTv, jianyiTv, sortTv, timesTv, exercisesCountTv;
     private RatingBar nanduBar;
+    private int type;
 
     @Override
     protected void initView() {
@@ -75,12 +75,109 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
         user = UserManager.getInstance().getUser();
         exercisesModels.clear();
         setTitle("答题报告");
-        ArrayList<ExercisesModel> models = (ArrayList<ExercisesModel>) getIntent().getSerializableExtra("data");
-        zhishidianName = getIntent().getStringExtra("zhishidianName");
-        zhishiId = getIntent().getStringExtra("zhishiId");
         timeString = getIntent().getStringExtra("time");
+        type = getIntent().getIntExtra("type", Constant.ERROR_CODE);
+        switch (type) {
+            case Constant.STUDENT_DOING:
+                //知识点作业
+                studentDoing();
+                break;
+            case Constant.STUDENT_HOME_WORK:
+                //老师发布作业
+                studentHomeWork();
+                break;
+            case Constant.STUDENT_TASK_FINISHED:
+                studentHomeWorked();
+                break;
+            default:
+                LogUtil.e("TaskStudentHomeWorkActivity:type is error");
+                break;
+        }
+    }
 
-        //不是从完成作业界面点击进来的
+    /**
+     * 查看已完成作业报告
+     */
+    private void studentHomeWorked() {
+        workId = getIntent().getStringExtra("workId");
+        title = getIntent().getStringExtra("title");
+        RequestCenter.getStudentTaskBaoGao(user.getId(), workId, new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                BaseTaskResultModel resultModel = (BaseTaskResultModel) responseObj;
+                if (resultModel.data != null) {
+                    setResultData(resultModel.data);
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
+    }
+
+    /**
+     * 获取学生作业初始化信息
+     */
+    private void studentHomeWork() {
+        workId = getIntent().getStringExtra("workId");
+        title = getIntent().getStringExtra("homeWorkTitle");
+        ArrayList<ExercisesModel> models = (ArrayList<ExercisesModel>) getIntent().getSerializableExtra("data");
+        if (models != null && models.size() > 0) {
+            exercisesModels.addAll(models);
+            mNumberAdapter.notifyDataSetChanged();
+            if (!TextUtils.isEmpty(workId)) {
+                setPostHomeWorkInitData();
+            }
+        }
+    }
+
+    /**
+     * 初始化学生作业报告请求参数
+     */
+    private void setPostHomeWorkInitData() {
+        List<ExercisesResultModel> resultModels = new ArrayList<>();
+        for (ExercisesModel model : exercisesModels) {
+            ExercisesResultModel resultModel = new ExercisesResultModel();
+            resultModel.setTimu_id(Integer.parseInt(model.getTimu_id()));
+            resultModel.setIs_correct(model.getAnswersModel().isCorrect() ? 1 : 0);
+            resultModel.setChooseanswer(model.getAnswersModel().getChooseAnswer());
+            resultModels.add(resultModel);
+        }
+        String json = JsonUtils.jsonFromObject(resultModels);
+        postHomeWorkResultData(json);
+    }
+
+    /**
+     * 学生作业报告
+     *
+     * @param json
+     */
+    private void postHomeWorkResultData(String json) {
+        RequestCenter.getStudentTaskResult(user.getId(), workId, timeString, json, new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                BaseTaskResultModel resultModel = (BaseTaskResultModel) responseObj;
+                if (resultModel.data != null) {
+                    setResultData(resultModel.data);
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
+    }
+
+    /**
+     * 初始化知识点作业信息
+     */
+    private void studentDoing() {
+        title = getIntent().getStringExtra("zhishidianName");
+        zhishiId = getIntent().getStringExtra("zhishiId");
+        ArrayList<ExercisesModel> models = (ArrayList<ExercisesModel>) getIntent().getSerializableExtra("data");
         if (models != null && models.size() > 0) {
             exercisesModels.addAll(models);
             mNumberAdapter.notifyDataSetChanged();
@@ -88,11 +185,10 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
                 setPostInitData();
             }
         }
-
     }
 
     /**
-     * 初始化请求参数
+     * 初始化知识点作业请求参数
      */
     private void setPostInitData() {
         List<ExercisesResultModel> resultModels = new ArrayList<>();
@@ -103,15 +199,15 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
             resultModels.add(resultModel);
         }
         String json = JsonUtils.jsonFromObject(resultModels);
-        postResultData(json);
+        postDoingResultData(json);
     }
 
     /**
-     * 请求报告数据
+     * 请求知识点作业报告数据
      *
      * @param resultJson
      */
-    private void postResultData(String resultJson) {
+    private void postDoingResultData(String resultJson) {
         RequestCenter.getTaskResultData(user.getId(), zhishiId, timeString, resultJson, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -147,11 +243,11 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
         //学习建议
         jianyiTv.setText(data.getSuggest());
         //排比
-        sortTv.setText(data.getSort_rate());
+        sortTv.setText("击败" + data.getSort_rate() + "%的同学");
         //时间
         timesTv.setText(data.getTimes());
         //时间
-        exercisesCountTv.setText(data.getTimu_count()+"");
+        exercisesCountTv.setText(data.getTimu_count() + "");
 
     }
 
@@ -189,7 +285,7 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
         Intent intent = new Intent(this, TaskStudentHomeWorkActivity.class);
         intent.putExtra("type", Constant.STUDENT_ANALYSIS);
         intent.putExtra("data", exercisesModels);
-        intent.putExtra("zhishidianName", zhishidianName);
+        intent.putExtra("zhishidianName", title);
         startActivity(intent);
     }
 

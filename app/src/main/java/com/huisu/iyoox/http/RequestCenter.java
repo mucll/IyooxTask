@@ -10,6 +10,7 @@ import com.huisu.iyoox.entity.base.BaseScreenSubjectVersionModel;
 import com.huisu.iyoox.entity.base.BaseSendMsgCodeModel;
 import com.huisu.iyoox.entity.base.BaseSubjectModel;
 import com.huisu.iyoox.entity.base.BaseTaskResultModel;
+import com.huisu.iyoox.entity.base.BaseTaskStudentListModel;
 import com.huisu.iyoox.entity.base.BaseUser;
 import com.huisu.iyoox.entity.base.BaseVideoModel;
 import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
@@ -268,4 +269,47 @@ public class RequestCenter {
         params.put("answer_details", json);
         RequestCenter.postRequest(HttpConstants.getTaskResultData, params, listener, BaseTaskResultModel.class);
     }
+
+    /**
+     * 学生作业列表
+     */
+    public static void getStudentTaskListData(String studentId, String status, String page, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("student_id", studentId);
+        params.put("status", status);
+        params.put("page_index", page);
+        RequestCenter.postRequest(HttpConstants.getStudentTaskListData, params, listener, BaseTaskStudentListModel.class);
+    }
+
+    /**
+     * 学生作业列表
+     */
+    public static void getStudentTaskDetails(String work_id, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("work_id", work_id);
+        RequestCenter.postRequest(HttpConstants.getStudentTaskDetails, params, listener, BaseExercisesModel.class);
+    }
+
+    /**
+     * 学生作业列表
+     */
+    public static void getStudentTaskResult(String studentId, String work_id, String times, String json, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("work_id", work_id);
+        params.put("student_id", studentId);
+        params.put("answer_times", times);
+        params.put("answer_details", json);
+        RequestCenter.postRequest(HttpConstants.getStudentTaskResult, params, listener, BaseTaskResultModel.class);
+    }
+
+    /**
+     * 学生作业列表
+     */
+    public static void getStudentTaskBaoGao(String studentId, String work_id, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("work_id", work_id);
+        params.put("student_id", studentId);
+        RequestCenter.postRequest(HttpConstants.getStudentTaskBaoGao, params, listener, BaseTaskResultModel.class);
+    }
+
 }

@@ -90,4 +90,5 @@ dependencies {
     implementation 'me.panavtec:drawableview:0.6.0'
     implementation 'org.litepal.android:core:2.0.0'
     implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
+    implementation 'org.greenrobot:eventbus:3.0.0'
 }
