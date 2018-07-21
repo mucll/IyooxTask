@@ -1,6 +1,7 @@
 package com.huisu.iyoox.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -57,15 +58,23 @@ public class StudentTaskListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         TaskStudentListModel model = getItem(position);
-        holder.subjectIcon.setImageResource(getImgResId(model.getXueke_name()));
-        holder.taskSubjectName.setText(model.getXueke_name());
-        holder.classId.setText("ID:" + model.getClassroom_no());
-        String startTime = model.getStart_time().replace("T", " ");
-        String[] startTimes = startTime.split("-");
-        holder.startTime.setText(startTimes[1] + "-" + startTimes[2]);
-        String endTime = model.getEnd_time().replace("T", " ");
-        String[] endTimes = endTime.split("-");
-        holder.endTime.setText(endTimes[1] + "-" + endTimes[2]);
+        if (!TextUtils.isEmpty(model.getXueke_name())) {
+            holder.subjectIcon.setImageResource(getImgResId(model.getXueke_name()));
+            holder.taskSubjectName.setText(model.getXueke_name());
+        }
+        if (!TextUtils.isEmpty(model.getClassroom_no())) {
+            holder.classId.setText("ID:" + model.getClassroom_no());
+        }
+        if (!TextUtils.isEmpty(model.getStart_time())) {
+            String startTime = model.getStart_time().replace("T", " ");
+            String[] startTimes = startTime.split("-");
+            holder.startTime.setText(startTimes[1] + "-" + startTimes[2]);
+        }
+        if (!TextUtils.isEmpty(model.getEnd_time())) {
+            String endTime = model.getEnd_time().replace("T", " ");
+            String[] endTimes = endTime.split("-");
+            holder.endTime.setText(endTimes[1] + "-" + endTimes[2]);
+        }
         switch (taskType) {
             case TaskStatus.UNFINISH:
                 holder.startIconTV.setVisibility(View.VISIBLE);

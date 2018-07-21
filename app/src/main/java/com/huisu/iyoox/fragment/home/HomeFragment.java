@@ -130,6 +130,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private void initData() {
         subjectModels.clear();
         subjectModels.addAll(gradeListModels.get(selectGradeCode).getKemuArr());
+        for (SubjectModel model : subjectModels) {
+            model.setSelect(false);
+        }
         mTabView.init(subjectModels);
     }
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dip_10"
+        android:paddingLeft="@dimen/dip_20"
+        android:paddingRight="@dimen/dip_20"
+        android:paddingTop="@dimen/dip_10">
+
+        <ImageView
+            android:id="@+id/item_class_teacher_head_icon_view"
+            android:layout_width="@dimen/dip_80"
+            android:layout_height="@dimen/dip_80"
+            android:layout_centerInParent="true"
+            android:src="@drawable/homework_yu" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_class_teacher_head_icon_view"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dip_8"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_class_teacher_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="赵老师"
+                android:textColor="@color/color333"
+                android:textSize="@dimen/f_14" />
+
+            <TextView
+                android:id="@+id/item_class_teacher_subject_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(语文)"
+                android:textColor="@color/color333"
+                android:textSize="@dimen/f_10" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -81,7 +81,7 @@ public class ExercisesChooseView extends BaseExercisesView {
         view = View.inflate(context, R.layout.layout_exercise_choose_view, null);
         ButterKnife.bind(this, view);
         //设置题目解析数据
-        String analysisContent = info.getJiexi();
+        String analysisContent = "【解析】" + info.getJiexi();
         if (!TextUtils.isEmpty(analysisContent)) {
             analysisView.setHtmlFromString(analysisContent, false);
             if (isImageClick) {
@@ -90,7 +90,7 @@ public class ExercisesChooseView extends BaseExercisesView {
         } else {
             analysisView.setHtmlFromString("", false);
         }        //设置题目解析数据
-        String daanText = info.getDaan();
+        String daanText = "【答案】" + info.getDaan();
         if (!TextUtils.isEmpty(analysisContent)) {
             daanView.setHtmlFromString(daanText, false);
         } else {

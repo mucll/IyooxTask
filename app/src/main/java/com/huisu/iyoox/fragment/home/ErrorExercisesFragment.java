@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.MainActivity;
 import com.huisu.iyoox.activity.student.StudentWriteExercisesErrorActivity;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.SubjectModel;
@@ -58,7 +59,6 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
     public void onShow() {
         super.onShow();
         if (!init) {
-            user = UserManager.getInstance().getUser();
             postStudentErrorData(user.getId());
             init = true;
         }
@@ -93,6 +93,7 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
     }
 
     private void initView() {
+        user = UserManager.getInstance().getUser();
         mLayoutInflater = LayoutInflater.from(getContext());
         mVp = (ViewPager) view.findViewById(R.id.vp_gallery_vp);
         mVp.setOverScrollMode(View.OVER_SCROLL_NEVER);
@@ -117,7 +118,7 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
 
     @Override
     public void onEmptyClick(View v) {
-
+        ((MainActivity) getActivity()).myFragmentLayout.setCurrenItem(0);
     }
 
     class MyAdapter extends PagerAdapter {

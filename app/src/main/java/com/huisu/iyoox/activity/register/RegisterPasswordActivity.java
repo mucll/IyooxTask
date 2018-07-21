@@ -203,6 +203,7 @@ public class RegisterPasswordActivity extends BaseActivity implements TextWatche
             startActivityForResult(intent, START_CODE);
         } else {
             UserManager.getInstance().setUser(user);
+            user.clearSavedState();
             user.saveThrows();
             MainActivity.start(context);
             setResult(RESULT_OK);

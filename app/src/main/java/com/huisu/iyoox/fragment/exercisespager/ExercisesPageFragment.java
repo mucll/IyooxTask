@@ -162,7 +162,7 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
                 if (exercisesData != null && exercisesData.size() > 0) {
                     bean = exercisesData.get(position);
                 }
-                BaseExercisesView view = BaseExercisesView.getInstence(getActivity(), bean.getType());
+                BaseExercisesView view = BaseExercisesView.getInstence(getActivity(), bean.getType()+"");
                 BaseExercisesView.ExerciseCallBack callBack = new BaseExercisesView.ExerciseCallBack() {
                     @Override
                     public void selectAnswer() {

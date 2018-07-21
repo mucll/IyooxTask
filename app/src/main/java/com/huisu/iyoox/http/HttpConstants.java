@@ -110,6 +110,14 @@ public class HttpConstants {
      * 更换个人头像
      */
     public static String updateAvatar = ROOT_URL + "/user/update_avatar";
+    /**
+     * 个人信息
+     */
+    public static String userInfo = ROOT_URL + "/user/user_info";
+    /**
+     * 获取班级信息和个人排名
+     */
+    public static String getClassRanking = ROOT_URL + "/classroom/get_classroom_by_student";
 
 }
 

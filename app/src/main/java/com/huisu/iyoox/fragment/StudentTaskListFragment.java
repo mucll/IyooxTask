@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.huisu.iyoox.Interface.TaskStatus;
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.MainActivity;
 import com.huisu.iyoox.activity.TaskResultActivity;
 import com.huisu.iyoox.activity.student.TaskStudentHomeWorkActivity;
 import com.huisu.iyoox.adapter.StudentTaskListAdapter;
@@ -79,6 +80,14 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
         swipeToLoadLayout.setOnLoadMoreListener(this);
         swipeToLoadLayout.setOnRefreshListener(this);
         mListView.setOnItemClickListener(this);
+        emptyView.setOnEmptyClick(new TaskEmptyView.onEmptyClickListener() {
+            @Override
+            public void onEmptyClick(View v) {
+                if (((MainActivity) getActivity()).myFragmentLayout != null) {
+                    ((MainActivity) getActivity()).myFragmentLayout.setCurrenItem(0);
+                }
+            }
+        });
     }
 
     @Override
@@ -118,6 +127,7 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
             @Override
             public void onFailure(Object reasonObj) {
                 closeLoading();
+                emptyView.setVisibility(View.VISIBLE);
             }
         });
     }

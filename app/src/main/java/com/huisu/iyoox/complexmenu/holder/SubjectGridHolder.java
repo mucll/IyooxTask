@@ -1,6 +1,7 @@
 package com.huisu.iyoox.complexmenu.holder;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.adapter.BookGridViewAdapter;
 import com.huisu.iyoox.entity.BookDetailsModel;
+import com.huisu.iyoox.util.ImageLoader;
 
 import java.util.List;
 
@@ -117,12 +119,16 @@ public class SubjectGridHolder extends BaseWidgetHolder<List<BookDetailsModel>> 
                 holder = new CustomViewHolder();
                 convertView = View.inflate(mContext, R.layout.item_book_gridview, null);
                 holder.nameTv = convertView.findViewById(R.id.name_tv);
+                holder.image = convertView.findViewById(R.id.image);
                 convertView.setTag(holder);
             } else {
                 holder = (CustomViewHolder) convertView.getTag();
             }
             BookDetailsModel bean = mlist.get(position);
             holder.nameTv.setText(bean.getName());
+            ImageLoader.load(mContext, holder.image,
+                    TextUtils.isEmpty(bean.getCover_url()) ? "" : bean.getCover_url()
+                    , R.drawable.icon_image_loading);
             return convertView;
         }
 

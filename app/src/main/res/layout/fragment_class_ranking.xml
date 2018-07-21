@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorf7"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dip_16"
+    android:paddingRight="@dimen/dip_16">
+
+    <TextView
+        android:id="@+id/class_ranking_zhishidian_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dip_8"
+        android:textColor="@color/color333"
+        android:textSize="@dimen/f_14" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dip_2"
+            android:layout_weight="2"
+            android:background="@color/bg_green" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dip_1"
+            android:layout_gravity="bottom"
+            android:layout_weight="3"
+            android:background="@color/bg_green" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colore4"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/dip_60"
+            android:layout_height="@dimen/dip_40"
+            android:gravity="center"
+            android:text="排名"
+            android:textColor="@color/color333"
+            android:textSize="@dimen/f_13" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dip_36"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="学生"
+            android:textColor="@color/color333"
+            android:textSize="@dimen/f_13" />
+
+        <TextView
+            android:layout_width="@dimen/dip_105"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="成绩"
+            android:textColor="@color/color333"
+            android:textSize="@dimen/f_13" />
+    </LinearLayout>
+
+    <com.huisu.iyoox.views.EbagListView
+        android:id="@+id/item_class_ranking_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+</LinearLayout>

@@ -19,6 +19,7 @@ import com.huisu.iyoox.adapter.AnswerResultNumberAdapter;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.ExercisesModel;
 import com.huisu.iyoox.entity.ExercisesResultModel;
+import com.huisu.iyoox.entity.StudentAnswersModel;
 import com.huisu.iyoox.entity.TaskResultModel;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.base.BaseTaskResultModel;
@@ -107,6 +108,9 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
                 BaseTaskResultModel resultModel = (BaseTaskResultModel) responseObj;
                 if (resultModel.data != null) {
                     setResultData(resultModel.data);
+                    if (resultModel.data.getTimu_list() != null && resultModel.data.getTimu_list().size() > 0) {
+                        initTiMuData(resultModel.data.getTimu_list());
+                    }
                 }
             }
 
@@ -115,6 +119,21 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
 
             }
         });
+    }
+
+    /**
+     * 作业报告
+     * @param timu_list
+     */
+    private void initTiMuData(List<ExercisesModel> timu_list) {
+        for (ExercisesModel exercisesModel : timu_list) {
+            StudentAnswersModel answersModel = new StudentAnswersModel();
+            answersModel.setCorrect(exercisesModel.getIs_correct() == 1);
+            answersModel.setChooseAnswer(exercisesModel.getChooseanswer());
+            exercisesModel.setAnswersModel(answersModel);
+        }
+        exercisesModels.addAll(timu_list);
+        mNumberAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -161,6 +180,7 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
                 BaseTaskResultModel resultModel = (BaseTaskResultModel) responseObj;
                 if (resultModel.data != null) {
                     setResultData(resultModel.data);
+
                 }
             }
 

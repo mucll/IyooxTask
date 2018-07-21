@@ -5,6 +5,11 @@ import android.content.Intent;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
+import com.huisu.iyoox.entity.User;
+import com.huisu.iyoox.entity.base.BaseUser;
+import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.manager.UserManager;
+import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 
 /**
  * @author: dl
@@ -21,6 +26,25 @@ public class PersonalDataActivity extends BaseActivity {
     @Override
     protected void initData() {
         setTitle("个人资料");
+        postPersonData();
+    }
+
+    private void postPersonData() {
+        User user = UserManager.getInstance().getUser();
+        RequestCenter.userInfo(user.getId(), new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                BaseUser baseUser = (BaseUser) responseObj;
+                if (baseUser.data != null) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.huisu.iyoox.http;
 
 import com.huisu.iyoox.entity.base.BaseBookDetailsModel;
 import com.huisu.iyoox.entity.base.BaseCheckMsgCode;
+import com.huisu.iyoox.entity.base.BaseClassRankingModel;
 import com.huisu.iyoox.entity.base.BaseExercisesModel;
 import com.huisu.iyoox.entity.base.BaseGradeListModel;
 import com.huisu.iyoox.entity.base.BasePhoneModel;
@@ -21,6 +22,9 @@ import com.huisu.iyoox.okhttp.request.CommonRequest;
 import com.huisu.iyoox.okhttp.request.RequestParams;
 import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.util.MD5Util;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * @author: vision
@@ -68,6 +72,22 @@ public class RequestCenter {
     public static void postUpFile(String url, RequestParams params, DisposeDataListener listener, Class<?> clazz) {
         CommonOkHttpClient.get(CommonRequest.createMultiPostRequest(url, params),
                 new DisposeDataHandle(listener, clazz));
+    }
+
+    /**
+     * 判断手机号 是否注册
+     *
+     * @param listener
+     */
+    public static void updateAvatar(String userId, File file, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("user_id", userId);
+        try {
+            params.put("file", file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        RequestCenter.postUpFile(HttpConstants.updateAvatar, params, listener, null);
     }
 
     /**
@@ -310,6 +330,24 @@ public class RequestCenter {
         params.put("work_id", work_id);
         params.put("student_id", studentId);
         RequestCenter.postRequest(HttpConstants.getStudentTaskBaoGao, params, listener, BaseTaskResultModel.class);
+    }
+
+    /**
+     * 学生作业列表
+     */
+    public static void userInfo(String user_id, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("user_id", user_id);
+        RequestCenter.postRequest(HttpConstants.userInfo, params, listener, BaseUser.class);
+    }
+
+    /**
+     * 学生作业列表
+     */
+    public static void getClassRanking(String student_id, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("student_id", student_id);
+        RequestCenter.postRequest(HttpConstants.getClassRanking, params, listener, BaseClassRankingModel.class);
     }
 
 }

@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.huisu.iyoox.R;
-import com.huisu.iyoox.activity.ConfigMainActivity;
 import com.huisu.iyoox.activity.ContactWayActivity;
 import com.huisu.iyoox.activity.LoginActivity;
 import com.huisu.iyoox.activity.PersonalDataActivity;
@@ -23,12 +22,10 @@ import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.manager.ActivityStackManager;
 import com.huisu.iyoox.manager.UserManager;
-import com.huisu.iyoox.util.StatusBarUtil;
 import com.huisu.iyoox.views.ChangeHeaderImgDialog;
 import com.huisu.iyoox.views.HeadView;
 
 import org.litepal.LitePal;
-import org.litepal.crud.LitePalSupport;
 
 import java.io.File;
 
@@ -42,9 +39,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private View view;
     private HeadView mHeadView;
     private ChangeHeaderImgDialog mHeaderImgDialog;
-    private String userId = "123";
     private RelativeLayout topLayout;
     private LinearLayout personalLayout, interestLayout, remindLayout, recordLayout, contactWayLayout, configLayout;
+    private User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,7 +70,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void initData() {
-        mHeadView.setHead(userId, "iyoox", "");
+        user = UserManager.getInstance().getUser();
+        mHeadView.setHead(user.getId(), "iyoox", "");
     }
 
     private void setEvent() {
@@ -114,10 +112,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.mine_setting_layout:
                 //设置
-//                ConfigMainActivity.start(getContext());
-                LitePal.delete(User.class, 1);
+                LitePal.deleteAll(User.class);
                 ActivityStackManager.getActivityStackManager().popAllActivity();
+                UserManager.getInstance().removeUser();
                 LoginActivity.start(getContext());
+//                ConfigMainActivity.start(getContext());
                 break;
             default:
                 break;
@@ -131,7 +130,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             public void getResult(final File file) {
                 super.getResult(file);
                 String path = file.getAbsolutePath();
-                mHeadView.setHead(userId, "iyoox", path);
+                mHeadView.setHead(user.getId() + "", "iyoox", path);
             }
         };
     }

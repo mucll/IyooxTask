@@ -1,6 +1,7 @@
 package com.huisu.iyoox.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,11 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 
+/**
+ * @author: dl
+ * @function: 答题报告 题目number
+ * @date: 18/6/28
+ */
 public class AnswerResultNumberAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ExercisesModel> exercisesModels;
@@ -51,11 +57,14 @@ public class AnswerResultNumberAdapter extends BaseAdapter {
         }
         ExercisesModel model = getItem(position);
         holder.exercisesNumberTv.setText(position + 1 + "");
-        if (model.getAnswersModel().isCorrect()) {
-            holder.exercisesNumberTv.setBackground(context.getResources().getDrawable(R.drawable.shape_oval_exercises_right_color_8dp));
-        } else {
-            holder.exercisesNumberTv.setBackground(context.getResources().getDrawable(R.drawable.shape_oval_exercises_error_color_8dp));
+        if (model.getAnswersModel() != null) {
+            if (model.getAnswersModel().isCorrect()) {
+                holder.exercisesNumberTv.setBackground(context.getResources().getDrawable(R.drawable.shape_oval_exercises_right_color_8dp));
+            } else {
+                holder.exercisesNumberTv.setBackground(context.getResources().getDrawable(R.drawable.shape_oval_exercises_error_color_8dp));
+            }
         }
+
         return convertView;
     }
 

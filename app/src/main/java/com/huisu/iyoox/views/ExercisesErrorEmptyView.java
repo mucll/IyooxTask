@@ -45,7 +45,9 @@ public class ExercisesErrorEmptyView extends LinearLayout implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        listener.onEmptyClick(v);
+        if (listener != null) {
+            listener.onEmptyClick(v);
+        }
     }
 
     public void setOnEmptyClick(onEmptyClickListener listener) {

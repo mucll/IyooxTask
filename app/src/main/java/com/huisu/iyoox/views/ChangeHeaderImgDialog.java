@@ -78,10 +78,13 @@ public class ChangeHeaderImgDialog implements View.OnClickListener {
     private void cropBitmap(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true"); // 开启剪裁
-        intent.putExtra("aspectX", 1); // 宽高比例
+        // 开启剪裁
+        intent.putExtra("crop", "true");
+        // 宽高比例
+        intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 300); // 宽高
+        // 宽高
+        intent.putExtra("outputX", 300);
         intent.putExtra("outputY", 300);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mOutputFile));
         context.startActivityForResult(intent, REQUST_CLIP);

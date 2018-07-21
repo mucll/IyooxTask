@@ -91,4 +91,5 @@ dependencies {
     implementation 'org.litepal.android:core:2.0.0'
     implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
     implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.android.support:recyclerview-v7:27.+'
 }

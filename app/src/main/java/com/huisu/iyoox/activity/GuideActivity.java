@@ -41,13 +41,13 @@ public class GuideActivity extends Activity {
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager
                     .LayoutParams.FLAG_FULLSCREEN);//
         }
-        if (StringUtils.isPad(this)) {
-            setRequestedOrientation(ActivityInfo
-                    .SCREEN_ORIENTATION_LANDSCAPE);// 横屏
-        } else {
-            setRequestedOrientation(ActivityInfo
-                    .SCREEN_ORIENTATION_PORTRAIT);//竖屏
-        }
+//        if (StringUtils.isPad(this)) {
+//            setRequestedOrientation(ActivityInfo
+//                    .SCREEN_ORIENTATION_LANDSCAPE);// 横屏
+//        } else {
+//            setRequestedOrientation(ActivityInfo
+//                    .SCREEN_ORIENTATION_PORTRAIT);//竖屏
+//        }
         setContentView(R.layout.activity_guide_layout);
         viewPager = (TagViewPager) findViewById(R.id.tagViewPager);
         viewPager.init(R.drawable.shape_photo_tag_select, R.drawable.shape_photo_tag_nomal, 16,

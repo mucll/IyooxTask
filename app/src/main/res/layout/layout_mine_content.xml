@@ -9,11 +9,11 @@
     <LinearLayout
         android:id="@+id/mine_personal_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_53"
+        android:layout_height="@dimen/dip_54"
         android:background="@drawable/select_white_bg"
         android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dip_13"
-        android:paddingRight="@dimen/dip_13">
+        android:paddingLeft="@dimen/dip_14"
+        android:paddingRight="@dimen/dip_14">
 
         <ImageView
             android:layout_width="@dimen/dip_23"
@@ -33,11 +33,11 @@
     <LinearLayout
         android:id="@+id/mine_interest_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_53"
+        android:layout_height="@dimen/dip_54"
         android:background="@drawable/select_white_bg"
         android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dip_13"
-        android:paddingRight="@dimen/dip_13">
+        android:paddingLeft="@dimen/dip_14"
+        android:paddingRight="@dimen/dip_14">
 
         <ImageView
             android:layout_width="@dimen/dip_23"
@@ -57,11 +57,11 @@
     <LinearLayout
         android:id="@+id/mine_record_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_53"
+        android:layout_height="@dimen/dip_54"
         android:background="@drawable/select_white_bg"
         android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dip_13"
-        android:paddingRight="@dimen/dip_13">
+        android:paddingLeft="@dimen/dip_14"
+        android:paddingRight="@dimen/dip_14">
 
         <ImageView
             android:layout_width="@dimen/dip_23"
@@ -81,11 +81,11 @@
     <LinearLayout
         android:id="@+id/mine_remind_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_53"
+        android:layout_height="@dimen/dip_54"
         android:background="@drawable/select_white_bg"
         android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dip_13"
-        android:paddingRight="@dimen/dip_13">
+        android:paddingLeft="@dimen/dip_14"
+        android:paddingRight="@dimen/dip_14">
 
         <ImageView
             android:layout_width="@dimen/dip_23"
@@ -105,11 +105,11 @@
     <LinearLayout
         android:id="@+id/mine_contact_way_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_53"
+        android:layout_height="@dimen/dip_54"
         android:background="@drawable/select_white_bg"
         android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dip_13"
-        android:paddingRight="@dimen/dip_13">
+        android:paddingLeft="@dimen/dip_14"
+        android:paddingRight="@dimen/dip_14">
 
         <ImageView
             android:layout_width="@dimen/dip_23"
@@ -129,11 +129,11 @@
     <LinearLayout
         android:id="@+id/mine_setting_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_53"
+        android:layout_height="@dimen/dip_54"
         android:background="@drawable/select_white_bg"
         android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dip_13"
-        android:paddingRight="@dimen/dip_13">
+        android:paddingLeft="@dimen/dip_14"
+        android:paddingRight="@dimen/dip_14">
 
         <ImageView
             android:layout_width="@dimen/dip_23"

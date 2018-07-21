@@ -9,18 +9,21 @@ import java.util.List;
  * @date: 2018/7/13
  */
 public class ExercisesModel implements Serializable {
+
     private String daan;
     private String fenxi;
     private String jiexi;
     private String kaodian;
     private String tigan;
     private String timu_id;
-    private String type;
+    private int type;
+    private String chooseanswer;
+    private int is_correct;
     private ExercisesChooseModel option_One;
     private StudentAnswersModel answersModel;
 
     public String getDaan() {
-        return daan;
+        return daan.trim();
     }
 
     public void setDaan(String daan) {
@@ -67,11 +70,11 @@ public class ExercisesModel implements Serializable {
         this.timu_id = timu_id;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
@@ -89,5 +92,21 @@ public class ExercisesModel implements Serializable {
 
     public void setAnswersModel(StudentAnswersModel answersModel) {
         this.answersModel = answersModel;
+    }
+
+    public String getChooseanswer() {
+        return chooseanswer;
+    }
+
+    public void setChooseanswer(String chooseanswer) {
+        this.chooseanswer = chooseanswer;
+    }
+
+    public int getIs_correct() {
+        return is_correct;
+    }
+
+    public void setIs_correct(int is_correct) {
+        this.is_correct = is_correct;
     }
 }

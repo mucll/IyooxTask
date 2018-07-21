@@ -30,12 +30,13 @@ public class LocationIndicatorAdapter extends RecyclerView.Adapter<LocationIndic
     MyOnItemClickListener onItemClickListener;
     Context context;
     List<SubjectModel> mlist;
-    private ScrollSpeedLinearLayoutManger mLayoutManager;
 
     public LocationIndicatorAdapter(Context context, List<SubjectModel> list) {
         this.context = context;
         this.mlist = list;
-        getSelectPostion();
+        if (list != null && list.size() > 0) {
+            mlist.get(0).setSelect(true);
+        }
     }
 
     public int getSelectPostion() {

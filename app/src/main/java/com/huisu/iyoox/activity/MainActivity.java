@@ -38,7 +38,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity {
 
     private long exitTime;
-    private MyFragmentLayout myFragmentLayout;
+    public MyFragmentLayout myFragmentLayout;
     private List<Fragment> mFragmentList = null;
     private final int maxTime = 2000;
     private int tabImages[][] = {
@@ -106,8 +106,10 @@ public class MainActivity extends BaseActivity {
             case 0:
                 mFragmentList.get(0).onActivityResult(requestCode, resultCode, data);
                 break;
-            case 3:
-                mFragmentList.get(3).onActivityResult(requestCode, resultCode, data);
+            case 4:
+                mFragmentList.get(4).onActivityResult(requestCode, resultCode, data);
+                break;
+            default:
                 break;
         }
 

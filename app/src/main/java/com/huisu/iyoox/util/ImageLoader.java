@@ -59,10 +59,10 @@ public class ImageLoader {
     public static void load(Context context, ImageView iv, String url, int errorRes) {
         Glide.with(context)
                 .load(url)
-                .dontAnimate()
                 .placeholder(R.drawable.icon_image_loading)
                 .error(errorRes)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .dontAnimate()
                 .into(iv);
     }
 
