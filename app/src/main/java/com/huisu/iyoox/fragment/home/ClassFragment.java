@@ -41,9 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author: dl
- * @function: 班级Fragment
- * @date: 18/6/28
+ * 班级Fragment
  */
 public class ClassFragment extends BaseFragment {
 
@@ -133,6 +131,9 @@ public class ClassFragment extends BaseFragment {
         });
     }
 
+    /**
+     * 请求到数据后 设置数据
+     */
     private void setPostData(ClassRankingModel data) {
         teacherModels.clear();
         teacherModels.addAll(data.getTeacher_list());

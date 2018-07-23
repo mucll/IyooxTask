@@ -71,12 +71,12 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
     public void updateArguments(String gradeId, SubjectModel model) {
         this.gradeId = gradeId;
         this.subjectModel = model;
+        this.init = false;
         Bundle args = getArguments();
         if (args != null) {
             args.putString("grade_id", gradeId);
             args.putSerializable("model", model);
         }
-
     }
 
 
@@ -87,10 +87,10 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
             view = inflater.inflate(R.layout.fragment_book, container, false);
         }
         initView();
-        initData();
         setEvent();
         return view;
     }
+
 
     /**
      * 初始化控件
@@ -130,7 +130,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
 
             @Override
             public void onFailure(Object reasonObj) {
-
+                TabToast.showMiddleToast(getContext(),"网络错误");
             }
         });
     }
@@ -194,6 +194,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
                     public void onFailure(Object reasonObj) {
                         swipeToLoadLayout.setLoadingMore(false);
                         swipeToLoadLayout.setRefreshing(false);
+                        TabToast.showMiddleToast(getContext(),"网络错误");
                     }
                 });
     }
@@ -258,10 +259,15 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
         }
     }
 
+    private boolean init = false;
+
     @Override
     public void onShow() {
         super.onShow();
-        LogUtil.e("调用了Fragment");
+        if (!init) {
+            initData();
+            init = true;
+        }
     }
 
     @Override

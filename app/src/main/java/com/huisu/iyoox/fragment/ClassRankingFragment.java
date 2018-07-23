@@ -17,7 +17,7 @@ import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.views.WrapContentHeightViewPager;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 班级Fragment里面 学生排名
  */
 public class ClassRankingFragment extends BaseFragment {
 

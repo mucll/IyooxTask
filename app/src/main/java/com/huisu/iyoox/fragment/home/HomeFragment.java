@@ -80,7 +80,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 if (baseGradeListModel.data != null && baseGradeListModel.data.size() > 0) {
                     gradeListModels.clear();
                     gradeListModels.addAll(baseGradeListModel.data);
-                    getSelectGradeListModel(gradeListModels);
+                    getSelectGradeListModel();
                 } else {
                     TabToast.showMiddleToast(getContext(), baseGradeListModel.msg);
                 }
@@ -88,27 +88,20 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
             @Override
             public void onFailure(Object reasonObj) {
-
+                TabToast.showMiddleToast(getContext(),"网络错误");
             }
         });
     }
 
     /**
      * 根据学生年级 默认的选取科目信息
-     *
-     * @param models
      */
-    private void getSelectGradeListModel(List<GradeListModel> models) {
+    private void getSelectGradeListModel() {
         user = UserManager.getInstance().getUser();
-        for (GradeListModel model : models) {
-            if (user.getGrade() == model.getGrade_id()) {
-                initView();
-                initData();
-                initPage();
-                setEvent();
-                return;
-            }
-        }
+        initView();
+        initData();
+        initPage();
+        setEvent();
     }
 
     /**
@@ -118,7 +111,6 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         studentGradeTv = view.findViewById(R.id.student_grade_tv);
         mTabView = view.findViewById(R.id.fragment_home_tab_view);
         mViewPager = view.findViewById(R.id.fragment_home_page);
-        mViewPager.setOffscreenPageLimit(3);
         //初始化 学生年级
         studentGradeTv.setText(user.getGradeName());
         selectGradeCode = user.getGrade() - 1;
@@ -143,7 +135,11 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         myPagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(myPagerAdapter);
         mViewPager.setCurrentItem(0);
-
+        if (gradeListModels.get(selectGradeCode).getKemuArr().size() >= 2) {
+            mViewPager.setOffscreenPageLimit(gradeListModels.get(selectGradeCode).getKemuArr().size() - 1);
+        }
+        BaseFragment baseFragment = fragments.get(0);
+        baseFragment.onShow();
     }
 
     /**
@@ -167,7 +163,8 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     @Override
     public void onPageSelected(int position) {
         mTabView.setSelection(position);
-
+        BaseFragment baseFragment = fragments.get(position);
+        baseFragment.onShow();
     }
 
     @Override
@@ -194,21 +191,25 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         }
     }
 
+    private ArrayList<BaseFragment> fragments = new ArrayList<>();
+
     /**
      * 自定义适配器
      */
     class MyPagerAdapter extends FragmentPagerAdapter {
 
+
         MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
-
 
         @Override
         public BookFragment getItem(int position) {
             String gradeId = gradeListModels.get(selectGradeCode).getGrade_id() + "";
             SubjectModel subjectModel = gradeListModels.get(selectGradeCode).getKemuArr().get(position);
-            return getFragment(gradeId, subjectModel);
+            BookFragment bookFragment = getFragment(gradeId, subjectModel);
+            fragments.add(bookFragment);
+            return bookFragment;
         }
 
         @Override
@@ -216,7 +217,6 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             return gradeListModels.get(selectGradeCode).getKemuArr().size();
         }
 
-        @NonNull
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             BookFragment bookFragment = (BookFragment) super.instantiateItem(container, position);
@@ -224,6 +224,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             bookFragment.updateArguments(tab.getGrade_id() + "", tab.getKemuArr().get(position));
             return bookFragment;
         }
+
     }
 
     private BookFragment getFragment(String gradeId, SubjectModel model) {
