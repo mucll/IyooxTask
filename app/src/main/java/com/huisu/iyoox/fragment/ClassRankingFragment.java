@@ -3,7 +3,6 @@ package com.huisu.iyoox.fragment;
 
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +14,25 @@ import com.huisu.iyoox.R;
 import com.huisu.iyoox.adapter.ClassRankingListAdapter;
 import com.huisu.iyoox.entity.StudentRankingModel;
 import com.huisu.iyoox.fragment.base.BaseFragment;
+import com.huisu.iyoox.views.WrapContentHeightViewPager;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ClassRankingFragment extends BaseFragment {
 
+
+    private int position;
+    private WrapContentHeightViewPager mViewPager;
+
+    public ClassRankingFragment() {
+        super();
+    }
+
+    public ClassRankingFragment(WrapContentHeightViewPager mViewPager, int position) {
+        this.position = position;
+        this.mViewPager = mViewPager;
+    }
 
     private View view;
     private StudentRankingModel model;
@@ -41,6 +53,7 @@ public class ClassRankingFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_class_ranking, container, false);
+        mViewPager.setObjectForPosition(view, position);
         initView();
         return view;
     }

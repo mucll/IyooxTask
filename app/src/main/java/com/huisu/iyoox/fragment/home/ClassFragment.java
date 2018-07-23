@@ -35,8 +35,8 @@ import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.views.WrapContentHeightViewPager;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +52,7 @@ public class ClassFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
     private TeacherIconAdapter teacherAdapter;
     private LineChart mChart;
-    private ViewPager mViewPager;
+    private WrapContentHeightViewPager mViewPager;
     private boolean init;
     private User user;
     private List<TeacherModel> teacherModels = new ArrayList<>();
@@ -65,7 +65,7 @@ public class ClassFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_class, container, false);
         initTab();
         initView();
-        initData();
+        setEvent();
         return view;
     }
 
@@ -78,12 +78,30 @@ public class ClassFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         teacherAdapter = new TeacherIconAdapter(getContext(), teacherModels);
         mRecyclerView.setAdapter(teacherAdapter);
-
     }
 
-    private void initData() {
 
+    private void setEvent() {
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mViewPager.resetHeight(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+
+        });
+        mViewPager.resetHeight(0);
     }
+
 
     @Override
     public void onShow() {
@@ -128,7 +146,7 @@ public class ClassFragment extends BaseFragment {
     }
 
     private ClassRankingFragment getFragment(int position) {
-        ClassRankingFragment fragment = new ClassRankingFragment();
+        ClassRankingFragment fragment = new ClassRankingFragment(mViewPager, position);
         Bundle b = new Bundle();
         b.putSerializable("data", rankingModels.get(position));
         fragment.setArguments(b);
