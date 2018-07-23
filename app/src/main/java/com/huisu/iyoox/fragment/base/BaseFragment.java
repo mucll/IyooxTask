@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.entity.SubjectModel;
 import com.huisu.iyoox.util.StatusBarUtil;
 
 /**
@@ -76,5 +77,8 @@ public class BaseFragment extends Fragment {
 
     public void result() {
 
+    }
+
+    public void updateArguments(String gradeId, SubjectModel model) {
     }
 }

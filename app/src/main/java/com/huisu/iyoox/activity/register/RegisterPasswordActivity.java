@@ -204,7 +204,7 @@ public class RegisterPasswordActivity extends BaseActivity implements TextWatche
         } else {
             UserManager.getInstance().setUser(user);
             user.clearSavedState();
-            user.saveThrows();
+            boolean isSave = user.save();
             MainActivity.start(context);
             setResult(RESULT_OK);
             finish();

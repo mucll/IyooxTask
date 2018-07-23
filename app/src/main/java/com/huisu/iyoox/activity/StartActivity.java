@@ -22,6 +22,7 @@ import com.huisu.iyoox.util.SaveDate;
 import com.huisu.iyoox.util.StringUtils;
 
 import org.litepal.LitePal;
+import org.litepal.crud.LitePalSupport;
 
 import java.lang.ref.WeakReference;
 
@@ -45,7 +46,7 @@ public class StartActivity extends Activity {
             if (activity != null) {
                 if (StringUtils.getCurrentVersion(activity) == SaveDate.getInstence(activity)
                         .getVersion()) {
-                    User user = LitePal.find(User.class, 1);
+                    User user = LitePal.findFirst(User.class);
                     if (user != null) {
                         UserManager.getInstance().setUser(user);
                         MainActivity.start(activity);

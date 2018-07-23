@@ -88,7 +88,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
             @Override
             public void onFailure(Object reasonObj) {
-                TabToast.showMiddleToast(getContext(),"网络错误");
+                TabToast.showMiddleToast(getContext(), "网络错误");
             }
         });
     }
@@ -125,6 +125,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         for (SubjectModel model : subjectModels) {
             model.setSelect(false);
         }
+        SubjectModel subjectModel = new SubjectModel();
+        subjectModel.setName("首页");
+        subjectModels.add(0, subjectModel);
         mTabView.init(subjectModels);
     }
 
@@ -204,25 +207,32 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         }
 
         @Override
-        public BookFragment getItem(int position) {
-            String gradeId = gradeListModels.get(selectGradeCode).getGrade_id() + "";
-            SubjectModel subjectModel = gradeListModels.get(selectGradeCode).getKemuArr().get(position);
-            BookFragment bookFragment = getFragment(gradeId, subjectModel);
+        public BaseFragment getItem(int position) {
+            BaseFragment bookFragment;
+            if (position == 0) {
+                bookFragment = new HomePageFragment();
+            } else {
+                String gradeId = gradeListModels.get(selectGradeCode).getGrade_id() + "";
+                SubjectModel subjectModel = gradeListModels.get(selectGradeCode).getKemuArr().get(position - 1);
+                bookFragment = getFragment(gradeId, subjectModel);
+            }
             fragments.add(bookFragment);
             return bookFragment;
         }
 
         @Override
         public int getCount() {
-            return gradeListModels.get(selectGradeCode).getKemuArr().size();
+            return subjectModels == null ? 0 : subjectModels.size();
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            BookFragment bookFragment = (BookFragment) super.instantiateItem(container, position);
-            GradeListModel tab = gradeListModels.get(selectGradeCode);
-            bookFragment.updateArguments(tab.getGrade_id() + "", tab.getKemuArr().get(position));
-            return bookFragment;
+            BaseFragment baseFragment = (BaseFragment) super.instantiateItem(container, position);
+            if (position != 0) {
+                GradeListModel tab = gradeListModels.get(selectGradeCode);
+                baseFragment.updateArguments(tab.getGrade_id() + "", tab.getKemuArr().get(position - 1));
+            }
+            return baseFragment;
         }
 
     }
