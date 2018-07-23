@@ -3,19 +3,29 @@ package com.huisu.iyoox.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+import android.widget.TextView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
+import com.huisu.iyoox.entity.User;
+import com.huisu.iyoox.manager.ActivityStackManager;
+import com.huisu.iyoox.manager.UserManager;
+
+import org.litepal.LitePal;
+
 /**
- * @author: dl
- * @function: 设置
- * @date: 18/6/28
+ * 设置
  */
-public class ConfigMainActivity extends BaseActivity {
+public class ConfigMainActivity extends BaseActivity implements View.OnClickListener {
+
+    private TextView logoutTv;
+    private View resetPasswordView;
 
     @Override
     protected void initView() {
-
+        logoutTv = findViewById(R.id.logout_tv);
+        resetPasswordView = findViewById(R.id.reset_password_ll);
     }
 
     @Override
@@ -26,6 +36,8 @@ public class ConfigMainActivity extends BaseActivity {
     @Override
     protected void setEvent() {
         setBack();
+        logoutTv.setOnClickListener(this);
+        resetPasswordView.setOnClickListener(this);
     }
 
     @Override
@@ -33,9 +45,32 @@ public class ConfigMainActivity extends BaseActivity {
         return R.layout.activity_config_main;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.reset_password_ll:
+                ResetPasswordActivity.start(this);
+                break;
+            case R.id.logout_tv:
+                logout();
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 退出登录
+     */
+    private void logout() {
+        LitePal.deleteAll(User.class);
+        ActivityStackManager.getActivityStackManager().popAllActivity();
+        UserManager.getInstance().removeUser();
+        LoginActivity.start(this);
+    }
+
     public static void start(Context context) {
         Intent intent = new Intent(context, ConfigMainActivity.class);
         context.startActivity(intent);
     }
-
 }

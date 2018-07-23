@@ -6,21 +6,20 @@ import android.content.Intent;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
+
 /**
- * @author: dl
- * @function: 学习提醒
- * @date: 18/6/28
+ * 学生收藏界面
  */
-public class StudentLearningRemindingActivity extends BaseActivity {
+public class StudentCollectActivity extends BaseActivity {
+
 
     @Override
     protected void initView() {
-
     }
 
     @Override
     protected void initData() {
-        setTitle("学习提醒");
+        setTitle("我的收藏");
     }
 
     @Override
@@ -28,14 +27,15 @@ public class StudentLearningRemindingActivity extends BaseActivity {
         setBack();
     }
 
-    @Override
-    protected int getContentView() {
-        return R.layout.activity_student_learning_reminding;
-    }
 
     public static void start(Context context) {
-        Intent intent = new Intent(context, StudentLearningRemindingActivity.class);
+        Intent intent = new Intent(context, StudentCollectActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_student_collect;
     }
 
 }

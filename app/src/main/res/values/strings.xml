@@ -43,7 +43,6 @@
     <string name="pull_to_load">上拉加载</string>
     <string name="loading">正在加载</string>
     <string name="release_to_load">加载完成</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="class_empty_hint_text">还没有班级呢,快去寻找你的小伙伴吧</string>
+    <string name="student_add_class_room_hint_text">请输入6位班级编号</string>
 </resources>

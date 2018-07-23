@@ -1,4 +1,4 @@
-package com.huisu.iyoox.fragment;
+package com.huisu.iyoox.fragment.student;
 
 
 import android.content.Intent;

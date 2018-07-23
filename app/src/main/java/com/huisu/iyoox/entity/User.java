@@ -11,6 +11,8 @@ public class User extends LitePalSupport {
     private int sex;
     private int isvalid;
     private int grade;
+    private int classroom_id;
+    private String classroom_name;
 
     public String getUserId() {
         return user_id + "";
@@ -66,6 +68,22 @@ public class User extends LitePalSupport {
 
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+
+    public int getClassroom_id() {
+        return classroom_id;
+    }
+
+    public void setClassroom_id(int classroom_id) {
+        this.classroom_id = classroom_id;
+    }
+
+    public String getClassroom_name() {
+        return classroom_name;
+    }
+
+    public void setClassroom_name(String classroom_name) {
+        this.classroom_name = classroom_name;
     }
 
     public String getGradeName() {

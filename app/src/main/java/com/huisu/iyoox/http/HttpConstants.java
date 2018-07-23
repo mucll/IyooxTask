@@ -117,7 +117,10 @@ public class HttpConstants {
     /**
      * 获取班级信息和个人排名
      */
-    public static String getClassRanking = ROOT_URL + "/classroom/get_classroom_by_student";
+    public static String getClassRanking = ROOT_URL + "/classroom/get_classroom_by_student";    /**
+     * 学生添加班级
+     */
+    public static String addClassRoom = ROOT_URL + "/classroom/insert_classroom";
 
 }
 

@@ -2,6 +2,7 @@ package com.huisu.iyoox.fragment.home;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,23 +10,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.huisu.iyoox.R;
-import com.huisu.iyoox.activity.ContactWayActivity;
-import com.huisu.iyoox.activity.LoginActivity;
+import com.huisu.iyoox.activity.ConfigMainActivity;
+import com.huisu.iyoox.activity.PatriarchActivity;
 import com.huisu.iyoox.activity.PersonalDataActivity;
 import com.huisu.iyoox.activity.base.BaseActivity;
-import com.huisu.iyoox.activity.student.StudentInterestActivity;
-import com.huisu.iyoox.activity.student.StudentLearningRemindingActivity;
-import com.huisu.iyoox.activity.student.StudentPurchaseRecordActivity;
+import com.huisu.iyoox.activity.student.StudentCacheVideoActivity;
+import com.huisu.iyoox.activity.student.StudentCollectActivity;
+import com.huisu.iyoox.activity.student.StudentLearningCardActivity;
+import com.huisu.iyoox.activity.student.StudentLearningHistoryActivity;
+import com.huisu.iyoox.activity.student.StudentPurchaseHistoryActivity;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.fragment.base.BaseFragment;
-import com.huisu.iyoox.manager.ActivityStackManager;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.views.ChangeHeaderImgDialog;
 import com.huisu.iyoox.views.HeadView;
 
-import org.litepal.LitePal;
 
 import java.io.File;
 
@@ -40,7 +42,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private HeadView mHeadView;
     private ChangeHeaderImgDialog mHeaderImgDialog;
     private RelativeLayout topLayout;
-    private LinearLayout personalLayout, interestLayout, remindLayout, recordLayout, contactWayLayout, configLayout;
+    private LinearLayout learningCardLayout, learningHistoryLayout, patriarchLayout, configLayout, servicePhoneLayout;
+    private View mineCacheView, mineCollectView, mineHistoryView;
+
     private User user;
 
     @Override
@@ -49,6 +53,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_mine, container, false);
         }
+        initTab();
         initView();
         initData();
         setEvent();
@@ -56,14 +61,26 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void initView() {
+
+        //头像
         mHeadView = view.findViewById(R.id.user_icon);
-        topLayout = view.findViewById(R.id.mine_fragment_top_layout);
-        personalLayout = view.findViewById(R.id.mine_personal_layout);
-        interestLayout = view.findViewById(R.id.mine_interest_layout);
-        recordLayout = view.findViewById(R.id.mine_record_layout);
-        remindLayout = view.findViewById(R.id.mine_remind_layout);
-        contactWayLayout = view.findViewById(R.id.mine_contact_way_layout);
+        //缓存
+        mineCacheView = view.findViewById(R.id.mine_cache_ll);
+        //收藏
+        mineCollectView = view.findViewById(R.id.mine_collect_ll);
+        //购买记录
+        mineHistoryView = view.findViewById(R.id.mine_purchase_history_ll);
+        //学习卡
+        learningCardLayout = view.findViewById(R.id.mine_learning_card_layout);
+        //学习记录
+        learningHistoryLayout = view.findViewById(R.id.mine_learning_history_layout);
+        //家长
+        patriarchLayout = view.findViewById(R.id.mine_patriarch_layout);
+        //客服
+        servicePhoneLayout = view.findViewById(R.id.mine_service_phone_layout);
+        //设置
         configLayout = view.findViewById(R.id.mine_setting_layout);
+        topLayout = view.findViewById(R.id.mine_fragment_top_layout);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             topLayout.setPadding(0, (int) (24 * BaseActivity.getScreenScale(getActivity())), 0, 0);
         }
@@ -71,52 +88,61 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private void initData() {
         user = UserManager.getInstance().getUser();
-        mHeadView.setHead(user.getUserId(), "iyoox", "");
+        mHeadView.setHead(user.getUserId(), user.getName(), "");
     }
 
     private void setEvent() {
         mHeadView.setOnClickListener(this);
-        personalLayout.setOnClickListener(this);
-        interestLayout.setOnClickListener(this);
-        remindLayout.setOnClickListener(this);
-        recordLayout.setOnClickListener(this);
-        contactWayLayout.setOnClickListener(this);
+        mineCacheView.setOnClickListener(this);
+        mineCollectView.setOnClickListener(this);
+        mineHistoryView.setOnClickListener(this);
+        learningCardLayout.setOnClickListener(this);
+        learningHistoryLayout.setOnClickListener(this);
+        patriarchLayout.setOnClickListener(this);
+        servicePhoneLayout.setOnClickListener(this);
         configLayout.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.user_icon:
-                configHeard();
-                break;
-            case R.id.mine_personal_layout:
                 //个人资料
                 PersonalDataActivity.start(getContext());
                 break;
-            case R.id.mine_interest_layout:
-                //学习兴趣
-                StudentInterestActivity.start(getContext());
+            case R.id.mine_cache_ll:
+                //缓存
+                StudentCacheVideoActivity.start(getContext());
                 break;
-            case R.id.mine_record_layout:
+            case R.id.mine_collect_ll:
+                //收藏
+                StudentCollectActivity.start(getContext());
+                break;
+            case R.id.mine_purchase_history_ll:
                 //购买记录
-                StudentPurchaseRecordActivity.start(getContext());
+                StudentPurchaseHistoryActivity.start(getContext());
                 break;
-            case R.id.mine_remind_layout:
-                //学习提醒
-                StudentLearningRemindingActivity.start(getContext());
+            case R.id.mine_learning_card_layout:
+                //学习卡
+                StudentLearningCardActivity.start(getContext());
                 break;
-            case R.id.mine_contact_way_layout:
-                //联系我们
-                ContactWayActivity.start(getContext());
+            case R.id.mine_learning_history_layout:
+                //学习记录
+                StudentLearningHistoryActivity.start(getContext());
+                break;
+            case R.id.mine_patriarch_layout:
+                //家长
+                PatriarchActivity.start(getContext());
+                break;
+            case R.id.mine_service_phone_layout:
+                //客服电话
+                Intent Intent = new Intent(android.content.Intent.ACTION_DIAL, Uri.parse("tel:" + 123));//跳转到拨号界面，同时传递电话号码
+                startActivity(Intent);
                 break;
             case R.id.mine_setting_layout:
                 //设置
-                LitePal.deleteAll(User.class);
-                ActivityStackManager.getActivityStackManager().popAllActivity();
-                UserManager.getInstance().removeUser();
-                LoginActivity.start(getContext());
-//                ConfigMainActivity.start(getContext());
+                ConfigMainActivity.start(getContext());
                 break;
             default:
                 break;
@@ -151,5 +177,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void doWriteSDCard() {
         mHeaderImgDialog.doWriteSDCard();
+    }
+
+    private void initTab() {
+        View tabView = view.findViewById(R.id.tab_view);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            tabView.setVisibility(View.VISIBLE);
+        } else {
+            tabView.setVisibility(View.GONE);
+        }
     }
 }

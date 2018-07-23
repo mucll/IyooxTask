@@ -218,4 +218,23 @@
         <item name="android:minHeight">20px</item>
         <item name="android:isIndicator">true</item>
     </style>
+
+    <style name="person_details_layout_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/dip_16</item>
+        <item name="android:background">@drawable/select_white_bg</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingBottom">@dimen/dip_4</item>
+        <item name="android:paddingTop">@dimen/dip_4</item>
+    </style>
+
+    <style name="person_details_layout_tv_style">
+        <item name="android:layout_width">@dimen/dip_100</item>
+        <item name="android:layout_height">@dimen/dip_40</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/color333</item>
+        <item name="android:textSize">@dimen/f_17</item>
+    </style>
 </resources>

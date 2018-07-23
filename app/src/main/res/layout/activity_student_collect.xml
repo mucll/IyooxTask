@@ -3,11 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.student.StudentInterestActivity">
+    android:orientation="vertical"
+    tools:context=".activity.student.StudentCollectActivity">
+
+    <include layout="@layout/layout_title_bar_all" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="学习兴趣" />
+        android:text="收藏" />
 </LinearLayout>

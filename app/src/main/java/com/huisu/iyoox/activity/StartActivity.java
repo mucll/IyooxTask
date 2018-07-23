@@ -15,29 +15,25 @@ import android.widget.ImageView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
-import com.huisu.iyoox.activity.register.RegisterPhoneActivity;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.util.SaveDate;
 import com.huisu.iyoox.util.StringUtils;
 
 import org.litepal.LitePal;
-import org.litepal.crud.LitePalSupport;
 
 import java.lang.ref.WeakReference;
 
 /**
- * @author: dl
- * @function: 启动界面
- * @date: 18/6/28
+ * 启动界面
  */
 public class StartActivity extends Activity {
 
     private static class MyHandler extends Handler {
         private final WeakReference<StartActivity> mActivity;
 
-        public MyHandler(StartActivity activity) {
-            mActivity = new WeakReference<StartActivity>(activity);
+        MyHandler(StartActivity activity) {
+            mActivity = new WeakReference<>(activity);
         }
 
         @Override
@@ -154,7 +150,7 @@ public class StartActivity extends Activity {
         startAnimBook(iconrPercentageIv, 1000, 200f, -250f, 30f);
     }
 
-    private void startAnim(View view, int animTime) {
+    private void startAnim(View view, long animTime) {
         AnimatorSet animatorSet = new AnimatorSet();
         float curTranslationX = view.getTranslationY();
         ObjectAnimator translationAnim = ObjectAnimator.ofFloat(view, "translationY", curTranslationX, -300f);
@@ -179,7 +175,7 @@ public class StartActivity extends Activity {
 
     }
 
-    private void startAnimBook(View view, int animTime, float translationX, float translationY, float doudong) {
+    private void startAnimBook(View view, long animTime, float translationX, float translationY, float doudong) {
         AnimatorSet animatorSet = new AnimatorSet();
         float curTranslationY = view.getTranslationY();
         float curTranslationX = view.getTranslationX();
@@ -215,19 +211,19 @@ public class StartActivity extends Activity {
     }
 
     private void initView() {
-        iconBottomIv = (ImageView) findViewById(R.id.start_icon_bottom_iv);
-        iconGuangIv = (ImageView) findViewById(R.id.start_icon_guang_iv);
-        iconPersonIv = (ImageView) findViewById(R.id.start_icon_person_iv);
-        iconBoxIv = (ImageView) findViewById(R.id.start_icon_box_iv);
-        iconBookIv = (ImageView) findViewById(R.id.start_icon_book_iv);
-        iconBIv = (ImageView) findViewById(R.id.start_icon_b_iv);
-        iconBookTwoIv = (ImageView) findViewById(R.id.start_icon_book_two_iv);
-        iconErrorIv = (ImageView) findViewById(R.id.start_icon_error_iv);
-        iconHatIv = (ImageView) findViewById(R.id.start_icon_hat_iv);
-        iconPenIv = (ImageView) findViewById(R.id.start_pen_iv);
-        iconrAIv = (ImageView) findViewById(R.id.start_icon_a_iv);
-        iconrRubberIv = (ImageView) findViewById(R.id.start_rubber_iv);
-        iconrPercentageIv = (ImageView) findViewById(R.id.start_percentage_iv);
+        iconBottomIv = findViewById(R.id.start_icon_bottom_iv);
+        iconGuangIv = findViewById(R.id.start_icon_guang_iv);
+        iconPersonIv = findViewById(R.id.start_icon_person_iv);
+        iconBoxIv = findViewById(R.id.start_icon_box_iv);
+        iconBookIv = findViewById(R.id.start_icon_book_iv);
+        iconBIv = findViewById(R.id.start_icon_b_iv);
+        iconBookTwoIv = findViewById(R.id.start_icon_book_two_iv);
+        iconErrorIv = findViewById(R.id.start_icon_error_iv);
+        iconHatIv = findViewById(R.id.start_icon_hat_iv);
+        iconPenIv = findViewById(R.id.start_pen_iv);
+        iconrAIv = findViewById(R.id.start_icon_a_iv);
+        iconrRubberIv = findViewById(R.id.start_rubber_iv);
+        iconrPercentageIv = findViewById(R.id.start_percentage_iv);
     }
 
     /**

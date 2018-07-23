@@ -79,8 +79,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         LayoutInflater.from(this).inflate(getContentView(), contentView);
         context = this;
         initView();
-        initData();
         setEvent();
+        initData();
         initUmeng();
         ActivityStackManager.getActivityStackManager().pushActivity(this);
         if (isStatusBar) {

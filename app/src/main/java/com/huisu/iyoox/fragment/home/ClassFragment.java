@@ -1,6 +1,8 @@
 package com.huisu.iyoox.fragment.home;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,9 +12,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -23,7 +30,9 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ValueFormatter;
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.student.StudentAddClassRoomActivity;
 import com.huisu.iyoox.adapter.TeacherIconAdapter;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.ClassRankingModel;
 import com.huisu.iyoox.entity.StudentRankingModel;
 import com.huisu.iyoox.entity.StudentScoreModel;
@@ -43,7 +52,7 @@ import java.util.List;
 /**
  * 班级Fragment
  */
-public class ClassFragment extends BaseFragment {
+public class ClassFragment extends BaseFragment implements View.OnClickListener {
 
 
     private View view;
@@ -56,6 +65,10 @@ public class ClassFragment extends BaseFragment {
     private List<TeacherModel> teacherModels = new ArrayList<>();
     private List<StudentScoreModel> scoreModels = new ArrayList<>();
     private List<StudentRankingModel> rankingModels = new ArrayList<>();
+    private Button addClassBt;
+    private TextView titleTv;
+    private View scrollView;
+    private View emptyView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,6 +81,12 @@ public class ClassFragment extends BaseFragment {
     }
 
     private void initView() {
+        user = UserManager.getInstance().getUser();
+        scrollView = view.findViewById(R.id.class_scroll_view);
+        emptyView = view.findViewById(R.id.empty_view_layout);
+        addClassBt = view.findViewById(R.id.add_class_bt);
+        titleTv = view.findViewById(R.id.title_bar_tv);
+
         mChart = view.findViewById(R.id.chart_line);
         mViewPager = view.findViewById(R.id.class_fragment_view_pager);
         mRecyclerView = view.findViewById(R.id.class_teacher_recycler_view);
@@ -80,6 +99,7 @@ public class ClassFragment extends BaseFragment {
 
 
     private void setEvent() {
+        addClassBt.setOnClickListener(this);
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -104,10 +124,23 @@ public class ClassFragment extends BaseFragment {
     @Override
     public void onShow() {
         super.onShow();
-        if (!init) {
-            user = UserManager.getInstance().getUser();
-            postClassRankingData();
-            init = true;
+        isAddClassRoom();
+    }
+
+    private void isAddClassRoom() {
+        user = UserManager.getInstance().getUser();
+        if (!TextUtils.isEmpty(user.getClassroom_name())) {
+            emptyView.setVisibility(View.GONE);
+            scrollView.setVisibility(View.VISIBLE);
+            if (!init) {
+                postClassRankingData();
+                init = true;
+            }
+            titleTv.setText(user.getClassroom_name());
+        } else {
+            scrollView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+            titleTv.setText("我的班级");
         }
     }
 
@@ -152,6 +185,28 @@ public class ClassFragment extends BaseFragment {
         b.putSerializable("data", rankingModels.get(position));
         fragment.setArguments(b);
         return fragment;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.add_class_bt:
+                startAddClassAc();
+                break;
+        }
+    }
+
+    private void startAddClassAc() {
+        Intent intent = new Intent(getContext(), StudentAddClassRoomActivity.class);
+        getActivity().startActivityForResult(intent, Constant.POST_SUCCESS_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            isAddClassRoom();
+        }
     }
 
     /**

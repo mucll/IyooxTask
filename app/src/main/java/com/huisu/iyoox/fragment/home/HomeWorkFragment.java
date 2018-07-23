@@ -3,50 +3,28 @@ package com.huisu.iyoox.fragment.home;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.huisu.iyoox.Interface.TaskStatus;
 import com.huisu.iyoox.R;
-import com.huisu.iyoox.activity.base.BaseActivity;
-import com.huisu.iyoox.activity.student.TaskStudentHomeWorkActivity;
-import com.huisu.iyoox.adapter.HomeWorkFragmentAdapter;
-import com.huisu.iyoox.entity.BookBean;
-import com.huisu.iyoox.entity.SubjectModel;
-import com.huisu.iyoox.fragment.StudentTaskListFragment;
+import com.huisu.iyoox.fragment.student.StudentTaskListFragment;
 import com.huisu.iyoox.fragment.base.BaseFragment;
-import com.huisu.iyoox.util.StatusBarUtil;
 import com.huisu.iyoox.views.MyFragmentLayout_line;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- * @author: dl
- * @function: 作业fragment
- * @date: 18/6/28
+ * tab作业界面
  */
 public class HomeWorkFragment extends BaseFragment {
     private View view;
-    private ListView mListView;
     private MyFragmentLayout_line myFragmentLayout;
     private ArrayList<BaseFragment> fragments = new ArrayList();
-    private String taskType = "";
     private boolean init;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Bundle args = getArguments();
-        if (args != null) {
-            taskType = args.getString("grade_id");
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

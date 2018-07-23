@@ -24,7 +24,7 @@
 
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/title_bar_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -40,7 +40,8 @@
         android:id="@+id/class_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,4 +148,41 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/empty_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/class_empty_icon_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_110"
+            android:src="@drawable/class_wu" />
+
+        <TextView
+            android:id="@+id/class_empty_hint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/class_empty_icon_iv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_30"
+            android:text="@string/class_empty_hint_text"
+            android:textColor="@color/colora0"
+            android:textSize="@dimen/f_14" />
+
+        <Button
+            android:id="@+id/add_class_bt"
+            android:layout_width="@dimen/dip_120"
+            android:layout_height="@dimen/dip_32"
+            android:layout_below="@id/class_empty_hint_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_30"
+            android:background="@drawable/select_maincolor_submit_bt_bg"
+            android:text="马上添加"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/f_16" />
+    </RelativeLayout>
 </LinearLayout>

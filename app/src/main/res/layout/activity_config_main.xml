@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.ConfigMainActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/layout_title_bar_all" />
+
+    <LinearLayout
+        android:id="@+id/reset_password_ll"
+        style="@style/person_details_layout_style"
+        android:layout_marginBottom="@dimen/dip_8"
+        android:layout_marginTop="@dimen/dip_8"
+        android:background="@color/white">
+
+        <TextView
+            style="@style/person_details_layout_tv_style"
+            android:text="修改密码" />
+
+        <TextView
+            style="@style/person_details_layout_tv_style"
+            android:layout_marginRight="@dimen/dip_16"
+            android:layout_weight="1"
+            android:drawableRight="@drawable/homework_finished_forward"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/f_15" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/logout_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_48"
+        android:layout_marginTop="@dimen/dip_22"
+        android:background="@color/exercises_error"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/f_16" />
+</LinearLayout>

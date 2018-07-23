@@ -85,17 +85,21 @@
         <activity
             android:name=".activity.PersonalDataActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".activity.student.StudentInterestActivity" />
-        <activity android:name=".activity.student.StudentPurchaseRecordActivity" />
-        <activity android:name=".activity.student.StudentLearningRemindingActivity" />
-        <activity android:name=".activity.ContactWayActivity" />
+        <activity android:name=".activity.student.StudentLearningHistoryActivity" />
+        <activity android:name=".activity.PatriarchActivity" />
         <activity android:name=".activity.ConfigMainActivity" />
         <activity android:name=".activity.register.RegisterPhoneVerificationCodeActivity" />
         <activity android:name=".activity.register.RegisterPasswordActivity" />
         <activity android:name=".activity.register.RegisterIdentityActivity" />
         <activity android:name=".activity.register.RegisterPersonDetailsActivity" />
         <activity android:name=".activity.student.StudentWriteExercisesErrorActivity" />
-        <activity android:name=".activity.ScreenErrorExercisesListActivity"></activity>
+        <activity android:name=".activity.ScreenErrorExercisesListActivity" />
+        <activity android:name=".activity.student.StudentCacheVideoActivity" />
+        <activity android:name=".activity.student.StudentCollectActivity" />
+        <activity android:name=".activity.student.StudentPurchaseHistoryActivity" />
+        <activity android:name=".activity.student.StudentLearningCardActivity" />
+        <activity android:name=".activity.ResetPasswordActivity" />
+        <activity android:name=".activity.student.StudentAddClassRoomActivity"></activity>
     </application>
 
 </manifest>

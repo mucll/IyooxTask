@@ -55,9 +55,21 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_hone, container, false);
         }
-        postHomeData();
         initTab();
+        initView();
+        initBaseView();
+        setEvent();
+        initPage();
+        postHomeData();
         return view;
+    }
+
+    private void initBaseView() {
+        subjectModels.clear();
+        SubjectModel subjectModel = new SubjectModel();
+        subjectModel.setName("首页");
+        subjectModels.add(subjectModel);
+        mTabView.init(subjectModels);
     }
 
     private void initTab() {
@@ -97,17 +109,15 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
      * 根据学生年级 默认的选取科目信息
      */
     private void getSelectGradeListModel() {
-        user = UserManager.getInstance().getUser();
-        initView();
         initData();
         initPage();
-        setEvent();
     }
 
     /**
      * 初始化控件
      */
     private void initView() {
+        user = UserManager.getInstance().getUser();
         studentGradeTv = view.findViewById(R.id.student_grade_tv);
         mTabView = view.findViewById(R.id.fragment_home_tab_view);
         mViewPager = view.findViewById(R.id.fragment_home_page);
@@ -138,11 +148,14 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         myPagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(myPagerAdapter);
         mViewPager.setCurrentItem(0);
-        if (gradeListModels.get(selectGradeCode).getKemuArr().size() >= 2) {
+        if (gradeListModels.size() >= selectGradeCode && gradeListModels.get(selectGradeCode).getKemuArr().size() >= 2) {
             mViewPager.setOffscreenPageLimit(gradeListModels.get(selectGradeCode).getKemuArr().size() - 1);
         }
-        BaseFragment baseFragment = fragments.get(0);
-        baseFragment.onShow();
+        if (fragments.size() > 0) {
+            BaseFragment baseFragment = fragments.get(0);
+            baseFragment.onShow();
+        }
+
     }
 
     /**
@@ -179,6 +192,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.student_grade_tv:
+                if (gradeListModels.size() == 0) {
+                    return;
+                }
                 SelectGradeDialog gradeDialog = new SelectGradeDialog(getContext(), gradeListModels, selectGradeCode) {
                     @Override
                     public void getGradeType(GradeListModel gradeModel, int gradeCode) {

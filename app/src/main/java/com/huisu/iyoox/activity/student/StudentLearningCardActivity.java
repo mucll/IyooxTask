@@ -5,12 +5,8 @@ import android.content.Intent;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
-/**
- * @author: dl
- * @function: 购买记录
- * @date: 18/6/28
- */
-public class StudentPurchaseRecordActivity extends BaseActivity {
+
+public class StudentLearningCardActivity extends BaseActivity {
 
     @Override
     protected void initView() {
@@ -19,7 +15,7 @@ public class StudentPurchaseRecordActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        setTitle("购买记录");
+        setTitle("学习卡");
     }
 
     @Override
@@ -29,11 +25,12 @@ public class StudentPurchaseRecordActivity extends BaseActivity {
 
     @Override
     protected int getContentView() {
-        return R.layout.activity_student_purchase_record;
+        return R.layout.activity_student_learning_card;
     }
 
     public static void start(Context context) {
-        Intent intent = new Intent(context, StudentPurchaseRecordActivity.class);
+        Intent intent = new Intent(context, StudentLearningCardActivity.class);
         context.startActivity(intent);
     }
+
 }

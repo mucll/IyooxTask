@@ -1,5 +1,6 @@
 package com.huisu.iyoox.http;
 
+import com.huisu.iyoox.entity.base.BaseAddClassRoomModel;
 import com.huisu.iyoox.entity.base.BaseBookDetailsModel;
 import com.huisu.iyoox.entity.base.BaseCheckMsgCode;
 import com.huisu.iyoox.entity.base.BaseClassRankingModel;
@@ -342,12 +343,22 @@ public class RequestCenter {
     }
 
     /**
-     * 学生作业列表
+     * 学生获取班级详情信息
      */
     public static void getClassRanking(String student_id, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("student_id", student_id);
         RequestCenter.postRequest(HttpConstants.getClassRanking, params, listener, BaseClassRankingModel.class);
+    }
+
+    /**
+     * 学生添加班级
+     */
+    public static void addClassRoom(String student_id, String classId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("student_id", student_id);
+        params.put("classroom_no", classId);
+        RequestCenter.postRequest(HttpConstants.addClassRoom, params, listener, BaseAddClassRoomModel.class);
     }
 
 }

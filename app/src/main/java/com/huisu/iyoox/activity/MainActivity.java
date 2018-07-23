@@ -102,17 +102,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (myFragmentLayout.getCurrentPosition()) {
-            case 0:
-                mFragmentList.get(0).onActivityResult(requestCode, resultCode, data);
-                break;
-            case 4:
-                mFragmentList.get(4).onActivityResult(requestCode, resultCode, data);
-                break;
-            default:
-                break;
-        }
-
+        mFragmentList.get(myFragmentLayout.getCurrentPosition()).onActivityResult(requestCode, resultCode, data);
     }
 
     /**
