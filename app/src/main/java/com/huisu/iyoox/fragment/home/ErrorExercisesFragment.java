@@ -59,7 +59,7 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
     public void onShow() {
         super.onShow();
         if (!init) {
-            postStudentErrorData(user.getId());
+            postStudentErrorData(user.getUserId());
             init = true;
         }
     }

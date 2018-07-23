@@ -102,7 +102,7 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
      * 获取学生作业列表
      */
     private void postTaskListData() {
-        RequestCenter.getStudentTaskListData(user.getId(), taskType, page + "", new DisposeDataListener() {
+        RequestCenter.getStudentTaskListData(user.getUserId(), taskType, page + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 closeLoading();

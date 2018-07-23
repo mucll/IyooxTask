@@ -115,7 +115,7 @@ public class ClassFragment extends BaseFragment {
      * 请求数据
      */
     private void postClassRankingData() {
-        RequestCenter.getClassRanking(user.getId(), new DisposeDataListener() {
+        RequestCenter.getClassRanking(user.getUserId(), new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 BaseClassRankingModel baseClassRankingModel = (BaseClassRankingModel) responseObj;

@@ -31,7 +31,7 @@ public class PersonalDataActivity extends BaseActivity {
 
     private void postPersonData() {
         User user = UserManager.getInstance().getUser();
-        RequestCenter.userInfo(user.getId(), new DisposeDataListener() {
+        RequestCenter.userInfo(user.getUserId(), new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 BaseUser baseUser = (BaseUser) responseObj;

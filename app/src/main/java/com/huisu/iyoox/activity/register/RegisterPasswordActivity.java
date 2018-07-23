@@ -199,7 +199,7 @@ public class RegisterPasswordActivity extends BaseActivity implements TextWatche
     private void judgeUserInfo(User user) {
         if (TextUtils.isEmpty(user.getName())) {
             Intent intent = new Intent(context, RegisterPersonDetailsActivity.class);
-            intent.putExtra("userId", user.getId());
+            intent.putExtra("userId", user.getUserId());
             startActivityForResult(intent, START_CODE);
         } else {
             UserManager.getInstance().setUser(user);

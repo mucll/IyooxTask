@@ -71,7 +71,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private void initData() {
         user = UserManager.getInstance().getUser();
-        mHeadView.setHead(user.getId(), "iyoox", "");
+        mHeadView.setHead(user.getUserId(), "iyoox", "");
     }
 
     private void setEvent() {
@@ -130,7 +130,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             public void getResult(final File file) {
                 super.getResult(file);
                 String path = file.getAbsolutePath();
-                mHeadView.setHead(user.getId() + "", "iyoox", path);
+                mHeadView.setHead(user.getUserId() + "", "iyoox", path);
             }
         };
     }

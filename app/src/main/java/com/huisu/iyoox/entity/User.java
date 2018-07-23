@@ -12,11 +12,11 @@ public class User extends LitePalSupport {
     private int isvalid;
     private int grade;
 
-    public String getId() {
+    public String getUserId() {
         return user_id + "";
     }
 
-    public void setId(int user_id) {
+    public void setUserId(int user_id) {
         this.user_id = user_id;
     }
 

@@ -75,7 +75,7 @@ public class StudentWriteExercisesErrorActivity extends BaseActivity implements 
 
     private void postSubjectData() {
         loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
-        RequestCenter.getErrorSubjectDetilas(user.getId(), subjectId + "", jiaoCaiId, zhiShiDianId, time, new DisposeDataListener() {
+        RequestCenter.getErrorSubjectDetilas(user.getUserId(), subjectId + "", jiaoCaiId, zhiShiDianId, time, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 loading.dismiss();
@@ -142,7 +142,7 @@ public class StudentWriteExercisesErrorActivity extends BaseActivity implements 
     private void startScreenActivity() {
         Intent intent = new Intent(this, ScreenErrorExercisesListActivity.class);
         intent.putExtra("subjectId", subjectId + "");
-        intent.putExtra("studentId", user.getId() + "");
+        intent.putExtra("studentId", user.getUserId() + "");
         startActivityForResult(intent, 100);
     }
 }

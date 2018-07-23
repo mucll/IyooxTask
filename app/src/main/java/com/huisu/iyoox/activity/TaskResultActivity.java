@@ -102,7 +102,7 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
     private void studentHomeWorked() {
         workId = getIntent().getStringExtra("workId");
         title = getIntent().getStringExtra("title");
-        RequestCenter.getStudentTaskBaoGao(user.getId(), workId, new DisposeDataListener() {
+        RequestCenter.getStudentTaskBaoGao(user.getUserId(), workId, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 BaseTaskResultModel resultModel = (BaseTaskResultModel) responseObj;
@@ -174,7 +174,7 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
      * @param json
      */
     private void postHomeWorkResultData(String json) {
-        RequestCenter.getStudentTaskResult(user.getId(), workId, timeString, json, new DisposeDataListener() {
+        RequestCenter.getStudentTaskResult(user.getUserId(), workId, timeString, json, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 BaseTaskResultModel resultModel = (BaseTaskResultModel) responseObj;
@@ -228,7 +228,7 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
      * @param resultJson
      */
     private void postDoingResultData(String resultJson) {
-        RequestCenter.getTaskResultData(user.getId(), zhishiId, timeString, resultJson, new DisposeDataListener() {
+        RequestCenter.getTaskResultData(user.getUserId(), zhishiId, timeString, resultJson, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 BaseTaskResultModel resultModel = (BaseTaskResultModel) responseObj;
