@@ -45,4 +45,10 @@
     <string name="release_to_load">加载完成</string>
     <string name="class_empty_hint_text">还没有班级呢,快去寻找你的小伙伴吧</string>
     <string name="student_add_class_room_hint_text">请输入6位班级编号</string>
+    <string name="student_video_cache_empty_text">暂时还没有缓存任何视频呢</string>
+    <string name="student_video_cache_empty_hint_text">可在视频播放页面点击缓存按钮进行缓存哦</string>
+    <string name="student_collect_empty_text">暂时还没有收藏任何视频呢</string>
+    <string name="student_collect_empty_hint_text">可在视频播放页面点击收藏按钮进行收藏哦</string>
+    <string name="student_purchase_empty_text">您暂无待支付订单哦</string>
+    <string name="student_learning_empty_text">暂时还没有购买任何学习卡呢</string>
 </resources>

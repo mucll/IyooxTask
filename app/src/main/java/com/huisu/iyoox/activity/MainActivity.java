@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity {
             }
         });
         myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout, 0x101);
-        myFragmentLayout.getViewPager().setOffscreenPageLimit(5);
+        myFragmentLayout.getViewPager().setOffscreenPageLimit(4);
     }
 
     @Override

@@ -48,6 +48,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
     private SwipeToLoadLayout swipeToLoadLayout;
 
     private String gradeId;
+    private String gradeDetailId;
     private final int default_code = 0;
     private ArrayList<VideoGroupModel> videoModels = new ArrayList<>();
 
@@ -56,7 +57,8 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         if (args != null) {
-            gradeId = args.getString("grade_id");
+            gradeId = args.getString("gradeId");
+            gradeDetailId = args.getString("gradeDetailId");
             subjectModel = (SubjectModel) args.getSerializable("model");
         }
 
@@ -68,13 +70,15 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
      * @param gradeId 年级ID
      * @param model   科目
      */
-    public void updateArguments(String gradeId, SubjectModel model) {
+    public void updateArguments(String gradeId, String gradeDetailId, SubjectModel model) {
         this.gradeId = gradeId;
+        this.gradeDetailId = gradeDetailId;
         this.subjectModel = model;
         this.init = false;
         Bundle args = getArguments();
         if (args != null) {
-            args.putString("grade_id", gradeId);
+            args.putString("gradeId", gradeId);
+            args.putString("gradeDetailId", gradeDetailId);
             args.putSerializable("model", model);
         }
     }
@@ -112,10 +116,10 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
     }
 
     /**
-     * 请求课程详情
+     * 请求课本 版本 章节 知识点
      */
     private void postBookDetailsData() {
-        RequestCenter.getOptionlist(gradeId, subjectModel.getKemu_id() + "", new DisposeDataListener() {
+        RequestCenter.getOptionlist(gradeId, gradeDetailId, subjectModel.getKemu_id() + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 BaseBookDetailsModel baseBookDetailsModel = (BaseBookDetailsModel) responseObj;
@@ -130,7 +134,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
 
             @Override
             public void onFailure(Object reasonObj) {
-                TabToast.showMiddleToast(getContext(),"网络错误");
+                TabToast.showMiddleToast(getContext(), "网络错误");
             }
         });
     }
@@ -179,8 +183,11 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
                             if (baseVideoModel.data != null && baseVideoModel.data.size() > 0) {
                                 videoModels.addAll(baseVideoModel.data);
                             } else {
-                                page--;
-                                TabToast.showMiddleToast(getContext(), "没有更多数据");
+                                if (page > 1) {
+                                    page--;
+                                    TabToast.showMiddleToast(getContext(), "没有更多数据");
+                                }
+                                mAdapter.notifyDataSetChanged();
                                 return;
                             }
                             mAdapter.notifyDataSetChanged();
@@ -194,7 +201,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
                     public void onFailure(Object reasonObj) {
                         swipeToLoadLayout.setLoadingMore(false);
                         swipeToLoadLayout.setRefreshing(false);
-                        TabToast.showMiddleToast(getContext(),"网络错误");
+                        TabToast.showMiddleToast(getContext(), "网络错误");
                     }
                 });
     }
@@ -272,13 +279,16 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
 
     @Override
     public void onLoadMore() {
-        if (videoModels.size() != 0) {
-            page++;
-        }
+        page++;
         BookDetailsModel editionModel = bookTypeView.getSelectJiaoCaiData();
         BookChapterModel chapterModel = bookTypeView.getSelectZhangJieData();
-        postDetailsData(editionModel.getJiaocai_id(), editionModel.getGrade_detail_id(),
-                chapterModel.getZhangjie_id(), bookTypeView.getSelectZhiShiDianData());
+        if (editionModel == null || chapterModel == null) {
+            initData();
+        } else {
+            postDetailsData(editionModel.getJiaocai_id(), editionModel.getGrade_detail_id(),
+                    chapterModel.getZhangjie_id(), bookTypeView.getSelectZhiShiDianData());
+        }
+
     }
 
     @Override
@@ -286,7 +296,11 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
         page = 1;
         BookDetailsModel editionModel = bookTypeView.getSelectJiaoCaiData();
         BookChapterModel chapterModel = bookTypeView.getSelectZhangJieData();
-        postDetailsData(editionModel.getJiaocai_id(), editionModel.getGrade_detail_id(),
-                chapterModel.getZhangjie_id(), bookTypeView.getSelectZhiShiDianData());
+        if (editionModel == null || chapterModel == null) {
+            initData();
+        } else {
+            postDetailsData(editionModel.getJiaocai_id(), editionModel.getGrade_detail_id(),
+                    chapterModel.getZhangjie_id(), bookTypeView.getSelectZhiShiDianData());
+        }
     }
 }

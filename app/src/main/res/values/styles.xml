@@ -103,6 +103,13 @@
         <item name="android:windowAnimationStyle">@style/mypopwindow_anim_style</item>
     </style>
 
+    <style name="Transparent5">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/mypopwindow_anim_style</item>
+    </style>
+
     <!-- ######全屏dialog黑背景###### -->
     <style name="blackDialog" parent="Transparent">
         <item name="android:windowBackground">@color/black</item>

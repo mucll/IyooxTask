@@ -79,6 +79,6 @@ public class BaseFragment extends Fragment {
 
     }
 
-    public void updateArguments(String gradeId, SubjectModel model) {
+    public void updateArguments(String gradeId, String gradeDetailId, SubjectModel model) {
     }
 }

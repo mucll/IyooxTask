@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,6 +20,9 @@ import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.DialogUtil;
 import com.huisu.iyoox.util.TabToast;
 
+/**
+ * 添加班级
+ */
 public class StudentAddClassRoomActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tabSubmitTv;
@@ -51,7 +55,7 @@ public class StudentAddClassRoomActivity extends BaseActivity implements View.On
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() >= 4) {
+                if (s.length() >= 6) {
                     tabSubmitTv.setEnabled(true);
                 } else {
                     tabSubmitTv.setEnabled(false);

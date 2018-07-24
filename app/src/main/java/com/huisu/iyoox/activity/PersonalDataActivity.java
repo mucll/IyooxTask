@@ -22,8 +22,8 @@ import com.huisu.iyoox.views.HeadView;
  */
 public class PersonalDataActivity extends BaseActivity implements View.OnClickListener {
 
-    private View headLayout, accountLayout, userNameLayout, sexLayout, schoolLayout, gradeLayout, classLayout;
-    private TextView accountTv, userNameTv, sexTv, schoolTv, gradeTv, classTv;
+    private View headLayout, accountLayout, userNameLayout, sexLayout, gradeLayout, classLayout;
+    private TextView accountTv, userNameTv, sexTv, gradeTv, classTv;
     private HeadView headView;
 
     @Override
@@ -32,7 +32,6 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         accountLayout = findViewById(R.id.person_account_ll);
         userNameLayout = findViewById(R.id.person_user_name_ll);
         sexLayout = findViewById(R.id.person_sex_ll);
-        schoolLayout = findViewById(R.id.person_school_ll);
         gradeLayout = findViewById(R.id.person_grade_ll);
         classLayout = findViewById(R.id.person_class_ll);
 
@@ -40,7 +39,6 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         accountTv = findViewById(R.id.person_account_tv);
         userNameTv = findViewById(R.id.person_user_name_tv);
         sexTv = findViewById(R.id.person_sex_tv);
-        schoolTv = findViewById(R.id.person_school_tv);
         gradeTv = findViewById(R.id.person_grade_tv);
         classTv = findViewById(R.id.person_class_tv);
     }
@@ -75,6 +73,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         userNameTv.setText(!TextUtils.isEmpty(data.getName()) ? data.getName() : "");
         sexTv.setText(data.getSex() == 0 ? "女" : "男");
         gradeTv.setText(data.getGradeName());
+        classTv.setText(TextUtils.isEmpty(data.getClassroom_name()) ? "" : data.getClassroom_name());
     }
 
     @Override
@@ -98,8 +97,6 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
             case R.id.person_user_name_ll:
                 break;
             case R.id.person_sex_ll:
-                break;
-            case R.id.person_school_ll:
                 break;
             case R.id.person_grade_ll:
                 break;

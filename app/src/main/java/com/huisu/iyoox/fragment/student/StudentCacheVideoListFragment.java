@@ -16,8 +16,9 @@ import com.huisu.iyoox.fragment.base.BaseFragment;
  * 学生缓存Fragment
  */
 public class StudentCacheVideoListFragment extends BaseFragment {
+
     private View view;
-    private TextView cacheTv;
+
     private String type = "";
 
     @Override
@@ -38,12 +39,6 @@ public class StudentCacheVideoListFragment extends BaseFragment {
     }
 
     private void initView() {
-        cacheTv = view.findViewById(R.id.cache_tv);
-        if (TaskStatus.FINISH.equals(type)) {
-            cacheTv.setText("已缓存界面");
-        } else {
-            cacheTv.setText("未缓存界面");
-        }
     }
 
 }

@@ -52,8 +52,7 @@ public class StringUtils {
     }
 
     /**
-     * @param list
-     * @return
+     * 判断集合是否为空
      */
     public static boolean isEmpty(List list) {
         return list == null ? true : list.isEmpty();
@@ -109,5 +108,6 @@ public class StringUtils {
         float scale = context.getResources().getDisplayMetrics().density;
         return (int) (value * scale + 0.5f);
     }
+
 
 }

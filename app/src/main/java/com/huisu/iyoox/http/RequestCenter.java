@@ -13,6 +13,7 @@ import com.huisu.iyoox.entity.base.BaseSendMsgCodeModel;
 import com.huisu.iyoox.entity.base.BaseSubjectModel;
 import com.huisu.iyoox.entity.base.BaseTaskResultModel;
 import com.huisu.iyoox.entity.base.BaseTaskStudentListModel;
+import com.huisu.iyoox.entity.base.BaseTrialCardModel;
 import com.huisu.iyoox.entity.base.BaseUser;
 import com.huisu.iyoox.entity.base.BaseVideoModel;
 import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
@@ -203,9 +204,10 @@ public class RequestCenter {
      *
      * @param listener
      */
-    public static void getOptionlist(String grade_id, String kemu_id, DisposeDataListener listener) {
+    public static void getOptionlist(String grade_id, String gradeDetailId, String kemu_id, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("grade_id", grade_id);
+        params.put("grade_detail_id", gradeDetailId);
         params.put("kemu_id", kemu_id);
         RequestCenter.postRequest(HttpConstants.GET_OPTIONLIST, params, listener, BaseBookDetailsModel.class);
     }
@@ -359,6 +361,26 @@ public class RequestCenter {
         params.put("student_id", student_id);
         params.put("classroom_no", classId);
         RequestCenter.postRequest(HttpConstants.addClassRoom, params, listener, BaseAddClassRoomModel.class);
+    }
+
+    /**
+     * 获取激活码
+     */
+    public static void getJiHuoCode(String user_id, String phone, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("user_id", user_id);
+        params.put("phone", phone);
+        RequestCenter.postRequest(HttpConstants.getJiHuoCode, params, listener, BaseTrialCardModel.class);
+    }
+
+    /**
+     * 绑定激活码
+     */
+    public static void getStudentBindCard(String id, String gradeId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("grade_id", gradeId);
+        RequestCenter.postRequest(HttpConstants.getStudentBindCard, params, listener, null);
     }
 
 }

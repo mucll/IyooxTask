@@ -4,7 +4,6 @@ package com.huisu.iyoox.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.huisu.iyoox.R;
-import com.huisu.iyoox.activity.register.RegisterPhoneActivity;
 import com.huisu.iyoox.util.SaveDate;
 import com.huisu.iyoox.util.StringUtils;
 import com.huisu.iyoox.views.TagViewPager;

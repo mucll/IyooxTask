@@ -50,12 +50,12 @@ public class RegisterPhoneVerificationCodeActivity extends BaseActivity implemen
     @Override
     protected void initView() {
         StatusBarUtil.transparencyBar(this);
-        phoneTextView = (TextView) findViewById(R.id.register_code_phone_tv);
-        sendCodeView = (TextView) findViewById(R.id.register_send_code_tv);
+        phoneTextView = findViewById(R.id.register_code_phone_tv);
+        sendCodeView = findViewById(R.id.register_send_code_tv);
         sendCodeView.setSelected(true);
-        mCodeEditText = (EditText) findViewById(R.id.register_phone_code_edit_text);
-        nextBt = (Button) findViewById(R.id.register_phone_code_next_bt);
-        editContetView = (View) findViewById(R.id.register_edit_content_layout);
+        mCodeEditText = findViewById(R.id.register_phone_code_edit_text);
+        nextBt = findViewById(R.id.register_phone_code_next_bt);
+        editContetView = findViewById(R.id.register_edit_content_layout);
         time = new TimeCount(60000, 1000, sendCodeView);
     }
 
@@ -116,6 +116,7 @@ public class RegisterPhoneVerificationCodeActivity extends BaseActivity implemen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.register_send_code_tv:
+                sendCodeView.setEnabled(false);
                 sendMsgCode();
                 break;
             case R.id.register_phone_code_next_bt:

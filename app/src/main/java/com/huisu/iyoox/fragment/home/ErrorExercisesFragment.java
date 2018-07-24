@@ -23,6 +23,7 @@ import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.views.ExercisesErrorEmptyView;
 import com.huisu.iyoox.views.ZoomOutPageTransformer;
 
@@ -37,7 +38,6 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
     private View view;
     private LayoutInflater mLayoutInflater;
     private ViewPager mVp;
-    private boolean init = false;
     private ExercisesErrorEmptyView emptyView;
     private User user;
     private ArrayList<SubjectModel> models = new ArrayList<>();
@@ -58,10 +58,7 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
     @Override
     public void onShow() {
         super.onShow();
-        if (!init) {
-            postStudentErrorData(user.getUserId());
-            init = true;
-        }
+        postStudentErrorData(user.getUserId());
     }
 
     /**

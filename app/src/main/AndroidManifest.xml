@@ -60,22 +60,20 @@
         </activity>
         <activity
             android:name=".activity.GuideActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".activity.LoginActivity" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.register.RegisterPhoneActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name=".activity.LoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activity.videoplayer.VideoPlayerActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".activity.TaskResultActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
@@ -85,21 +83,57 @@
         <activity
             android:name=".activity.PersonalDataActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".activity.student.StudentLearningHistoryActivity" />
-        <activity android:name=".activity.PatriarchActivity" />
-        <activity android:name=".activity.ConfigMainActivity" />
-        <activity android:name=".activity.register.RegisterPhoneVerificationCodeActivity" />
-        <activity android:name=".activity.register.RegisterPasswordActivity" />
-        <activity android:name=".activity.register.RegisterIdentityActivity" />
-        <activity android:name=".activity.register.RegisterPersonDetailsActivity" />
-        <activity android:name=".activity.student.StudentWriteExercisesErrorActivity" />
-        <activity android:name=".activity.ScreenErrorExercisesListActivity" />
-        <activity android:name=".activity.student.StudentCacheVideoActivity" />
-        <activity android:name=".activity.student.StudentCollectActivity" />
-        <activity android:name=".activity.student.StudentPurchaseHistoryActivity" />
-        <activity android:name=".activity.student.StudentLearningCardActivity" />
-        <activity android:name=".activity.ResetPasswordActivity" />
-        <activity android:name=".activity.student.StudentAddClassRoomActivity"></activity>
+        <activity
+            android:name=".activity.student.StudentLearningHistoryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.PatriarchActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.ConfigMainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.register.RegisterPhoneVerificationCodeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.register.RegisterPasswordActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.register.RegisterIdentityActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.register.RegisterPersonDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.student.StudentWriteExercisesErrorActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.ScreenErrorExercisesListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.student.StudentCacheVideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.student.StudentCollectActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.student.StudentPurchaseHistoryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.student.StudentLearningCardActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.ResetPasswordActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.student.StudentAddClassRoomActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.FeedBackActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.student.TrialCardActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
     </application>
 
 </manifest>

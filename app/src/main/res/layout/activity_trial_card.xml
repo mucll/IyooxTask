@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorf7"
+    android:orientation="vertical"
+    tools:context=".activity.student.TrialCardActivity">
+
+    <include layout="@layout/layout_title_bar_all" />
+
+    <EditText
+        android:id="@+id/trial_card_et"
+        style="@style/person_details_layout_tv_style"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_40"
+        android:layout_marginBottom="@dimen/dip_8"
+        android:layout_marginLeft="@dimen/dip_16"
+        android:layout_marginRight="@dimen/dip_16"
+        android:layout_marginTop="@dimen/dip_8"
+        android:background="@drawable/shape_trial_card_r10px"
+        android:gravity="center"
+        android:hint="请输入11位试用码"
+        android:inputType="number"
+        android:maxLength="11"
+        android:textColor="@color/color333"
+        android:textSize="@dimen/f_15" />
+
+    <EditText
+        android:id="@+id/trial_card_code_tv"
+        style="@style/person_details_layout_tv_style"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_40"
+        android:layout_marginBottom="@dimen/dip_8"
+        android:layout_marginLeft="@dimen/dip_16"
+        android:layout_marginRight="@dimen/dip_16"
+        android:layout_marginTop="@dimen/dip_8"
+        android:background="@drawable/shape_trial_card_r10px"
+        android:gravity="center"
+        android:hint="试用卡卡号"
+        android:textColor="@color/color333"
+        android:textSize="@dimen/f_15" />
+
+    <EditText
+        android:id="@+id/trial_card_select_grade_tv"
+        style="@style/person_details_layout_tv_style"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_40"
+        android:layout_marginBottom="@dimen/dip_8"
+        android:layout_marginLeft="@dimen/dip_16"
+        android:layout_marginRight="@dimen/dip_16"
+        android:layout_marginTop="@dimen/dip_8"
+        android:background="@drawable/shape_trial_card_r10px"
+        android:gravity="center"
+        android:hint="请选择年级"
+        android:textColor="@color/color333"
+        android:textSize="@dimen/f_15" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_16"
+        android:text="请注意有效期及点卡试用产品;"
+        android:textColor="@color/color999" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_16"
+        android:layout_marginTop="@dimen/dip_6"
+        android:text="激活成功后可无限观看海量视频;"
+        android:textColor="@color/color999" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_16"
+        android:layout_marginTop="@dimen/dip_6"
+        android:text="如有疑问可拨打400-700-9987;"
+        android:textColor="@color/color999" />
+
+    <Button
+        android:id="@+id/card_submit_bt"
+        android:layout_width="@dimen/dip_320"
+        android:layout_height="@dimen/dip_40"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dip_22"
+        android:background="@drawable/select_button_bg_maincolor"
+        android:enabled="false"
+        android:text="马上激活"
+        android:textColor="@color/white"
+        android:textSize="@dimen/f_16" />
+</LinearLayout>

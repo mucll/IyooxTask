@@ -26,6 +26,7 @@ import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.util.StatusBarUtil;
 import com.huisu.iyoox.util.TabToast;
+import com.huisu.iyoox.views.GradeDialog;
 import com.huisu.iyoox.views.LocationIndicatorView;
 import com.huisu.iyoox.views.SelectGradeDialog;
 
@@ -45,9 +46,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private TextView studentGradeTv;
     private List<SubjectModel> subjectModels = new ArrayList<>();
     private User user;
-    private int selectGradeCode;
     private ArrayList<GradeListModel> gradeListModels = new ArrayList<>();
     private MyPagerAdapter myPagerAdapter;
+    private int selectPosition = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,22 +56,15 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_hone, container, false);
         }
+        user = UserManager.getInstance().getUser();
         initTab();
         initView();
-        initBaseView();
         setEvent();
         initPage();
         postHomeData();
         return view;
     }
 
-    private void initBaseView() {
-        subjectModels.clear();
-        SubjectModel subjectModel = new SubjectModel();
-        subjectModel.setName("首页");
-        subjectModels.add(subjectModel);
-        mTabView.init(subjectModels);
-    }
 
     private void initTab() {
         View tabView = view.findViewById(R.id.tab_view);
@@ -92,6 +86,14 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 if (baseGradeListModel.data != null && baseGradeListModel.data.size() > 0) {
                     gradeListModels.clear();
                     gradeListModels.addAll(baseGradeListModel.data);
+                    for (int i = 0; i < gradeListModels.size(); i++) {
+                        GradeListModel gradeListModel = gradeListModels.get(i);
+                        //获取默认勾选的position
+                        if (gradeListModel.getGrade_id() == user.getGrade() && gradeListModel.getGrade_detail_id() == 1) {
+                            selectPosition = i;
+                            break;
+                        }
+                    }
                     getSelectGradeListModel();
                 } else {
                     TabToast.showMiddleToast(getContext(), baseGradeListModel.msg);
@@ -117,13 +119,17 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
      * 初始化控件
      */
     private void initView() {
-        user = UserManager.getInstance().getUser();
         studentGradeTv = view.findViewById(R.id.student_grade_tv);
         mTabView = view.findViewById(R.id.fragment_home_tab_view);
         mViewPager = view.findViewById(R.id.fragment_home_page);
+
+        subjectModels.clear();
+        SubjectModel subjectModel = new SubjectModel();
+        subjectModel.setName("首页");
+        subjectModels.add(subjectModel);
+        mTabView.init(subjectModels);
         //初始化 学生年级
-        studentGradeTv.setText(user.getGradeName());
-        selectGradeCode = user.getGrade() - 1;
+        studentGradeTv.setText(user.getGradeName() + "上");
     }
 
     /**
@@ -131,7 +137,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
      */
     private void initData() {
         subjectModels.clear();
-        subjectModels.addAll(gradeListModels.get(selectGradeCode).getKemuArr());
+        subjectModels.addAll(gradeListModels.get(selectPosition).getKemuArr());
         for (SubjectModel model : subjectModels) {
             model.setSelect(false);
         }
@@ -148,8 +154,8 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         myPagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(myPagerAdapter);
         mViewPager.setCurrentItem(0);
-        if (gradeListModels.size() >= selectGradeCode && gradeListModels.get(selectGradeCode).getKemuArr().size() >= 2) {
-            mViewPager.setOffscreenPageLimit(gradeListModels.get(selectGradeCode).getKemuArr().size() - 1);
+        if (gradeListModels.size() > 0 && gradeListModels.size() >= selectPosition && gradeListModels.get(selectPosition).getKemuArr().size() >= 2) {
+            mViewPager.setOffscreenPageLimit(gradeListModels.get(selectPosition).getKemuArr().size() - 1);
         }
         if (fragments.size() > 0) {
             BaseFragment baseFragment = fragments.get(0);
@@ -195,15 +201,16 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 if (gradeListModels.size() == 0) {
                     return;
                 }
-                SelectGradeDialog gradeDialog = new SelectGradeDialog(getContext(), gradeListModels, selectGradeCode) {
+                GradeDialog gradeDialog = new GradeDialog(getContext(), gradeListModels, selectPosition) {
                     @Override
-                    public void getGradeType(GradeListModel gradeModel, int gradeCode) {
-                        studentGradeTv.setText(gradeModel.getName());
-                        HomeFragment.this.selectGradeCode = gradeCode;
+                    public void getGradePosition(int position) {
+                        HomeFragment.this.selectPosition = position;
+                        studentGradeTv.setText(gradeListModels.get(position).getName());
                         initData();
                         initPage();
                     }
                 };
+                gradeDialog.show();
                 break;
             default:
                 break;
@@ -228,9 +235,10 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             if (position == 0) {
                 bookFragment = new HomePageFragment();
             } else {
-                String gradeId = gradeListModels.get(selectGradeCode).getGrade_id() + "";
-                SubjectModel subjectModel = gradeListModels.get(selectGradeCode).getKemuArr().get(position - 1);
-                bookFragment = getFragment(gradeId, subjectModel);
+                String gradeId = gradeListModels.get(selectPosition).getGrade_id() + "";
+                String gradeDetailId = gradeListModels.get(selectPosition).getGrade_detail_id() + "";
+                SubjectModel subjectModel = gradeListModels.get(selectPosition).getKemuArr().get(position - 1);
+                bookFragment = getFragment(gradeId, gradeDetailId, subjectModel);
             }
             fragments.add(bookFragment);
             return bookFragment;
@@ -245,18 +253,21 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         public Object instantiateItem(ViewGroup container, int position) {
             BaseFragment baseFragment = (BaseFragment) super.instantiateItem(container, position);
             if (position != 0) {
-                GradeListModel tab = gradeListModels.get(selectGradeCode);
-                baseFragment.updateArguments(tab.getGrade_id() + "", tab.getKemuArr().get(position - 1));
+                GradeListModel tab = gradeListModels.get(selectPosition);
+                baseFragment.updateArguments(tab.getGrade_id() + "",
+                        tab.getGrade_detail_id() + "",
+                        tab.getKemuArr().get(position - 1));
             }
             return baseFragment;
         }
 
     }
 
-    private BookFragment getFragment(String gradeId, SubjectModel model) {
+    private BookFragment getFragment(String gradeId, String gradeDetailId, SubjectModel model) {
         BookFragment fragment = new BookFragment();
         Bundle b = new Bundle();
-        b.putString("grade_id", gradeId);
+        b.putString("gradeId", gradeId);
+        b.putString("gradeDetailId", gradeDetailId);
         b.putSerializable("model", model);
         fragment.setArguments(b);
         return fragment;

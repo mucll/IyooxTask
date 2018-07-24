@@ -173,7 +173,7 @@
             android:textColor="@color/colora0"
             android:textSize="@dimen/f_14" />
 
-        <Button
+        <TextView
             android:id="@+id/add_class_bt"
             android:layout_width="@dimen/dip_120"
             android:layout_height="@dimen/dip_32"
@@ -181,6 +181,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dip_30"
             android:background="@drawable/select_maincolor_submit_bt_bg"
+            android:gravity="center"
             android:text="马上添加"
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/f_16" />

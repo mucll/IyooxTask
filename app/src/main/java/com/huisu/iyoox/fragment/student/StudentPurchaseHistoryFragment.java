@@ -19,7 +19,6 @@ import com.huisu.iyoox.fragment.base.BaseFragment;
 public class StudentPurchaseHistoryFragment extends BaseFragment {
 
     private View view;
-    private TextView purchaseTv;
     private String type = "";
 
     @Override
@@ -40,12 +39,6 @@ public class StudentPurchaseHistoryFragment extends BaseFragment {
     }
 
     private void initView() {
-        purchaseTv = view.findViewById(R.id.student_purchase_tv);
-        if (TaskStatus.FINISH.equals(type)) {
-            purchaseTv.setText("已支付");
-        } else {
-            purchaseTv.setText("待支付");
-        }
     }
 
 }

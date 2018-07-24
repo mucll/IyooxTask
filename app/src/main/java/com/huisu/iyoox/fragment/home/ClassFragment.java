@@ -65,7 +65,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
     private List<TeacherModel> teacherModels = new ArrayList<>();
     private List<StudentScoreModel> scoreModels = new ArrayList<>();
     private List<StudentRankingModel> rankingModels = new ArrayList<>();
-    private Button addClassBt;
+    private TextView addClassBt;
     private TextView titleTv;
     private View scrollView;
     private View emptyView;

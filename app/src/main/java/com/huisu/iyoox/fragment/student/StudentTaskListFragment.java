@@ -117,10 +117,10 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
                 } else {
                     if (page != 1) {
                         page--;
+                        TabToast.showMiddleToast(getContext(), "没有更多数据");
                     } else {
                         emptyView.setVisibility(View.VISIBLE);
                     }
-                    TabToast.showMiddleToast(getContext(), "没有更多数据");
                 }
             }
 

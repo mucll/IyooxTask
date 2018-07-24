@@ -22,6 +22,7 @@ import com.huisu.iyoox.activity.student.StudentCollectActivity;
 import com.huisu.iyoox.activity.student.StudentLearningCardActivity;
 import com.huisu.iyoox.activity.student.StudentLearningHistoryActivity;
 import com.huisu.iyoox.activity.student.StudentPurchaseHistoryActivity;
+import com.huisu.iyoox.activity.student.TrialCardActivity;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.manager.UserManager;
@@ -43,7 +44,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private ChangeHeaderImgDialog mHeaderImgDialog;
     private RelativeLayout topLayout;
     private LinearLayout learningCardLayout, learningHistoryLayout, patriarchLayout, configLayout, servicePhoneLayout;
-    private View mineCacheView, mineCollectView, mineHistoryView;
+    private View mineCacheView, mineCollectView, mineHistoryView, mineTrialCardView;
 
     private User user;
 
@@ -70,6 +71,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mineCollectView = view.findViewById(R.id.mine_collect_ll);
         //购买记录
         mineHistoryView = view.findViewById(R.id.mine_purchase_history_ll);
+        //试用卡
+        mineTrialCardView = view.findViewById(R.id.mine_trial_card_ll);
         //学习卡
         learningCardLayout = view.findViewById(R.id.mine_learning_card_layout);
         //学习记录
@@ -96,6 +99,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mineCacheView.setOnClickListener(this);
         mineCollectView.setOnClickListener(this);
         mineHistoryView.setOnClickListener(this);
+        mineTrialCardView.setOnClickListener(this);
         learningCardLayout.setOnClickListener(this);
         learningHistoryLayout.setOnClickListener(this);
         patriarchLayout.setOnClickListener(this);
@@ -122,6 +126,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.mine_purchase_history_ll:
                 //购买记录
                 StudentPurchaseHistoryActivity.start(getContext());
+                break;
+            case R.id.mine_trial_card_ll:
+                //购买记录
+                TrialCardActivity.start(getContext());
                 break;
             case R.id.mine_learning_card_layout:
                 //学习卡

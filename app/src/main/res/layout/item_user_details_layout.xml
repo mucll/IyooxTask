@@ -101,26 +101,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/person_school_ll"
-            style="@style/person_details_layout_style"
-            android:background="@color/white">
-
-            <TextView
-                style="@style/person_details_layout_tv_style"
-                android:text="学校" />
-
-            <TextView
-                android:id="@+id/person_school_tv"
-                style="@style/person_details_layout_tv_style"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:paddingRight="@dimen/dip_16"
-                android:textColor="@color/color999"
-                android:textSize="@dimen/f_15" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/person_grade_ll"
             style="@style/person_details_layout_style"
             android:background="@color/white">

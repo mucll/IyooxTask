@@ -8,6 +8,7 @@ import java.util.List;
  * @date: 2018/7/11
  */
 public class GradeListModel {
+    private int grade_detail_id;
     private int grade_id;
     private String name;
     private List<SubjectModel> kemuArr;
@@ -43,5 +44,13 @@ public class GradeListModel {
 
     public void setSelect(boolean select) {
         isSelect = select;
+    }
+
+    public int getGrade_detail_id() {
+        return grade_detail_id;
+    }
+
+    public void setGrade_detail_id(int grade_detail_id) {
+        this.grade_detail_id = grade_detail_id;
     }
 }

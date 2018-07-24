@@ -188,6 +188,7 @@ public class RegisterPersonDetailsActivity extends BaseActivity implements View.
                 BaseUser baseUser = (BaseUser) responseObj;
                 if (baseUser.data != null) {
                     UserManager.getInstance().setUser(baseUser.data);
+                    baseUser.data.save();
                     MainActivity.start(context);
                     setResult(RESULT_OK);
                     finish();
