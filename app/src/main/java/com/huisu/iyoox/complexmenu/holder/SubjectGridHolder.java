@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.adapter.BookGridViewAdapter;
 import com.huisu.iyoox.entity.BookDetailsModel;
@@ -126,9 +127,10 @@ public class SubjectGridHolder extends BaseWidgetHolder<List<BookDetailsModel>> 
             }
             BookDetailsModel bean = mlist.get(position);
             holder.nameTv.setText(bean.getName());
-            ImageLoader.load(mContext, holder.image,
-                    TextUtils.isEmpty(bean.getCover_url()) ? "" : bean.getCover_url()
-                    , R.drawable.icon_image_loading);
+            ImageLoader.showUrl(holder.image, TextUtils.isEmpty(bean.getCover_url()) ? "" : bean.getCover_url());
+//            ImageLoader.load(mContext, holder.image,
+//                    TextUtils.isEmpty(bean.getCover_url()) ? "" : bean.getCover_url()
+//                    , R.drawable.icon_image_loading);
             return convertView;
         }
 
@@ -136,7 +138,7 @@ public class SubjectGridHolder extends BaseWidgetHolder<List<BookDetailsModel>> 
     }
 
     static class CustomViewHolder {
-        ImageView image;
+        SimpleDraweeView image;
         TextView nameTv;
     }
 

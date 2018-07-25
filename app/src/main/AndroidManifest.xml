@@ -134,6 +134,11 @@
         <activity
             android:name=".activity.student.TrialCardActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:name=".activity.teacher.TeacherCreateClassActivity" />
+        <activity android:name=".activity.register.RegisterTeacherSubjectActivity" />
+        <activity android:name=".activity.register.TeacherSelectSubjectActivity" />
+        <activity android:name=".activity.register.TeacherSelectSubjectVersionActivity" />
+        <activity android:name=".activity.teacher.TeacherCreateClassResultActivity"></activity>
     </application>
 
 </manifest>

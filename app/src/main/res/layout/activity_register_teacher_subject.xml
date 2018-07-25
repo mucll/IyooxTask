@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/icon_login_bg"
+    android:orientation="vertical"
+    tools:context="com.huisu.iyoox.activity.LoginActivity">
+
+    <include layout="@layout/layout_title_bar_all_trans" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_30"
+        android:text="请编辑你的档案"
+        android:textColor="@color/black_87"
+        android:textSize="@dimen/f_30" />
+
+    <LinearLayout
+        android:id="@+id/register_person_details_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_27"
+        android:layout_marginRight="@dimen/dip_27"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dip_105">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dip_6"
+            android:paddingTop="@dimen/dip_6">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/reg_name" />
+
+            <EditText
+                android:id="@+id/register_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dip_18"
+                android:background="@null"
+                android:hint="@string/edit_name_text"
+                android:maxLength="8"
+                android:singleLine="true"
+                android:textColor="@color/black_87"
+                android:textSize="@dimen/f_20" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/register_grade_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dip_6"
+            android:paddingTop="@dimen/dip_6">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/reg_gender" />
+
+
+            <TextView
+                android:id="@+id/register_grade_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dip_12"
+                android:drawableRight="@drawable/homework_finished_forward"
+                android:hint="请选择授课年级"
+                android:textSize="@dimen/f_20" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/register_select_subject_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dip_6"
+            android:paddingTop="@dimen/dip_6">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/reg_grade" />
+
+            <TextView
+                android:id="@+id/register_select_subject_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dip_12"
+                android:drawableRight="@drawable/homework_finished_forward"
+                android:hint="请选择授课科目"
+                android:textSize="@dimen/f_20" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/register_version_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dip_6"
+            android:paddingTop="@dimen/dip_6">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/reg_grade" />
+
+            <TextView
+                android:id="@+id/register_version_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dip_12"
+                android:drawableRight="@drawable/homework_finished_forward"
+                android:hint="请选择教材版本"
+                android:maxLength="8"
+                android:singleLine="true"
+                android:textSize="@dimen/f_20" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/register_teacher_submit_bt"
+        android:layout_width="@dimen/dip_320"
+        android:layout_height="@dimen/dip_40"
+        android:layout_below="@id/register_person_details_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dip_24"
+        android:background="@drawable/select_button_bg_maincolor"
+        android:enabled="false"
+        android:text="下一步"
+        android:textColor="@color/white" />
+</LinearLayout>

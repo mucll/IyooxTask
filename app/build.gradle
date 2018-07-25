@@ -53,7 +53,7 @@ android {
     sourceSets {
         main {
             manifest.srcFile 'src/main/AndroidManifest.xml'
-            jniLibs.srcDirs = ['libs']  //**在libs文件夹下找so文件*/
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -61,7 +61,7 @@ android {
 repositories {
     mavenCentral()
     flatDir {
-        dirs 'libs' //**在libs文件夹下找aar文件*/
+        dirs 'libs'
     }
 }
 
@@ -78,7 +78,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.3.0'
     implementation 'com.android.support:design:27.+'
     implementation 'com.android.support:support-v4:27.+'
-    implementation files('libs/glide.jar')
     implementation files('libs/umeng-share-core-6.9.2.jar')
     implementation files('libs/umeng-share-wechat-simplify-6.9.2.jar')
     implementation files('libs/wechat-sdk-android-without-mta-5.1.4.jar')
@@ -92,4 +91,7 @@ dependencies {
     implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.android.support:recyclerview-v7:27.+'
+    implementation 'com.facebook.fresco:fresco:0.14.1'
+    implementation 'com.facebook.fresco:imagepipeline-okhttp3:0.12.0+'
+    implementation files('libs/glide.jar')
 }

@@ -2,8 +2,10 @@ package com.huisu.iyoox.http;
 
 import com.huisu.iyoox.entity.base.BaseAddClassRoomModel;
 import com.huisu.iyoox.entity.base.BaseBookDetailsModel;
+import com.huisu.iyoox.entity.base.BaseBookEditionModel;
 import com.huisu.iyoox.entity.base.BaseCheckMsgCode;
 import com.huisu.iyoox.entity.base.BaseClassRankingModel;
+import com.huisu.iyoox.entity.base.BaseClassRoomModel;
 import com.huisu.iyoox.entity.base.BaseExercisesModel;
 import com.huisu.iyoox.entity.base.BaseGradeListModel;
 import com.huisu.iyoox.entity.base.BasePhoneModel;
@@ -77,7 +79,7 @@ public class RequestCenter {
     }
 
     /**
-     * 判断手机号 是否注册
+     * 更换个人头像
      *
      * @param listener
      */
@@ -155,6 +157,44 @@ public class RequestCenter {
         params.put("sex", sex);
         params.put("grade", grade);
         RequestCenter.postRequest(HttpConstants.SET_USER_INFO, params, listener, BaseUser.class);
+    }
+
+    /**
+     * 设置老师用户信息
+     *
+     * @param listener
+     */
+    public static void setTeacherUserInfo(String userId, String name, String grade, String xuekeId, String jiaocaiId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("id", userId);
+        params.put("name", name);
+        params.put("grade", grade);
+        params.put("xueke_id", xuekeId);
+        params.put("jiaocai_id", jiaocaiId);
+        RequestCenter.postRequest(HttpConstants.SET_USER_INFO, params, listener, BaseUser.class);
+    }
+
+
+    /**
+     * 老师根据年级获取科目列表
+     *
+     * @param listener
+     */
+    public static void GET_KEMU_BY_GRADE(String gradeId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("grade_id", gradeId);
+        RequestCenter.postRequest(HttpConstants.GET_KEMU_BY_GRADE, params, listener, BaseSubjectModel.class);
+    }
+
+    /**
+     * 老师根据科目获取教材版本列表
+     *
+     * @param listener
+     */
+    public static void getBookVersion(String xuekeId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("xueke_id", xuekeId);
+        RequestCenter.postRequest(HttpConstants.getBookVersion, params, listener, BaseBookEditionModel.class);
     }
 
     /**
@@ -381,6 +421,26 @@ public class RequestCenter {
         params.put("id", id);
         params.put("grade_id", gradeId);
         RequestCenter.postRequest(HttpConstants.getStudentBindCard, params, listener, null);
+    }
+
+    /**
+     * 老师创建班级
+     */
+    public static void teacherCreateClassroom(String teacherId, String gradeId, String className, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("teacher_id", teacherId);
+        params.put("grade_id", gradeId);
+        params.put("name", className);
+        RequestCenter.postRequest(HttpConstants.teacherCreateClassroom, params, listener, BaseClassRoomModel.class);
+    }
+
+    /**
+     * 老师获取班级列表
+     */
+    public static void teacherClassroomList(String teacherId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("teacher_id", teacherId);
+        RequestCenter.postRequest(HttpConstants.teacherClassroomList, params, listener, BaseClassRoomModel.class);
     }
 
 }

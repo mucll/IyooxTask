@@ -37,9 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author:dl
- * @function:注册-设置个人信息
- * @date: 2018/7/10
+ * 注册学生设置个人信息
  */
 public class RegisterPersonDetailsActivity extends BaseActivity implements View.OnClickListener {
 

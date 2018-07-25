@@ -30,9 +30,7 @@ import com.huisu.iyoox.views.Loading;
 import com.huisu.iyoox.views.TimeCount;
 
 /**
- * @author: dl
- * @function: 注册发送验证码 phone和code_type 必须要传
- * @date: 18/6/28
+ * 获取验证码并进行验证
  */
 public class RegisterPhoneVerificationCodeActivity extends BaseActivity implements View.OnClickListener {
 

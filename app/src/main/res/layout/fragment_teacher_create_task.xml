@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.teacher.TeacherClassFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/maincolor"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/tab_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_24"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height">
+
+
+            <TextView
+                android:id="@+id/title_bar_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:drawablePadding="@dimen/dip_4"
+                android:padding="@dimen/dip_8"
+                android:textColor="@color/white"
+                android:textSize="@dimen/f_18" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

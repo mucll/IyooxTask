@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dip_48"
+    android:background="@drawable/shape_main_tab"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/dip_48"
+    android:orientation="horizontal"
+    android:paddingTop="1px">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_main_tab_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="2dp">
+
+        <ImageView
+            android:id="@+id/tab_img"
+            android:layout_width="17.0dip"
+            android:layout_height="17.0dip"
+            android:scaleType="fitCenter"
+            android:src="@drawable/tab_icon_class_selected" />
+
+        <TextView
+            android:id="@+id/tab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="班级"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/f_12" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_main_tab_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="2dp">
+
+        <ImageView
+            android:id="@+id/tab_img"
+            android:layout_width="17.0dip"
+            android:layout_height="17.0dip"
+            android:scaleType="fitCenter"
+            android:src="@drawable/tab_icon_learning_regular" />
+
+        <TextView
+            android:id="@+id/tab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="布置作业"
+            android:textColor="@color/color333"
+            android:textSize="@dimen/f_12" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_mine"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_main_tab_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="2dp">
+
+        <ImageView
+            android:id="@+id/tab_img"
+            android:layout_width="17.0dip"
+            android:layout_height="17.0dip"
+            android:scaleType="fitCenter"
+            android:src="@drawable/tab_icon_homework_regular" />
+
+        <TextView
+            android:id="@+id/tab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="批改作业"
+            android:textColor="@color/color333"
+            android:textSize="@dimen/f_12" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_mine"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_main_tab_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="2dp">
+
+        <ImageView
+            android:id="@+id/tab_img"
+            android:layout_width="17.0dip"
+            android:layout_height="17.0dip"
+            android:scaleType="fitCenter"
+            android:src="@drawable/tab_icon_user_regular" />
+
+        <TextView
+            android:id="@+id/tab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="我的"
+            android:textColor="@color/color333"
+            android:textSize="@dimen/f_12" />
+    </LinearLayout>
+
+</LinearLayout>

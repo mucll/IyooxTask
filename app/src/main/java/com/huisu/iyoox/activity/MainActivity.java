@@ -2,27 +2,27 @@ package com.huisu.iyoox.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.fragment.base.BaseFragment;
-import com.huisu.iyoox.fragment.home.BookFragment;
 import com.huisu.iyoox.fragment.home.ClassFragment;
 import com.huisu.iyoox.fragment.home.ErrorExercisesFragment;
 import com.huisu.iyoox.fragment.home.HomeFragment;
 import com.huisu.iyoox.fragment.home.HomeWorkFragment;
 import com.huisu.iyoox.fragment.home.MineFragment;
+import com.huisu.iyoox.fragment.teacher.TeacherClassFragment;
+import com.huisu.iyoox.fragment.teacher.TeacherCorrectTaskFragment;
+import com.huisu.iyoox.fragment.teacher.TeacherCreateTaskFragment;
+import com.huisu.iyoox.fragment.teacher.TeacherMineFragment;
+import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.util.StatusBarUtil;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.MyFragmentLayout;
@@ -41,12 +41,7 @@ public class MainActivity extends BaseActivity {
     public MyFragmentLayout myFragmentLayout;
     private List<Fragment> mFragmentList = null;
     private final int maxTime = 2000;
-    private int tabImages[][] = {
-            {R.drawable.tab_icon_learning_selected, R.drawable.tab_icon_learning_regular},
-            {R.drawable.tab_icon_ctj_selected, R.drawable.tab_icon_ctj_regular},
-            {R.drawable.tab_icon_homework_selected, R.drawable.tab_icon_homework_regular},
-            {R.drawable.tab_icon_class_selected, R.drawable.tab_icon_class_regular},
-            {R.drawable.tab_icon_user_selected, R.drawable.tab_icon_user_regular}};
+    private int tabImages[][] = null;
 
     @Override
     protected void initView() {
@@ -55,13 +50,35 @@ public class MainActivity extends BaseActivity {
         } else {
             requestPermission(Constant.WRITE_READ_EXTERNAL_CODE, Constant.WRITE_READ_EXTERNAL_PERMISSION);
         }
-        myFragmentLayout = (MyFragmentLayout) findViewById(R.id.main_content_layout);
+        User user = UserManager.getInstance().getUser();
         mFragmentList = new ArrayList();
-        mFragmentList.add(new HomeFragment());
-        mFragmentList.add(new ErrorExercisesFragment());
-        mFragmentList.add(new HomeWorkFragment());
-        mFragmentList.add(new ClassFragment());
-        mFragmentList.add(new MineFragment());
+        //区分 老师 和 学生
+        if (Constant.TEACHER_TYPE == user.getType()) {
+            //老师
+            tabImages = new int[][]{
+                    {R.drawable.tab_icon_class_selected, R.drawable.tab_icon_class_regular},
+                    {R.drawable.tab_icon_learning_selected, R.drawable.tab_icon_learning_regular},
+                    {R.drawable.tab_icon_homework_selected, R.drawable.tab_icon_homework_regular},
+                    {R.drawable.tab_icon_user_selected, R.drawable.tab_icon_user_regular}};
+            mFragmentList.add(new TeacherClassFragment());
+            mFragmentList.add(new TeacherCreateTaskFragment());
+            mFragmentList.add(new TeacherCorrectTaskFragment());
+            mFragmentList.add(new TeacherMineFragment());
+        } else {
+            //学生
+            tabImages = new int[][]{
+                    {R.drawable.tab_icon_learning_selected, R.drawable.tab_icon_learning_regular},
+                    {R.drawable.tab_icon_ctj_selected, R.drawable.tab_icon_ctj_regular},
+                    {R.drawable.tab_icon_homework_selected, R.drawable.tab_icon_homework_regular},
+                    {R.drawable.tab_icon_class_selected, R.drawable.tab_icon_class_regular},
+                    {R.drawable.tab_icon_user_selected, R.drawable.tab_icon_user_regular}};
+            mFragmentList.add(new HomeFragment());
+            mFragmentList.add(new ErrorExercisesFragment());
+            mFragmentList.add(new HomeWorkFragment());
+            mFragmentList.add(new ClassFragment());
+            mFragmentList.add(new MineFragment());
+        }
+        myFragmentLayout = (MyFragmentLayout) findViewById(R.id.main_content_layout);
         myFragmentLayout.setScorllToNext(false);
         myFragmentLayout.setScorll(true);
         myFragmentLayout.setWhereTab(0);
@@ -80,8 +97,14 @@ public class MainActivity extends BaseActivity {
                 ((BaseFragment) mFragmentList.get(positon)).onShow();
             }
         });
-        myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout, 0x101);
-        myFragmentLayout.getViewPager().setOffscreenPageLimit(4);
+        if (Constant.TEACHER_TYPE == user.getType()) {
+            //老师
+            myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout_teacher, 0x101);
+        } else {
+            //学生
+            myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout_student, 0x101);
+        }
+        myFragmentLayout.getViewPager().setOffscreenPageLimit(mFragmentList.size());
     }
 
     @Override

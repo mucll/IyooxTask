@@ -50,7 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 班级Fragment
+ * 学生端 -班级Fragment
  */
 public class ClassFragment extends BaseFragment implements View.OnClickListener {
 

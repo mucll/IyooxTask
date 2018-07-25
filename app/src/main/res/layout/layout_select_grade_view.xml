@@ -2,22 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/stu_select_grade_bg"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        android:background="@color/white"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/btn_view_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/select_white_bg"
+            android:layout_alignParentRight="true"
+            android:background="@null"
             android:paddingLeft="@dimen/dip_16"
             android:paddingRight="@dimen/dip_16"
-            android:src="@drawable/stl_cg_del_btn" />
+            android:src="@drawable/stu_select_grade_back_img" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,7 +32,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorf7">
+        android:layout_marginLeft="@dimen/dip_16"
+        android:layout_marginRight="@dimen/dip_16">
 
         <com.huisu.iyoox.views.EbagGridView
             android:id="@+id/select_grade_grid_view"
@@ -39,6 +41,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/dip_16"
             android:gravity="center"
+            android:horizontalSpacing="@dimen/dip_12"
             android:numColumns="3"
             android:verticalSpacing="@dimen/dip_12" />
     </LinearLayout>

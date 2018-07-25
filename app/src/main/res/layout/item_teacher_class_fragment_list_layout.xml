@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dip_16"
+            android:background="@drawable/select_white_bg"
+            android:elevation="@dimen/dip_1"
+            android:orientation="vertical"
+            android:padding="@dimen/dip_8"
+            android:translationZ="@dimen/dip_1">
+
+            <TextView
+                android:id="@+id/class_room_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="八年级(1)班"
+                android:textColor="@color/color333"
+                android:textSize="@dimen/f_18" />
+
+            <TextView
+                android:id="@+id/class_room_id_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_8"
+                android:text="班级ID:7623"
+                android:textColor="@color/color666"
+                android:textSize="@dimen/f_15" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dip_16"
+                android:layout_marginTop="@dimen/dip_8">
+
+                <TextView
+                    android:id="@+id/class_room_student_num_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="班级人数:16人"
+                    android:textColor="@color/color666"
+                    android:textSize="@dimen/f_15" />
+
+                <TextView
+                    android:id="@+id/class_room_create_time_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/color666"
+                    android:textSize="@dimen/f_15" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_1"
+                android:background="@color/black_05" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dip_8"
+                    android:text="管理"
+                    android:textColor="@color/color333"
+                    android:textSize="@dimen/f_15" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

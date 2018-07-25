@@ -32,9 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * @author:dl
- * @function:注册-设置密码
- * @date: 2018/7/10
+ * 输入密码
  */
 public class RegisterPasswordActivity extends BaseActivity implements TextWatcher, View.OnClickListener {
 
@@ -198,9 +196,15 @@ public class RegisterPasswordActivity extends BaseActivity implements TextWatche
 
     private void judgeUserInfo(User user) {
         if (TextUtils.isEmpty(user.getName())) {
-            Intent intent = new Intent(context, RegisterPersonDetailsActivity.class);
-            intent.putExtra("userId", user.getUserId());
-            startActivityForResult(intent, START_CODE);
+            if (user.getType() == Constant.STUDENT_TYPE) {
+                Intent intent = new Intent(context, RegisterPersonDetailsActivity.class);
+                intent.putExtra("userId", user.getUserId());
+                startActivityForResult(intent, START_CODE);
+            } else if (user.getType() == Constant.TEACHER_TYPE) {
+                Intent intent = new Intent(context, RegisterTeacherSubjectActivity.class);
+                intent.putExtra("userId", user.getUserId());
+                startActivityForResult(intent, START_CODE);
+            }
         } else {
             UserManager.getInstance().setUser(user);
             user.clearSavedState();

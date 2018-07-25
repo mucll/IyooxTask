@@ -48,6 +48,14 @@ public class HttpConstants {
      * 重置密码
      */
     public static String MODIFY_PASSWORD = ROOT_URL + "/user/ModifyPassword";
+    /**
+     * 老师根据年级获取科目列表
+     */
+    public static String GET_KEMU_BY_GRADE = ROOT_URL + "/user/get_kemu_by_grade";
+    /**
+     * 老师根据科目获取教材版本列表
+     */
+    public static String getBookVersion = ROOT_URL + "/user/get_jiocai_by_kemu";
 
     /**
      * 首页 年级 和科目 列表
@@ -132,6 +140,14 @@ public class HttpConstants {
      * 激活 激活码
      */
     public static String getStudentBindCard = ROOT_URL + "/jihuoma/jihuoma_bind_grade";
+    /**
+     * 老师创建班级
+     */
+    public static String teacherCreateClassroom = ROOT_URL + "/classroom/create_classroom";
+    /**
+     * 老师获取班级列表
+     */
+    public static String teacherClassroomList = ROOT_URL + "/classroom/my_classroom_list";
 
 }
 

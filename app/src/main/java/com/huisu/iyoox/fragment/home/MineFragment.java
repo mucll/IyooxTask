@@ -145,7 +145,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.mine_service_phone_layout:
                 //客服电话
-                Intent Intent = new Intent(android.content.Intent.ACTION_DIAL, Uri.parse("tel:" + 123));//跳转到拨号界面，同时传递电话号码
+                Intent Intent = new Intent(android.content.Intent.ACTION_DIAL, Uri.parse("tel:4007009987"));//跳转到拨号界面，同时传递电话号码
                 startActivity(Intent);
                 break;
             case R.id.mine_setting_layout:
