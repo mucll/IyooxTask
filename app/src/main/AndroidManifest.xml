@@ -134,11 +134,37 @@
         <activity
             android:name=".activity.student.TrialCardActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".activity.teacher.TeacherCreateClassActivity" />
-        <activity android:name=".activity.register.RegisterTeacherSubjectActivity" />
-        <activity android:name=".activity.register.TeacherSelectSubjectActivity" />
-        <activity android:name=".activity.register.TeacherSelectSubjectVersionActivity" />
-        <activity android:name=".activity.teacher.TeacherCreateClassResultActivity"></activity>
+        <activity
+            android:name=".activity.teacher.TeacherCreateClassActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.register.RegisterTeacherSubjectActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.register.TeacherSelectSubjectActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.register.TeacherSelectSubjectVersionActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.teacher.TeacherCreateClassResultActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.teacher.TeacherClassRoomDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.teacher.TeacherCreateTaskActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.teacher.ClassRoomManageTeacherActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.teacher.TeacherSelectExercisesActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.teacher.TeacherSendTaskActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity android:name=".activity.teacher.TeacherClassRoomConfigActivity"></activity>
     </application>
 
 </manifest>

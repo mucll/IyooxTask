@@ -11,6 +11,7 @@ public class VideoGroupModel {
     private int zhangjie_id;
     private String zhangjie_name;
     private List<VideoModel> zhishidian;
+    private boolean choiced;
 
     public int getZhangjie_id() {
         return zhangjie_id;
@@ -34,5 +35,13 @@ public class VideoGroupModel {
 
     public void setZhishidian(List<VideoModel> zhishidian) {
         this.zhishidian = zhishidian;
+    }
+
+    public boolean isChoiced() {
+        return choiced;
+    }
+
+    public void setChoiced(boolean choiced) {
+        this.choiced = choiced;
     }
 }

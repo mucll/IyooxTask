@@ -285,7 +285,7 @@ public class SelectMenuView extends LinearLayout {
             params1.height = LayoutParams.MATCH_PARENT;
             linearLayout.setLayoutParams(params1);
         } else {
-            int dip = StringUtils.dp2px(mContext, 192);
+            int dip = StringUtils.dp2px(mContext, 320);
             LinearLayout linearLayout = mPopupWindowView.findViewById(R.id.ll_content_layout);
             LinearLayout.LayoutParams params1 = (LayoutParams) linearLayout.getLayoutParams();
             params1.width = LayoutParams.MATCH_PARENT;

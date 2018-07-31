@@ -148,6 +148,35 @@ public class HttpConstants {
      * 老师获取班级列表
      */
     public static String teacherClassroomList = ROOT_URL + "/classroom/my_classroom_list";
+    /**
+     * 老师锁定或解锁班级
+     */
+    public static String teacherLockClassRoom = ROOT_URL + "/classroom/lock_un_classroom";
+    /**
+     * 老师获取班级详情
+     */
+    public static String teacherClassroomListDeatail = ROOT_URL + "/classroom/classroom_deatil";
+    /**
+     * 班级下的老师列表
+     */
+    public static String CLASSROOM_TEACHER_LIST = ROOT_URL + "/user/classroom_teacher_list";
+    /**
+     * 老师布置作业教材章节列表
+     */
+    public static String getZhangjieDetail = ROOT_URL + "/work/get_zhangjie_detail";
+
+    /**
+     * 老师布置作业选择题目
+     */
+    public static String teacherSelectExercisesData = ROOT_URL + "/Timu/list2";
+    /**
+     * 老师布置作业
+     */
+    public static String teacherSendTask = ROOT_URL + "/work/teacher_publish_work ";
+    /**
+     * 老师布置作业成功 提醒家长
+     */
+    public static String notifyParents = ROOT_URL + "/message/notify_parents ";
 
 }
 

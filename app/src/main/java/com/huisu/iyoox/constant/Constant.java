@@ -81,26 +81,76 @@ public class Constant {
     public static final int STUDENT_TASK_FINISHED = 5;
 
 //----------------------------------科目ID---------------------------------------
+
     /**
      * 语文ID
      */
     public static final int SUBJECT_YUWEN = 1;
+
     /**
      * 数学ID
      */
-    public static final int SUBJECT_SHUXU = 2;
+    public static final int SUBJECT_SHUXUE = 2;
+
     /**
      * 英语ID
      */
     public static final int SUBJECT_ENGLISH = 3;
+
     /**
      * 物理ID
      */
     public static final int SUBJECT_WULI = 4;
+
     /**
      * 化学ID
      */
     public static final int SUBJECT_HUAXUE = 5;
+    //----------------------------------班级---------------------------------------
+
+    /**
+     * 锁定
+     */
+    public static final int CLASS_LOCK = 1;
+
+    /**
+     * 未锁定
+     */
+    public static final int CLASS_UNLOCK = 0;
+
+    /**
+     * 创建班级
+     */
+    public static final int CLASS_CREATE = 0;
+
+    /**
+     * 添加班级
+     */
+    public static final int CLASS_ADD = 1;
+
+    //----------------------------------结果界面---------------------------------------
+
+    /**
+     * 创建班级
+     */
+    public static final int CREATE_CLASS_RESULT = 0;
+
+    /**
+     * 布置作业
+     */
+    public static final int CREATE_TASK_RESULT = 1;
+
+    //----------------------------------作业类型---------------------------------------
+
+    /**
+     * 一课一练
+     */
+    public static final int TASK_YIKE_TYPE = 1;
+
+    /**
+     * 试卷
+     */
+    public static final int TASK_SHIJUAN_TYPE = 2;
 
     /**
      * 权限常量相关

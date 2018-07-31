@@ -68,7 +68,7 @@ public class AnswerResultNumberAdapter extends BaseAdapter {
         return convertView;
     }
 
-    class ViewHolder {
+    static class ViewHolder {
         TextView exercisesNumberTv;
 
         ViewHolder(View view) {

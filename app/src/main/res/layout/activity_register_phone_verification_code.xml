@@ -39,11 +39,11 @@
         <TextView
             android:id="@+id/register_send_code_tv"
             android:layout_width="@dimen/dip_94"
-            android:layout_height="@dimen/dip_27"
+            android:layout_height="@dimen/dip_30"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dip_27"
-            android:background="@drawable/select_trans_r4_onclick"
+            android:background="@drawable/select_trans_r4_onclick_enable"
             android:gravity="center"
             android:text="@string/send_msg_title_code_text"
             android:textColor="@drawable/select_text_color_onclick"

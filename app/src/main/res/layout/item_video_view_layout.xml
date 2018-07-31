@@ -36,8 +36,8 @@
 
         <TextView
             android:id="@+id/item_video_state"
-            android:layout_width="@dimen/dip_77"
-            android:layout_height="@dimen/dip_21"
+            android:layout_width="@dimen/dip_80"
+            android:layout_height="@dimen/dip_20"
             android:layout_gravity="center"
             android:background="@drawable/select_trans_r4_10dp"
             android:drawableRight="@drawable/select_video_state_right_icon"

@@ -1,7 +1,5 @@
 package com.huisu.iyoox.util;
 
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,6 +12,7 @@ public class DateUtils {
     public static SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
     public static SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static SimpleDateFormat sdf4 = new SimpleDateFormat("yyyy-MM-dd");
+    //默认
     public static SimpleDateFormat sdf5 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static SimpleDateFormat sdf6 = new SimpleDateFormat("MM-dd");
     public static SimpleDateFormat sdf7 = new SimpleDateFormat("MM-dd HH:mm");

@@ -62,6 +62,8 @@ public class RegisterPhoneVerificationCodeActivity extends BaseActivity implemen
         phone = getIntent().getStringExtra("phone");
         codeType = getIntent().getStringExtra("code_type");
         phoneTextView.setText(phone);
+        sendCodeView.setEnabled(false);
+        sendMsgCode();
     }
 
     @Override

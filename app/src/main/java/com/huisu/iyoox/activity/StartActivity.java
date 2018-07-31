@@ -60,7 +60,8 @@ public class StartActivity extends Activity {
     private final MyHandler handler = new MyHandler(this);
 
     private ImageView iconBottomIv, iconBoxIv, iconPersonIv, iconBookIv, iconBIv, iconGuangIv,
-            iconBookTwoIv, iconErrorIv, iconHatIv, iconPenIv, iconrAIv, iconrRubberIv, iconrPercentageIv;
+            iconBookTwoIv, iconErrorIv, iconHatIv, iconPenIv, iconrAIv, iconrRubberIv,
+            twoPenIv, iconrPercentageIv,jbdIv;
     private int height;
 
     @Override
@@ -126,22 +127,59 @@ public class StartActivity extends Activity {
     private void startAnims() {
         iconBoxIv.setVisibility(View.VISIBLE);
         iconGuangIv.setVisibility(View.VISIBLE);
+        if (StringUtils.isPad(this)) {
+            startPad();
+        } else {
+            startPhone();
+        }
+    }
 
+    private void startPad() {
         iconPersonIv.setVisibility(View.VISIBLE);
-        startAnim(iconPersonIv, 1000);
+        startAnim(iconPersonIv, 1000, -250f, -30f);
         iconBookIv.setVisibility(View.VISIBLE);
-        startAnimBook(iconBookIv, 1000, 150f, -100f, 10f);
+        startAnimBook(iconBookIv, 1000, 250f, -80f, 40f);
+        jbdIv.setVisibility(View.VISIBLE);
+        startAnimBook(jbdIv, 1000, 150f, -30f, 20f);
         iconBIv.setVisibility(View.VISIBLE);
         startAnimBook(iconBIv, 1000, -50f, -50f, 20f);
         iconHatIv.setVisibility(View.VISIBLE);
         startAnimBook(iconHatIv, 1000, 150f, -350f, 10f);
         iconrAIv.setVisibility(View.VISIBLE);
         startAnimBook(iconrAIv, 1000, -80f, -200f, 30f);
-
+        twoPenIv.setVisibility(View.VISIBLE);
+        startAnimBook(twoPenIv, 1000, -150f, -300f, 20f);
         iconBookTwoIv.setVisibility(View.VISIBLE);
         startAnimBook(iconBookTwoIv, 1000, -150f, -160f, 10f);
         iconErrorIv.setVisibility(View.VISIBLE);
-        startAnimBook(iconErrorIv, 1000, -200f, -400f, 10f);
+        startAnimBook(iconErrorIv, 1000, -150f, -350f, 10f);
+        iconPenIv.setVisibility(View.VISIBLE);
+        startAnimBook(iconPenIv, 1000, 120f, -140f, 30f);
+        iconrRubberIv.setVisibility(View.VISIBLE);
+        startAnimBook(iconrRubberIv, 1000, -160f, -130f, 20f);
+        iconrPercentageIv.setVisibility(View.VISIBLE);
+        startAnimBook(iconrPercentageIv, 1000, 200f, -250f, 30f);
+    }
+
+    private void startPhone() {
+        iconPersonIv.setVisibility(View.VISIBLE);
+        startAnim(iconPersonIv, 1000, -300f, -30f);
+        iconBookIv.setVisibility(View.VISIBLE);
+        startAnimBook(iconBookIv, 1000, 300f, -80f, 10f);
+        jbdIv.setVisibility(View.VISIBLE);
+        startAnimBook(jbdIv, 1000, 200f, -50f, 10f);
+        iconBIv.setVisibility(View.VISIBLE);
+        startAnimBook(iconBIv, 1000, -50f, -50f, 20f);
+        iconHatIv.setVisibility(View.VISIBLE);
+        startAnimBook(iconHatIv, 1000, 150f, -350f, 10f);
+        iconrAIv.setVisibility(View.VISIBLE);
+        startAnimBook(iconrAIv, 1000, -80f, -200f, 30f);
+        twoPenIv.setVisibility(View.VISIBLE);
+        startAnimBook(twoPenIv, 1000, -200f, -320f, 20f);
+        iconBookTwoIv.setVisibility(View.VISIBLE);
+        startAnimBook(iconBookTwoIv, 1000, -150f, -160f, 10f);
+        iconErrorIv.setVisibility(View.VISIBLE);
+        startAnimBook(iconErrorIv, 1000, -150f, -350f, 10f);
         iconPenIv.setVisibility(View.VISIBLE);
         startAnimBook(iconPenIv, 1000, 120f, -140f, 30f);
         iconrRubberIv.setVisibility(View.VISIBLE);
@@ -150,10 +188,10 @@ public class StartActivity extends Activity {
         startAnimBook(iconrPercentageIv, 1000, 200f, -250f, 30f);
     }
 
-    private void startAnim(View view, long animTime) {
+    private void startAnim(View view, long animTime, float translationY, float doudong) {
         AnimatorSet animatorSet = new AnimatorSet();
         float curTranslationX = view.getTranslationY();
-        ObjectAnimator translationAnim = ObjectAnimator.ofFloat(view, "translationY", curTranslationX, -300f);
+        ObjectAnimator translationAnim = ObjectAnimator.ofFloat(view, "translationY", curTranslationX, translationY);
         translationAnim.setDuration(300);
         translationAnim.setInterpolator(new DecelerateInterpolator());
         translationAnim.setRepeatMode(ValueAnimator.RESTART);
@@ -165,8 +203,7 @@ public class StartActivity extends Activity {
         ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(view, "scaleY", 0.7f, 1f);
         scaleYAnimator.setDuration(300);
         scaleYAnimator.setRepeatMode(ValueAnimator.RESTART);
-
-        ObjectAnimator translationAnimY = ObjectAnimator.ofFloat(view, "translationY", -300f, -280f, -300f, -320f, -300f);
+        ObjectAnimator translationAnimY = ObjectAnimator.ofFloat(view, "translationY", translationY, translationY - doudong, translationY, translationY + doudong, translationY);
         translationAnimY.setDuration(animTime);
         translationAnimY.setRepeatMode(ValueAnimator.RESTART);
 
@@ -224,6 +261,8 @@ public class StartActivity extends Activity {
         iconrAIv = findViewById(R.id.start_icon_a_iv);
         iconrRubberIv = findViewById(R.id.start_rubber_iv);
         iconrPercentageIv = findViewById(R.id.start_percentage_iv);
+        twoPenIv = findViewById(R.id.start_icon_two_pen_iv);
+        jbdIv = findViewById(R.id.start_icon_jbd_iv);
     }
 
     /**

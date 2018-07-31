@@ -1,14 +1,383 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.home.HomePageFragment">
+    android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="首页" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_banner" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/coloreeee"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/home_page_radio_group"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dip_48"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dip_20"
+                android:paddingRight="@dimen/dip_20">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/select_home_page_radio_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="关于我们"
+                    android:textColor="@color/color333"
+                    android:textSize="@dimen/f_13" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/select_home_page_radio_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="强大师资"
+                    android:textColor="@color/color333"
+                    android:textSize="@dimen/f_13" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/select_home_page_radio_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="服务承诺"
+                    android:textColor="@color/color333"
+                    android:textSize="@dimen/f_13" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawablePadding="@dimen/dip_8"
+                android:drawableRight="@drawable/homework_finished_forward"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dip_10"
+                android:paddingRight="@dimen/dip_16"
+                android:text="更多"
+                android:textColor="@color/color333"
+                android:textSize="@dimen/f_13" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/home_page_content_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_120"
+            android:background="@color/colorf7" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_8"
+            android:background="@color/coloreeee" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dip_16"
+            android:paddingRight="@dimen/dip_16"
+            android:paddingTop="@dimen/dip_20">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dip_16"
+                android:text="课程推荐"
+                android:textColor="@color/color333"
+                android:textSize="@dimen/f_16" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dip_90"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/home_course1_bg" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dip_10"
+                                android:layout_marginTop="@dimen/dip_20"
+                                android:text="七年级数学上"
+                                android:textColor="@color/f1ffd1"
+                                android:textSize="@dimen/f_10" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dip_10"
+                                android:layout_marginTop="@dimen/dip_8"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text="一元一次方程"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/f_12" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="@dimen/dip_40"
+                            android:layout_height="@dimen/dip_14"
+                            android:layout_marginLeft="@dimen/dip_8"
+                            android:layout_marginRight="@dimen/dip_10"
+                            android:layout_marginTop="@dimen/dip_8"
+                            android:background="@color/edf9cd"
+                            android:gravity="center"
+                            android:text="人教版"
+                            android:textColor="@color/color333"
+                            android:textSize="@dimen/f_10" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dip_90"
+                    android:layout_marginLeft="@dimen/dip_16"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/home_course2_bg" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dip_10"
+                                android:layout_marginTop="@dimen/dip_20"
+                                android:text="七年级数学下"
+                                android:textColor="@color/f1ffd1"
+                                android:textSize="@dimen/f_10" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dip_10"
+                                android:layout_marginTop="@dimen/dip_8"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text="带入法解二元一次方程组"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/f_12" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="@dimen/dip_40"
+                            android:layout_height="@dimen/dip_14"
+                            android:layout_marginLeft="@dimen/dip_8"
+                            android:layout_marginRight="@dimen/dip_10"
+                            android:layout_marginTop="@dimen/dip_8"
+                            android:background="@color/edf9cd"
+                            android:gravity="center"
+                            android:text="人教版"
+                            android:textColor="@color/color333"
+                            android:textSize="@dimen/f_10" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dip_16"
+                android:layout_marginTop="@dimen/dip_16"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dip_90"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/home_course3_bg" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dip_10"
+                                android:layout_marginTop="@dimen/dip_20"
+                                android:text="七年级英语上"
+                                android:textColor="@color/f1ffd1"
+                                android:textSize="@dimen/f_10" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dip_10"
+                                android:layout_marginTop="@dimen/dip_8"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text="人物代词和物主代词的用法"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/f_12" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="@dimen/dip_40"
+                            android:layout_height="@dimen/dip_14"
+                            android:layout_marginLeft="@dimen/dip_8"
+                            android:layout_marginRight="@dimen/dip_10"
+                            android:layout_marginTop="@dimen/dip_8"
+                            android:background="@color/edf9cd"
+                            android:gravity="center"
+                            android:text="仁爱版"
+                            android:textColor="@color/color333"
+                            android:textSize="@dimen/f_10" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dip_90"
+                    android:layout_marginLeft="@dimen/dip_16"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/home_course4_bg" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dip_10"
+                                android:layout_marginTop="@dimen/dip_20"
+                                android:text="七年级英语上"
+                                android:textColor="@color/f1ffd1"
+                                android:textSize="@dimen/f_10" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dip_10"
+                                android:layout_marginTop="@dimen/dip_8"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text="make的用法"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/f_12" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="@dimen/dip_40"
+                            android:layout_height="@dimen/dip_14"
+                            android:layout_marginLeft="@dimen/dip_8"
+                            android:layout_marginRight="@dimen/dip_10"
+                            android:layout_marginTop="@dimen/dip_8"
+                            android:background="@color/edf9cd"
+                            android:gravity="center"
+                            android:text="仁爱版"
+                            android:textColor="@color/color333"
+                            android:textSize="@dimen/f_10" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_40"
+            android:background="@color/coloreeee"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="@dimen/dip_8"
+                android:layout_height="@dimen/dip_2"
+                android:background="@color/ccc" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dip_8"
+                android:layout_marginRight="@dimen/dip_8"
+                android:text="暂时就只有这些了哦"
+                android:textColor="@color/color999"
+                android:textSize="@dimen/f_12" />
+
+            <View
+                android:layout_width="@dimen/dip_8"
+                android:layout_height="@dimen/dip_2"
+                android:background="@color/ccc" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

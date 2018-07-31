@@ -14,9 +14,17 @@ public class User extends LitePalSupport {
     private int classroom_id;
     private String classroom_name;
     private int type;
+    private int xueke_id;
+    private int jiaocai_id;
+    private int grade_detail_id;
+    private String jiaocai_name;
 
     public String getUserId() {
         return user_id + "";
+    }
+
+    public int getUser_id() {
+        return user_id;
     }
 
     public void setUserId(int user_id) {
@@ -95,6 +103,38 @@ public class User extends LitePalSupport {
         this.type = type;
     }
 
+    public int getXueke_id() {
+        return xueke_id;
+    }
+
+    public void setXueke_id(int xueke_id) {
+        this.xueke_id = xueke_id;
+    }
+
+    public int getJiaocai_id() {
+        return jiaocai_id;
+    }
+
+    public void setJiaocai_id(int jiaocai_id) {
+        this.jiaocai_id = jiaocai_id;
+    }
+
+    public int getGrade_detail_id() {
+        return grade_detail_id;
+    }
+
+    public void setGrade_detail_id(int grade_detail_id) {
+        this.grade_detail_id = grade_detail_id;
+    }
+
+    public String getJiaocai_name() {
+        return jiaocai_name;
+    }
+
+    public void setJiaocai_name(String jiaocai_name) {
+        this.jiaocai_name = jiaocai_name;
+    }
+
     public String getGradeName() {
         switch (grade) {
             case 1:
@@ -118,5 +158,17 @@ public class User extends LitePalSupport {
             default:
                 return "一年级";
         }
+    }
+
+    public String getVersionName() {
+        switch (grade_detail_id) {
+            case 0:
+                return jiaocai_name;
+            case 1:
+                return jiaocai_name + "上册";
+            case 2:
+                return jiaocai_name + "下册";
+        }
+        return "";
     }
 }

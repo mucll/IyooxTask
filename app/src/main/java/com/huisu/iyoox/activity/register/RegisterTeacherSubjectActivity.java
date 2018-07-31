@@ -28,6 +28,9 @@ import com.huisu.iyoox.views.SelectGradeDialog;
 
 import java.util.List;
 
+/**
+ * 老师注册设置授课信息
+ */
 public class RegisterTeacherSubjectActivity extends BaseActivity implements View.OnClickListener {
 
     private EditText nameEt;
@@ -44,6 +47,7 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
     private int subjectId = 0;
     private SubjectModel subjectModel;
     private int versionId = 0;
+    private int versionDetailId = 0;
     private BookEditionModel versionModel;
     private Button stubmit;
     private String userId;
@@ -70,6 +74,7 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
 
     @Override
     protected void setEvent() {
+        setBack();
         gradeView.setOnClickListener(this);
         subjectView.setOnClickListener(this);
         versionView.setOnClickListener(this);
@@ -124,7 +129,8 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
                 break;
             case R.id.register_version_ll:
                 if (subjectModel != null) {
-                    TeacherSelectSubjectVersionActivity.start(this, subjectModel.getKemu_id(), versionId);
+                    TeacherSelectSubjectVersionActivity.start(this, gradeCode + 1,
+                            subjectModel.getKemu_id(), versionId, versionDetailId);
                 }
                 break;
             case R.id.register_teacher_submit_bt:
@@ -140,25 +146,28 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
      */
     private void postSetUserInfo() {
         loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
-        RequestCenter.setTeacherUserInfo(userId, nameEt.getText().toString(), gradeCode + 1 + "", subjectModel.getKemu_id() + "", versionModel.getJiaocai_id() + "", new DisposeDataListener() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                loading.dismiss();
-                BaseUser baseUser = (BaseUser) responseObj;
-                if (baseUser.data != null) {
-                    UserManager.getInstance().setUser(baseUser.data);
-                    baseUser.data.save();
-                    MainActivity.start(context);
-                    setResult(RESULT_OK);
-                    finish();
-                }
-            }
+        RequestCenter.setTeacherUserInfo(userId, nameEt.getText().toString(), gradeCode + 1 + "",
+                subjectModel.getKemu_id() + "", versionModel.getJiaocai_id() + ""
+                , versionModel.getGrade_detail_id() + "",
+                new DisposeDataListener() {
+                    @Override
+                    public void onSuccess(Object responseObj) {
+                        loading.dismiss();
+                        BaseUser baseUser = (BaseUser) responseObj;
+                        if (baseUser.data != null) {
+                            UserManager.getInstance().setUser(baseUser.data);
+                            baseUser.data.save();
+                            MainActivity.start(context);
+                            setResult(RESULT_OK);
+                            finish();
+                        }
+                    }
 
-            @Override
-            public void onFailure(Object reasonObj) {
-                loading.dismiss();
-            }
-        });
+                    @Override
+                    public void onFailure(Object reasonObj) {
+                        loading.dismiss();
+                    }
+                });
     }
 
     /**
@@ -212,7 +221,8 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
         if (requestCode == 2 && resultCode == RESULT_OK) {
             versionModel = (BookEditionModel) data.getSerializableExtra("versionModel");
             versionId = data.getIntExtra("versionId", 0);
-            versionTv.setText(versionModel.getName());
+            versionDetailId = data.getIntExtra("versionDetailId", 0);
+            versionTv.setText(versionModel.getVersionName());
             setViewEnable();
         }
     }

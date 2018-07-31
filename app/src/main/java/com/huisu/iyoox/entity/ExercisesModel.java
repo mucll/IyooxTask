@@ -19,6 +19,8 @@ public class ExercisesModel implements Serializable {
     private int type;
     private String chooseanswer;
     private int is_correct;
+    private String A;
+
     private ExercisesChooseModel option_One;
     private StudentAnswersModel answersModel;
 

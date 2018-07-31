@@ -2,22 +2,16 @@ package com.huisu.iyoox.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.opengl.GLES10;
 import android.os.Build;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.support.v8.renderscript.Element;
-import android.support.v8.renderscript.RenderScript;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.huisu.iyoox.R;
-
-import java.io.File;
 
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
@@ -37,17 +31,21 @@ public class ImageLoader {
 
 
     /**
-     * 显示http或者https远程图片。
+     * 普通加载图片,设置错误图片
      *
-     * @param draweeView imageView。
-     * @param url        连接地址。
+     * @param context
+     * @param iv
+     * @param url
+     * @param errorRes 加载错误后的图片
      */
-    public static void showUrl(SimpleDraweeView draweeView, String url) {
-        try {
-            draweeView.setImageURI(Uri.parse(url));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void load(Context context, ImageView iv, String url, int errorRes) {
+        Glide.with(context)
+                .load(url)
+                .dontAnimate()
+                .placeholder(R.drawable.icon_img_loading)
+                .error(errorRes)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(iv);
     }
 
     /**

@@ -49,6 +49,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private ArrayList<GradeListModel> gradeListModels = new ArrayList<>();
     private MyPagerAdapter myPagerAdapter;
     private int selectPosition = 0;
+    private int selectPageIndexof = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -145,6 +146,10 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         subjectModel.setName("首页");
         subjectModels.add(0, subjectModel);
         mTabView.init(subjectModels);
+        //跳转到上次记录的tab
+        if (subjectModels.size() > selectPageIndexof) {
+            mTabView.setSelection(selectPageIndexof);
+        }
     }
 
     /**
@@ -155,7 +160,15 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         mViewPager.setAdapter(myPagerAdapter);
         mViewPager.setCurrentItem(0);
         if (gradeListModels.size() > 0 && gradeListModels.size() >= selectPosition && gradeListModels.get(selectPosition).getKemuArr().size() >= 2) {
-            mViewPager.setOffscreenPageLimit(gradeListModels.get(selectPosition).getKemuArr().size() - 1);
+            //多缓存一个首页的界面
+            int fragmentCount = gradeListModels.get(selectPosition).getKemuArr().size() + 1;
+            mViewPager.setOffscreenPageLimit(fragmentCount - 1);
+            //跳转到上次记录的界面
+            if (fragmentCount > selectPageIndexof) {
+                mViewPager.setCurrentItem(selectPageIndexof);
+            } else {
+                selectPageIndexof = 0;
+            }
         }
         if (fragments.size() > 0) {
             BaseFragment baseFragment = fragments.get(0);
@@ -184,6 +197,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
     @Override
     public void onPageSelected(int position) {
+        selectPageIndexof = position;
         mTabView.setSelection(position);
         BaseFragment baseFragment = fragments.get(position);
         baseFragment.onShow();

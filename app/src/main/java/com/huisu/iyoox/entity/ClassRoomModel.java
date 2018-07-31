@@ -1,5 +1,7 @@
 package com.huisu.iyoox.entity;
 
+import java.io.Serializable;
+
 /**
  * Function:
  * Date: 2018/7/25
@@ -7,12 +9,15 @@ package com.huisu.iyoox.entity;
  * @author dinglai
  * @since JDK 1.8
  */
-public class ClassRoomModel {
+public class ClassRoomModel implements Serializable {
     private int classroom_id;
     private String classroom_no;
     private String name;
     private int student_num;
     private String create_date;
+    private int islcok;
+    private int isadmin;
+    private boolean isSelect;
 
     public int getClassroom_id() {
         return classroom_id;
@@ -52,5 +57,29 @@ public class ClassRoomModel {
 
     public void setCreate_date(String create_date) {
         this.create_date = create_date;
+    }
+
+    public int getLock() {
+        return islcok;
+    }
+
+    public void setLock(int lock) {
+        this.islcok = lock;
+    }
+
+    public int getIsadmin() {
+        return isadmin;
+    }
+
+    public void setIsadmin(int isadmin) {
+        this.isadmin = isadmin;
+    }
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
     }
 }

@@ -18,13 +18,13 @@
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/dip_60"
             android:layout_weight="1">
 
             <com.huisu.iyoox.views.HeadView
                 android:id="@+id/person_iv"
-                android:layout_width="60dip"
-                android:layout_height="60dip"
+                android:layout_width="@dimen/dip_60"
+                android:layout_height="@dimen/dip_60"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/dip_16" />
 

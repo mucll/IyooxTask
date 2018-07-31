@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/shape_divider_line_1px"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    tools:context=".activity.teacher.TeacherClassRoomConfigActivity">
+
+    <include layout="@layout/layout_title_bar_all" />
+
+    <LinearLayout
+        style="@style/person_details_layout_style"
+        android:layout_height="@dimen/dip_56"
+        android:background="@color/colorf7">
+
+        <TextView
+            style="@style/person_details_layout_tv_style"
+            android:text="班级名称" />
+
+        <TextView
+            android:id="@+id/class_name_tv"
+            style="@style/person_details_layout_tv_style"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:paddingRight="@dimen/dip_16"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/f_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/person_details_layout_style"
+        android:layout_height="@dimen/dip_56"
+        android:background="@color/colorf7">
+
+        <TextView
+            style="@style/person_details_layout_tv_style"
+            android:text="班级ID" />
+
+        <TextView
+            android:id="@+id/class_id_tv"
+            style="@style/person_details_layout_tv_style"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:paddingRight="@dimen/dip_16"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/f_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/person_details_layout_style"
+        android:layout_height="@dimen/dip_56"
+        android:background="@color/colorf7">
+
+        <TextView
+            style="@style/person_details_layout_tv_style"
+            android:text="创建时间" />
+
+        <TextView
+            android:id="@+id/class_create_time_tv"
+            style="@style/person_details_layout_tv_style"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:paddingRight="@dimen/dip_16"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/f_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/person_details_layout_style"
+        android:layout_height="@dimen/dip_56"
+        android:background="@color/colorf7">
+
+        <TextView
+            style="@style/person_details_layout_tv_style"
+            android:text="学生人数" />
+
+        <TextView
+            android:id="@+id/class_student_count_tv"
+            style="@style/person_details_layout_tv_style"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:paddingRight="@dimen/dip_16"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/f_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/person_details_layout_style"
+        android:layout_height="@dimen/dip_56"
+        android:background="@color/colorf7"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="是否锁定"
+            android:textColor="@color/color333"
+            android:textSize="@dimen/f_17" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/class_lock_sc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dip_16"
+            android:checked="false" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/class_delete_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_48"
+        android:layout_marginTop="@dimen/dip_32"
+        android:background="@color/exercises_error"
+        android:gravity="center"
+        android:text="删除并退出"
+        android:textColor="@color/white"
+        android:textSize="@dimen/f_16" />
+</LinearLayout>

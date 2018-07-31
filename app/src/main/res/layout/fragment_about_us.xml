@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorf7"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dip_16"
+    android:paddingLeft="@dimen/dip_20"
+    android:paddingTop="@dimen/dip_16"
+    tools:context=".fragment.AboutUsFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/shape_head_999"
+        android:drawablePadding="@dimen/dip_8"
+        android:gravity="center"
+        android:text="全国147位一线名师授课"
+        android:textColor="@color/color333"
+        android:textSize="@dimen/f_12" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_16"
+        android:drawableLeft="@drawable/shape_head_999"
+        android:drawablePadding="@dimen/dip_8"
+        android:gravity="center"
+        android:text="在线互动课堂,讲练测评结合"
+        android:textColor="@color/color333"
+        android:textSize="@dimen/f_12" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_16"
+        android:drawableLeft="@drawable/shape_head_999"
+        android:drawablePadding="@dimen/dip_8"
+        android:gravity="center"
+        android:text="手机、电脑上课,课程还可回放"
+        android:textColor="@color/color333"
+        android:textSize="@dimen/f_12" />
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorf7"
+    android:orientation="vertical"
+    tools:context=".activity.teacher.TeacherCreateTaskActivity">
+
+    <include layout="@layout/layout_title_bar_all" />
+
+    <com.huisu.iyoox.views.DropdownButton
+        android:id="@+id/dropdown_tab_bt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_40" />
+
+    <ExpandableListView
+        android:id="@id/swipe_target"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:groupIndicator="@null" />
+</LinearLayout>

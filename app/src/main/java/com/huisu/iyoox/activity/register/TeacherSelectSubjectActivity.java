@@ -19,6 +19,9 @@ import com.huisu.iyoox.views.EbagGridView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 老师注册选择授课科目
+ */
 public class TeacherSelectSubjectActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private EbagGridView mGridView;

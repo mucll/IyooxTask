@@ -22,10 +22,11 @@
 
     <ImageView
         android:id="@+id/start_icon_guang_iv"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_alignBottom="@id/start_icon_bottom_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/start_icon_bottom_iv"
         android:layout_centerHorizontal="true"
+        android:paddingLeft="@dimen/dip_20"
         android:src="@drawable/icon_start_guang"
         android:visibility="invisible" />
 
@@ -93,32 +94,50 @@
         android:src="@drawable/start_icon_rubber"
         android:visibility="invisible" />
 
-    <ImageView
-        android:id="@+id/start_percentage_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/start_icon_bottom_iv"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/icon_start_percentage"
-        android:visibility="invisible" />
-
 
     <ImageView
         android:id="@+id/start_icon_person_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:paddingLeft="@dimen/dip_16"
         android:src="@drawable/icon_start_person"
         android:visibility="invisible" />
 
+    <ImageView
+        android:id="@+id/start_icon_two_pen_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/start_icon_bottom_iv"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/pen_left"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/start_percentage_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/start_icon_box_iv_hint"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/icon_start_percentage"
+        android:visibility="invisible" />
 
     <ImageView
         android:id="@+id/start_icon_book_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/start_icon_bottom_iv"
-        android:layout_alignRight="@id/start_icon_person_iv"
+        android:layout_alignTop="@id/start_icon_box_iv_hint"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/start_icon_book"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/start_icon_jbd_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/start_icon_bottom_iv"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/jbd"
         android:visibility="invisible" />
 
     <ImageView
@@ -126,6 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:paddingRight="@dimen/dip_20"
         android:src="@drawable/icon_start_box"
         android:visibility="invisible" />
 

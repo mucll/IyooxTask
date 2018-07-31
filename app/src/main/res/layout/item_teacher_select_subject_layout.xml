@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dip_4"
             android:layout_marginRight="@dimen/dip_4"
-            android:src="@drawable/btn_selected"
+            android:src="@drawable/btn_selected_check"
             android:visibility="invisible" />
 
         <LinearLayout
@@ -29,7 +29,7 @@
                 android:id="@+id/subject_icon_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_app" />
+                android:src="@drawable/subject_yu" />
 
             <TextView
                 android:id="@+id/subject_name_tv"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dip_4"
             android:layout_marginRight="@dimen/dip_4"
-            android:src="@drawable/btn_selected"
+            android:src="@drawable/btn_selected_check"
             android:visibility="invisible" />
 
     </LinearLayout>

@@ -2,6 +2,7 @@ package com.huisu.iyoox.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -23,14 +24,16 @@ public class TeacherSelectSubjectVersionAdapter extends RecyclerView.Adapter<Tea
     private Context context;
     private List<BookEditionModel> models;
     private int selectVersionId = 0;
+    private int versionDetailId = 0;
 
     public TeacherSelectSubjectVersionAdapter(Context context, List<BookEditionModel> models) {
         this.context = context;
         this.models = models;
     }
 
-    public void setSelectVersionId(int selectVersionId) {
+    public void setSelectVersionId(int selectVersionId, int versionDetailId) {
         this.selectVersionId = selectVersionId;
+        this.versionDetailId = versionDetailId;
     }
 
     @Override
@@ -43,8 +46,8 @@ public class TeacherSelectSubjectVersionAdapter extends RecyclerView.Adapter<Tea
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         BookEditionModel model = models.get(position);
-        holder.versionTv.setText(model.getName());
-        if (model.getJiaocai_id() == selectVersionId) {
+        holder.versionTv.setText(model.getVersionName());
+        if (model.getJiaocai_id() == selectVersionId && model.getGrade_detail_id() == versionDetailId) {
             holder.versionTv.setSelected(true);
         } else {
             holder.versionTv.setSelected(false);

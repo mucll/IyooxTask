@@ -11,6 +11,7 @@ public class BookChapterModel {
     private int zhangjie_id;
     private String name;
     private List<String> zhishidianArr;
+    private boolean choiced;
 
     public int getZhangjie_id() {
         return zhangjie_id;
@@ -34,5 +35,13 @@ public class BookChapterModel {
 
     public void setZhishidianArr(List<String> zhishidianArr) {
         this.zhishidianArr = zhishidianArr;
+    }
+
+    public boolean isChoiced() {
+        return choiced;
+    }
+
+    public void setChoiced(boolean choiced) {
+        this.choiced = choiced;
     }
 }

@@ -1,11 +1,13 @@
 package com.huisu.iyoox.entity;
 
+import java.io.Serializable;
+
 /**
  * @author:dl
  * @function:
  * @date: 2018/7/12
  */
-public class VideoTitleModel {
+public class VideoTitleModel implements Serializable {
     private int shipin_id;
     private String shipin_name;
     private int zhishidian_id;

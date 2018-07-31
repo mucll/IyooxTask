@@ -19,13 +19,18 @@ import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 老师注册选择授课科目的版本
+ */
 public class TeacherSelectSubjectVersionActivity extends BaseActivity implements MyOnItemClickListener {
 
     private RecyclerView recyclerView;
     private List<BookEditionModel> models = new ArrayList<>();
     private TeacherSelectSubjectVersionAdapter mAdapter;
     private String kemuId;
+    private String gradeId;
     private int selectVersionId = 0;
+    private int versionDetailId = 0;
 
     @Override
     protected void initView() {
@@ -39,19 +44,21 @@ public class TeacherSelectSubjectVersionActivity extends BaseActivity implements
     protected void initData() {
         setTitle("选择教材版本");
         kemuId = getIntent().getStringExtra("kemuId");
+        gradeId = getIntent().getStringExtra("gradeId");
         selectVersionId = getIntent().getIntExtra("versionId", 0);
+        versionDetailId = getIntent().getIntExtra("versionDetailId", 0);
         postVersionHttp();
     }
 
     private void postVersionHttp() {
-        RequestCenter.getBookVersion(kemuId, new DisposeDataListener() {
+        RequestCenter.getBookVersion(kemuId, gradeId, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 BaseBookEditionModel baseBookEditionModel = (BaseBookEditionModel) responseObj;
                 if (baseBookEditionModel.data != null && baseBookEditionModel.data.size() > 0) {
                     models.clear();
                     models.addAll(baseBookEditionModel.data);
-                    mAdapter.setSelectVersionId(selectVersionId);
+                    mAdapter.setSelectVersionId(selectVersionId, versionDetailId);
                     mAdapter.notifyDataSetChanged();
                 }
             }
@@ -74,10 +81,12 @@ public class TeacherSelectSubjectVersionActivity extends BaseActivity implements
         return R.layout.activity_teacher_select_subject_version;
     }
 
-    public static void start(Context context, int kemuId, int versionId) {
+    public static void start(Context context, int gradeId, int kemuId, int versionId, int versionDetailId) {
         Intent intent = new Intent(context, TeacherSelectSubjectVersionActivity.class);
         intent.putExtra("kemuId", kemuId + "");
         intent.putExtra("versionId", versionId);
+        intent.putExtra("gradeId", gradeId+"");
+        intent.putExtra("versionDetailId", versionDetailId);
         ((Activity) context).startActivityForResult(intent, 2);
     }
 
@@ -87,6 +96,7 @@ public class TeacherSelectSubjectVersionActivity extends BaseActivity implements
         Intent intent = new Intent();
         intent.putExtra("versionModel", editionModel);
         intent.putExtra("versionId", editionModel.getJiaocai_id());
+        intent.putExtra("versionDetailId", editionModel.getGrade_detail_id());
         setResult(RESULT_OK, intent);
         finish();
     }

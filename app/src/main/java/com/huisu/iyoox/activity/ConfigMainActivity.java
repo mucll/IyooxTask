@@ -49,7 +49,7 @@ public class ConfigMainActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.reset_password_ll:
-                ResetPasswordActivity.start(this);
+//                ResetPasswordActivity.start(this);
                 break;
             case R.id.logout_tv:
                 logout();

@@ -1,9 +1,6 @@
 package com.huisu.iyoox.views;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.text.TextUtils;
@@ -18,7 +15,6 @@ import android.widget.TextView;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.entity.ExercisesChooseModel;
 import com.huisu.iyoox.entity.ExercisesModel;
-import com.huisu.iyoox.entity.ResQuestionListBean;
 import com.huisu.iyoox.entity.StudentAnswersModel;
 import com.huisu.iyoox.util.StringUtils;
 
@@ -44,7 +40,7 @@ public class ExercisesChooseView extends BaseExercisesView {
     @Bind(R.id.help_layout)
     LinearLayout helpLayout;
     @Bind(R.id.content_webview)
-    WebView contentWebview;
+    HtmlTextView contentWebview;
 
     ExercisesModel bean;
 
@@ -98,32 +94,29 @@ public class ExercisesChooseView extends BaseExercisesView {
         }
         StringBuilder sb = new StringBuilder();
         //自动换行
-        sb.append("<p style=\"word-break:break-all\">");
         sb.append(bean.getTigan());
-        sb.append("</p>");
         String s = sb.toString().replaceAll("style='max-width:100%'", "style='max-width:100%;height:auto;'");
         contentWebview.setVisibility(VISIBLE);
-        contentWebview.loadDataWithBaseURL(null, s, "text/html", "UTF-8", null);
-        contentWebview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        contentWebview.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return true;
-            }
-        });
-        ExercisesChooseModel mData = bean.getOption_One();
+        if (!TextUtils.isEmpty(s)) {
+            contentWebview.setHtmlFromString(s, false);
+        } else {
+            contentWebview.setHtmlFromString("", false);
+        }
+        if (bean.getOption_One() != null) {
+            ExercisesChooseModel mData = bean.getOption_One();
 //        填充选项
-        if (!TextUtils.isEmpty(mData.getA())) {
-            setChooseData("A", mData.getA());
-        }
-        if (!TextUtils.isEmpty(mData.getB())) {
-            setChooseData("B", mData.getB());
-        }
-        if (!TextUtils.isEmpty(mData.getC())) {
-            setChooseData("C", mData.getC());
-        }
-        if (!TextUtils.isEmpty(mData.getD())) {
-            setChooseData("D", mData.getD());
+            if (!TextUtils.isEmpty(mData.getA())) {
+                setChooseData("A", mData.getA());
+            }
+            if (!TextUtils.isEmpty(mData.getB())) {
+                setChooseData("B", mData.getB());
+            }
+            if (!TextUtils.isEmpty(mData.getC())) {
+                setChooseData("C", mData.getC());
+            }
+            if (!TextUtils.isEmpty(mData.getD())) {
+                setChooseData("D", mData.getD());
+            }
         }
         this.addView(view);
     }

@@ -7,41 +7,70 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.base.BaseClassRoomModel;
+import com.huisu.iyoox.entity.base.BaseClassRoomResultModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.Loading;
 
-public class TeacherCreateClassActivity extends BaseActivity implements View.OnClickListener {
+import org.litepal.util.Const;
 
+public class TeacherCreateClassActivity extends BaseActivity implements View.OnClickListener {
+    public static final int START_CODE = 0x105;
 
     private TextView gradeNameTv;
     private EditText classNameEt;
+    private EditText addClassEt;
     private User user;
     private TextView tabSubmitTv;
     private Loading loading;
+    private View createView;
+    private View addView;
+    private int type;
 
     @Override
     protected void initView() {
         user = UserManager.getInstance().getUser();
+        type = getIntent().getIntExtra("type", Constant.ERROR_CODE);
         tabSubmitTv = findViewById(R.id.tv_submit);
         tabSubmitTv.setText("完成");
         tabSubmitTv.setVisibility(View.VISIBLE);
         tabSubmitTv.setEnabled(false);
+        createView = findViewById(R.id.teacher_create_class_ll);
+        addView = findViewById(R.id.teacher_add_class_ll);
         gradeNameTv = findViewById(R.id.teacher_grade_name_tv);
-        gradeNameTv.setText(user.getGradeName());
         classNameEt = findViewById(R.id.teacher_create_class_name);
+        addClassEt = findViewById(R.id.teacher_add_class_et);
+        switch (type) {
+            case Constant.CLASS_CREATE:
+                setTitle("创建班级");
+                createView.setVisibility(View.VISIBLE);
+                addView.setVisibility(View.GONE);
+                gradeNameTv.setText(user.getGradeName());
+                break;
+            case Constant.CLASS_ADD:
+                setTitle("添加班级");
+                createView.setVisibility(View.GONE);
+                addView.setVisibility(View.VISIBLE);
+                break;
+            default:
+                break;
+        }
+
     }
 
     @Override
     protected void initData() {
-        setTitle("创建班级");
+
     }
 
     @Override
@@ -68,6 +97,26 @@ public class TeacherCreateClassActivity extends BaseActivity implements View.OnC
 
             }
         });
+        addClassEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 6) {
+                    tabSubmitTv.setEnabled(true);
+                } else {
+                    tabSubmitTv.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -79,7 +128,13 @@ public class TeacherCreateClassActivity extends BaseActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_submit:
-                postCreateClassRoomHttp();
+                if (type == Constant.CLASS_CREATE) {
+                    postCreateClassRoomHttp();
+                } else if (type == Constant.CLASS_ADD) {
+                    postaddClassRoomHttp();
+                }
+                break;
+            default:
                 break;
         }
     }
@@ -90,8 +145,9 @@ public class TeacherCreateClassActivity extends BaseActivity implements View.OnC
             @Override
             public void onSuccess(Object responseObj) {
                 loading.dismiss();
-                BaseClassRoomModel baseClassRoomModel = (BaseClassRoomModel) responseObj;
+                BaseClassRoomResultModel baseClassRoomModel = (BaseClassRoomResultModel) responseObj;
                 if (baseClassRoomModel.data != null) {
+                    TeacherCreateClassResultActivity.start(context, Constant.CREATE_CLASS_RESULT, baseClassRoomModel.data.getClassroom_no(), null);
                     setResult(RESULT_OK);
                     finish();
                 }
@@ -104,8 +160,13 @@ public class TeacherCreateClassActivity extends BaseActivity implements View.OnC
         });
     }
 
-    public static void start(Context context) {
+    private void postaddClassRoomHttp() {
+        TabToast.showMiddleToast(context, "暂未接入");
+    }
+
+    public static void start(Context context, int type) {
         Intent intent = new Intent(context, TeacherCreateClassActivity.class);
-        ((Activity) context).startActivityForResult(intent, 1);
+        intent.putExtra("type", type);
+        ((Activity) context).startActivityForResult(intent, START_CODE);
     }
 }

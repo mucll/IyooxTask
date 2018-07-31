@@ -60,7 +60,7 @@
 
             <RelativeLayout
                 android:id="@+id/submit_bt"
-                android:layout_width="@dimen/dip_213"
+                android:layout_width="@dimen/dip_200"
                 android:layout_height="@dimen/dip_40"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dip_22"
@@ -70,7 +70,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:drawablePadding="@dimen/dip_9"
                     android:drawableRight="@drawable/ctj_icon_sx_mood"
                     android:text="选好了,开始复习"
                     android:textColor="@color/main_text_color"

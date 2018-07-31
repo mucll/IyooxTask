@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_background"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dip_192"
+    android:layout_height="@dimen/dip_320"
     android:background="#00000000"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll_content_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_192"
+        android:layout_height="@dimen/dip_320"
         android:background="#00000000"
         android:orientation="vertical">
 

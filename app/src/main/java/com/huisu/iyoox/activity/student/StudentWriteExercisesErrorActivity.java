@@ -21,6 +21,7 @@ import com.huisu.iyoox.fragment.exercisespager.ExercisesPageFragment;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.StatusBarUtil;
 import com.huisu.iyoox.views.Loading;
 
 import java.io.Serializable;
@@ -48,7 +49,6 @@ public class StudentWriteExercisesErrorActivity extends BaseActivity implements 
         mRadioGroup = findViewById(R.id.radio_group_title);
         screenBt = findViewById(R.id.screen_bt);
         manager = getSupportFragmentManager();
-        ((RadioButton) mRadioGroup.getChildAt(0)).setChecked(true);
     }
 
     @Override
@@ -58,6 +58,7 @@ public class StudentWriteExercisesErrorActivity extends BaseActivity implements 
         if (subjectId != Constant.ERROR_CODE) {
             postSubjectData();
         }
+        ((RadioButton) mRadioGroup.getChildAt(0)).setChecked(true);
     }
 
     @Override

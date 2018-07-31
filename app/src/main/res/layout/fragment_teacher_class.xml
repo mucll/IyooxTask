@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorf7"
     android:orientation="vertical"
     tools:context=".fragment.teacher.TeacherClassFragment">
 
@@ -34,14 +35,21 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/f_18" />
 
-            <ImageView
-                android:id="@+id/teacher_add_class_ic"
+            <RelativeLayout
+                android:id="@+id/teacher_add_class_ll"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:padding="@dimen/dip_16"
-                android:src="@drawable/icon_add" />
+                android:paddingLeft="@dimen/dip_16"
+                android:paddingRight="@dimen/dip_16">
+
+                <ImageView
+                    android:id="@+id/teacher_add_class_ic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_add" />
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 
@@ -49,10 +57,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/teacher_class_fragment_recycler_view"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/teacher_class_fragment_refresh_ll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/teacher_class_fragment_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <RelativeLayout
             android:id="@+id/empty_view_layout"

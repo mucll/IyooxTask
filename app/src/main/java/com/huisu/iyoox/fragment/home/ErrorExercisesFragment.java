@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.MainActivity;
@@ -135,6 +136,8 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
             View view = mLayoutInflater.inflate(R.layout.item_img, container, false);
             final SubjectModel subjectModel = models.get(position);
             ImageView img = view.findViewById(R.id.img_item_img);
+            TextView tv = view.findViewById(R.id.error_subject_name_tv);
+            tv.setText(subjectModel.getName());
             img.setImageResource(getSubjectResId(subjectModel.getKemu_id()));
             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
             img.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +162,7 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
         switch (subjectId) {
             case Constant.SUBJECT_YUWEN:
                 return R.drawable.ctj_yuwen_curremt;
-            case Constant.SUBJECT_SHUXU:
+            case Constant.SUBJECT_SHUXUE:
                 return R.drawable.ctj_yuwen_curremt;
             case Constant.SUBJECT_ENGLISH:
                 return R.drawable.ctj_yuwen_curremt;

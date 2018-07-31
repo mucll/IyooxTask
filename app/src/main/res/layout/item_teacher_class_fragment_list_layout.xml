@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorf7">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,39 +15,62 @@
             android:background="@drawable/select_white_bg"
             android:elevation="@dimen/dip_1"
             android:orientation="vertical"
-            android:padding="@dimen/dip_8"
+            android:paddingLeft="@dimen/dip_16"
+            android:paddingRight="@dimen/dip_16"
+            android:paddingTop="@dimen/dip_10"
             android:translationZ="@dimen/dip_1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dip_6"
+                    android:paddingTop="@dimen/dip_6"
+                    android:src="@drawable/home_icon_class" />
+
+
+                <TextView
+                    android:id="@+id/teacher_class_config_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dip_6"
+                    android:text="编辑"
+                    android:textColor="@color/color333"
+                    android:textSize="@dimen/f_16" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/class_room_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="八年级(1)班"
+                android:layout_marginTop="@dimen/dip_10"
                 android:textColor="@color/color333"
-                android:textSize="@dimen/f_18" />
+                android:textSize="@dimen/f_16" />
 
             <TextView
                 android:id="@+id/class_room_id_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dip_8"
-                android:text="班级ID:7623"
+                android:layout_marginTop="@dimen/dip_12"
                 android:textColor="@color/color666"
-                android:textSize="@dimen/f_15" />
+                android:textSize="@dimen/f_12" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dip_16"
-                android:layout_marginTop="@dimen/dip_8">
+                android:layout_marginTop="@dimen/dip_12">
 
                 <TextView
                     android:id="@+id/class_room_student_num_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="班级人数:16人"
                     android:textColor="@color/color666"
-                    android:textSize="@dimen/f_15" />
+                    android:textSize="@dimen/f_12" />
 
                 <TextView
                     android:id="@+id/class_room_create_time_tv"
@@ -54,27 +78,37 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:textColor="@color/color666"
-                    android:textSize="@dimen/f_15" />
+                    android:textSize="@dimen/f_12" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dip_1"
-                android:background="@color/black_05" />
+                android:background="@color/coloreddd" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/dip_48"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/teacher_class_fragment_work_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:padding="@dimen/dip_8"
-                    android:text="管理"
+                    android:drawableLeft="@drawable/home_icon_work"
+                    android:drawablePadding="@dimen/dip_4"
+                    android:padding="@dimen/dip_6"
+                    android:text="作业"
                     android:textColor="@color/color333"
-                    android:textSize="@dimen/f_15" />
-            </RelativeLayout>
+                    android:textSize="@dimen/f_14" />
+
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

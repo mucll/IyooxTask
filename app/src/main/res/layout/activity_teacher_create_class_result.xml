@@ -1,9 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activity.teacher.TeacherCreateClassResultActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/menu_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/select_white_bg"
+            android:paddingLeft="@dimen/dip_16"
+            android:paddingRight="@dimen/dip_16"
+            android:src="@drawable/stl_cg_del_btn" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/teacher_create_class_success_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/teacher_create_class_class_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_200"
+            android:src="@drawable/home_class_founded" />
+
+        <TextView
+            android:id="@+id/teacher_create_class_class_hint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/teacher_create_class_class_iv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_16"
+            android:text="班级创建成功啦"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/f_14" />
+
+        <LinearLayout
+            android:id="@+id/class_id_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/teacher_create_class_class_hint_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_16"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="班级ID"
+                android:textColor="@color/color333"
+                android:textSize="@dimen/f_16" />
+
+            <TextView
+                android:id="@+id/teacher_create_class_class_id_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dip_16"
+                android:textColor="@color/main_text_color"
+                android:textSize="@dimen/f_16" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="@dimen/dip_320"
+            android:layout_height="@dimen/dip_40"
+            android:layout_below="@id/class_id_ll"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_22"
+            android:background="@drawable/select_button_bg_maincolor"
+            android:enabled="false"
+            android:text="邀请老师"
+            android:textColor="@color/white"
+            android:textSize="@dimen/f_16" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/teacher_send_task_success_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/teacher_task_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_200"
+            android:src="@drawable/setting_work_pic_setting_succeed" />
+
+        <TextView
+            android:id="@+id/teacher_task_hint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/teacher_task_iv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_16"
+            android:text="作业布置成功"
+            android:textColor="@color/color333"
+            android:textSize="@dimen/f_16" />
+
+
+        <Button
+            android:id="@+id/task_submit_home_bt"
+            android:layout_width="@dimen/dip_320"
+            android:layout_height="@dimen/dip_40"
+            android:layout_below="@id/teacher_task_hint_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_22"
+            android:background="@drawable/select_button_bg_maincolor"
+            android:text="通知家长"
+            android:textColor="@color/white"
+            android:textSize="@dimen/f_16" />
+    </RelativeLayout>
+</RelativeLayout>

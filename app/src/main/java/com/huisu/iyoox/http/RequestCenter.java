@@ -6,17 +6,22 @@ import com.huisu.iyoox.entity.base.BaseBookEditionModel;
 import com.huisu.iyoox.entity.base.BaseCheckMsgCode;
 import com.huisu.iyoox.entity.base.BaseClassRankingModel;
 import com.huisu.iyoox.entity.base.BaseClassRoomModel;
+import com.huisu.iyoox.entity.base.BaseClassRoomResultModel;
 import com.huisu.iyoox.entity.base.BaseExercisesModel;
 import com.huisu.iyoox.entity.base.BaseGradeListModel;
 import com.huisu.iyoox.entity.base.BasePhoneModel;
 import com.huisu.iyoox.entity.base.BaseRegisterResultModel;
 import com.huisu.iyoox.entity.base.BaseScreenSubjectVersionModel;
 import com.huisu.iyoox.entity.base.BaseSendMsgCodeModel;
+import com.huisu.iyoox.entity.base.BaseSendTaskResultModel;
+import com.huisu.iyoox.entity.base.BaseStudentModel;
 import com.huisu.iyoox.entity.base.BaseSubjectModel;
 import com.huisu.iyoox.entity.base.BaseTaskResultModel;
 import com.huisu.iyoox.entity.base.BaseTaskStudentListModel;
+import com.huisu.iyoox.entity.base.BaseTeacherModel;
 import com.huisu.iyoox.entity.base.BaseTrialCardModel;
 import com.huisu.iyoox.entity.base.BaseUser;
+import com.huisu.iyoox.entity.base.BaseVideoGroupModel;
 import com.huisu.iyoox.entity.base.BaseVideoModel;
 import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
 import com.huisu.iyoox.okhttp.CommonOkHttpClient;
@@ -31,19 +36,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
- * @author: vision
- * @function:
- * @date: 16/8/12
+ * 请求链接方法
  */
 public class RequestCenter {
 
     /**
      * get请求
-     *
-     * @param url
-     * @param params
-     * @param listener
-     * @param clazz
      */
     public static void getRequest(String url, RequestParams params, DisposeDataListener listener, Class<?> clazz) {
         CommonOkHttpClient.get(CommonRequest.createGetRequest(url, params),
@@ -52,11 +50,6 @@ public class RequestCenter {
 
     /**
      * post请求
-     *
-     * @param url
-     * @param params
-     * @param listener
-     * @param clazz
      */
     public static void postRequest(String url, RequestParams params, DisposeDataListener listener, Class<?> clazz) {
         //打印请求地址
@@ -67,11 +60,6 @@ public class RequestCenter {
 
     /**
      * 文件上传
-     *
-     * @param url
-     * @param params
-     * @param listener
-     * @param clazz
      */
     public static void postUpFile(String url, RequestParams params, DisposeDataListener listener, Class<?> clazz) {
         CommonOkHttpClient.get(CommonRequest.createMultiPostRequest(url, params),
@@ -80,8 +68,6 @@ public class RequestCenter {
 
     /**
      * 更换个人头像
-     *
-     * @param listener
      */
     public static void updateAvatar(String userId, File file, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -97,8 +83,7 @@ public class RequestCenter {
     /**
      * 判断手机号 是否注册
      *
-     * @param listener
-     * @param phone    手机号
+     * @param phone 手机号
      */
     public static void isExistphone(String phone, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -109,8 +94,7 @@ public class RequestCenter {
     /**
      * 发送短信验证码
      *
-     * @param listener
-     * @param phone    手机号
+     * @param phone 手机号
      */
     public static void sendMsgCode(String phone, String source, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -122,8 +106,7 @@ public class RequestCenter {
     /**
      * 判断验证是否正确
      *
-     * @param listener
-     * @param phone    手机号
+     * @param phone 手机号
      */
     public static void checkMsgCode(String phone, String code, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -134,8 +117,6 @@ public class RequestCenter {
 
     /**
      * 用户注册
-     *
-     * @param listener
      */
     public static void register(String phone, String password, String type, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -147,8 +128,6 @@ public class RequestCenter {
 
     /**
      * 设置用户信息
-     *
-     * @param listener
      */
     public static void setUserInfo(String userId, String name, String sex, String grade, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -161,24 +140,21 @@ public class RequestCenter {
 
     /**
      * 设置老师用户信息
-     *
-     * @param listener
      */
-    public static void setTeacherUserInfo(String userId, String name, String grade, String xuekeId, String jiaocaiId, DisposeDataListener listener) {
+    public static void setTeacherUserInfo(String userId, String name, String grade, String xuekeId, String jiaocaiId, String detailId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("id", userId);
         params.put("name", name);
         params.put("grade", grade);
         params.put("xueke_id", xuekeId);
         params.put("jiaocai_id", jiaocaiId);
+        params.put("grade_detail_id", detailId);
         RequestCenter.postRequest(HttpConstants.SET_USER_INFO, params, listener, BaseUser.class);
     }
 
 
     /**
      * 老师根据年级获取科目列表
-     *
-     * @param listener
      */
     public static void GET_KEMU_BY_GRADE(String gradeId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -188,19 +164,16 @@ public class RequestCenter {
 
     /**
      * 老师根据科目获取教材版本列表
-     *
-     * @param listener
      */
-    public static void getBookVersion(String xuekeId, DisposeDataListener listener) {
+    public static void getBookVersion(String xuekeId, String gradeId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("xueke_id", xuekeId);
+        params.put("grade_id", gradeId);
         RequestCenter.postRequest(HttpConstants.getBookVersion, params, listener, BaseBookEditionModel.class);
     }
 
     /**
      * 用户登陆请求
-     *
-     * @param listener
      */
     public static void login(String phone, String password, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -211,8 +184,6 @@ public class RequestCenter {
 
     /**
      * 年级列表
-     *
-     * @param listener
      */
     public static void getGrades(DisposeDataListener listener) {
         RequestCenter.postRequest(HttpConstants.GET_GRADES, null, listener, BaseGradeListModel.class);
@@ -220,8 +191,6 @@ public class RequestCenter {
 
     /**
      * 重置密码
-     *
-     * @param listener
      */
     public static void ModifyPassword(String phone, String password, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -232,8 +201,6 @@ public class RequestCenter {
 
     /**
      * 学习界面 年级列表和教材列表
-     *
-     * @param listener
      */
     public static void indexList(DisposeDataListener listener) {
         RequestCenter.postRequest(HttpConstants.INDEX_LIST, null, listener, BaseGradeListModel.class);
@@ -241,8 +208,6 @@ public class RequestCenter {
 
     /**
      * 学习界面 章节 和 知识点列表
-     *
-     * @param listener
      */
     public static void getOptionlist(String grade_id, String gradeDetailId, String kemu_id, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -254,8 +219,6 @@ public class RequestCenter {
 
     /**
      * 学习界面 章节 和 知识点列表
-     *
-     * @param listener
      */
     public static void getShipinlist(String grade_id, String kemu_id, String jiaocai_id, String grade_detail_id,
                                      String zhangjie_id, String zhishidian, String page,
@@ -273,8 +236,6 @@ public class RequestCenter {
 
     /**
      * 获取视频列表
-     *
-     * @param listener
      */
     public static void getVideoTimu(String shipinId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -284,8 +245,6 @@ public class RequestCenter {
 
     /**
      * 获取有错题的科目
-     *
-     * @param listener
      */
     public static void getErrorSubject(String studentId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -295,8 +254,6 @@ public class RequestCenter {
 
     /**
      * 获取有错题的科目
-     *
-     * @param listener
      */
     public static void getErrorSubjectDetilas(String studentId, String subjectId, String jiaoCaiId, String zhishidianId
             , String time, DisposeDataListener listener) {
@@ -311,8 +268,6 @@ public class RequestCenter {
 
     /**
      * 获取错题筛选数据
-     *
-     * @param listener
      */
     public static void getscreenErrorListData(String studentId, String subjectId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -431,7 +386,7 @@ public class RequestCenter {
         params.put("teacher_id", teacherId);
         params.put("grade_id", gradeId);
         params.put("name", className);
-        RequestCenter.postRequest(HttpConstants.teacherCreateClassroom, params, listener, BaseClassRoomModel.class);
+        RequestCenter.postRequest(HttpConstants.teacherCreateClassroom, params, listener, BaseClassRoomResultModel.class);
     }
 
     /**
@@ -443,4 +398,84 @@ public class RequestCenter {
         RequestCenter.postRequest(HttpConstants.teacherClassroomList, params, listener, BaseClassRoomModel.class);
     }
 
+    /**
+     * 老师锁定或解锁班级
+     */
+    public static void teacherLockClassRoom(String classroomId, String islock, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("banji_id", classroomId);
+        params.put("islock", islock);
+        RequestCenter.postRequest(HttpConstants.teacherLockClassRoom, params, listener, null);
+    }
+
+    /**
+     * 老师获取班级列表
+     */
+    public static void teacherClassroomListDeatail(String classroomId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("banji_id", classroomId);
+        RequestCenter.postRequest(HttpConstants.teacherClassroomListDeatail, params, listener, BaseStudentModel.class);
+    }
+
+    /**
+     * 老师获取班级列表
+     */
+    public static void classroomTeacherList(String classroomId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("class_room_id", classroomId);
+        RequestCenter.postRequest(HttpConstants.CLASSROOM_TEACHER_LIST, params, listener, BaseTeacherModel.class);
+    }
+
+    /**
+     * 老师布置作业教材章节列表
+     */
+    public static void getZhangjieDetail(String gradeId, String kemuId, String jiaocaiId,
+                                         String detailId, String page,
+                                         DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("grade_id", gradeId);
+        params.put("kemu_id", kemuId);
+        params.put("jiaocai_id", jiaocaiId);
+        params.put("grade_detail_id", detailId);
+        params.put("page_index", page);
+        RequestCenter.postRequest(HttpConstants.getZhangjieDetail, params, listener, BaseVideoGroupModel.class);
+    }
+
+    /**
+     * 老师布置作业 选择题目
+     */
+    public static void teacherSelectExercisesData(String shipinId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("id", shipinId);
+        RequestCenter.postRequest(HttpConstants.teacherSelectExercisesData, params, listener, BaseExercisesModel.class);
+    }
+
+    /**
+     * 老师布置作业成功 提醒家长
+     */
+    public static void notifyParents(String workId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("work_id", workId);
+        RequestCenter.postRequest(HttpConstants.notifyParents, params, listener, null);
+    }
+
+    /**
+     * 老师布置作业
+     */
+    public static void teacherSendTask(String userId, String taskName, String classIds, String timuIds,
+                                       String createdate, String endDate, String desc, String zhishidianId,
+                                       String xuekeId, String taskType, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("teacher_id", userId);
+        params.put("name", taskName);
+        params.put("classroom_ids", classIds);
+        params.put("timu_ids", timuIds);
+        params.put("createdate", createdate);
+        params.put("end_time", endDate);
+        params.put("zhishidian_id", zhishidianId);
+        params.put("xueke_id", xuekeId);
+        params.put("source_type ", taskType);
+        params.put("desc ", desc);
+        RequestCenter.postRequest(HttpConstants.teacherSendTask, params, listener, BaseSendTaskResultModel.class);
+    }
 }

@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
+import android.widget.EditText;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -107,6 +110,28 @@ public class StringUtils {
     public static int dp2px(Context context, float value) {
         float scale = context.getResources().getDisplayMetrics().density;
         return (int) (value * scale + 0.5f);
+    }
+
+    /**
+     * 禁止EditText输入特殊字符
+     *
+     * @param editText EditText输入框
+     */
+    public static void setEditTextInputSpeChat(EditText editText) {
+        InputFilter filter = new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                String speChat = "[`~!@#$%^&*()+=|{}':;',\\[\\]<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+                Pattern pattern = Pattern.compile(speChat);
+                Matcher matcher = pattern.matcher(source.toString());
+                if (matcher.find()) {
+                    return "";
+                } else {
+                    return source;
+                }
+            }
+        };
+        editText.setFilters(new InputFilter[]{filter});
     }
 
 

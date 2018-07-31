@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.SubjectModel;
 
 import java.util.List;
@@ -68,7 +69,26 @@ public class TeacherSelectSubjectAdapter extends BaseAdapter {
         } else {
             holder.selectIv.setVisibility(View.INVISIBLE);
         }
+        holder.icon.setImageResource(getSubjectIconId(model.getKemu_id()));
         return convertView;
+    }
+
+
+    private int getSubjectIconId(int subjectId) {
+        switch (subjectId) {
+            case Constant.SUBJECT_YUWEN:
+                return R.drawable.subject_yu;
+            case Constant.SUBJECT_SHUXUE:
+                return R.drawable.subject_math;
+            case Constant.SUBJECT_ENGLISH:
+                return R.drawable.subject_eng;
+            case Constant.SUBJECT_WULI:
+                return R.drawable.subject_pyhsics;
+            case Constant.SUBJECT_HUAXUE:
+                return R.drawable.subject_chemistry;
+            default:
+                return R.drawable.subject_yu;
+        }
     }
 
     static class ViewHolder {

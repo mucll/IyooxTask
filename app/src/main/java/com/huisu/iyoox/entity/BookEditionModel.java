@@ -1,6 +1,5 @@
 package com.huisu.iyoox.entity;
 
-import android.text.TextUtils;
 
 import java.io.Serializable;
 
@@ -12,7 +11,7 @@ import java.io.Serializable;
 public class BookEditionModel implements Serializable {
     private int jiaocai_id;
     private String name;
-    private String grade_detail_id;
+    private int grade_detail_id;
     private boolean isSelect;
 
     public int getJiaocai_id() {
@@ -31,11 +30,11 @@ public class BookEditionModel implements Serializable {
         this.name = name;
     }
 
-    public String getGrade_detail_id() {
-        return TextUtils.isEmpty(grade_detail_id) ? "" : grade_detail_id;
+    public int getGrade_detail_id() {
+        return grade_detail_id;
     }
 
-    public void setGrade_detail_id(String grade_detail_id) {
+    public void setGrade_detail_id(int grade_detail_id) {
         this.grade_detail_id = grade_detail_id;
     }
 
@@ -45,5 +44,17 @@ public class BookEditionModel implements Serializable {
 
     public void setSelect(boolean select) {
         isSelect = select;
+    }
+
+    public String getVersionName() {
+        switch (grade_detail_id) {
+            case 0:
+                return name;
+            case 1:
+                return name + "上册";
+            case 2:
+                return name + "下册";
+        }
+        return "";
     }
 }

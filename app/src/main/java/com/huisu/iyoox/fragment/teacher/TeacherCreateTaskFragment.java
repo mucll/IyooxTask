@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.teacher.TeacherCreateTaskActivity;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 
 /**
@@ -19,6 +21,7 @@ public class TeacherCreateTaskFragment extends BaseFragment {
 
     private View view;
     private TextView titleTv;
+    private View createTaskView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,6 +30,7 @@ public class TeacherCreateTaskFragment extends BaseFragment {
         initTab();
         initView();
         initData();
+        setEvent();
         return view;
     }
 
@@ -36,6 +40,16 @@ public class TeacherCreateTaskFragment extends BaseFragment {
 
     private void initView() {
         titleTv = view.findViewById(R.id.title_bar_tv);
+        createTaskView = view.findViewById(R.id.teacher_create_task_ll);
+    }
+
+    private void setEvent() {
+        createTaskView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TeacherCreateTaskActivity.start(getContext(), Constant.TASK_YIKE_TYPE);
+            }
+        });
     }
 
     private void initTab() {

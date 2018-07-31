@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.teacher.ClassRoomManageTeacherActivity">
+
+    <include layout="@layout/layout_title_bar_all" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/teacher_manage_class_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/delete_teacher_tv"
+        android:layout_width="@dimen/dip_320"
+        android:layout_height="@dimen/dip_40"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/dip_16"
+        android:background="@drawable/select_button_bg_maincolor"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="移除老师"
+        android:textColor="@color/white"
+        android:textSize="@dimen/f_16"
+        android:visibility="gone" />
+</LinearLayout>

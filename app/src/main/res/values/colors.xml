@@ -122,4 +122,7 @@
     <color name="screen_time_text_color">#2081d1</color>
     <color name="screen_subject_version_text_color">#ff5e57</color>
     <color name="screen_zhishidian_text_color">#11a68d</color>
+    <color name="f1ffd1">#f1ffd1</color>
+    <color name="edf9cd">#edf9cd</color>
+    <color name="ccc">#cccccc</color>
 </resources>

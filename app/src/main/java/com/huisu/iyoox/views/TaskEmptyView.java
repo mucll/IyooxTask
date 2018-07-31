@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,7 +30,7 @@ public class TaskEmptyView extends LinearLayout implements View.OnClickListener 
 
     private void initView(Context context, AttributeSet object) {
         View view = LayoutInflater.from(context).inflate(R.layout.task_emptyview_layout, this);
-        error_tv = (TextView) view.findViewById(R.id.item_exercises_error_tv);
+        error_tv = view.findViewById(R.id.item_exercises_error_tv);
         error_tv.setOnClickListener(this);
     }
 

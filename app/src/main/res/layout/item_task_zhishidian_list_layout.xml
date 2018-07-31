@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorf7">
+
+    <TextView
+        android:id="@+id/item_book_chapter_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_16"
+        android:layout_marginTop="@dimen/dip_32"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/f_14" />
+</RelativeLayout>

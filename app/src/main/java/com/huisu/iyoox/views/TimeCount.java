@@ -25,14 +25,12 @@ public class TimeCount extends CountDownTimer {
         tvCode.setBackgroundResource(R.drawable.select_register_code_bg);
         tvCode.setText(millisUntilFinished / 1000 + "秒");
         tvCode.setEnabled(false);
-        tvCode.setSelected(false);
     }
 
     @Override
     public void onFinish() {
         tvCode.setBackgroundResource(R.drawable.select_register_code_bg);
-        tvCode.setText("再次发送");
+        tvCode.setText("重新发送");
         tvCode.setEnabled(true);
-        tvCode.setSelected(true);
     }
 }

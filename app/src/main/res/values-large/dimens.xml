@@ -5,7 +5,7 @@
 
     <dimen name="more_view_h">50dp</dimen>
     <dimen name="menu_image_wh">40dp</dimen>
-    <dimen name="title_height">64dp</dimen>
+    <dimen name="title_height">68dp</dimen>
     <dimen name="paint_width">2px</dimen>
     <!-- 文字的大小 -->
     <dimen name="f_8">12sp</dimen>
@@ -42,6 +42,7 @@
     <dimen name="dip_22">34dip</dimen>
     <dimen name="dip_24">36dip</dimen>
     <dimen name="dip_28">40dip</dimen>
+    <dimen name="dip_30">42dip</dimen>
     <dimen name="dip_32">44dip</dimen>
     <dimen name="dip_36">48dip</dimen>
     <dimen name="dip_40">52dip</dimen>
@@ -49,6 +50,7 @@
     <dimen name="dip_48">70dip</dimen>
     <dimen name="dip_50">75dip</dimen>
     <dimen name="dip_54">81dip</dimen>
+    <dimen name="dip_56">84dip</dimen>
     <dimen name="dip_60">90dip</dimen>
     <dimen name="dip_64">96dip</dimen>
     <dimen name="dip_67">100dip</dimen>
@@ -56,12 +58,14 @@
     <dimen name="dip_76">114dip</dimen>
     <dimen name="dip_80">120dip</dimen>
     <dimen name="dip_90">140dip</dimen>
+    <dimen name="dip_94">144dip</dimen>
     <dimen name="dip_100">150dip</dimen>
     <dimen name="dip_110">165dip</dimen>
-    <dimen name="dip_120">180dip</dimen>
+    <dimen name="dip_120">200dip</dimen>
     <dimen name="dip_130">195dip</dimen>
     <dimen name="dip_140">210dip</dimen>
     <dimen name="dip_150">225dip</dimen>
+    <dimen name="dip_160">240dip</dimen>
     <dimen name="dip_200">300dip</dimen>
     <dimen name="dip_320">420dip</dimen>
     <dimen name="msg_count_shape">26dip</dimen>

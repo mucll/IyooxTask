@@ -47,6 +47,15 @@ public abstract class BaseExercisesView extends FrameLayout {
         }
     }
 
+    public static String getExercisesTypeString(String type) {
+        switch (type) {
+            case ExercisesType.SINGLECHOOSE:
+                return "选择题";
+            default:
+                return "选择题";
+        }
+    }
+
     public boolean isImageClick() {
         return isImageClick;
     }

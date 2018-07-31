@@ -31,18 +31,18 @@
                 android:textColor="@color/white" />
         </FrameLayout>
 
-        <WebView
+        <com.huisu.iyoox.views.HtmlTextView
             android:id="@+id/content_webview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:layout_marginBottom="@dimen/dip_8"
+            android:layout_marginTop="@dimen/dip_8"
+            android:background="@android:color/transparent"
             android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dip_8"
-            android:paddingRight="@dimen/dip_8"
-            android:paddingTop="16dp"
-            android:scrollbars="none"
-            android:visibility="visible" />
-
+            android:paddingLeft="@dimen/dip_12"
+            android:paddingRight="@dimen/dip_12"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_16" />
 
         <LinearLayout
             android:id="@+id/option_layout"
@@ -56,8 +56,8 @@
             android:id="@+id/help_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <View
                 android:layout_width="match_parent"
