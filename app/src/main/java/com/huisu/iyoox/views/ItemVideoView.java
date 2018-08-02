@@ -21,6 +21,7 @@ import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class ItemVideoView extends FrameLayout implements AdapterView.OnItemClic
     private NoScrollListView noScrollListView;
     private List<VideoTitleModel> videoTitleModels = new ArrayList<>();
     private ItemVideoListAdapter mAdapter;
-
+    private String zhangjieName;
 
     public ItemVideoView(Context context) {
         this(context, null);
@@ -56,7 +57,8 @@ public class ItemVideoView extends FrameLayout implements AdapterView.OnItemClic
         noScrollListView.setOnItemClickListener(this);
     }
 
-    public void setData(List<VideoTitleModel> titleModel) {
+    public void setData(List<VideoTitleModel> titleModel, String zhangjieName) {
+        this.zhangjieName = zhangjieName;
         videoTitleModels.clear();
         videoTitleModels.addAll(titleModel);
         mAdapter.notifyDataSetChanged();
@@ -65,35 +67,40 @@ public class ItemVideoView extends FrameLayout implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         VideoTitleModel titleModel = videoTitleModels.get(position);
-        postVideoUrlData(titleModel.getShipin_id() + "");
+        Intent intent = new Intent(context, VideoPlayerActivity.class);
+        intent.putExtra("selectModel", titleModel);
+        intent.putExtra("zhangjieName", zhangjieName);
+        intent.putExtra("models", (Serializable) videoTitleModels);
+        context.startActivity(intent);
+//        postVideoUrlData(titleModel.getShipin_id() + "");
     }
 
     private String VIDEO_URL = "http://flv2.bn.netease.com/videolib3/1611/28/GbgsL3639/HD/movie_index.m3u8";
     private String TITLE = "视频标题";
 
-    private void postVideoUrlData(String videoId) {
-        RequestCenter.getVideoTimu(videoId, new DisposeDataListener() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                BaseVideoTimuModel baseVideoUrlModel = (BaseVideoTimuModel) responseObj;
-                if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE && baseVideoUrlModel.data != null) {
-                    VideoTimuModel urlModel = baseVideoUrlModel.data;
-                    if (!TextUtils.isEmpty(urlModel.getShipin_url())) {
-                        VIDEO_URL = urlModel.getShipin_url();
-                        TITLE = urlModel.getShipin_name();
-                        setVideoPlayerUrl(VIDEO_URL, TITLE);
-                    } else {
-                        setVideoPlayerUrl(VIDEO_URL, TITLE);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Object reasonObj) {
-
-            }
-        });
-    }
+//    private void postVideoUrlData(String videoId) {
+//        RequestCenter.getVideoTimu(videoId, new DisposeDataListener() {
+//            @Override
+//            public void onSuccess(Object responseObj) {
+//                BaseVideoTimuModel baseVideoUrlModel = (BaseVideoTimuModel) responseObj;
+//                if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE && baseVideoUrlModel.data != null) {
+//                    VideoTimuModel urlModel = baseVideoUrlModel.data;
+//                    if (!TextUtils.isEmpty(urlModel.getShipin_url())) {
+//                        VIDEO_URL = urlModel.getShipin_url();
+//                        TITLE = urlModel.getShipin_name();
+//                        setVideoPlayerUrl(VIDEO_URL, TITLE);
+//                    } else {
+//                        setVideoPlayerUrl(VIDEO_URL, TITLE);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Object reasonObj) {
+//
+//            }
+//        });
+//    }
 
     /**
      * 设置视频播放地址等参数

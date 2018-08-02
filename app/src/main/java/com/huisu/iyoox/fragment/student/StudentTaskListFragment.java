@@ -10,16 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.huisu.iyoox.Interface.TaskStatus;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.MainActivity;
 import com.huisu.iyoox.activity.TaskResultActivity;
+import com.huisu.iyoox.activity.student.StudentHomeWorkReportActivity;
 import com.huisu.iyoox.activity.student.TaskStudentHomeWorkActivity;
 import com.huisu.iyoox.adapter.StudentTaskListAdapter;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.TaskStudentListModel;
 import com.huisu.iyoox.entity.User;
+import com.huisu.iyoox.entity.base.BaseHomeWorkResultModel;
+import com.huisu.iyoox.entity.base.BaseTaskResultModel;
 import com.huisu.iyoox.entity.base.BaseTaskStudentListModel;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.http.RequestCenter;
@@ -186,12 +190,30 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
             getContext().startActivity(intent);
         } else {
             //已完成
-//            Intent intent = new Intent(getContext(), TaskResultActivity.class);
-//            intent.putExtra("type", Constant.STUDENT_TASK_FINISHED);
-//            intent.putExtra("work_id", model.getWork_id() + "");
-//            intent.putExtra("title", model.getWork_name());
-//            getContext().startActivity(intent);
+            studentHomeWorked(model.getWork_id());
         }
+    }
+
+    /**
+     * 查看已完成作业报告
+     */
+    private void studentHomeWorked(int workId) {
+        RequestCenter.getStudentTaskBaoGao(user.getUserId(), workId + "", new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                BaseHomeWorkResultModel resultModel = (BaseHomeWorkResultModel) responseObj;
+                if (resultModel.data != null) {
+                    StudentHomeWorkReportActivity.start(getContext(), resultModel.data);
+                } else {
+                    TabToast.showMiddleToast(getContext(), "老师暂未点评");
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

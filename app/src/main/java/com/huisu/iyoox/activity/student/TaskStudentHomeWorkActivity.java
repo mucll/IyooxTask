@@ -261,7 +261,7 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
         for (ExercisesModel model : exercisesModels) {
             ExercisesResultModel resultModel = new ExercisesResultModel();
             resultModel.setTimu_id(Integer.parseInt(model.getTimu_id()));
-            resultModel.setIs_correct(model.getAnswersModel().isCorrect() ? 1 : 0);
+            resultModel.setIs_correct(model.getAnswersModel().isCorrect() ? Constant.ANSWER_CORRECT : Constant.ANSWER_ERROR);
             resultModel.setChooseanswer(model.getAnswersModel().getChooseAnswer());
             resultModels.add(resultModel);
         }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dip_90"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_course1_bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_10"
+                    android:layout_marginTop="@dimen/dip_20"
+                    android:textColor="@color/f1ffd1"
+                    android:textSize="@dimen/f_10" />
+
+                <TextView
+                    android:id="@+id/student_collect_zhishidian_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_10"
+                    android:layout_marginTop="@dimen/dip_8"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="一元一次方程"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/f_12" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="@dimen/dip_40"
+                android:layout_height="@dimen/dip_14"
+                android:layout_marginLeft="@dimen/dip_8"
+                android:layout_marginRight="@dimen/dip_10"
+                android:layout_marginTop="@dimen/dip_8"
+                android:background="@color/edf9cd"
+                android:gravity="center"
+                android:text="人教版"
+                android:textColor="@color/color333"
+                android:textSize="@dimen/f_10"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -134,5 +135,18 @@ public class StringUtils {
         editText.setFilters(new InputFilter[]{filter});
     }
 
+    public static String getTimeString(String time) {
+        if (TextUtils.isEmpty(time)) {
+            return "";
+        }
+        if (time.contains(".")) {
+            time = time.split("\\.")[0];
+        }
+        if (time.contains("T")) {
+            time = time.split("T")[0] + " " + time.split("T")[1];
+        }
+        time = DateUtils.formatTimesMDHm(time);
+        return time;
+    }
 
 }

@@ -50,6 +50,7 @@ public class LoginActivity extends BaseActivity implements PhoneEditText.onPhone
 
     @Override
     protected void initData() {
+
     }
 
     @Override

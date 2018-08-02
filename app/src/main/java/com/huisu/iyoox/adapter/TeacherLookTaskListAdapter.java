@@ -12,6 +12,7 @@ import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.TaskTeacherListModel;
+import com.huisu.iyoox.util.StringUtils;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class TeacherLookTaskListAdapter extends RecyclerView.Adapter<TeacherLook
     public void onBindViewHolder(ViewHolder holder, int position) {
         TaskTeacherListModel model = models.get(position);
         holder.nameTv.setText(model.getName());
-        holder.timeTv.setText(model.getCreatedate());
+        holder.timeTv.setText(StringUtils.getTimeString(model.getCreatedate()));
         switch (type) {
             case Constant.TASK_SEND_CODE:
                 holder.deleteTv.setVisibility(View.GONE);

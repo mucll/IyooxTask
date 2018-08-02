@@ -75,7 +75,11 @@ public class HttpConstants {
     /**
      * 首页  视频链接地址
      */
-    public static String GET_VIDEO_TIMU = ROOT_URL + "/zhishidian/get_video_timu";
+    public static String getVideoData = ROOT_URL + "/zhishidian/get_video";
+    /**
+     * 首页  视频下的题目
+     */
+    public static String getVideoTimu = ROOT_URL + "/zhishidian/get_timu_by_video";
 
     /**
      * 获取有错题的科目

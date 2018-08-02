@@ -1,5 +1,7 @@
 package com.huisu.iyoox.entity;
 
+import java.io.Serializable;
+
 /**
  * Function:
  * Date: 2018/7/18
@@ -7,7 +9,7 @@ package com.huisu.iyoox.entity;
  * @author dinglai
  * @since JDK 1.8
  */
-public class ExercisesResultModel {
+public class ExercisesResultModel implements Serializable {
     private int timu_id;
     private int is_correct;
     private String chooseanswer;

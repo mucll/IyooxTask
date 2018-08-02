@@ -8,10 +8,20 @@
 
     <include layout="@layout/layout_title_bar_all" />
 
+    <GridView
+        android:id="@+id/student_collect_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:horizontalSpacing="@dimen/dip_12"
+        android:numColumns="2"
+        android:padding="@dimen/dip_16"
+        android:verticalSpacing="@dimen/dip_12" />
+
     <RelativeLayout
         android:id="@+id/student_collect_empty_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/student_collect_empty_icon"

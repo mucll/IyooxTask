@@ -26,6 +26,7 @@
         android:ellipsize="end"
         android:lines="1"
         android:text="1.1 分式的定义"
+        android:textColor="@drawable/select_video_state_text_color"
         android:textSize="@dimen/f_14" />
 
     <FrameLayout

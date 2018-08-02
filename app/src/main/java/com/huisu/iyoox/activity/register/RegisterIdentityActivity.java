@@ -151,7 +151,6 @@ public class RegisterIdentityActivity extends BaseActivity implements View.OnCli
 
             @Override
             public void onFailure(Object reasonObj) {
-                TabToast.showMiddleToast(context, getString(R.string.register_error_text));
                 loading.dismiss();
             }
         });

@@ -46,7 +46,7 @@ public class CommonOkHttpClient {
                 Request request = chain.request()
                         .newBuilder()
                         .addHeader("User-Agent", "Imooc-Mobile") // 标明发送本次请求的客户端
-                        .addHeader("Content-Type","application/json")
+                        .addHeader("Content-Type", "application/json")
                         .build();
                 return chain.proceed(request);
             }

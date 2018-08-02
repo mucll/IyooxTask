@@ -71,9 +71,7 @@
         android:id="@+id/item_class_ranking_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:focusable="true"
-        android:focusableInTouchMode="true" />
+        android:background="@color/white" />
 
     <TextView
         android:id="@+id/empty_view"
@@ -82,6 +80,5 @@
         android:gravity="center"
         android:text="暂无数据"
         android:textColor="@color/color666"
-        android:textSize="@dimen/f_16"
-        android:visibility="gone" />
+        android:textSize="@dimen/f_16" />
 </LinearLayout>

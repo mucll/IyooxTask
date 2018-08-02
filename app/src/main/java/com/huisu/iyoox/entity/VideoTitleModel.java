@@ -1,5 +1,7 @@
 package com.huisu.iyoox.entity;
 
+import org.litepal.crud.LitePalSupport;
+
 import java.io.Serializable;
 
 /**
@@ -7,7 +9,7 @@ import java.io.Serializable;
  * @function:
  * @date: 2018/7/12
  */
-public class VideoTitleModel implements Serializable {
+public class VideoTitleModel extends LitePalSupport implements Serializable {
     private int shipin_id;
     private String shipin_name;
     private int zhishidian_id;

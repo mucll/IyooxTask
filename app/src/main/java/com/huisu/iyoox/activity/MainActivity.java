@@ -119,9 +119,9 @@ public class MainActivity extends BaseActivity {
     protected void setEvent() {
         //横屏全屏的实现
         //横向
-        JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+//        JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         //纵向
-        JZVideoPlayer.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT;
+//        JZVideoPlayer.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT;
     }
 
     @Override
@@ -140,37 +140,43 @@ public class MainActivity extends BaseActivity {
      *
      * @return
      */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN
+                && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (System.currentTimeMillis() - exitTime > maxTime) {
+                exitTime = System.currentTimeMillis();
+                TabToast.makeText(
+                        getResources().getString(R.string.exit_destroy_app),
+                        this);
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 //    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (event.getAction() == KeyEvent.ACTION_DOWN
-//                && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-//
-//            return true;
+//    public void onBackPressed() {
+//        if (JZVideoPlayer.backPress()) {
+//            return;
 //        }
-//        return super.onKeyDown(keyCode, event);
+//        if (System.currentTimeMillis() - exitTime > maxTime) {
+//            exitTime = System.currentTimeMillis();
+//            TabToast.makeText(
+//                    getResources().getString(R.string.exit_destroy_app),
+//                    this);
+//        } else {
+//            finish();
+//        }
+//        super.onBackPressed();
 //    }
 
-    @Override
-    public void onBackPressed() {
-        if (JZVideoPlayer.backPress()) {
-            return;
-        }
-        if (System.currentTimeMillis() - exitTime > maxTime) {
-            exitTime = System.currentTimeMillis();
-            TabToast.makeText(
-                    getResources().getString(R.string.exit_destroy_app),
-                    this);
-        } else {
-            finish();
-        }
-        super.onBackPressed();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        JZVideoPlayer.releaseAllVideos();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        JZVideoPlayer.releaseAllVideos();
+//    }
 
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);

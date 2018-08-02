@@ -9,6 +9,7 @@ import com.huisu.iyoox.entity.base.BaseClassRoomModel;
 import com.huisu.iyoox.entity.base.BaseClassRoomResultModel;
 import com.huisu.iyoox.entity.base.BaseExercisesModel;
 import com.huisu.iyoox.entity.base.BaseGradeListModel;
+import com.huisu.iyoox.entity.base.BaseHomeWorkResultModel;
 import com.huisu.iyoox.entity.base.BasePhoneModel;
 import com.huisu.iyoox.entity.base.BaseRegisterResultModel;
 import com.huisu.iyoox.entity.base.BaseScreenSubjectVersionModel;
@@ -238,10 +239,18 @@ public class RequestCenter {
     /**
      * 获取视频列表
      */
+    public static void getVideoData(String shipinId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("shipin_id", shipinId);
+        RequestCenter.postRequest(HttpConstants.getVideoData, params, listener, BaseVideoTimuModel.class);
+    }
+    /**
+     * 获取视频題目
+     */
     public static void getVideoTimu(String shipinId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("shipin_id", shipinId);
-        RequestCenter.postRequest(HttpConstants.GET_VIDEO_TIMU, params, listener, BaseVideoTimuModel.class);
+        RequestCenter.postRequest(HttpConstants.getVideoTimu, params, listener, BaseVideoTimuModel.class);
     }
 
     /**
@@ -328,7 +337,7 @@ public class RequestCenter {
         RequestParams params = new RequestParams();
         params.put("work_id", work_id);
         params.put("student_id", studentId);
-        RequestCenter.postRequest(HttpConstants.getStudentTaskBaoGao, params, listener, BaseTaskResultModel.class);
+        RequestCenter.postRequest(HttpConstants.getStudentTaskBaoGao, params, listener, BaseHomeWorkResultModel.class);
     }
 
     /**

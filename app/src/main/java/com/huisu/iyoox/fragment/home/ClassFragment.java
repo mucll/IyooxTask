@@ -12,14 +12,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -44,6 +40,7 @@ import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.views.Loading;
 import com.huisu.iyoox.views.WrapContentHeightViewPager;
 
 import java.util.ArrayList;
@@ -67,8 +64,9 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
     private List<StudentRankingModel> rankingModels = new ArrayList<>();
     private TextView addClassBt;
     private TextView titleTv;
-    private View scrollView;
+    private NestedScrollView scrollView;
     private View emptyView;
+    private Loading loading;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -124,42 +122,44 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public void onShow() {
         super.onShow();
-        isAddClassRoom();
+        if (!init) {
+            isAddClassRoom();
+            init = true;
+        }
     }
 
     private void isAddClassRoom() {
+        titleTv.setText("我的班级");
         user = UserManager.getInstance().getUser();
-        if (!TextUtils.isEmpty(user.getClassroom_name())) {
-            emptyView.setVisibility(View.GONE);
-            scrollView.setVisibility(View.VISIBLE);
-            if (!init) {
-                postClassRankingData();
-                init = true;
-            }
-            titleTv.setText(user.getClassroom_name());
-        } else {
-            scrollView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
-            titleTv.setText("我的班级");
-        }
+        postClassRankingData();
     }
 
     /**
      * 请求数据
      */
     private void postClassRankingData() {
+        loading = Loading.show(null, getContext(), getString(R.string.loading_one_hint_text));
         RequestCenter.getClassRanking(user.getUserId(), new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
+                loading.dismiss();
                 BaseClassRankingModel baseClassRankingModel = (BaseClassRankingModel) responseObj;
-                if (baseClassRankingModel.data != null) {
-                    setPostData(baseClassRankingModel.data);
+                if (baseClassRankingModel.code == Constant.POST_SUCCESS_CODE) {
+                    if (baseClassRankingModel.data != null) {
+                        setPostData(baseClassRankingModel.data);
+                        emptyView.setVisibility(View.GONE);
+                        scrollView.setVisibility(View.VISIBLE);
+                        titleTv.setText(baseClassRankingModel.data.getClassroom_name());
+                    } else {
+                        scrollView.setVisibility(View.GONE);
+                        emptyView.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
             @Override
             public void onFailure(Object reasonObj) {
-
+                loading.dismiss();
             }
         });
     }
@@ -217,7 +217,6 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
         MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
-
 
         @Override
         public ClassRankingFragment getItem(int position) {

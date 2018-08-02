@@ -103,7 +103,6 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
             @Override
             public void onFailure(Object reasonObj) {
-                TabToast.showMiddleToast(getContext(), "网络错误");
             }
         });
     }

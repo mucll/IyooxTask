@@ -85,8 +85,6 @@ public class RegisterPersonDetailsActivity extends BaseActivity implements View.
 
             @Override
             public void onFailure(Object reasonObj) {
-                OkHttpException exception = (OkHttpException) reasonObj;
-                LogUtil.e(exception.getEmsg().toString());
             }
         });
     }

@@ -175,6 +175,15 @@ public class Constant {
      * 学生未完成
      */
     public static final int TASK_EXERCISES_NUMBER = 3;
+    /**
+     * 回答错误
+     */
+    public static final int ANSWER_ERROR = 0;
+    /**
+     * 回答正确
+     */
+    public static final int ANSWER_CORRECT = 1;
+
 
     /**
      * 权限常量相关

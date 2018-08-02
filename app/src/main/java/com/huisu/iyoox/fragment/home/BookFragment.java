@@ -134,7 +134,6 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
 
             @Override
             public void onFailure(Object reasonObj) {
-                TabToast.showMiddleToast(getContext(), "网络错误");
             }
         });
     }
@@ -201,7 +200,6 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
                     public void onFailure(Object reasonObj) {
                         swipeToLoadLayout.setLoadingMore(false);
                         swipeToLoadLayout.setRefreshing(false);
-                        TabToast.showMiddleToast(getContext(), "网络错误");
                     }
                 });
     }

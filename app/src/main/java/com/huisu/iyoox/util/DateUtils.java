@@ -71,9 +71,9 @@ public class DateUtils {
      */
     public static String formatTimesMDHm(String time) {
         try {
-            long time1 = Long.parseLong(time);
-            return sdf7.format(new Date(time1));
-        } catch (NumberFormatException e) {
+            Date date = sdf5.parse(time);
+            return sdf7.format(date);
+        } catch (Exception e) {
             e.printStackTrace();
             return "";
         }

@@ -89,7 +89,7 @@ public class HomeExpandableListAdapter extends BaseExpandableListAdapter {
         String base = context.getResources().getString(R.string.video_count_text);
         holder.videoCount.setText(String.format(base, videoModel.getZsd_count() + ""));
         holder.videoPgaeCount.setText(videoModel.getPage_count());
-        holder.videContent.setData(videoModel.getShipinlist());
+        holder.videContent.setData(videoModel.getShipinlist(), videoModel.getZhishidian_name());
         if (selectGroup == groupPosition && selectChild == childPosition) {
             holder.videContent.setVisibility(View.VISIBLE);
             holder.moreUnfoldIv.setImageDrawable(context.getResources().getDrawable(R.drawable.less_black));

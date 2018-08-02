@@ -109,7 +109,7 @@ public class CommonJsonCallback implements Callback {
     }
 
     private ArrayList<String> handleCookie(Headers headers) {
-        ArrayList<String> tempList = new ArrayList<String>();
+        ArrayList<String> tempList = new ArrayList<>();
         for (int i = 0; i < headers.size(); i++) {
             if (headers.name(i).equalsIgnoreCase(COOKIE_STORE)) {
                 tempList.add(headers.value(i));
@@ -133,7 +133,8 @@ public class CommonJsonCallback implements Callback {
             LogUtil.e(responseObj.toString());
             int code = result.getInt("code");
             if (code != Constant.POST_SUCCESS_CODE) {
-                mListener.onSuccess(result);
+                TabToast.showMiddleToast(MyApplication.getApplication().getApplicationContext(), result.getString("msg"));
+                mListener.onFailure(result);
                 return;
             }
             if (mClass == null) {

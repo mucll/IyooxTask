@@ -87,39 +87,12 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
                 //老师发布作业
                 studentHomeWork();
                 break;
-            case Constant.STUDENT_TASK_FINISHED:
-                studentHomeWorked();
-                break;
             default:
                 LogUtil.e("TaskStudentHomeWorkActivity:type is error");
                 break;
         }
     }
 
-    /**
-     * 查看已完成作业报告
-     */
-    private void studentHomeWorked() {
-        workId = getIntent().getStringExtra("workId");
-        title = getIntent().getStringExtra("title");
-        RequestCenter.getStudentTaskBaoGao(user.getUserId(), workId, new DisposeDataListener() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                BaseTaskResultModel resultModel = (BaseTaskResultModel) responseObj;
-                if (resultModel.data != null) {
-                    setResultData(resultModel.data);
-                    if (resultModel.data.getTimu_list() != null && resultModel.data.getTimu_list().size() > 0) {
-                        initTiMuData(resultModel.data.getTimu_list());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Object reasonObj) {
-
-            }
-        });
-    }
 
     /**
      * 作业报告

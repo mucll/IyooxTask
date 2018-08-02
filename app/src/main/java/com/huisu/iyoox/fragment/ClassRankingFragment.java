@@ -67,10 +67,9 @@ public class ClassRankingFragment extends BaseFragment {
         mListView = view.findViewById(R.id.item_class_ranking_listview);
         zhishi = view.findViewById(R.id.class_ranking_zhishidian_name_tv);
         zhishi.setText(TextUtils.isEmpty(model.getZhishidian_name()) ? "" : model.getZhishidian_name());
-
+        mAdapter = new ClassRankingListAdapter(getContext(), model.getStudent_list());
+        mListView.setAdapter(mAdapter);
         if (model.getStudent_list() != null && model.getStudent_list().size() > 0) {
-            mAdapter = new ClassRankingListAdapter(getContext(), model.getStudent_list());
-            mListView.setAdapter(mAdapter);
             emptyView.setVisibility(View.GONE);
         } else {
             emptyView.setVisibility(View.VISIBLE);

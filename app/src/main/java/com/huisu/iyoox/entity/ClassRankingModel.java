@@ -10,6 +10,8 @@ import java.util.List;
  * @since JDK 1.8
  */
 public class ClassRankingModel {
+    private String classroom_name;
+    private int classroom_id;
     private List<TeacherModel> teacher_list;
     private List<StudentScoreModel> student_fenshu_list;
     private List<StudentRankingModel> zhishidian_list;
@@ -36,5 +38,21 @@ public class ClassRankingModel {
 
     public void setZhishidian_list(List<StudentRankingModel> zhishidian_list) {
         this.zhishidian_list = zhishidian_list;
+    }
+
+    public String getClassroom_name() {
+        return classroom_name;
+    }
+
+    public void setClassroom_name(String classroom_name) {
+        this.classroom_name = classroom_name;
+    }
+
+    public int getClassroom_id() {
+        return classroom_id;
+    }
+
+    public void setClassroom_id(int classroom_id) {
+        this.classroom_id = classroom_id;
     }
 }
