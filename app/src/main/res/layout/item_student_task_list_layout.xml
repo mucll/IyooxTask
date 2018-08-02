@@ -54,15 +54,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dip_18">
 
-                <TextView
+                <ImageView
                     android:id="@+id/task_start_iv"
                     android:layout_width="@dimen/dip_16"
                     android:layout_height="@dimen/dip_16"
-                    android:background="@drawable/shape_item_task_list_icon_bg"
-                    android:gravity="center"
-                    android:text="起"
-                    android:textColor="@color/color999"
-                    android:textSize="@dimen/f_12" />
+                    android:src="@drawable/homework_icon_time" />
 
                 <TextView
                     android:id="@+id/task_start_time_iv"
@@ -73,15 +69,6 @@
                     android:textColor="@color/color999"
                     android:textSize="@dimen/f_12" />
 
-                <TextView
-                    android:id="@+id/task_end_iv"
-                    android:layout_width="@dimen/dip_16"
-                    android:layout_height="@dimen/dip_16"
-                    android:background="@drawable/shape_item_task_list_icon_bg"
-                    android:gravity="center"
-                    android:text="止"
-                    android:textColor="@color/red64"
-                    android:textSize="@dimen/f_12" />
 
                 <TextView
                     android:id="@+id/task_end_icon_iv"
@@ -93,26 +80,12 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/task_start_xzy_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dip_13"
-                android:src="@drawable/homework_icon_xzy"
-                android:visibility="gone" />
-
-            <ImageView
-                android:id="@+id/task_finished_icon_iv"
-                android:layout_width="@dimen/dip_5"
-                android:layout_height="@dimen/dip_9"
-                android:layout_marginRight="@dimen/dip_8"
-                android:src="@drawable/homework_finished_forward"
-                android:visibility="gone" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/task_finished_icon_iv"
+            android:layout_width="@dimen/dip_5"
+            android:layout_height="@dimen/dip_9"
+            android:layout_marginRight="@dimen/dip_8"
+            android:src="@drawable/homework_finished_forward"
+            android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>

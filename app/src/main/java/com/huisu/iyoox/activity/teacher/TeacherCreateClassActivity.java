@@ -2,8 +2,10 @@ package com.huisu.iyoox.activity.teacher;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -19,9 +21,12 @@ import com.huisu.iyoox.entity.base.BaseClassRoomResultModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.DialogUtil;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.Loading;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.litepal.util.Const;
 
 public class TeacherCreateClassActivity extends BaseActivity implements View.OnClickListener {
@@ -105,7 +110,7 @@ public class TeacherCreateClassActivity extends BaseActivity implements View.OnC
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() > 6) {
+                if (s.length() >= 6) {
                     tabSubmitTv.setEnabled(true);
                 } else {
                     tabSubmitTv.setEnabled(false);
@@ -129,9 +134,23 @@ public class TeacherCreateClassActivity extends BaseActivity implements View.OnC
         switch (v.getId()) {
             case R.id.tv_submit:
                 if (type == Constant.CLASS_CREATE) {
-                    postCreateClassRoomHttp();
+                    DialogUtil.show("提示", "请确认班级名字:" + classNameEt.getText().toString().trim() + "?", "确认", "取消", this,
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    postCreateClassRoomHttp();
+                                }
+                            }, null);
                 } else if (type == Constant.CLASS_ADD) {
-                    postaddClassRoomHttp();
+                    DialogUtil.show("提示", "请确认班级编号ID:" + addClassEt.getText().toString().trim() + "?", "确认", "取消", this,
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    postaddClassRoomHttp();
+                                }
+                            }, null);
                 }
                 break;
             default:
@@ -139,6 +158,9 @@ public class TeacherCreateClassActivity extends BaseActivity implements View.OnC
         }
     }
 
+    /**
+     * 创建班级
+     */
     private void postCreateClassRoomHttp() {
         loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
         RequestCenter.teacherCreateClassroom(user.getUserId(), user.getGrade() + "", classNameEt.getText().toString().trim(), new DisposeDataListener() {
@@ -160,8 +182,36 @@ public class TeacherCreateClassActivity extends BaseActivity implements View.OnC
         });
     }
 
+    /**
+     * 添加班级
+     */
     private void postaddClassRoomHttp() {
-        TabToast.showMiddleToast(context, "暂未接入");
+        RequestCenter.joinClassroom(user.getUserId(), addClassEt.getText().toString().trim(), new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                JSONObject jsonObject = (JSONObject) responseObj;
+                try {
+                    int code = jsonObject.getInt("code");
+                    if (Constant.POST_SUCCESS_CODE == code) {
+                        TabToast.showMiddleToast(context, "班级添加成功");
+                        setResult(RESULT_OK);
+                        finish();
+                    } else {
+                        String data = jsonObject.getString("data");
+                        if (!TextUtils.isEmpty(data)) {
+                            TabToast.showMiddleToast(context, data);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
     }
 
     public static void start(Context context, int type) {

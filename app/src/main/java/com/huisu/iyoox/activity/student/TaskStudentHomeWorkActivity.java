@@ -14,17 +14,25 @@ import com.huisu.iyoox.activity.TaskResultActivity;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.ExercisesModel;
+import com.huisu.iyoox.entity.ExercisesResultModel;
+import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.VideoTimuModel;
 import com.huisu.iyoox.entity.base.BaseExercisesModel;
+import com.huisu.iyoox.entity.base.BaseTaskResultModel;
 import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
 import com.huisu.iyoox.fragment.exercisespager.ExercisesPageFragment;
 import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.DateUtils;
+import com.huisu.iyoox.util.JsonUtils;
 import com.huisu.iyoox.util.LogUtil;
+import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.Loading;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -232,14 +240,64 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
         if (type == Constant.STUDENT_DOING) {
             intent.putExtra("zhishiId", zhishiId);
             intent.putExtra("zhishidianName", zhishidianName);
+            startActivity(intent);
+            finish();
         } else if (type == Constant.STUDENT_HOME_WORK) {
-            intent.putExtra("workId", work_id);
-            intent.putExtra("homeWorkTitle", homeWorkTitle);
+//            intent.putExtra("workId", work_id);
+//            intent.putExtra("homeWorkTitle", homeWorkTitle);
             //发消息刷新作业列表界面
-            EventBus.getDefault().post("home_work");
+//            startActivity(intent);
+            setPostHomeWorkInitData(exercisesData, timeString);
         }
-        startActivity(intent);
-        finish();
+
+    }
+
+
+    /**
+     * 初始化学生作业报告请求参数
+     */
+    private void setPostHomeWorkInitData(ArrayList<ExercisesModel> exercisesModels, String time) {
+        List<ExercisesResultModel> resultModels = new ArrayList<>();
+        for (ExercisesModel model : exercisesModels) {
+            ExercisesResultModel resultModel = new ExercisesResultModel();
+            resultModel.setTimu_id(Integer.parseInt(model.getTimu_id()));
+            resultModel.setIs_correct(model.getAnswersModel().isCorrect() ? 1 : 0);
+            resultModel.setChooseanswer(model.getAnswersModel().getChooseAnswer());
+            resultModels.add(resultModel);
+        }
+        String json = JsonUtils.jsonFromObject(resultModels);
+        postHomeWorkResultData(json, time);
+    }
+
+    /**
+     * 学生作业报告
+     *
+     * @param json
+     */
+    private void postHomeWorkResultData(String json, String time) {
+        User user = UserManager.getInstance().getUser();
+        RequestCenter.getStudentTaskResult(user.getUserId(), work_id, time, json, new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                JSONObject jsonObject = (JSONObject) responseObj;
+                try {
+                    int code = jsonObject.getInt("code");
+                    if (code == Constant.POST_SUCCESS_CODE) {
+                        EventBus.getDefault().post("home_work");
+                        finish();
+                    } else {
+                        TabToast.showMiddleToast(context, "提交异常,请重新提交");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
     }
 
     @Override

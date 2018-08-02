@@ -60,39 +60,22 @@ public class StudentTaskListAdapter extends BaseAdapter {
         TaskStudentListModel model = getItem(position);
         if (!TextUtils.isEmpty(model.getXueke_name())) {
             holder.subjectIcon.setImageResource(getImgResId(model.getXueke_name()));
-            holder.taskSubjectName.setText(model.getXueke_name());
+            holder.taskName.setText(model.getWork_name());
         }
-        if (!TextUtils.isEmpty(model.getClassroom_no())) {
-            holder.classId.setText("ID:" + model.getClassroom_no());
-        }
-        if (!TextUtils.isEmpty(model.getStart_time())) {
-            String startTime = model.getStart_time().replace("T", " ");
-            String[] startTimes = startTime.split("-");
-            holder.startTime.setText(startTimes[1] + "-" + startTimes[2]);
-        }
-        if (!TextUtils.isEmpty(model.getEnd_time())) {
-            String endTime = model.getEnd_time().replace("T", " ");
-            String[] endTimes = endTime.split("-");
-            holder.endTime.setText(endTimes[1] + "-" + endTimes[2]);
-        }
+        holder.startTime.setText(TextUtils.isEmpty(model.getStart_time()) ? "" : model.getStart_time());
+        holder.endTime.setText(TextUtils.isEmpty(model.getEnd_time()) ? "" : model.getEnd_time());
         switch (taskType) {
             case TaskStatus.UNFINISH:
-                holder.startIconTV.setVisibility(View.VISIBLE);
+                holder.startIconTV.setImageResource(R.drawable.homework_icon_time);
                 holder.startTime.setVisibility(View.VISIBLE);
                 holder.endIcon.setVisibility(View.GONE);
                 holder.endIcon.setVisibility(View.GONE);
-                holder.xzyIcon.setVisibility(View.VISIBLE);
-                holder.endIconTv.setText("止");
-                holder.endIconTv.setBackground(context.getResources().getDrawable(R.drawable.shape_item_task_list_icon_bg));
                 break;
             case TaskStatus.FINISH:
-                holder.startIconTV.setVisibility(View.GONE);
+                holder.startIconTV.setImageResource(R.drawable.homework_icon_finished);
                 holder.startTime.setVisibility(View.GONE);
                 holder.endIcon.setVisibility(View.VISIBLE);
                 holder.endIcon.setVisibility(View.VISIBLE);
-                holder.xzyIcon.setVisibility(View.GONE);
-                holder.endIconTv.setText("");
-                holder.endIconTv.setBackground(context.getResources().getDrawable(R.drawable.homework_icon_finished));
                 break;
             default:
                 break;
@@ -120,24 +103,20 @@ public class StudentTaskListAdapter extends BaseAdapter {
 
     static class ViewHolder {
 
-        TextView taskSubjectName;
+        TextView taskName;
         TextView classId;
-        TextView startIconTV;
+        ImageView startIconTV;
         TextView startTime;
-        TextView endIconTv;
         TextView endTime;
-        ImageView xzyIcon;
         ImageView endIcon;
         ImageView subjectIcon;
 
         public ViewHolder(View view) {
-            taskSubjectName = view.findViewById(R.id.item_task_subject_text_tv);
+            taskName = view.findViewById(R.id.item_task_subject_text_tv);
             classId = view.findViewById(R.id.item_task_student_classId);
             startIconTV = view.findViewById(R.id.task_start_iv);
             startTime = view.findViewById(R.id.task_start_time_iv);
-            endIconTv = view.findViewById(R.id.task_end_iv);
             endTime = view.findViewById(R.id.task_end_icon_iv);
-            xzyIcon = view.findViewById(R.id.task_start_xzy_iv);
             endIcon = view.findViewById(R.id.task_finished_icon_iv);
             subjectIcon = view.findViewById(R.id.item_task_subject_icon_iv);
         }

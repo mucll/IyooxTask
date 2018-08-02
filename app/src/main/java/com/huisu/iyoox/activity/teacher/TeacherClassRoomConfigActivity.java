@@ -15,7 +15,9 @@ import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.ClassRoomModel;
+import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.DialogUtil;
 import com.huisu.iyoox.util.LogUtil;
@@ -39,9 +41,11 @@ public class TeacherClassRoomConfigActivity extends BaseActivity implements View
     private Loading loading;
 
     private boolean init = false;
+    private User user;
 
     @Override
     protected void initView() {
+        user = UserManager.getInstance().getUser();
         name = findViewById(R.id.class_name_tv);
         id = findViewById(R.id.class_id_tv);
         create = findViewById(R.id.class_create_time_tv);
@@ -71,6 +75,99 @@ public class TeacherClassRoomConfigActivity extends BaseActivity implements View
         backBtn.setOnClickListener(this);
     }
 
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_teacher_class_room_config;
+    }
+
+    public static void start(Context context, ClassRoomModel model) {
+        Intent intent = new Intent(context, TeacherClassRoomConfigActivity.class);
+        intent.putExtra("model", model);
+        ((Activity) context).startActivityForResult(intent, START_CODE);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.class_delete_tv:
+                DialogUtil.show("提示", "确认刪除该班级?", "确认", "取消", (Activity) context,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                postDeteleClassHttp();
+                            }
+                        }, null);
+                break;
+            case R.id.class_lock_sc:
+                if (model.getLock() == Constant.CLASS_LOCK) {
+                    postLockClassRoomHttp(Constant.CLASS_UNLOCK);
+                } else {
+                    DialogUtil.show("确认锁定该班级?", "锁定后将不可再接受新学生!", "确认", "取消", (Activity) context,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    postLockClassRoomHttp(Constant.CLASS_LOCK);
+                                }
+                            }, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    lock.setChecked(model.getLock() == Constant.CLASS_LOCK ? true : false);
+                                }
+                            });
+                }
+                break;
+            case R.id.menu_back:
+                if (init) {
+                    setResult(RESULT_OK);
+                }
+                finish();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (init) {
+            setResult(RESULT_OK);
+        }
+        super.onBackPressed();
+    }
+
+    /**
+     * 删除班级
+     */
+    private void postDeteleClassHttp() {
+        RequestCenter.deleteClassroom(user.getUserId(), model.getClassroom_id() + "", new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                JSONObject jsonObject = (JSONObject) responseObj;
+                try {
+                    int code = jsonObject.getInt("code");
+                    if (Constant.POST_SUCCESS_CODE == code) {
+                        TabToast.showMiddleToast(TeacherClassRoomConfigActivity.this, "刪除班級成功");
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 锁定班级
+     * @param type
+     */
     private void postLockClassRoomHttp(final int type) {
         loading = Loading.show(null, context, context.getString(R.string.loading_one_hint_text));
         RequestCenter.teacherLockClassRoom(model.getClassroom_id() + "", type + "", new DisposeDataListener() {
@@ -104,50 +201,5 @@ public class TeacherClassRoomConfigActivity extends BaseActivity implements View
                 lock.setChecked(model.getLock() == Constant.CLASS_LOCK ? true : false);
             }
         });
-    }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.activity_teacher_class_room_config;
-    }
-
-    public static void start(Context context, ClassRoomModel model) {
-        Intent intent = new Intent(context, TeacherClassRoomConfigActivity.class);
-        intent.putExtra("model", model);
-        ((Activity) context).startActivityForResult(intent, START_CODE);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.class_delete_tv:
-                break;
-            case R.id.class_lock_sc:
-                if (model.getLock() == Constant.CLASS_LOCK) {
-                    postLockClassRoomHttp(Constant.CLASS_UNLOCK);
-                } else {
-                    DialogUtil.show("确认锁定该班级?", "锁定后将不可再接受新学生!", "确认", "取消", (Activity) context,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    postLockClassRoomHttp(Constant.CLASS_LOCK);
-                                }
-                            }, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    lock.setChecked(model.getLock() == Constant.CLASS_LOCK ? true : false);
-                                }
-                            });
-                }
-                break;
-            case R.id.menu_back:
-                if (init) {
-                    setResult(RESULT_OK);
-                }
-                finish();
-                break;
-            default:
-                break;
-        }
     }
 }

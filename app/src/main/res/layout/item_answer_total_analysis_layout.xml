@@ -36,8 +36,8 @@
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/item_answer_total_analysis_chart_view"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="@dimen/dip_90"
+                android:layout_height="@dimen/dip_90"
                 android:layout_gravity="center_horizontal"
                 android:visibility="invisible" />
 

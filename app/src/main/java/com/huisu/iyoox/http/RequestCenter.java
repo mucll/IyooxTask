@@ -18,6 +18,7 @@ import com.huisu.iyoox.entity.base.BaseStudentModel;
 import com.huisu.iyoox.entity.base.BaseSubjectModel;
 import com.huisu.iyoox.entity.base.BaseTaskResultModel;
 import com.huisu.iyoox.entity.base.BaseTaskStudentListModel;
+import com.huisu.iyoox.entity.base.BaseTaskTeacherListModel;
 import com.huisu.iyoox.entity.base.BaseTeacherModel;
 import com.huisu.iyoox.entity.base.BaseTrialCardModel;
 import com.huisu.iyoox.entity.base.BaseUser;
@@ -309,7 +310,7 @@ public class RequestCenter {
     }
 
     /**
-     * 学生作业列表
+     * 学生提交作业
      */
     public static void getStudentTaskResult(String studentId, String work_id, String times, String json, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -317,11 +318,11 @@ public class RequestCenter {
         params.put("student_id", studentId);
         params.put("answer_times", times);
         params.put("answer_details", json);
-        RequestCenter.postRequest(HttpConstants.getStudentTaskResult, params, listener, BaseTaskResultModel.class);
+        RequestCenter.postRequest(HttpConstants.getStudentTaskResult, params, listener, null);
     }
 
     /**
-     * 学生作业列表
+     * 学生作业报告
      */
     public static void getStudentTaskBaoGao(String studentId, String work_id, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -460,6 +461,16 @@ public class RequestCenter {
     }
 
     /**
+     * 老师删除班级
+     */
+    public static void deleteClassroom(String userId, String classId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("teacher_id", userId);
+        params.put("classroom_id", classId);
+        RequestCenter.postRequest(HttpConstants.deleteClassroom, params, listener, null);
+    }
+
+    /**
      * 老师布置作业
      */
     public static void teacherSendTask(String userId, String taskName, String classIds, String timuIds,
@@ -474,8 +485,30 @@ public class RequestCenter {
         params.put("end_time", endDate);
         params.put("zhishidian_id", zhishidianId);
         params.put("xueke_id", xuekeId);
-        params.put("source_type ", taskType);
-        params.put("desc ", desc);
+        params.put("source_type", taskType);
+        params.put("desc", desc);
         RequestCenter.postRequest(HttpConstants.teacherSendTask, params, listener, BaseSendTaskResultModel.class);
+    }
+
+    /**
+     * 老师删除班级
+     */
+    public static void joinClassroom(String userId, String classNo, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("teacher_id", userId);
+        params.put("classroom_no", classNo);
+        RequestCenter.postRequest(HttpConstants.joinClassroom, params, listener, null);
+    }
+
+    /**
+     * 老师查看班级作业列表
+     */
+    public static void teacherTaskList(String userId, String classId, String type, String page, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("teacher_id", userId);
+        params.put("classroom_id", classId);
+        params.put("type", type);
+        params.put("pageindex", page);
+        RequestCenter.postRequest(HttpConstants.teacherTaskList, params, listener, BaseTaskTeacherListModel.class);
     }
 }

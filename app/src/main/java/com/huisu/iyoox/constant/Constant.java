@@ -153,6 +153,30 @@ public class Constant {
     public static final int TASK_SHIJUAN_TYPE = 2;
 
     /**
+     * 已发布
+     */
+    public static final int TASK_SEND_CODE = 1;
+
+    /**
+     * 待发布
+     */
+    public static final int TASK_UNSEND_CODE = 0;
+
+    /**
+     * 学生已完成
+     */
+    public static final int TASK_STUDENT_FINISHED = 1;
+
+    /**
+     * 学生未完成
+     */
+    public static final int TASK_STUDENT_UNFINISH = 2;
+    /**
+     * 学生未完成
+     */
+    public static final int TASK_EXERCISES_NUMBER = 3;
+
+    /**
      * 权限常量相关
      */
     public static final int WRITE_READ_EXTERNAL_CODE = 0x01;

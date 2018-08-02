@@ -14,6 +14,7 @@ import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.teacher.TeacherClassRoomConfigActivity;
 import com.huisu.iyoox.activity.teacher.TeacherClassRoomDetailsActivity;
+import com.huisu.iyoox.activity.teacher.TeacherLookTaskListActivity;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.ClassRoomModel;
 import com.huisu.iyoox.http.RequestCenter;
@@ -70,6 +71,12 @@ public class TeacherClassFragmentListAdapter extends RecyclerView.Adapter<Teache
         } else {
             holder.configTv.setVisibility(View.GONE);
         }
+        holder.lookTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TeacherLookTaskListActivity.start(context, model);
+            }
+        });
     }
 
     @Override
@@ -91,6 +98,7 @@ public class TeacherClassFragmentListAdapter extends RecyclerView.Adapter<Teache
         private TextView classNum;
         private TextView classCreateTime;
         private TextView configTv;
+        private TextView lookTv;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -99,6 +107,7 @@ public class TeacherClassFragmentListAdapter extends RecyclerView.Adapter<Teache
             classNum = itemView.findViewById(R.id.class_room_student_num_tv);
             classCreateTime = itemView.findViewById(R.id.class_room_create_time_tv);
             configTv = itemView.findViewById(R.id.teacher_class_config_tv);
+            lookTv = itemView.findViewById(R.id.teacher_class_fragment_work_tv);
             this.itemView.setOnClickListener(this);
         }
 

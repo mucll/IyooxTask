@@ -49,6 +49,7 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="请输入6位班级ID"
+            android:inputType="number"
             android:maxLength="6"
             android:paddingLeft="@dimen/dip_32"
             android:paddingRight="@dimen/dip_16"

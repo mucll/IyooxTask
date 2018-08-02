@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.huisu.iyoox.R;
+
 import cn.jzvd.JZVideoPlayerStandard;
 
 /**
@@ -41,7 +43,7 @@ public class MyJZVideoPlayerStandard extends JZVideoPlayerStandard {
 
     @Override
     public int getLayoutId() {
-        return cn.jzvd.R.layout.jz_layout_standard;
+        return R.layout.jz_layout_standard;
     }
 
     @Override

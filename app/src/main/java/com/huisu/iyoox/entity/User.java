@@ -13,11 +13,11 @@ public class User extends LitePalSupport {
     private int grade;
     private int classroom_id;
     private String classroom_name;
-    private int type;
     private int xueke_id;
     private int jiaocai_id;
     private int grade_detail_id;
     private String jiaocai_name;
+    private int type;
 
     public String getUserId() {
         return user_id + "";

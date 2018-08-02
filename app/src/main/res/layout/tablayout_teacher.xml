@@ -48,7 +48,7 @@
             android:layout_width="17.0dip"
             android:layout_height="17.0dip"
             android:scaleType="fitCenter"
-            android:src="@drawable/tab_icon_learning_regular" />
+            android:src="@drawable/tab_icon_homework_regular_tea" />
 
         <TextView
             android:id="@+id/tab_text"
@@ -76,14 +76,14 @@
             android:layout_width="17.0dip"
             android:layout_height="17.0dip"
             android:scaleType="fitCenter"
-            android:src="@drawable/tab_icon_homework_regular" />
+            android:src="@drawable/tab_icon_score_regular_tea" />
 
         <TextView
             android:id="@+id/tab_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="批改作业"
+            android:text="点评"
             android:textColor="@color/color333"
             android:textSize="@dimen/f_12" />
     </LinearLayout>
@@ -104,7 +104,7 @@
             android:layout_width="17.0dip"
             android:layout_height="17.0dip"
             android:scaleType="fitCenter"
-            android:src="@drawable/tab_icon_user_regular" />
+            android:src="@drawable/tab_icon_user_regular_tea" />
 
         <TextView
             android:id="@+id/tab_text"

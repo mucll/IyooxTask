@@ -164,7 +164,13 @@
         <activity
             android:name=".activity.teacher.TeacherSendTaskActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-        <activity android:name=".activity.teacher.TeacherClassRoomConfigActivity"></activity>
+        <activity android:name=".activity.teacher.TeacherClassRoomConfigActivity" />
+        <activity android:name=".activity.teacher.TeacherLookTaskListActivity" />
+        <activity android:name=".activity.teacher.TeacherLookTaskDetailsActivity" />
+        <activity android:name=".activity.teacher.TeacherLookStudentTaskDetailActivity" />
+        <activity android:name=".activity.teacher.TeacherRemarkActivity" />
+        <activity android:name=".activity.teacher.TeacherRemarkResultActivity" />
+        <activity android:name=".activity.student.StudentHomeWorkReportActivity"></activity>
     </application>
 
 </manifest>

@@ -17,7 +17,7 @@
             android:orientation="vertical"
             android:paddingLeft="@dimen/dip_16"
             android:paddingRight="@dimen/dip_16"
-            android:paddingTop="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_4"
             android:translationZ="@dimen/dip_1">
 
             <RelativeLayout
@@ -27,8 +27,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/dip_6"
-                    android:paddingTop="@dimen/dip_6"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/home_icon_class" />
 
 
@@ -37,7 +36,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:padding="@dimen/dip_6"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/select_white_bg"
+                    android:padding="@dimen/dip_12"
                     android:text="编辑"
                     android:textColor="@color/color333"
                     android:textSize="@dimen/f_16" />
@@ -100,10 +101,13 @@
                 <TextView
                     android:id="@+id/teacher_class_fragment_work_tv"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/select_white_bg"
                     android:drawableLeft="@drawable/home_icon_work"
                     android:drawablePadding="@dimen/dip_4"
-                    android:padding="@dimen/dip_6"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/dip_12"
+                    android:paddingRight="@dimen/dip_12"
                     android:text="作业"
                     android:textColor="@color/color333"
                     android:textSize="@dimen/f_14" />

@@ -15,6 +15,7 @@ import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.manager.ActivityStackManager;
 import com.huisu.iyoox.manager.UserManager;
+import com.huisu.iyoox.views.HeadView;
 
 import org.litepal.LitePal;
 
@@ -24,6 +25,8 @@ import org.litepal.LitePal;
 public class TeacherMineFragment extends BaseFragment {
 
     private View view;
+    private HeadView headView;
+    private User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,6 +38,7 @@ public class TeacherMineFragment extends BaseFragment {
     }
 
     private void initView() {
+        user = UserManager.getInstance().getUser();
         TextView logout = view.findViewById(R.id.logout_tv);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +46,8 @@ public class TeacherMineFragment extends BaseFragment {
                 logout();
             }
         });
+        headView = view.findViewById(R.id.user_icon);
+        headView.setHead(user.getUserId(), user.getName(), "");
     }
 
     /**

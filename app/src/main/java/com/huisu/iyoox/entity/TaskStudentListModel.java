@@ -8,42 +8,13 @@ package com.huisu.iyoox.entity;
  * @since JDK 1.8
  */
 public class TaskStudentListModel {
-    //    {
-//        "rowid": 2,
-//            "id": 3,
-//            "teacher_id": 16,
-//            "classroom_id": 21,
-//            "createdate": "2018-07-18T11:52:57.83",
-//            "zhishidian_id": 23837,
-//            "xueke_id": null,
-//            "name": "基础拼音练习",
-//            "desc": "remark",
-//            "source": null,
-//            "isvalid": 1,
-//            "need_score": 0,
-//            "start_time": "2018-07-01T00:00:00",
-//            "end_time": "2018-07-18T14:40:00",
-//            "work_count": 0,
-//            "classroom_no": "400040",
-//            "xueke_name": "英语"
-//    }
-    private int rowid;
-    private int classroom_id;
     private int zhishidian_id;
+    private String zhishidain_name;
     private String start_time;
     private String end_time;
-    private String work_count;
+    private String work_name;
+    private int work_id;
     private String xueke_name;
-    private String classroom_no;
-    private String name;
-
-    public int getClassroom_id() {
-        return classroom_id;
-    }
-
-    public void setClassroom_id(int classroom_id) {
-        this.classroom_id = classroom_id;
-    }
 
     public int getZhishidian_id() {
         return zhishidian_id;
@@ -69,14 +40,6 @@ public class TaskStudentListModel {
         this.end_time = end_time;
     }
 
-    public String getWork_count() {
-        return work_count;
-    }
-
-    public void setWork_count(String work_count) {
-        this.work_count = work_count;
-    }
-
     public String getXueke_name() {
         return xueke_name;
     }
@@ -85,27 +48,27 @@ public class TaskStudentListModel {
         this.xueke_name = xueke_name;
     }
 
-    public String getClassroom_no() {
-        return classroom_no;
+    public String getZhishidain_name() {
+        return zhishidain_name;
     }
 
-    public void setClassroom_no(String classroom_no) {
-        this.classroom_no = classroom_no;
+    public void setZhishidain_name(String zhishidain_name) {
+        this.zhishidain_name = zhishidain_name;
     }
 
-    public int getRowid() {
-        return rowid;
+    public String getWork_name() {
+        return work_name;
     }
 
-    public void setRowid(int rowid) {
-        this.rowid = rowid;
+    public void setWork_name(String work_name) {
+        this.work_name = work_name;
     }
 
-    public String getName() {
-        return name;
+    public int getWork_id() {
+        return work_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setWork_id(int work_id) {
+        this.work_id = work_id;
     }
 }

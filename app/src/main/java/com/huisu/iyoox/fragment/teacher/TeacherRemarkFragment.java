@@ -15,7 +15,7 @@ import com.huisu.iyoox.fragment.base.BaseFragment;
 /**
  * 老师端-批改作业Fragment
  */
-public class TeacherCorrectTaskFragment extends BaseFragment {
+public class TeacherRemarkFragment extends BaseFragment {
 
     private View view;
     private TextView titleTv;
@@ -31,7 +31,7 @@ public class TeacherCorrectTaskFragment extends BaseFragment {
     }
 
     private void initData() {
-        titleTv.setText("批改作业");
+        titleTv.setText("点评");
     }
 
     private void initView() {

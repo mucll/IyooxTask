@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorf7"
+    tools:context=".fragment.teacher.TeacherLookTaskListFragment">
+
+    <com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout
+        android:id="@+id/swipeToLoadLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.huisu.iyoox.views.RefreshHeadView
+            android:id="@id/swipe_refresh_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_10" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@id/swipe_target"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorf7"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:groupIndicator="@null"
+            android:scrollbars="none" />
+
+        <com.huisu.iyoox.views.LoadMoreView
+            android:id="@id/swipe_load_more_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dip_10"
+            android:layout_marginTop="@dimen/dip_10"
+            android:gravity="center" />
+
+    </com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout>
+
+    <RelativeLayout
+        android:id="@+id/task_list_teacher_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/task_list_teacher_empty_icon_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_160"
+            android:src="@drawable/home_homework_pic_wu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/task_list_teacher_empty_icon_view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_16"
+            android:text="您暂无发布的作业"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/f_16" />
+    </RelativeLayout>
+</RelativeLayout>

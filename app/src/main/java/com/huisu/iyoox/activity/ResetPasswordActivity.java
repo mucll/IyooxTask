@@ -19,7 +19,8 @@ import com.huisu.iyoox.activity.base.BaseActivity;
 public class ResetPasswordActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tabSubmiteView;
-    private EditText oldPasswordEt;
+    private TextView sendMsgTv;
+    private EditText codePasswordEt;
     private EditText newPasswordEt;
 
     @Override
@@ -30,7 +31,8 @@ public class ResetPasswordActivity extends BaseActivity implements View.OnClickL
         tabSubmiteView.setEnabled(false);
         tabSubmiteView.setVisibility(View.VISIBLE);
         //旧密码
-        oldPasswordEt = findViewById(R.id.user_old_password_et);
+        codePasswordEt = findViewById(R.id.user_codel_password_et);
+        sendMsgTv = findViewById(R.id.register_send_code_tv);
         //新密码
         newPasswordEt = findViewById(R.id.user_new_password_et);
     }
@@ -44,7 +46,8 @@ public class ResetPasswordActivity extends BaseActivity implements View.OnClickL
     protected void setEvent() {
         setBack();
         tabSubmiteView.setOnClickListener(this);
-        oldPasswordEt.addTextChangedListener(new TextWatcher() {
+        sendMsgTv.setOnClickListener(this);
+        codePasswordEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -83,7 +86,7 @@ public class ResetPasswordActivity extends BaseActivity implements View.OnClickL
     }
 
     private void setSubmitEnable() {
-        if (!TextUtils.isEmpty(oldPasswordEt.getText().toString().trim()) && !TextUtils.isEmpty(newPasswordEt.getText().toString().trim())) {
+        if (!TextUtils.isEmpty(codePasswordEt.getText().toString().trim()) && !TextUtils.isEmpty(newPasswordEt.getText().toString().trim())) {
             tabSubmiteView.setEnabled(true);
         } else {
             tabSubmiteView.setEnabled(false);
@@ -104,6 +107,9 @@ public class ResetPasswordActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_submit:
+
+                break;
+            case R.id.register_send_code_tv:
 
                 break;
             default:

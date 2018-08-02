@@ -93,7 +93,7 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
     @Override
     public void onShow() {
         if (!init) {
-            postTaskListData();
+            swipeToLoadLayout.setRefreshing(true);
             init = true;
         }
     }
@@ -106,22 +106,22 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
             @Override
             public void onSuccess(Object responseObj) {
                 closeLoading();
+                if (page == 1) {
+                    listModels.clear();
+                }
                 BaseTaskStudentListModel baseTaskStudentListModel = (BaseTaskStudentListModel) responseObj;
                 if (baseTaskStudentListModel.data != null && baseTaskStudentListModel.data.size() > 0) {
                     emptyView.setVisibility(View.GONE);
-                    if (page == 1) {
-                        listModels.clear();
-                    }
                     listModels.addAll(baseTaskStudentListModel.data);
-                    mAdapter.notifyDataSetChanged();
                 } else {
                     if (page != 1) {
                         page--;
-                        TabToast.showMiddleToast(getContext(), "没有更多数据");
+                        TabToast.showMiddleToast(getContext(), "暂无更多数据");
                     } else {
                         emptyView.setVisibility(View.VISIBLE);
                     }
                 }
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -181,23 +181,26 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
         if (TaskStatus.UNFINISH.equals(taskType)) {
             Intent intent = new Intent(getContext(), TaskStudentHomeWorkActivity.class);
             intent.putExtra("type", Constant.STUDENT_HOME_WORK);
-            intent.putExtra("work_id", model.getRowid() + "");
-            intent.putExtra("title", model.getName());
+            intent.putExtra("work_id", model.getWork_id() + "");
+            intent.putExtra("title", model.getWork_name());
             getContext().startActivity(intent);
         } else {
             //已完成
-            Intent intent = new Intent(getContext(), TaskResultActivity.class);
-            intent.putExtra("type", Constant.STUDENT_TASK_FINISHED);
-            intent.putExtra("workId", model.getRowid() + "");
-            intent.putExtra("title", model.getName());
-            getContext().startActivity(intent);
+//            Intent intent = new Intent(getContext(), TaskResultActivity.class);
+//            intent.putExtra("type", Constant.STUDENT_TASK_FINISHED);
+//            intent.putExtra("work_id", model.getWork_id() + "");
+//            intent.putExtra("title", model.getWork_name());
+//            getContext().startActivity(intent);
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(String type) {
         page = 1;
-        postTaskListData();
+        if (!init) {
+            init = true;
+        }
+        swipeToLoadLayout.setRefreshing(true);
     }
 
     @Override

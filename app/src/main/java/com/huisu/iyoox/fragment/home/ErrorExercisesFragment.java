@@ -161,17 +161,17 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
     private int getSubjectResId(int subjectId) {
         switch (subjectId) {
             case Constant.SUBJECT_YUWEN:
-                return R.drawable.ctj_yuwen_curremt;
+                return R.drawable.ctj_subject_chinese;
             case Constant.SUBJECT_SHUXUE:
-                return R.drawable.ctj_yuwen_curremt;
+                return R.drawable.ctj_subject_math;
             case Constant.SUBJECT_ENGLISH:
-                return R.drawable.ctj_yuwen_curremt;
+                return R.drawable.ctj_subject_eng;
             case Constant.SUBJECT_WULI:
-                return R.drawable.ctj_yuwen_curremt;
+                return R.drawable.ctj_subject_physics;
             case Constant.SUBJECT_HUAXUE:
-                return R.drawable.ctj_yuwen_curremt;
+                return R.drawable.ctj_subject_chemical;
             default:
-                return R.drawable.ctj_yuwen_curremt;
+                return R.drawable.ctj_subject_chinese;
         }
     }
 

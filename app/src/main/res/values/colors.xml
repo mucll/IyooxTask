@@ -125,4 +125,5 @@
     <color name="f1ffd1">#f1ffd1</color>
     <color name="edf9cd">#edf9cd</color>
     <color name="ccc">#cccccc</color>
+    <color name="exercises_right_answer_color">#3f714c</color>
 </resources>

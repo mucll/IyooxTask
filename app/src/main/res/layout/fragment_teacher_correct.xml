@@ -35,4 +35,25 @@
                 android:textSize="@dimen/f_18" />
         </RelativeLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dip_160"
+            android:src="@drawable/comment_pic_wu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dip_16"
+            android:text="暂无待点评的作业哦"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/f_16" />
+    </LinearLayout>
 </LinearLayout>

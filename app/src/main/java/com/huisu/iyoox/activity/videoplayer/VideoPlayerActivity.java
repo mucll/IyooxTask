@@ -55,10 +55,9 @@ public class VideoPlayerActivity extends BaseActivity implements MyJZVideoPlayer
     protected void initData() {
         setTitle("视频界面");
         String videoId = getIntent().getStringExtra("videoId");
-        setVideoPlayerUrl(VIDEO_URL, TITLE, IMAGE_URL);
-//        if (!TextUtils.isEmpty(videoId)) {
-//            postVideoUrlData(videoId);
-//        }
+        if (!TextUtils.isEmpty(videoId)) {
+            postVideoUrlData(videoId);
+        }
     }
 
     private void postVideoUrlData(String videoId) {
@@ -109,12 +108,14 @@ public class VideoPlayerActivity extends BaseActivity implements MyJZVideoPlayer
      * @param imageUrl 视频封面地址
      */
     private void setVideoPlayerUrl(String uri, String title, String imageUrl) {
-        mJZVideoPlayerStandard.clearFocus();
-        mJZVideoPlayerStandard.setUp(uri
-                , JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, title);
-        if (!TextUtils.isEmpty(imageUrl)) {
-            Glide.with(this).load(imageUrl).into(mJZVideoPlayerStandard.thumbImageView);
-        }
+//        mJZVideoPlayerStandard.clearFocus();
+//        mJZVideoPlayerStandard.setUp(uri
+//                , JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, title);
+        mJZVideoPlayerStandard.startFullscreen(this, JZVideoPlayerStandard.class, uri
+                , title);
+//        if (!TextUtils.isEmpty(imageUrl)) {
+//            Glide.with(this).load(imageUrl).into(mJZVideoPlayerStandard.thumbImageView);
+//        }
     }
 
     /**
@@ -125,13 +126,13 @@ public class VideoPlayerActivity extends BaseActivity implements MyJZVideoPlayer
         TabToast.makeText("完成播放,进行习题跳转", context);
     }
 
-    @Override
-    public void onBackPressed() {
-        if (JZVideoPlayer.backPress()) {
-            return;
-        }
-        super.onBackPressed();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (JZVideoPlayer.backPress()) {
+//            return;
+//        }
+//        super.onBackPressed();
+//    }
 
     @Override
     protected void onResume() {

@@ -172,11 +172,23 @@ public class HttpConstants {
     /**
      * 老师布置作业
      */
-    public static String teacherSendTask = ROOT_URL + "/work/teacher_publish_work ";
+    public static String teacherSendTask = ROOT_URL + "/work/teacher_publish_work";
     /**
      * 老师布置作业成功 提醒家长
      */
-    public static String notifyParents = ROOT_URL + "/message/notify_parents ";
+    public static String notifyParents = ROOT_URL + "/message/notify_parents";
+    /**
+     * 老师删除班级
+     */
+    public static String deleteClassroom = ROOT_URL + "/classroom/delete_classroom";
+    /**
+     * 老师加入班级
+     */
+    public static String joinClassroom = ROOT_URL + "/classroom/join_classroom";
+    /**
+     * 老师查看班级作业列表
+     */
+    public static String teacherTaskList = ROOT_URL + "/work/my_published_work";
 
 }
 

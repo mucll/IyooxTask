@@ -11,9 +11,10 @@ public interface TaskStatus {
     /**
      * 未完成
      */
-    public final String UNFINISH = "0";
+    public final String UNFINISH = "1";
     /**
      * 已完成
      */
-    public final String FINISH = "1";
+    public final String FINISH = "2";
+
 }

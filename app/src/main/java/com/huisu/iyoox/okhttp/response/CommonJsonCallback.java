@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
+import com.huisu.iyoox.application.MyApplication;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.okhttp.ResponseEntityToModule;
 import com.huisu.iyoox.okhttp.exception.OkHttpException;
@@ -11,6 +12,7 @@ import com.huisu.iyoox.okhttp.listener.DisposeDataHandle;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.okhttp.listener.DisposeHandleCookieListener;
 import com.huisu.iyoox.util.LogUtil;
+import com.huisu.iyoox.util.TabToast;
 
 import org.json.JSONObject;
 
@@ -82,6 +84,7 @@ public class CommonJsonCallback implements Callback {
         mDeliveryHandler.post(new Runnable() {
             @Override
             public void run() {
+                TabToast.showMiddleToast(MyApplication.getApplication().getApplicationContext(), "网络异常");
                 mListener.onFailure(new OkHttpException(NETWORK_ERROR, ioexception));
             }
         });
@@ -130,7 +133,7 @@ public class CommonJsonCallback implements Callback {
             LogUtil.e(responseObj.toString());
             int code = result.getInt("code");
             if (code != Constant.POST_SUCCESS_CODE) {
-                mListener.onFailure(result);
+                mListener.onSuccess(result);
                 return;
             }
             if (mClass == null) {

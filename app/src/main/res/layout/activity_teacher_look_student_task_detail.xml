@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.teacher.TeacherLookStudentTaskDetailActivity">
+
+    <include layout="@layout/layout_title_bar_all" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.huisu.iyoox.views.ExercisesNumberView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/submit_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_48"
+        android:background="@drawable/select_button_bg_maincolor_other"
+        android:gravity="center"
+        android:text="立即点评"
+        android:textColor="@color/white"
+        android:textSize="@dimen/f_16" />
+</LinearLayout>

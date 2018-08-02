@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorf7"
+    android:orientation="vertical"
+    tools:context=".activity.teacher.TeacherRemarkActivity">
+
+    <include layout="@layout/layout_title_bar_all" />
+
+    <EditText
+        android:id="@+id/teacher_send_msg_et"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_180"
+        android:layout_margin="@dimen/dip_16"
+        android:background="@color/white"
+        android:gravity="top"
+        android:hint="请在这里输入您对学生想说的话,最多50字"
+        android:maxLength="50"
+        android:padding="12dp"
+        android:textColor="@color/black_87"
+        android:textSize="@dimen/f_14" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/submit_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_48"
+        android:background="@drawable/select_button_bg_maincolor_other"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="确认点评"
+        android:textColor="@color/white"
+        android:textSize="@dimen/f_16" />
+</LinearLayout>
