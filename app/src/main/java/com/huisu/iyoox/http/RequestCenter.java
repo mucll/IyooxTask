@@ -341,7 +341,7 @@ public class RequestCenter {
     }
 
     /**
-     * 学生作业列表
+     * 用户信息
      */
     public static void userInfo(String user_id, DisposeDataListener listener) {
         RequestParams params = new RequestParams();

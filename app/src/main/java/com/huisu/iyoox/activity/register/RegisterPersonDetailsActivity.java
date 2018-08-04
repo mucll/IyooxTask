@@ -54,7 +54,6 @@ public class RegisterPersonDetailsActivity extends BaseActivity implements View.
 
     @Override
     protected void initView() {
-        StatusBarUtil.transparencyBar(this);
         nextBt = (Button) findViewById(R.id.register_person_details_next_bt);
         //名字
         nameEditText = (EditText) findViewById(R.id.register_name_edit_text);

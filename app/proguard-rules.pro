@@ -50,6 +50,7 @@
  -keep public class * extends android.app.backup.BackupAgentHelper
  -keep public class * extends android.preference.Preference
  -keep public class com.android.vending.licensing.ILicensingService
+ -keep public class com.google.vending.licensing.ILicensingService
  -keep public class * extends android.support.v4.app.Fragment
  -ignorewarning
  -dump class_files.txt
@@ -100,6 +101,7 @@
 -keep class butterknife.internal { *; }
 -dontwarn butterknife.internal.**
 -dontwarn butterknife.**
+
 -keep class **$$ViewBinder { *; }
 
 -keepclasseswithmembernames class * {
@@ -245,4 +247,39 @@ public static final int *;
 -keep class com.linkedin.** { *; }
 -keep class com.android.dingtalk.share.ddsharemodule.** { *; }
 -keepattributes Signature
+# 播放器混淆
+# The support library contains references to newer platform versions.
+# Don't warn about those in case this app is linking against an older
+# platform version.  We know about them, and they are safe.
+-dontwarn android.support.**
+# Understand the @Keep support annotation.
+-keep class android.support.annotation.Keep
+
+-keep @android.support.annotation.Keep class * {*;}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep <fields>;
+}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep <init>(...);
+}
+
+#忽略警告
+-ignorewarnings
+#保证是独立的jar,没有任何项目引用,如果不写就会认为我们所有的代码是无用的,从而把所有的代码压缩掉,导出一个空的jar
+-dontshrink
+#保护泛型
+-keepattributes Signature
+
+-keep class com.easefun.polyvsdk.**{*;}
+-keep class com.chinanetcenter.wcs.**{*;}
+-keep class org.apache.http.**{*;}
+-keep class tv.danmaku.ijk.media.**{*;}
+-keep class net.lingala.zip4j.**{*;}
+-keep class org.apache.commons.compress.**{*;}
 

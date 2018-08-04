@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.ConfigMainActivity;
 import com.huisu.iyoox.activity.LoginActivity;
+import com.huisu.iyoox.activity.PersonalDataActivity;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.manager.ActivityStackManager;
@@ -31,6 +32,7 @@ import org.litepal.LitePal;
 public class TeacherMineFragment extends BaseFragment implements View.OnClickListener {
 
     private View view;
+    private TextView userName;
     private HeadView headView;
     private User user;
     private View configLayout;
@@ -42,23 +44,34 @@ public class TeacherMineFragment extends BaseFragment implements View.OnClickLis
         view = inflater.inflate(R.layout.fragment_teacher_mine, container, false);
         initTab();
         initView();
+        initData();
         setEvent();
         return view;
     }
 
     private void initView() {
-        user = UserManager.getInstance().getUser();
         headView = view.findViewById(R.id.user_icon);
-        headView.setHead(user.getUserId(), user.getName(), "");
+        userName = view.findViewById(R.id.user_name);
         //设置
         configLayout = view.findViewById(R.id.mine_setting_layout);
         //客服
         servicePhoneLayout = view.findViewById(R.id.mine_service_phone_layout);
     }
 
+    private void initData() {
+        user = UserManager.getInstance().getUser();
+        headView.setHead(user.getUserId(), user.getName(), "");
+        userName.setText(user.getName());
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.user_icon:
+                //个人资料
+                PersonalDataActivity.start(getContext());
+                break;
             case R.id.mine_service_phone_layout:
                 showDialog();
                 break;
@@ -94,6 +107,7 @@ public class TeacherMineFragment extends BaseFragment implements View.OnClickLis
     }
 
     private void setEvent() {
+        headView.setOnClickListener(this);
         configLayout.setOnClickListener(this);
         servicePhoneLayout.setOnClickListener(this);
     }

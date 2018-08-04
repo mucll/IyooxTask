@@ -76,6 +76,12 @@ public class StudentTaskListAdapter extends BaseAdapter {
                 holder.endIcon.setVisibility(View.VISIBLE);
                 holder.startTime.setText(StringUtils.getTimeString(model.getEnd_time()));
                 break;
+            case TaskStatus.YUQI:
+                holder.startIconTV.setImageResource(R.drawable.homework_icon_time);
+                holder.endIcon.setVisibility(View.GONE);
+                holder.endIcon.setVisibility(View.GONE);
+                holder.startTime.setText(StringUtils.getTimeString(model.getStart_time()) + "-" + StringUtils.getTimeString(model.getEnd_time()));
+                break;
             default:
                 break;
         }

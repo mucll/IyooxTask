@@ -49,7 +49,6 @@ public class RegisterPasswordActivity extends BaseActivity implements TextWatche
 
     @Override
     protected void initView() {
-        StatusBarUtil.transparencyBar(this);
         passwordEditText = findViewById(R.id.register_password_edit_text);
         StringUtils.setEditTextInputSpeChat(passwordEditText);
         titleTv = findViewById(R.id.passwrod_title_tv);

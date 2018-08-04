@@ -41,7 +41,6 @@ public class RegisterIdentityActivity extends BaseActivity implements View.OnCli
 
     @Override
     protected void initView() {
-        StatusBarUtil.transparencyBar(this);
         nextBt = findViewById(R.id.register_identity_next_bt);
         teacherCheck = findViewById(R.id.identity_select_teahcer_cb);
         studentCheck = findViewById(R.id.identity_select_student_cb);

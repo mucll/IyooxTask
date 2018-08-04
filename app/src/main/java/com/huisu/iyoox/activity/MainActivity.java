@@ -48,7 +48,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        StatusBarUtil.transparencyBar(this);
         if (hasPermission(Constant.WRITE_READ_EXTERNAL_PERMISSION)) {
         } else {
             requestPermission(Constant.WRITE_READ_EXTERNAL_CODE, Constant.WRITE_READ_EXTERNAL_PERMISSION);

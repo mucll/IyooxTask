@@ -47,7 +47,6 @@ public class RegisterPhoneVerificationCodeActivity extends BaseActivity implemen
 
     @Override
     protected void initView() {
-        StatusBarUtil.transparencyBar(this);
         phoneTextView = findViewById(R.id.register_code_phone_tv);
         sendCodeView = findViewById(R.id.register_send_code_tv);
         sendCodeView.setSelected(true);

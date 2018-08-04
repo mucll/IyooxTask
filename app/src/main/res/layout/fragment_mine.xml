@@ -50,7 +50,7 @@
                         android:layout_marginTop="16dp" />
 
                     <TextView
-                        android:id="@+id/user_location"
+                        android:id="@+id/user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dip_4"
@@ -58,15 +58,6 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/f_16" />
 
-                    <TextView
-                        android:id="@+id/user_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/f_12"
-                        android:visibility="gone" />
                 </LinearLayout>
             </RelativeLayout>
         </RelativeLayout>

@@ -16,5 +16,9 @@ public interface TaskStatus {
      * 已完成
      */
     public final String FINISH = "2";
+    /**
+     * 逾期
+     */
+    public final String YUQI = "3";
 
 }

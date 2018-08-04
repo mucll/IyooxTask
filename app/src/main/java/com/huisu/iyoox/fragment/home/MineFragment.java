@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private View view;
     private HeadView mHeadView;
-    private ChangeHeaderImgDialog mHeaderImgDialog;
+    private TextView userName;
     private RelativeLayout topLayout;
     private LinearLayout learningCardLayout, learningHistoryLayout, patriarchLayout, configLayout, servicePhoneLayout;
     private View mineCacheView, mineCollectView, mineHistoryView, mineTrialCardView;
@@ -65,9 +66,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void initView() {
-
         //头像
         mHeadView = view.findViewById(R.id.user_icon);
+        userName = view.findViewById(R.id.user_name);
         //缓存
         mineCacheView = view.findViewById(R.id.mine_cache_ll);
         //收藏
@@ -94,7 +95,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private void initData() {
         user = UserManager.getInstance().getUser();
-        mHeadView.setHead(user.getUserId(), user.getName(), "");
+        mHeadView.setHead(user.getUserId(), user.getName(), TextUtils.isEmpty(user.getAvatar()) ? "" : user.getAvatar());
+        userName.setText(user.getName());
     }
 
     private void setEvent() {
@@ -108,7 +110,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         patriarchLayout.setOnClickListener(this);
         servicePhoneLayout.setOnClickListener(this);
         configLayout.setOnClickListener(this);
-
     }
 
     @Override
@@ -170,21 +171,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (mHeaderImgDialog != null) {
-            mHeaderImgDialog.onActivityResult(requestCode, resultCode, data);
-        }
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
+            initData();
+        }
     }
 
-    @Override
-    public void doOpenCamera() {
-        mHeaderImgDialog.doOpenCamera();
-    }
-
-    @Override
-    public void doWriteSDCard() {
-        mHeaderImgDialog.doWriteSDCard();
-    }
 
     private void initTab() {
         View tabView = view.findViewById(R.id.tab_view);

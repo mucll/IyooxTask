@@ -28,10 +28,6 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    public void steepStatusBar() {
-        StatusBarUtil.statusBarLightMode(getActivity());
-    }
-
     /**
      * 判断是否有指定的权限
      */

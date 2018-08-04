@@ -50,6 +50,7 @@ public class HomeWorkFragment extends BaseFragment {
         fragments.clear();
         fragments.add(getFragment(TaskStatus.UNFINISH));
         fragments.add(getFragment(TaskStatus.FINISH));
+        fragments.add(getFragment(TaskStatus.YUQI));
         myFragmentLayout.setScorllToNext(true);
         myFragmentLayout.setScorll(true);
         myFragmentLayout.setWhereTab(1);

@@ -125,20 +125,17 @@ public class HeadView extends FrameLayout {
         this.nickName = nickName;
         this.headUrl = headUrl;
         name.setVisibility(VISIBLE);
-        nickName = TextUtils.isEmpty(nickName) ? userId : nickName;
-        name.setText(getEndNick(nickName));
         name.setTag(userId);
-        head.setImageResource(getResId(userId));
+        head.setImageResource(getResId());
         if (context instanceof Activity && ((Activity) context).isFinishing()) {
             return;
         }
         Glide.with(context)
                 .load(headUrl)
                 .asBitmap()
-                .placeholder(getResId(userId))
+                .placeholder(getResId())
                 .dontAnimate()
-                .diskCacheStrategy
-                        (DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
                 .into(new BitmapImageViewTarget(head) {
                     @Override
@@ -173,8 +170,8 @@ public class HeadView extends FrameLayout {
                 });
     }
 
-    private int getResId(String userId) {
-        return R.drawable.shape_head_0;
+    private int getResId() {
+        return R.drawable.student_default;
     }
 
 

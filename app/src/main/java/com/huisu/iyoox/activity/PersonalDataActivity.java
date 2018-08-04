@@ -1,9 +1,11 @@
 package com.huisu.iyoox.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
@@ -14,6 +16,7 @@ import com.huisu.iyoox.entity.base.BaseUser;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.ChangeHeaderImgDialog;
 import com.huisu.iyoox.views.HeadView;
 
@@ -34,9 +37,12 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     private HeadView headView;
     private User user;
     private ChangeHeaderImgDialog mHeaderImgDialog;
+    private ImageButton backBtn;
+    private boolean setResult = false;
 
     @Override
     protected void initView() {
+        backBtn = findViewById(R.id.menu_back);
         headLayout = findViewById(R.id.head_layout);
         accountLayout = findViewById(R.id.person_account_ll);
         userNameLayout = findViewById(R.id.person_user_name_ll);
@@ -55,39 +61,31 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void initData() {
         setTitle("编辑资料");
-        postPersonData();
+        setPersonData();
     }
 
-    private void postPersonData() {
+    private void setPersonData() {
         user = UserManager.getInstance().getUser();
-        RequestCenter.userInfo(user.getUserId(), new DisposeDataListener() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                BaseUser baseUser = (BaseUser) responseObj;
-                if (baseUser.data != null) {
-                    postUserData(baseUser.data);
-                }
-            }
-
-            @Override
-            public void onFailure(Object reasonObj) {
-
-            }
-        });
+        postUserData(user);
     }
 
-    private void postUserData(User data) {
-        headView.setHead(data.getUserId(), data.getName(), "");
-        accountTv.setText(!TextUtils.isEmpty(data.getPhone()) ? data.getPhone() : "");
-        userNameTv.setText(!TextUtils.isEmpty(data.getName()) ? data.getName() : "");
-        sexTv.setText(data.getSex() == 0 ? "女" : "男");
-        gradeTv.setText(data.getGradeName());
-        classTv.setText(TextUtils.isEmpty(data.getClassroom_name()) ? "" : data.getClassroom_name());
+    private void postUserData(User user) {
+        headView.setHead(user.getUserId(), user.getName(), TextUtils.isEmpty(user.getAvatar()) ? "" : user.getAvatar());
+        accountTv.setText(!TextUtils.isEmpty(user.getPhone()) ? user.getPhone() : "");
+        userNameTv.setText(!TextUtils.isEmpty(user.getName()) ? user.getName() : "");
+        gradeTv.setText(user.getGradeName());
+        if (Constant.TEACHER_TYPE == user.getType()) {
+            sexLayout.setVisibility(View.GONE);
+            classLayout.setVisibility(View.GONE);
+        } else if (Constant.STUDENT_TYPE == user.getType()) {
+            sexTv.setText(user.getSex() == 0 ? "女" : "男");
+            classTv.setText(TextUtils.isEmpty(user.getClassroom_name()) ? "" : user.getClassroom_name());
+        }
     }
 
     @Override
     protected void setEvent() {
-        setBack();
+        backBtn.setOnClickListener(this);
         headLayout.setOnClickListener(this);
     }
 
@@ -99,6 +97,12 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.menu_back:
+                if (setResult) {
+                    setResult(RESULT_OK);
+                }
+                finish();
+                break;
             case R.id.head_layout:
                 configHeard();
                 break;
@@ -116,7 +120,6 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                 break;
         }
     }
-
 
     private void configHeard() {
         mHeaderImgDialog = new ChangeHeaderImgDialog(this,
@@ -136,9 +139,14 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                 JSONObject jsonObject = (JSONObject) responseObj;
                 try {
                     int code = jsonObject.getInt("code");
-                    if ( code== Constant.POST_SUCCESS_CODE){
+                    if (code == Constant.POST_SUCCESS_CODE) {
+                        TabToast.showMiddleToast(context, "头像修改成功");
                         String path = head.getAbsolutePath();
                         headView.setHead(user.getUserId() + "", user.getName(), path);
+                        String data = jsonObject.getString("data");
+                        user.setAvatar(data);
+                        UserManager.getInstance().setUser(user);
+                        setResult = true;
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -153,6 +161,14 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
+    public void onBackPressed() {
+        if (setResult) {
+            setResult(RESULT_OK);
+        }
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mHeaderImgDialog.onActivityResult(requestCode, resultCode, data);
@@ -160,7 +176,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
 
     public static void start(Context context) {
         Intent intent = new Intent(context, PersonalDataActivity.class);
-        context.startActivity(intent);
+        ((Activity) context).startActivityForResult(intent, 100);
     }
 
 }

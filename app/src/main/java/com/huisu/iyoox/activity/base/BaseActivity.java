@@ -268,7 +268,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 调整状态栏为亮模式，这样状态栏的文字颜色就为深模式了。
      */
     private void steepStatusBar() {
-        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.setStatusBarTranslucent(this, true);
     }
 
 

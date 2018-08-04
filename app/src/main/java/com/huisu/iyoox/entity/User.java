@@ -18,6 +18,7 @@ public class User extends LitePalSupport {
     private int grade_detail_id;
     private String jiaocai_name;
     private int type;
+    private String avatar;
 
     public String getUserId() {
         return user_id + "";
@@ -133,6 +134,14 @@ public class User extends LitePalSupport {
 
     public void setJiaocai_name(String jiaocai_name) {
         this.jiaocai_name = jiaocai_name;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getGradeName() {

@@ -42,7 +42,6 @@ public class LoginActivity extends BaseActivity implements PhoneEditText.onPhone
 
     @Override
     protected void initView() {
-        StatusBarUtil.transparencyBar(this);
         mPhoneEditText = (PhoneEditText) findViewById(R.id.login_phone_edit_text);
         nextBt = (Button) findViewById(R.id.login_phone_next_bt);
         editContetView = findViewById(R.id.login_edit_content);

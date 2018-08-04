@@ -55,7 +55,6 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
 
     @Override
     protected void initView() {
-        StatusBarUtil.transparencyBar(this);
         nameEt = findViewById(R.id.register_name_edit_text);
         gradeView = findViewById(R.id.register_grade_ll);
         gradeTv = findViewById(R.id.register_grade_tv);
