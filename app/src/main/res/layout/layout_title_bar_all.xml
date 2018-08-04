@@ -39,7 +39,7 @@
                 android:clickable="false"
                 android:ellipsize="middle"
                 android:gravity="left|center_vertical"
-                android:maxWidth="200dp"
+                android:maxWidth="@dimen/dip_200"
                 android:singleLine="true"
                 android:textColor="@color/black_87"
                 android:textSize="@dimen/f_18" />
@@ -56,6 +56,7 @@
                 android:textSize="@dimen/f_14"
                 android:visibility="gone" />
 
+
             <TextView
                 android:id="@+id/tv_submit"
                 android:layout_width="wrap_content"
@@ -63,6 +64,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dip_16"
+                android:ellipsize="middle"
+                android:gravity="center"
+                android:maxWidth="@dimen/dip_100"
+                android:singleLine="true"
                 android:textColor="@drawable/select_enable_text_color"
                 android:textSize="@dimen/f_14"
                 android:visibility="gone" />

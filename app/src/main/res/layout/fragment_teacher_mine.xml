@@ -38,7 +38,7 @@
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <com.huisu.iyoox.views.HeadView
@@ -74,16 +74,5 @@
             layout="@layout/layout_teacher_mine_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/logout_tv"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dip_48"
-            android:layout_marginTop="@dimen/dip_22"
-            android:background="@color/exercises_error"
-            android:gravity="center"
-            android:text="退出登录"
-            android:textColor="@color/white"
-            android:textSize="@dimen/f_16" />
     </LinearLayout>
 </ScrollView>

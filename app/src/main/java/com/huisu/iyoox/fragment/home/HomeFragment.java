@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.student.StudentMsgActivity;
 import com.huisu.iyoox.entity.GradeListModel;
 import com.huisu.iyoox.entity.SubjectModel;
 import com.huisu.iyoox.entity.User;
@@ -50,6 +51,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private MyPagerAdapter myPagerAdapter;
     private int selectPosition = 0;
     private int selectPageIndexof = 0;
+    private View msgView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,14 +68,22 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         return view;
     }
 
+    /**
+     * 初始化控件
+     */
+    private void initView() {
+        studentGradeTv = view.findViewById(R.id.student_grade_tv);
+        msgView = view.findViewById(R.id.home_fragment_msg_ll);
+        mTabView = view.findViewById(R.id.fragment_home_tab_view);
+        mViewPager = view.findViewById(R.id.fragment_home_page);
 
-    private void initTab() {
-        View tabView = view.findViewById(R.id.tab_view);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            tabView.setVisibility(View.VISIBLE);
-        } else {
-            tabView.setVisibility(View.GONE);
-        }
+        subjectModels.clear();
+        SubjectModel subjectModel = new SubjectModel();
+        subjectModel.setName("首页");
+        subjectModels.add(subjectModel);
+        mTabView.init(subjectModels);
+        //初始化 学生年级
+        studentGradeTv.setText(user.getGradeName() + "上");
     }
 
     /**
@@ -115,22 +125,6 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         initPage();
     }
 
-    /**
-     * 初始化控件
-     */
-    private void initView() {
-        studentGradeTv = view.findViewById(R.id.student_grade_tv);
-        mTabView = view.findViewById(R.id.fragment_home_tab_view);
-        mViewPager = view.findViewById(R.id.fragment_home_page);
-
-        subjectModels.clear();
-        SubjectModel subjectModel = new SubjectModel();
-        subjectModel.setName("首页");
-        subjectModels.add(subjectModel);
-        mTabView.init(subjectModels);
-        //初始化 学生年级
-        studentGradeTv.setText(user.getGradeName() + "上");
-    }
 
     /**
      * 初始化 数据
@@ -182,6 +176,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private void setEvent() {
         mViewPager.addOnPageChangeListener(this);
         studentGradeTv.setOnClickListener(this);
+        msgView.setOnClickListener(this);
         mTabView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -224,6 +219,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                     }
                 };
                 gradeDialog.show();
+                break;
+            case R.id.home_fragment_msg_ll:
+                StudentMsgActivity.start(getContext());
                 break;
             default:
                 break;
@@ -286,5 +284,13 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         return fragment;
     }
 
+    private void initTab() {
+        View tabView = view.findViewById(R.id.tab_view);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            tabView.setVisibility(View.VISIBLE);
+        } else {
+            tabView.setVisibility(View.GONE);
+        }
+    }
 
 }

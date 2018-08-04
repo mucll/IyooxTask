@@ -21,6 +21,14 @@ android {
         versionName "1.0"
         multiDexEnabled true
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+
+        //依赖的包可能支持很多类型的ABI
+        //为了避免打包了我们没有支持的ABI，指定需要打包的ABI目录
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'armeabi', 'x86_64', 'x86'
+        }
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -93,4 +101,7 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.android.support:recyclerview-v7:27.+'
     implementation 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
+    implementation 'com.easefun.polyv:polyvPlayer:2.4.0'//SDK核心包
+    implementation 'com.easefun.polyv:polyvPlayerABI:1.6.0'//SDK核心包
+    implementation 'com.easefun.polyv:polyvDownload:2.4.0'//SDK下载功能
 }

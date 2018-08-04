@@ -218,7 +218,6 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(String type) {
-        page = 1;
         if (!init) {
             init = true;
         }

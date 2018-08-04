@@ -2,12 +2,15 @@ package com.huisu.iyoox.complexmenu.holder;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
@@ -113,15 +116,23 @@ public class SubjectGridHolder extends BaseWidgetHolder<List<BookDetailsModel>> 
             CustomViewHolder holder;
             if (convertView == null) {
                 holder = new CustomViewHolder();
-                convertView = View.inflate(mContext, R.layout.item_book_gridview, null);
+                convertView = LayoutInflater.from(mContext).inflate(R.layout.item_book_gridview, parent, false);
                 holder.nameTv = convertView.findViewById(R.id.name_tv);
                 holder.image = convertView.findViewById(R.id.image);
+                holder.coverBg = convertView.findViewById(R.id.book_cover_bg);
                 convertView.setTag(holder);
             } else {
                 holder = (CustomViewHolder) convertView.getTag();
             }
             BookDetailsModel bean = mlist.get(position);
             holder.nameTv.setText(bean.getName());
+            if (mRightSelectedIndex == position) {
+                holder.nameTv.setSelected(true);
+                holder.coverBg.setSelected(true);
+            } else {
+                holder.nameTv.setSelected(false);
+                holder.coverBg.setSelected(false);
+            }
             ImageLoader.load(mContext, holder.image,
                     TextUtils.isEmpty(bean.getCover_url()) ? "" : bean.getCover_url()
                     , R.drawable.icon_no_img);
@@ -134,6 +145,7 @@ public class SubjectGridHolder extends BaseWidgetHolder<List<BookDetailsModel>> 
     static class CustomViewHolder {
         ImageView image;
         TextView nameTv;
+        View coverBg;
     }
 
     public void setOnRightListViewItemSelectedListener(OnRightListViewItemSelectedListener onRightListViewItemSelectedListener) {

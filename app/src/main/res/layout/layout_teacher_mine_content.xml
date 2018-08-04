@@ -7,7 +7,7 @@
     android:showDividers="middle">
 
     <LinearLayout
-        android:id="@+id/mine_learning_card_layout"
+        android:id="@+id/mine_teacher_select_subject_ll"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dip_54"
         android:background="@drawable/select_white_bg"
@@ -33,7 +33,7 @@
 
 
     <LinearLayout
-        android:id="@+id/mine_learning_history_layout"
+        android:id="@+id/mine_teacher_select_version_ll"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dip_54"
         android:background="@drawable/select_white_bg"

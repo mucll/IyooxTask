@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
-import com.huisu.iyoox.activity.MainActivity;
 import com.huisu.iyoox.activity.student.StudentWriteExercisesErrorActivity;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.SubjectModel;
@@ -24,22 +23,18 @@ import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
-import com.huisu.iyoox.util.LogUtil;
-import com.huisu.iyoox.views.ExercisesErrorEmptyView;
 import com.huisu.iyoox.views.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
 
 /**
- * @author: dl
- * @function: 错题集Fragment
- * @date: 18/6/28
+ * 学生错题集Fragment
  */
-public class ErrorExercisesFragment extends BaseFragment implements ExercisesErrorEmptyView.onEmptyClickListener {
+public class ErrorExercisesFragment extends BaseFragment {
     private View view;
     private LayoutInflater mLayoutInflater;
     private ViewPager mVp;
-    private ExercisesErrorEmptyView emptyView;
+    private View emptyView;
     private User user;
     private ArrayList<SubjectModel> models = new ArrayList<>();
 
@@ -49,7 +44,6 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
         view = inflater.inflate(R.layout.fragment_error_exercises, container, false);
         initView();
         initTab();
-        setEvent();
         return view;
     }
 
@@ -96,7 +90,6 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
         mVp = (ViewPager) view.findViewById(R.id.vp_gallery_vp);
         mVp.setOverScrollMode(View.OVER_SCROLL_NEVER);
         emptyView = view.findViewById(R.id.empty_view);
-        emptyView.setVisibility(View.VISIBLE);
         //控制两幅图之间的间距
         mVp.setPageMargin(10);
         mVp.setPageTransformer(true, new ZoomOutPageTransformer());
@@ -107,16 +100,6 @@ public class ErrorExercisesFragment extends BaseFragment implements ExercisesErr
                 return mVp.dispatchTouchEvent(motionEvent);
             }
         });
-    }
-
-
-    private void setEvent() {
-        emptyView.setOnEmptyClick(this);
-    }
-
-    @Override
-    public void onEmptyClick(View v) {
-        ((MainActivity) getActivity()).myFragmentLayout.setCurrenItem(0);
     }
 
     class MyAdapter extends PagerAdapter {

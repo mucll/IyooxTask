@@ -14,6 +14,16 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dip_40" />
 
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="暂无数据,请重新切换教材版本"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/f_18" />
+
     <ExpandableListView
         android:id="@id/swipe_target"
         android:layout_width="match_parent"
@@ -21,4 +31,5 @@
         android:divider="@null"
         android:dividerHeight="0dp"
         android:groupIndicator="@null" />
+
 </LinearLayout>

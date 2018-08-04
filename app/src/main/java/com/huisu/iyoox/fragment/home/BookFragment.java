@@ -51,6 +51,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
     private String gradeDetailId;
     private final int default_code = 0;
     private ArrayList<VideoGroupModel> videoModels = new ArrayList<>();
+    private int page = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -128,7 +129,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
                     bookDetailsModels.clear();
                     bookDetailsModels.addAll(baseBookDetailsModel.data);
                     bookTypeView.setEditionData(bookDetailsModels, default_code);
-                    setBookEditionData(bookDetailsModels.get(default_code));
+                    swipeToLoadLayout.setRefreshing(true);
                 }
             }
 
@@ -137,24 +138,6 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
             }
         });
     }
-
-    /**
-     * 根据 教材版本  请求 请求章节 和知识点
-     *
-     * @param bookEditionModel 教材
-     */
-    private void setBookEditionData(BookDetailsModel bookEditionModel) {
-        int jiaoCaiId = bookEditionModel.getJiaocai_id();
-        int gradeDetailsId = bookEditionModel.getGrade_detail_id();
-        //请求课程详情列表
-        postDetailsData(jiaoCaiId, gradeDetailsId,
-                bookEditionModel.getZhangjielist().get(default_code).getZhangjie_id(),
-                bookEditionModel.getZhangjielist().get(default_code).getZhishidianArr().get(default_code)
-        );
-    }
-
-    private int page = 1;
-
 
     /**
      * 根据 教材 章节  知识点  请求课程详情信息
@@ -218,34 +201,33 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
     }
 
     /**
-     * 切换教材版本 重新请求章节 知识点 信息
-     *
-     * @param editionModel 教材信息
+     * 切换教材版本
      */
     @Override
     public void onEditonChanged(BookDetailsModel editionModel) {
         page = 1;
         swipeToLoadLayout.setLoadingMore(false);
-        setBookEditionData(editionModel);
+        swipeToLoadLayout.setRefreshing(true);
     }
 
+    /**
+     * 切换章节
+     */
     @Override
     public void onChapterChanged(BookChapterModel chapterModel) {
         page = 1;
         swipeToLoadLayout.setLoadingMore(false);
-        BookDetailsModel editionModel = bookTypeView.getSelectJiaoCaiData();
-        postDetailsData(editionModel.getJiaocai_id(), editionModel.getGrade_detail_id(),
-                chapterModel.getZhangjie_id(), chapterModel.getZhishidianArr().get(0));
+        swipeToLoadLayout.setRefreshing(true);
     }
 
+    /**
+     * 切换知识点
+     */
     @Override
     public void onKnowledgeChanged(String knowledgeModel) {
         page = 1;
         swipeToLoadLayout.setLoadingMore(false);
-        BookDetailsModel editionModel = bookTypeView.getSelectJiaoCaiData();
-        BookChapterModel chapterModel = bookTypeView.getSelectZhangJieData();
-        postDetailsData(editionModel.getJiaocai_id(), editionModel.getGrade_detail_id(),
-                chapterModel.getZhangjie_id(), knowledgeModel);
+        swipeToLoadLayout.setRefreshing(true);
     }
 
     /**

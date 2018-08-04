@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_video_player"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.huisu.iyoox.activity.videoplayer.VideoPlayerActivity">
+
+
+    <!--<com.huisu.iyoox.views.MyJZVideoPlayerStandard-->
+    <!--android:id="@+id/ac_video_player_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dip_200" />-->
+    <RelativeLayout
+        android:id="@+id/view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_204"
+        android:background="@color/black">
+
+        <com.easefun.polyvsdk.video.PolyvVideoView
+            android:id="@+id/polyv_video_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!--<com.easefun.polyvsdk.player.PolyvPlayerMediaController-->
+            <!--android:id="@+id/polyv_player_media_controller"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:visibility="gone" />-->
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/video_zhangjia_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_40"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/video_zhangjie_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dip_16"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="@color/maincolor"
+            android:textSize="@dimen/f_16" />
+
+        <TextView
+            android:id="@+id/video_zhangjie_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dip_16"
+            android:gravity="center"
+            android:textColor="@color/maincolor"
+            android:textSize="@dimen/f_16" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/coloreddd" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/video_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

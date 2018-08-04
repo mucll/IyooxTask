@@ -114,13 +114,17 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
             public void onSuccess(Object responseObj) {
                 loading.dismiss();
                 BaseExercisesModel baseVideoUrlModel = (BaseExercisesModel) responseObj;
-                if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE && baseVideoUrlModel.data != null) {
+                if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE) {
                     if (baseVideoUrlModel.data != null && baseVideoUrlModel.data.size() > 0) {
                         //计时器清零
                         chronometer.setVisibility(View.VISIBLE);
                         chronometer.setBase(SystemClock.elapsedRealtime());
                         chronometer.start();
                         initFragment(baseVideoUrlModel.data, title, Constant.STUDENT_HOME_WORK);
+                    } else {
+                        TabToast.showMiddleToast(context, baseVideoUrlModel.msg);
+                        EventBus.getDefault().post("home_work");
+                        finish();
                     }
                 }
             }

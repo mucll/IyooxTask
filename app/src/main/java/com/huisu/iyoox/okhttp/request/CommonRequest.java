@@ -124,7 +124,8 @@ public class CommonRequest {
      * @return
      */
 //    private static final MediaType FILE_TYPE = MediaType.parse("application/x-www-form-urlencoded");
-    private static final MediaType FILE_TYPE = MediaType.parse("application/octet-stream");
+//    private static final MediaType FILE_TYPE = MediaType.parse("application/octet-stream");
+//    private static final MediaType FILE_TYPE = MediaType.parse("multipart/form-data; charset=utf-8");
 
     public static Request createMultiPostRequest(String url, RequestParams params) {
 
@@ -133,8 +134,8 @@ public class CommonRequest {
         if (params != null) {
             for (Map.Entry<String, Object> entry : params.fileParams.entrySet()) {
                 if (entry.getValue() instanceof File) {
-                    requestBody.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + entry.getKey() + "\""),
-                            RequestBody.create(FILE_TYPE, (File) entry.getValue()));
+                    requestBody.addFormDataPart(entry.getKey(), ((File) entry.getValue()).getName(),
+                            RequestBody.create(MediaType.parse("multipart/form-data"), (File) entry.getValue()));
                 } else if (entry.getValue() instanceof String) {
                     requestBody.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + entry.getKey() + "\""),
                             RequestBody.create(null, (String) entry.getValue()));

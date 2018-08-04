@@ -37,15 +37,13 @@ public class ChangeHeaderImgDialog implements View.OnClickListener {
     Activity context;
     ImageView headerIv;
     private Dialog dialog;
-    private BaseFragment fragment;
     private final TextView camareTv;
     private final TextView select;
     private boolean cutting = false;
 
-    public ChangeHeaderImgDialog(Activity context, ImageView headerIv, BaseFragment fragment) {
+    public ChangeHeaderImgDialog(Activity context, ImageView headerIv) {
         this.headerIv = headerIv;
         this.context = context;
-        this.fragment = fragment;
         String sdPath = MyApplication.CACHEPATH;
         File file = new File(sdPath);
         if (!file.exists()) {
@@ -106,14 +104,14 @@ public class ChangeHeaderImgDialog implements View.OnClickListener {
                 bm = null;
             }
             cutting = true;
-            if (fragment.hasPermission(Constant.WRITE_READ_EXTERNAL_PERMISSION)) {
+            if (((BaseActivity) context).hasPermission(Constant.WRITE_READ_EXTERNAL_PERMISSION)) {
                 bm = BitmapFactory.decodeFile(mOutputFile.getAbsolutePath());
                 if (bm != null && bm.getHeight() > 0) {
                     // postFile(imageData.getUri());
                     getResult(mOutputFile);
                 }
             } else {
-                fragment.requestPermission(Constant.WRITE_READ_EXTERNAL_CODE, Constant.WRITE_READ_EXTERNAL_PERMISSION);
+                ((BaseActivity) context).requestPermission(Constant.WRITE_READ_EXTERNAL_CODE, Constant.WRITE_READ_EXTERNAL_PERMISSION);
             }
         } else if (requestCode == REQUST_CAMARE) {
             Uri uri = Uri.fromFile(mOutputFile);
@@ -136,18 +134,18 @@ public class ChangeHeaderImgDialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.camare:
-                if (fragment.hasPermission(Constant.HARDWEAR_CAMERA_PERMISSION)) {
+                if (((BaseActivity) context).hasPermission(Constant.HARDWEAR_CAMERA_PERMISSION)) {
                     doOpenCamera();
                 } else {
-                    fragment.requestPermission(Constant.HARDWEAR_CAMERA_CODE, Constant.HARDWEAR_CAMERA_PERMISSION);
+                    ((BaseActivity) context).requestPermission(Constant.HARDWEAR_CAMERA_CODE, Constant.HARDWEAR_CAMERA_PERMISSION);
                 }
                 break;
             case R.id.select:
                 cutting = false;
-                if (fragment.hasPermission(Constant.WRITE_READ_EXTERNAL_PERMISSION)) {
+                if (((BaseActivity) context).hasPermission(Constant.WRITE_READ_EXTERNAL_PERMISSION)) {
                     doWriteSDCard();
                 } else {
-                    fragment.requestPermission(Constant.WRITE_READ_EXTERNAL_CODE, Constant.WRITE_READ_EXTERNAL_PERMISSION);
+                    ((BaseActivity) context).requestPermission(Constant.WRITE_READ_EXTERNAL_CODE, Constant.WRITE_READ_EXTERNAL_PERMISSION);
                 }
                 break;
         }

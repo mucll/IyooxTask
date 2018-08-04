@@ -47,6 +47,7 @@ public class TeacherCreateTaskActivity extends BaseActivity implements DropdownB
     private int kemu_id = 0;
     private int versionId = 0;
     private int versionDetailId = 0;
+    private View emptyView;
 
     @Override
     protected void initView() {
@@ -60,6 +61,7 @@ public class TeacherCreateTaskActivity extends BaseActivity implements DropdownB
         versionView.setText(user.getVersionName());
         versionView.setVisibility(View.VISIBLE);
         dropdownBt = findViewById(R.id.dropdown_tab_bt);
+        emptyView = findViewById(R.id.empty_view);
         mListView = findViewById(R.id.swipe_target);
         mAdapter = new TeacherZhiShiDianListAdapter(context, data);
         mListView.setAdapter(mAdapter);
@@ -83,8 +85,13 @@ public class TeacherCreateTaskActivity extends BaseActivity implements DropdownB
                         BaseVideoGroupModel baseVideoGroupModel = (BaseVideoGroupModel) responseObj;
                         if (baseVideoGroupModel.data != null && baseVideoGroupModel.data.size() > 0) {
                             videoGroupModels.addAll(baseVideoGroupModel.data);
+                            dropdownBt.setVisibility(View.VISIBLE);
+                            emptyView.setVisibility(View.GONE);
                             dropdownBt.setData(baseVideoGroupModel.data);
                             data.addAll(baseVideoGroupModel.data.get(0).getZhishidian());
+                        } else {
+                            dropdownBt.setVisibility(View.GONE);
+                            emptyView.setVisibility(View.VISIBLE);
                         }
                         mAdapter.notifyDataSetChanged();
                         for (int i = 0; i < data.size(); i++) {
@@ -125,7 +132,6 @@ public class TeacherCreateTaskActivity extends BaseActivity implements DropdownB
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_submit:
-
                 TeacherSelectSubjectVersionActivity.start(this, gradeCode,
                         kemu_id, versionId, versionDetailId);
                 break;

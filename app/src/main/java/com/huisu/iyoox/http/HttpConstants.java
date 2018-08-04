@@ -6,8 +6,12 @@ package com.huisu.iyoox.http;
  * @date: 16/8/12
  */
 public class HttpConstants {
-
-    private static final String ROOT_URL = "http://www.sunvke.com/api";
+    //外网
+//    private static final String ROOT_URL = "http://www.sunvke.com/api";
+    //刘栋
+    private static final String ROOT_URL = "http://8jbew0j.hk1.mofasuidao.cn/api";
+    //王佳浩
+//    private static final String ROOT_URL = "http://mpvbsjh.hk1.mofasuidao.cn/api";
 
     /**
      * 判断手机号 是否注册

@@ -25,6 +25,8 @@ allprojects {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        maven {url 'http://maven.aliyun.com/nexus/content/repositories/releases/'}
+        maven {url 'https://dl.bintray.com/polyv/test'}
     }
 }
 

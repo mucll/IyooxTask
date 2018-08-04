@@ -132,29 +132,29 @@
             android:textSize="@dimen/f_16" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/mine_about_layout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_54"
-        android:background="@drawable/select_white_bg"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dip_14"
-        android:paddingRight="@dimen/dip_14">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/mine_about_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/dip_54"-->
+        <!--android:background="@drawable/select_white_bg"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:paddingLeft="@dimen/dip_14"-->
+        <!--android:paddingRight="@dimen/dip_14">-->
 
-        <ImageView
-            android:layout_width="@dimen/dip_20"
-            android:layout_height="@dimen/dip_20"
-            android:src="@drawable/user_icon_about" />
+        <!--<ImageView-->
+            <!--android:layout_width="@dimen/dip_20"-->
+            <!--android:layout_height="@dimen/dip_20"-->
+            <!--android:src="@drawable/user_icon_about" />-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dip_20"
-            android:drawableRight="@drawable/homework_finished_forward"
-            android:text="关于"
-            android:textColor="@color/black_87"
-            android:textSize="@dimen/f_16" />
-    </LinearLayout>
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_marginLeft="@dimen/dip_20"-->
+            <!--android:drawableRight="@drawable/homework_finished_forward"-->
+            <!--android:text="关于"-->
+            <!--android:textColor="@color/black_87"-->
+            <!--android:textSize="@dimen/f_16" />-->
+    <!--</LinearLayout>-->
 
 </LinearLayout>

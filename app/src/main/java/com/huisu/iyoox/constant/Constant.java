@@ -19,6 +19,15 @@ public class Constant {
      */
     public static final int ERROR_CODE = -1;
 
+    /**
+     * 通知消息
+     */
+    public static final int NOTIFICATION_MSG = 1;
+    /**
+     * 系统消息
+     */
+    public static final int SYSTEM_MSG = 2;
+
 //----------------------------------密码界面根据type显示不同的界面---------------------------------------
     /**
      * 注册设置密码

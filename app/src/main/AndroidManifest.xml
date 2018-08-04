@@ -75,6 +75,9 @@
             android:name=".activity.videoplayer.VideoPlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
+            android:name=".activity.videoplayer.VideoPlayerNewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
             android:name=".activity.TaskResultActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
@@ -170,7 +173,8 @@
         <activity android:name=".activity.teacher.TeacherLookStudentTaskDetailActivity" />
         <activity android:name=".activity.teacher.TeacherRemarkActivity" />
         <activity android:name=".activity.teacher.TeacherRemarkResultActivity" />
-        <activity android:name=".activity.student.StudentHomeWorkReportActivity"></activity>
+        <activity android:name=".activity.student.StudentHomeWorkReportActivity" />
+        <activity android:name=".activity.student.StudentMsgActivity"></activity>
     </application>
 
 </manifest>

@@ -89,7 +89,7 @@ public class DropdownButton extends RelativeLayout implements Checkable, View.On
                 popWinDownUtil.hide();
             }
         });
-        ListView listView = (ListView) view.findViewById(R.id.dropdown_tab_list_view);
+        ListView listView = view.findViewById(R.id.dropdown_tab_list_view);
         listView.setOnItemClickListener(this);
 
         adapter = new DropDownAdapter(drops, mContext);
@@ -143,6 +143,7 @@ public class DropdownButton extends RelativeLayout implements Checkable, View.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (selectPosition == position) {
+            popWinDownUtil.hide();
             return;
         }
         drops.get(selectPosition).setChoiced(false);
