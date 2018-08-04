@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.activity.videoplayer.VideoPlayerActivity;
+import com.huisu.iyoox.activity.videoplayer.VideoPlayerNewActivity;
 import com.huisu.iyoox.adapter.StudentCollectAdapter;
 import com.huisu.iyoox.entity.VideoTitleModel;
 
@@ -74,7 +75,7 @@ public class StudentCollectActivity extends BaseActivity implements AdapterView.
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         VideoTitleModel model = models.get(position);
-        Intent intent = new Intent(context, VideoPlayerActivity.class);
+        Intent intent = new Intent(context, VideoPlayerNewActivity.class);
         intent.putExtra("selectModel", model);
         startActivity(intent);
     }

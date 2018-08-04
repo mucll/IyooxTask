@@ -59,24 +59,32 @@ public class StudentTaskListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         TaskStudentListModel model = getItem(position);
-        if (!TextUtils.isEmpty(model.getXueke_name())) {
-            holder.subjectIcon.setImageResource(getImgResId(model.getXueke_name()));
-            holder.taskName.setText(model.getWork_name());
-        }
         switch (taskType) {
             case TaskStatus.UNFINISH:
+                if (!TextUtils.isEmpty(model.getXueke_name())) {
+                    holder.subjectIcon.setImageResource(getImgResId(model.getXueke_name()));
+                    holder.taskName.setText(model.getWork_name());
+                }
                 holder.startIconTV.setImageResource(R.drawable.homework_icon_time);
                 holder.endIcon.setVisibility(View.GONE);
                 holder.endIcon.setVisibility(View.GONE);
                 holder.startTime.setText(StringUtils.getTimeString(model.getStart_time()) + "-" + StringUtils.getTimeString(model.getEnd_time()));
                 break;
             case TaskStatus.FINISH:
+                if (!TextUtils.isEmpty(model.getXueke_name())) {
+                    holder.subjectIcon.setImageResource(getImgResId(model.getXueke_name()));
+                    holder.taskName.setText(model.getWork_name());
+                }
                 holder.startIconTV.setImageResource(R.drawable.homework_icon_finished);
                 holder.endIcon.setVisibility(View.VISIBLE);
                 holder.endIcon.setVisibility(View.VISIBLE);
                 holder.startTime.setText(StringUtils.getTimeString(model.getEnd_time()));
                 break;
             case TaskStatus.YUQI:
+                if (!TextUtils.isEmpty(model.getXueke_name())) {
+                    holder.subjectIcon.setImageResource(getUnImgResId(model.getXueke_name()));
+                    holder.taskName.setText(model.getWork_name());
+                }
                 holder.startIconTV.setImageResource(R.drawable.homework_icon_time);
                 holder.endIcon.setVisibility(View.GONE);
                 holder.endIcon.setVisibility(View.GONE);
@@ -103,6 +111,23 @@ public class StudentTaskListAdapter extends BaseAdapter {
                 return R.drawable.homework_chemistry;
             default:
                 return R.drawable.homework_yu;
+        }
+    }
+
+    private int getUnImgResId(String subjectName) {
+        switch (subjectName) {
+            case "语文":
+                return R.drawable.homework_overdue_yu;
+            case "数学":
+                return R.drawable.homework_overdue_math;
+            case "英语":
+                return R.drawable.homework_overdue_eng;
+            case "物理":
+                return R.drawable.homework_overdue_physics;
+            case "化学":
+                return R.drawable.homework_overdue_chemistry;
+            default:
+                return R.drawable.homework_overdue_yu;
         }
     }
 

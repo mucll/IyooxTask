@@ -115,7 +115,7 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
                     @Override
                     public void getGradeType(GradeListModel gradeModel, int gradeCode) {
                         gradeTv.setText(gradeModel.getName());
-                        RegisterTeacherSubjectActivity.this.gradeCode = gradeCode;
+                        RegisterTeacherSubjectActivity.this.gradeCode = gradeCode + 1;
                         setSubjectEmpty();
                     }
                 };
@@ -124,11 +124,11 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
                 if (gradeCode == 0) {
                     return;
                 }
-                TeacherSelectSubjectActivity.start(this, gradeCode + 1, subjectId);
+                TeacherSelectSubjectActivity.start(this, gradeCode, subjectId);
                 break;
             case R.id.register_version_ll:
                 if (subjectModel != null) {
-                    TeacherSelectSubjectVersionActivity.start(this, gradeCode + 1,
+                    TeacherSelectSubjectVersionActivity.start(this, gradeCode,
                             subjectModel.getKemu_id(), versionId, versionDetailId);
                 }
                 break;
@@ -145,7 +145,7 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
      */
     private void postSetUserInfo() {
         loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
-        RequestCenter.setTeacherUserInfo(userId, nameEt.getText().toString(), gradeCode + 1 + "",
+        RequestCenter.setTeacherUserInfo(userId, nameEt.getText().toString(), gradeCode + "",
                 subjectModel.getKemu_id() + "", versionModel.getJiaocai_id() + ""
                 , versionModel.getGrade_detail_id() + "",
                 new DisposeDataListener() {

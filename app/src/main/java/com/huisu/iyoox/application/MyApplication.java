@@ -12,6 +12,8 @@ import com.easefun.polyvsdk.PolyvDownloaderManager;
 import com.easefun.polyvsdk.PolyvSDKClient;
 import com.huisu.iyoox.BuildConfig;
 import com.huisu.iyoox.util.PolyvStorageUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
@@ -39,14 +41,21 @@ public class MyApplication extends Application {
         mApplication = this;
         LitePalApplication.initialize(this);
         initUMeng();
+        // 创建默认的ImageLoader配置参数
+        ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(this);
+        ImageLoader.getInstance().init(configuration);
         initPolyvCilent();
     }
 
     //加密秘钥和加密向量，在后台->设置->API接口中获取，用于解密SDK加密串
     //值修改请参考https://github.com/easefun/polyv-android-sdk-demo/wiki/10.%E5%85%B3%E4%BA%8E-SDK%E5%8A%A0%E5%AF%86%E4%B8%B2-%E4%B8%8E-%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E5%8A%A0%E5%AF%86%E4%BC%A0%E8%BE%93
-    /** 加密秘钥 */
+    /**
+     * 加密秘钥
+     */
     private String aeskey = "VXtlHmwfS2oYm0CZ";
-    /** 加密向量 */
+    /**
+     * 加密向量
+     */
     private String iv = "2u9gDPKdX6GyQJKU";
 
     public void initPolyvCilent() {

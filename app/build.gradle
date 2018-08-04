@@ -104,4 +104,5 @@ dependencies {
     implementation 'com.easefun.polyv:polyvPlayer:2.4.0'//SDK核心包
     implementation 'com.easefun.polyv:polyvPlayerABI:1.6.0'//SDK核心包
     implementation 'com.easefun.polyv:polyvDownload:2.4.0'//SDK下载功能
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'//demo中图片使用
 }

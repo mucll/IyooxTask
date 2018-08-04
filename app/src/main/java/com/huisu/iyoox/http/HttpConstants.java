@@ -52,10 +52,12 @@ public class HttpConstants {
      * 重置密码
      */
     public static String MODIFY_PASSWORD = ROOT_URL + "/user/ModifyPassword";
+
     /**
      * 老师根据年级获取科目列表
      */
     public static String GET_KEMU_BY_GRADE = ROOT_URL + "/user/get_kemu_by_grade";
+
     /**
      * 老师根据科目获取教材版本列表
      */
