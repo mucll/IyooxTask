@@ -104,7 +104,7 @@
             android:layout_marginLeft="@dimen/dip_16"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:textColor="@color/maincolor"
+            android:textColor="@color/main_text_color"
             android:textSize="@dimen/f_16" />
 
         <TextView
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dip_16"
             android:gravity="center"
-            android:textColor="@color/maincolor"
+            android:textColor="@color/main_text_color"
             android:textSize="@dimen/f_16" />
     </LinearLayout>
 
@@ -147,7 +147,7 @@
             android:id="@+id/video_share_rl"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:background="@drawable/select_white_bg">
 
             <TextView
@@ -157,6 +157,7 @@
                 android:layout_centerInParent="true"
                 android:drawableLeft="@drawable/video_icon_share1"
                 android:drawablePadding="@dimen/dip_8"
+                android:gravity="center"
                 android:text="分享"
                 android:textColor="@color/color333"
                 android:textSize="@dimen/f_12" />
@@ -166,7 +167,7 @@
             android:id="@+id/video_collect_rl"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:background="@drawable/select_white_bg">
 
             <TextView
@@ -176,6 +177,7 @@
                 android:layout_centerInParent="true"
                 android:drawableLeft="@drawable/select_collect_bg"
                 android:drawablePadding="@dimen/dip_8"
+                android:gravity="center"
                 android:text="收藏"
                 android:textColor="@color/color333"
                 android:textSize="@dimen/f_12" />
@@ -184,7 +186,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:background="@color/red_light">
 
             <TextView

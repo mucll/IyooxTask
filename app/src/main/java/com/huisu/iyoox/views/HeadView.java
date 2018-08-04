@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.constant.Constant;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,6 +38,7 @@ public class HeadView extends FrameLayout {
     Context context;
     private GlideListener listener;
     private String userNo, nickName, headUrl;
+    private int type;
 
     public HeadView(Context context) {
         this(context, null);
@@ -120,20 +122,21 @@ public class HeadView extends FrameLayout {
      * @param nickName
      * @param headUrl
      */
-    public void setHead(final String userId, String nickName, String headUrl) {
+    public void setHead(final String userId, String nickName, String headUrl, int type) {
         userNo = userId;
         this.nickName = nickName;
         this.headUrl = headUrl;
+        this.type = type;
         name.setVisibility(VISIBLE);
         name.setTag(userId);
-        head.setImageResource(getResId());
+        head.setImageResource(getResId(type));
         if (context instanceof Activity && ((Activity) context).isFinishing()) {
             return;
         }
         Glide.with(context)
                 .load(headUrl)
                 .asBitmap()
-                .placeholder(getResId())
+                .placeholder(getResId(type))
                 .dontAnimate()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
@@ -170,8 +173,16 @@ public class HeadView extends FrameLayout {
                 });
     }
 
-    private int getResId() {
-        return R.drawable.student_default;
+    private int getResId(int type) {
+        switch (type) {
+            case Constant.STUDENT_TYPE:
+                return R.drawable.student_photo_default;
+            case Constant.TEACHER_TYPE:
+                return R.drawable.teacher_photo_default;
+            default:
+                return R.drawable.student_default;
+        }
+
     }
 
 

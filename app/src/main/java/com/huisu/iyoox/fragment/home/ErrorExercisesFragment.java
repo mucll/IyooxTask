@@ -87,7 +87,7 @@ public class ErrorExercisesFragment extends BaseFragment {
     private void initView() {
         user = UserManager.getInstance().getUser();
         mLayoutInflater = LayoutInflater.from(getContext());
-        mVp = (ViewPager) view.findViewById(R.id.vp_gallery_vp);
+        mVp = view.findViewById(R.id.vp_gallery_vp);
         mVp.setOverScrollMode(View.OVER_SCROLL_NEVER);
         emptyView = view.findViewById(R.id.empty_view);
         //控制两幅图之间的间距
@@ -119,8 +119,6 @@ public class ErrorExercisesFragment extends BaseFragment {
             View view = mLayoutInflater.inflate(R.layout.item_img, container, false);
             final SubjectModel subjectModel = models.get(position);
             ImageView img = view.findViewById(R.id.img_item_img);
-            TextView tv = view.findViewById(R.id.error_subject_name_tv);
-            tv.setText(subjectModel.getName());
             img.setImageResource(getSubjectResId(subjectModel.getKemu_id()));
             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
             img.setOnClickListener(new View.OnClickListener() {

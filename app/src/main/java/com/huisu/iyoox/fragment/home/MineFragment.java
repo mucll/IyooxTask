@@ -95,7 +95,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private void initData() {
         user = UserManager.getInstance().getUser();
-        mHeadView.setHead(user.getUserId(), user.getName(), TextUtils.isEmpty(user.getAvatar()) ? "" : user.getAvatar());
+        mHeadView.setHead(user.getUserId(), user.getName(), TextUtils.isEmpty(user.getAvatar()) ? "" : user.getAvatar(),user.getType());
         userName.setText(user.getName());
     }
 

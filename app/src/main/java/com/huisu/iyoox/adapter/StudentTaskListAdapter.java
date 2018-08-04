@@ -17,9 +17,7 @@ import com.huisu.iyoox.util.StringUtils;
 import java.util.ArrayList;
 
 /**
- * @author:dl
- * @function:
- * @date: 2018/7/13
+ * 学生作业列表adapter
  */
 public class StudentTaskListAdapter extends BaseAdapter {
 

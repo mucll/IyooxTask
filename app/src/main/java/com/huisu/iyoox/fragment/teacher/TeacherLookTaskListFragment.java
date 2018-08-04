@@ -89,7 +89,6 @@ public class TeacherLookTaskListFragment extends BaseFragment implements OnLoadM
                         page--;
                     } else {
                         emptyView.setVisibility(View.VISIBLE);
-                        TabToast.showMiddleToast(getContext(), "暂无数据");
                     }
                 }
                 mAdapter.notifyDataSetChanged();

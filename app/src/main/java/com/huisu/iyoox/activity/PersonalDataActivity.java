@@ -19,6 +19,7 @@ import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.ChangeHeaderImgDialog;
 import com.huisu.iyoox.views.HeadView;
+import com.huisu.iyoox.views.Loading;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +40,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     private ChangeHeaderImgDialog mHeaderImgDialog;
     private ImageButton backBtn;
     private boolean setResult = false;
+    private Loading loading;
 
     @Override
     protected void initView() {
@@ -70,7 +72,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void postUserData(User user) {
-        headView.setHead(user.getUserId(), user.getName(), TextUtils.isEmpty(user.getAvatar()) ? "" : user.getAvatar());
+        headView.setHead(user.getUserId(), user.getName(), TextUtils.isEmpty(user.getAvatar()) ? "" : user.getAvatar(), user.getType());
         accountTv.setText(!TextUtils.isEmpty(user.getPhone()) ? user.getPhone() : "");
         userNameTv.setText(!TextUtils.isEmpty(user.getName()) ? user.getName() : "");
         gradeTv.setText(user.getGradeName());
@@ -121,6 +123,9 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * 选择图片
+     */
     private void configHeard() {
         mHeaderImgDialog = new ChangeHeaderImgDialog(this,
                 headView.head) {
@@ -132,19 +137,25 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         };
     }
 
+    /**
+     * 上传头像
+     */
     private void setHead(final File head) {
+        loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
         RequestCenter.updateAvatar(user.getUserId(), head, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
+                loading.dismiss();
                 JSONObject jsonObject = (JSONObject) responseObj;
                 try {
                     int code = jsonObject.getInt("code");
                     if (code == Constant.POST_SUCCESS_CODE) {
                         TabToast.showMiddleToast(context, "头像修改成功");
                         String path = head.getAbsolutePath();
-                        headView.setHead(user.getUserId() + "", user.getName(), path);
+                        headView.setHead(user.getUserId() + "", user.getName(), path, user.getType());
                         String data = jsonObject.getString("data");
                         user.setAvatar(data);
+                        user.updateAll();
                         UserManager.getInstance().setUser(user);
                         setResult = true;
                     }
@@ -155,7 +166,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
 
             @Override
             public void onFailure(Object reasonObj) {
-
+                loading.dismiss();
             }
         });
     }

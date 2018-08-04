@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
@@ -40,7 +41,7 @@ public class TeacherIconAdapter extends RecyclerView.Adapter<TeacherIconAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         TeacherModel teacherModel = teacherModels.get(position);
         holder.teacherName.setText(teacherModel.getTeacher_name());
-        holder.subjectTv.setText(teacherModel.getXueke_name());
+        holder.subjectTv.setText("(" + teacherModel.getXueke_name() + ")");
     }
 
     @Override
@@ -50,11 +51,13 @@ public class TeacherIconAdapter extends RecyclerView.Adapter<TeacherIconAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private ImageView icon;
         private TextView teacherName;
         private TextView subjectTv;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            icon = itemView.findViewById(R.id.item_class_teacher_head_icon_view);
             teacherName = itemView.findViewById(R.id.item_class_teacher_name_tv);
             subjectTv = itemView.findViewById(R.id.item_class_teacher_subject_tv);
         }

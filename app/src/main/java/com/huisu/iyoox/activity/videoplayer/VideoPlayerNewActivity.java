@@ -110,7 +110,6 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
 
     @Override
     protected void initView() {
-        vid = "356557938d43ded7d21457166dd70a82_3";
         bitrate = getIntent().getIntExtra("bitrate", PolyvBitRate.ziDong.getNum());
         isMustFromLocal = getIntent().getBooleanExtra("isMustFromLocal", false);
 
@@ -245,7 +244,7 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
                     VideoTimuModel urlModel = baseVideoUrlModel.data;
                     mAdapter.setSelectId(selectModel.getZhishidian_id());
                     mAdapter.notifyDataSetChanged();
-
+                    vid = urlModel.getShipin_url();
                     play(vid, bitrate, false, isMustFromLocal);
                 }
             }
@@ -264,11 +263,8 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
                 setCollect();
                 break;
             case R.id.video_share_rl:
-
                 break;
-
             default:
-
                 break;
         }
     }
@@ -291,11 +287,9 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
 
     @Override
     protected void setEvent() {
-
         shareView.setOnClickListener(this);
         collectView.setOnClickListener(this);
         mAdapter.setOnItemClickListener(this);
-
 
         videoView.setOnPreparedListener(new IPolyvOnPreparedListener2() {
             @Override

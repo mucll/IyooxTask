@@ -26,12 +26,14 @@ public class TeacherCreateClassResultActivity extends BaseActivity implements Vi
     private View classView;
     private View taskView;
     private Button taskBt;
+    private Button inviteBt;
 
     @Override
     protected void initView() {
         classIdTv = findViewById(R.id.teacher_create_class_class_id_tv);
         classView = findViewById(R.id.teacher_create_class_success_ll);
         taskView = findViewById(R.id.teacher_send_task_success_rl);
+        inviteBt = findViewById(R.id.teacher_invite_bt);
         taskBt = findViewById(R.id.task_submit_home_bt);
     }
 
@@ -62,6 +64,11 @@ public class TeacherCreateClassResultActivity extends BaseActivity implements Vi
                 }
                 taskBt.setEnabled(false);
                 break;
+            case R.id.teacher_invite_bt:
+                finish();
+                break;
+            default:
+                break;
         }
     }
 
@@ -83,6 +90,7 @@ public class TeacherCreateClassResultActivity extends BaseActivity implements Vi
     protected void setEvent() {
         setBack();
         taskBt.setOnClickListener(this);
+        inviteBt.setOnClickListener(this);
     }
 
     @Override

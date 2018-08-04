@@ -75,13 +75,13 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/teacher_invite_bt"
             android:layout_width="@dimen/dip_320"
             android:layout_height="@dimen/dip_40"
             android:layout_below="@id/class_id_ll"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dip_22"
             android:background="@drawable/select_button_bg_maincolor"
-            android:enabled="false"
             android:text="邀请老师"
             android:textColor="@color/white"
             android:textSize="@dimen/f_16" />

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,7 @@ public class TeacherMineFragment extends BaseFragment implements View.OnClickLis
 
     private void initData() {
         user = UserManager.getInstance().getUser();
-        headView.setHead(user.getUserId(), user.getName(), "");
+        headView.setHead(user.getUserId(), user.getName(),  TextUtils.isEmpty(user.getAvatar()) ? "" : user.getAvatar(),user.getType());
         userName.setText(user.getName());
     }
 
@@ -81,6 +82,14 @@ public class TeacherMineFragment extends BaseFragment implements View.OnClickLis
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
+            initData();
         }
     }
 

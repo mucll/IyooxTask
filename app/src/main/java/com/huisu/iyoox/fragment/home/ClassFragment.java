@@ -51,7 +51,6 @@ import java.util.List;
  */
 public class ClassFragment extends BaseFragment implements View.OnClickListener {
 
-
     private View view;
     private RecyclerView mRecyclerView;
     private TeacherIconAdapter teacherAdapter;
