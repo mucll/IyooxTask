@@ -14,12 +14,20 @@ import android.widget.TextView;
 import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.adapter.TeacherLookTaskListAdapter;
+import com.huisu.iyoox.adapter.TeacherRemarkListAdapter;
+import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.entity.DianPingListModel;
 import com.huisu.iyoox.entity.TaskTeacherListModel;
 import com.huisu.iyoox.entity.User;
+import com.huisu.iyoox.entity.base.BaseDianPingListModel;
 import com.huisu.iyoox.fragment.base.BaseFragment;
+import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.manager.UserManager;
+import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.swipetoloadlayout.OnLoadMoreListener;
 import com.huisu.iyoox.swipetoloadlayout.OnRefreshListener;
 import com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout;
+import com.huisu.iyoox.util.TabToast;
 
 import java.util.ArrayList;
 
@@ -30,15 +38,13 @@ public class TeacherRemarkFragment extends BaseFragment implements MyOnItemClick
 
     private View view;
     private TextView titleTv;
-    private int type;
     private RecyclerView mRecyclerView;
     private SwipeToLoadLayout swipeToLoadLayout;
-    private TeacherLookTaskListAdapter mAdapter;
+    private TeacherRemarkListAdapter mAdapter;
     private int page = 1;
     private boolean init = false;
     private User user;
-    private int classId;
-    private ArrayList<TaskTeacherListModel> models = new ArrayList<>();
+    private ArrayList<DianPingListModel> models = new ArrayList<>();
     private View emptyView;
 
     @Override
@@ -55,11 +61,10 @@ public class TeacherRemarkFragment extends BaseFragment implements MyOnItemClick
     private void initView() {
         titleTv = view.findViewById(R.id.title_bar_tv);
         swipeToLoadLayout = view.findViewById(R.id.swipeToLoadLayout);
-        emptyView = view.findViewById(R.id.task_list_teacher_empty_view);
+        emptyView = view.findViewById(R.id.teacher_remark_empty_view);
         mRecyclerView = view.findViewById(R.id.swipe_target);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        mAdapter = new TeacherLookTaskListAdapter(getContext(), models, type);
-        mAdapter.setOnItemClickListener(this);
+        mAdapter = new TeacherRemarkListAdapter(getContext(), models);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -70,10 +75,41 @@ public class TeacherRemarkFragment extends BaseFragment implements MyOnItemClick
 
     private void initData() {
         titleTv.setText("点评");
+        user = UserManager.getInstance().getUser();
     }
 
+
     private void postTaskListHttp() {
-        closeLoading();
+        RequestCenter.teacherDianPingList(user.getUserId(), page + "", new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                closeLoading();
+                if (page == 1) {
+                    models.clear();
+                }
+                BaseDianPingListModel baseModel = (BaseDianPingListModel) responseObj;
+                if (baseModel.code == Constant.POST_SUCCESS_CODE) {
+                    if (baseModel.data != null && baseModel.data.size() > 0) {
+                        models.addAll(baseModel.data);
+                        emptyView.setVisibility(View.GONE);
+                    } else {
+                        if (page != 1) {
+                            page--;
+                            TabToast.showMiddleToast(getContext(), "暂无更多数据");
+                        } else {
+                            emptyView.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                closeLoading();
+            }
+        });
+
     }
 
     @Override

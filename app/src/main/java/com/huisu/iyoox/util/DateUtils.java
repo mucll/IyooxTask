@@ -80,6 +80,22 @@ public class DateUtils {
     }
 
     /**
+     * 返回MM-dd HH:mm
+     *
+     * @param time
+     * @return
+     */
+    public static String formatTimesMD(String time) {
+        try {
+            Date date = sdf5.parse(time);
+            return sdf6.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
      * "yyyy-MM-dd"字符串返回时间戳
      *
      * @param time

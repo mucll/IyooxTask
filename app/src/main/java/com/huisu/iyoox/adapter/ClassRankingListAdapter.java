@@ -57,7 +57,8 @@ public class ClassRankingListAdapter extends BaseAdapter {
         UserBaseModel model = data.get(position);
         holder.ranking.setText(position + 1 + "");
         holder.studentName.setText(TextUtils.isEmpty(model.getStudent_name()) ? "" : model.getStudent_name());
-        holder.scoreTv.setText(model.getFenshu() + "");
+
+        holder.scoreTv.setText(model.getFenshu() + "%");
         if (model.getFenshu() >= 80) {
             holder.scoreTv.setTextColor(context.getResources().getColor(R.color.main_text_color));
         } else if (model.getFenshu() < 80 && model.getFenshu() >= 60) {

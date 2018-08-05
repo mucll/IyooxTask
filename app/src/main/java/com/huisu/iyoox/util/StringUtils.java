@@ -149,4 +149,18 @@ public class StringUtils {
         return time;
     }
 
+    public static String getTimeStringMD(String time) {
+        if (TextUtils.isEmpty(time)) {
+            return "";
+        }
+        if (time.contains(".")) {
+            time = time.split("\\.")[0];
+        }
+        if (time.contains("T")) {
+            time = time.split("T")[0] + " " + time.split("T")[1];
+        }
+        time = DateUtils.formatTimesMD(time);
+        return time;
+    }
+
 }

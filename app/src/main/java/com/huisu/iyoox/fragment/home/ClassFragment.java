@@ -40,6 +40,7 @@ import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.StringUtils;
 import com.huisu.iyoox.views.Loading;
 import com.huisu.iyoox.views.WrapContentHeightViewPager;
 
@@ -282,7 +283,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
         XAxis xl = mChart.getXAxis();
         //      xl.setAvoidFirstLastClipping(true);
         xl.setPosition(XAxis.XAxisPosition.BOTTOM); // 设置X轴的数据在底部显示
-        xl.setTextSize(10f); // 设置字体大小
+        xl.setTextSize(8f); // 设置字体大小
         xl.setSpaceBetweenLabels(0); // 设置数据之间的间距'
         xl.setDrawGridLines(false);
         YAxis yl = mChart.getAxisLeft();
@@ -305,7 +306,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
         ArrayList<Entry> yVals = new ArrayList<>();
         for (int i = 0; i < scoreModels.size(); i++) {
             StudentScoreModel model = scoreModels.get(i);
-            xVals.add(i + 1 + "");
+            xVals.add(StringUtils.getTimeStringMD(model.getSubmit_datetime()));
             yVals.add(new Entry(model.getFenshu(), i));
         }
         // create a dataset and give it a type

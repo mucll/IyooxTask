@@ -46,9 +46,6 @@ public class TeacherLookTaskDetailAdapter extends RecyclerView.Adapter<TeacherLo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         TaskTeacherLookStudentModel model = models.get(position);
-        holder.nameTv.setText(model.getStudent_name());
-        ImageLoader.load(context, holder.studentIcon, TextUtils.isEmpty(model.getAvatar()) ? "" : model.getAvatar()
-                , R.drawable.student_photo_default, 0);
         switch (type) {
             case Constant.TASK_STUDENT_FINISHED:
                 holder.indexOfTv.setText(model.getPaiming() + "");
@@ -62,6 +59,9 @@ public class TeacherLookTaskDetailAdapter extends RecyclerView.Adapter<TeacherLo
             default:
                 break;
         }
+        holder.nameTv.setText(model.getStudent_name());
+        ImageLoader.load(context, holder.studentIcon, TextUtils.isEmpty(model.getAvatar()) ? "" : model.getAvatar()
+                , R.drawable.student_photo_default, 0);
     }
 
     @Override

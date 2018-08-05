@@ -240,12 +240,16 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
             @Override
             public void onSuccess(Object responseObj) {
                 BaseVideoTimuModel baseVideoUrlModel = (BaseVideoTimuModel) responseObj;
-                if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE && baseVideoUrlModel.data != null) {
-                    VideoTimuModel urlModel = baseVideoUrlModel.data;
-                    mAdapter.setSelectId(selectModel.getZhishidian_id());
-                    mAdapter.notifyDataSetChanged();
-                    vid = urlModel.getShipin_url();
-                    play(vid, bitrate, false, isMustFromLocal);
+                if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE) {
+                    if (baseVideoUrlModel.data != null) {
+                        VideoTimuModel urlModel = baseVideoUrlModel.data;
+                        mAdapter.setSelectId(selectModel.getZhishidian_id());
+                        mAdapter.notifyDataSetChanged();
+                        vid = urlModel.getShipin_url();
+                        play(vid, bitrate, false, isMustFromLocal);
+                    } else {
+                        TabToast.showMiddleToast(context, "暂无视频");
+                    }
                 }
             }
 

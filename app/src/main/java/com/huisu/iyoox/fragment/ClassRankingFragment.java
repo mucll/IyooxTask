@@ -1,6 +1,7 @@
 package com.huisu.iyoox.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.TextUtils;
@@ -66,7 +67,7 @@ public class ClassRankingFragment extends BaseFragment {
         emptyView = view.findViewById(R.id.empty_view);
         mListView = view.findViewById(R.id.item_class_ranking_listview);
         zhishi = view.findViewById(R.id.class_ranking_zhishidian_name_tv);
-        zhishi.setText(TextUtils.isEmpty(model.getZhishidian_name()) ? "" : model.getZhishidian_name());
+        zhishi.setText(TextUtils.isEmpty(model.getName()) ? "" : model.getName());
         mAdapter = new ClassRankingListAdapter(getContext(), model.getStudent_list());
         mListView.setAdapter(mAdapter);
         if (model.getStudent_list() != null && model.getStudent_list().size() > 0) {

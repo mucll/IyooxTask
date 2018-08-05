@@ -11,24 +11,24 @@ import java.util.List;
  * @since JDK 1.8
  */
 public class StudentRankingModel implements Serializable {
-    private int zhishidian_id;
-    private String zhishidian_name;
+    private int id;
+    private String name;
     private List<UserBaseModel> student_list;
 
-    public int getZhishidian_id() {
-        return zhishidian_id;
+    public int getId() {
+        return id;
     }
 
     public void setZhishidian_id(int zhishidian_id) {
-        this.zhishidian_id = zhishidian_id;
+        this.id = zhishidian_id;
     }
 
-    public String getZhishidian_name() {
-        return zhishidian_name;
+    public String getName() {
+        return name;
     }
 
     public void setZhishidian_name(String zhishidian_name) {
-        this.zhishidian_name = zhishidian_name;
+        this.name = zhishidian_name;
     }
 
     public List<UserBaseModel> getStudent_list() {

@@ -140,9 +140,11 @@ public class TeacherClassRoomConfigActivity extends BaseActivity implements View
      * 删除班级
      */
     private void postDeteleClassHttp() {
+        loading.show();
         RequestCenter.deleteClassroom(user.getUserId(), model.getClassroom_id() + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
+                loading.dismiss();
                 JSONObject jsonObject = (JSONObject) responseObj;
                 try {
                     int code = jsonObject.getInt("code");
@@ -158,7 +160,7 @@ public class TeacherClassRoomConfigActivity extends BaseActivity implements View
 
             @Override
             public void onFailure(Object reasonObj) {
-
+                loading.dismiss();
             }
         });
     }

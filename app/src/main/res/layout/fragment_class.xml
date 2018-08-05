@@ -100,8 +100,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dip_140"
                 android:layout_marginBottom="@dimen/dip_16"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginLeft="@dimen/dip_8"
+                android:layout_marginRight="@dimen/dip_8"
                 android:focusable="false" />
 
             <View

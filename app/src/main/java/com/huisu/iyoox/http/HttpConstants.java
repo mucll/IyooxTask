@@ -219,6 +219,10 @@ public class HttpConstants {
      * 点评某次作业
      */
     public static String dianpingStudentWork = ROOT_URL + "/work/dianping_student_work";
+    /**
+     * 点评集合
+     */
+    public static String teacherDianPingList = ROOT_URL + "/work/teacher_dianping_work_list";
 
 }
 

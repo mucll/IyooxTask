@@ -10,6 +10,7 @@ package com.huisu.iyoox.entity;
 public class StudentScoreModel {
     private int work_id;
     private int fenshu;
+    private String submit_datetime;
 
     public int getWork_id() {
         return work_id;
@@ -25,5 +26,13 @@ public class StudentScoreModel {
 
     public void setFenshu(int fenshu) {
         this.fenshu = fenshu;
+    }
+
+    public String getSubmit_datetime() {
+        return submit_datetime;
+    }
+
+    public void setSubmit_datetime(String submit_datetime) {
+        this.submit_datetime = submit_datetime;
     }
 }

@@ -7,6 +7,7 @@ import com.huisu.iyoox.entity.base.BaseCheckMsgCode;
 import com.huisu.iyoox.entity.base.BaseClassRankingModel;
 import com.huisu.iyoox.entity.base.BaseClassRoomModel;
 import com.huisu.iyoox.entity.base.BaseClassRoomResultModel;
+import com.huisu.iyoox.entity.base.BaseDianPingListModel;
 import com.huisu.iyoox.entity.base.BaseExercisesModel;
 import com.huisu.iyoox.entity.base.BaseGradeListModel;
 import com.huisu.iyoox.entity.base.BaseHomeWorkResultModel;
@@ -571,5 +572,15 @@ public class RequestCenter {
         params.put("student_id", studentId);
         params.put("dianping", dianping);
         RequestCenter.postRequest(HttpConstants.dianpingStudentWork, params, listener, null);
+    }
+
+    /**
+     * 老师点评集合
+     */
+    public static void teacherDianPingList(String userId, String pageindex, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("teacher_id", userId);
+        params.put("pageindex", pageindex);
+        RequestCenter.postRequest(HttpConstants.teacherDianPingList, params, listener, BaseDianPingListModel.class);
     }
 }

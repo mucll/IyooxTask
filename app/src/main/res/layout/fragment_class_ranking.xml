@@ -62,7 +62,7 @@
             android:layout_width="@dimen/dip_105"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="成绩"
+            android:text="正确率"
             android:textColor="@color/color333"
             android:textSize="@dimen/f_13" />
     </LinearLayout>
