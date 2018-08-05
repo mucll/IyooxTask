@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huisu.iyoox.Interface.TaskStatus;
@@ -56,7 +58,9 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
     private int page = 1;
     private SwipeToLoadLayout swipeToLoadLayout;
     private User user;
-    private TaskEmptyView emptyView;
+    private View emptyView;
+    private ImageView emptyIcon;
+    private TextView emptyTv;
     private ArrayList<TaskStudentListModel> listModels = new ArrayList<>();
 
     @Override
@@ -84,14 +88,6 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
         swipeToLoadLayout.setOnLoadMoreListener(this);
         swipeToLoadLayout.setOnRefreshListener(this);
         mListView.setOnItemClickListener(this);
-        emptyView.setOnEmptyClick(new TaskEmptyView.onEmptyClickListener() {
-            @Override
-            public void onEmptyClick(View v) {
-                if (((MainActivity) getActivity()).myFragmentLayout != null) {
-                    ((MainActivity) getActivity()).myFragmentLayout.setCurrenItem(0);
-                }
-            }
-        });
     }
 
     @Override
@@ -115,14 +111,14 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
                 }
                 BaseTaskStudentListModel baseTaskStudentListModel = (BaseTaskStudentListModel) responseObj;
                 if (baseTaskStudentListModel.data != null && baseTaskStudentListModel.data.size() > 0) {
-                    emptyView.setVisibility(View.GONE);
+                    setEmptyView(View.GONE, taskType);
                     listModels.addAll(baseTaskStudentListModel.data);
                 } else {
                     if (page != 1) {
                         page--;
                         TabToast.showMiddleToast(getContext(), "暂无更多数据");
                     } else {
-                        emptyView.setVisibility(View.VISIBLE);
+                        setEmptyView(View.VISIBLE, taskType);
                     }
                 }
                 mAdapter.notifyDataSetChanged();
@@ -131,7 +127,7 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
             @Override
             public void onFailure(Object reasonObj) {
                 closeLoading();
-                emptyView.setVisibility(View.VISIBLE);
+                setEmptyView(View.VISIBLE, taskType);
             }
         });
     }
@@ -147,9 +143,16 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
         user = UserManager.getInstance().getUser();
         mListView = view.findViewById(R.id.swipe_target);
         emptyView = view.findViewById(R.id.task_empty_view);
+        emptyIcon = view.findViewById(R.id.task_empty_view_icon);
+        emptyTv = view.findViewById(R.id.task_empty_view_tv);
         mAdapter = new StudentTaskListAdapter(getContext(), listModels, taskType);
         swipeToLoadLayout = view.findViewById(R.id.swipeToLoadLayout);
         mListView.setAdapter(mAdapter);
+        if (listModels != null && listModels.size() > 0) {
+            setEmptyView(View.GONE, taskType);
+        } else {
+            setEmptyView(View.VISIBLE, taskType);
+        }
     }
 
     /**
@@ -172,11 +175,6 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
 
     /**
      * listview点击
-     *
-     * @param parent
-     * @param view
-     * @param position
-     * @param id
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -188,9 +186,11 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
             intent.putExtra("work_id", model.getWork_id() + "");
             intent.putExtra("title", model.getWork_name());
             getContext().startActivity(intent);
-        } else {
+        } else if (TaskStatus.FINISH.equals(taskType)) {
             //已完成
             studentHomeWorked(model.getWork_id());
+        } else if (TaskStatus.YUQI.equals(taskType)) {
+            //已完成
         }
     }
 
@@ -228,5 +228,26 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+    }
+
+    private void setEmptyView(int visibility, String taskType) {
+        if (visibility == View.GONE) {
+            emptyView.setVisibility(View.GONE);
+            return;
+        }
+        emptyView.setVisibility(View.VISIBLE);
+        if (TaskStatus.UNFINISH.equals(taskType)) {
+            //未完成
+            emptyIcon.setImageResource(R.drawable.homework_pic_wu);
+            emptyTv.setText("真棒!作业都写完啦");
+        } else if (TaskStatus.FINISH.equals(taskType)) {
+            //已完成
+            emptyIcon.setImageResource(R.drawable.homework_pic_finished_wu);
+            emptyTv.setText("是时候去写作业啦");
+        } else if (TaskStatus.YUQI.equals(taskType)) {
+            //逾期
+            emptyIcon.setImageResource(R.drawable.homework_pic_overdue_wu);
+            emptyTv.setText("想在逾期里找到我?不存在的");
+        }
     }
 }

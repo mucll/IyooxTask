@@ -12,6 +12,7 @@ public class VideoGroupModel {
     private String zhangjie_name;
     private List<VideoModel> zhishidian;
     private boolean choiced;
+    private String module_remark;
 
     public int getZhangjie_id() {
         return zhangjie_id;
@@ -43,5 +44,13 @@ public class VideoGroupModel {
 
     public void setChoiced(boolean choiced) {
         this.choiced = choiced;
+    }
+
+    public String getModule_remark() {
+        return module_remark;
+    }
+
+    public void setModule_remark(String module_remark) {
+        this.module_remark = module_remark;
     }
 }

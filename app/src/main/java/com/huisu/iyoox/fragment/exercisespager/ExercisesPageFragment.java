@@ -99,6 +99,13 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
                 showStudentAnswer = false;
                 isResultShowAnalysis = false;
                 break;
+            case Constant.TEACHER_LOOK_TASK:
+                isSroll = true;
+                setEnable = false;
+                showHelp = View.GONE;
+                showStudentAnswer = false;
+                isResultShowAnalysis = false;
+                break;
             default:
                 break;
         }
@@ -162,7 +169,7 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
                 if (exercisesData != null && exercisesData.size() > 0) {
                     bean = exercisesData.get(position);
                 }
-                BaseExercisesView view = BaseExercisesView.getInstence(getActivity(), bean.getType()+"");
+                BaseExercisesView view = BaseExercisesView.getInstence(getActivity(), bean.getType() + "");
                 BaseExercisesView.ExerciseCallBack callBack = new BaseExercisesView.ExerciseCallBack() {
                     @Override
                     public void selectAnswer() {
@@ -184,6 +191,10 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
                 //学生作答后,显示答案对比
                 if (showStudentAnswer) {
                     view.showStudentAnswer();
+                }
+                if (type == Constant.TEACHER_LOOK_TASK) {
+                    mActionButton.setVisibility(View.GONE);
+                    view.showClassDetailLayout();
                 }
                 container.addView(view);
                 return view;

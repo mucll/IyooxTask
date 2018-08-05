@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.ExercisesModel;
+import com.huisu.iyoox.entity.TaskTeacherLookTimuModel;
 
 import java.util.ArrayList;
 
@@ -17,16 +19,18 @@ import java.util.ArrayList;
  */
 public class ExercisesNumberViewAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<ExercisesModel> exercisesModels;
+    ArrayList<TaskTeacherLookTimuModel> models;
+    private int type;
 
-    public ExercisesNumberViewAdapter(Context context, ArrayList<ExercisesModel> exercisesModels) {
+    public ExercisesNumberViewAdapter(Context context, ArrayList<TaskTeacherLookTimuModel> models, int type) {
         this.context = context;
-        this.exercisesModels = exercisesModels;
+        this.models = models;
+        this.type = type;
     }
 
     @Override
     public int getCount() {
-        return 30;
+        return models == null ? 0 : models.size();
     }
 
     @Override
@@ -49,7 +53,25 @@ public class ExercisesNumberViewAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.indexOfTv.setText(position + 1 + "");
+        TaskTeacherLookTimuModel model = models.get(position);
+        switch (type) {
+            case Constant.NUMBER_RATE:
+                holder.indexOfTv.setText(model.getTimu_index() + "");
+                holder.answerTv.setText(model.getBili() + "%");
+                holder.answerTv.setBackgroundResource(R.drawable.shape_oval_exercises_right_color_8dp);
+                break;
+            case Constant.NUMBER_ANSWER:
+                holder.indexOfTv.setText(position + 1 + "");
+                holder.answerTv.setText(model.getChooseanswer());
+                if (model.getIs_correct() == Constant.ANSWER_ERROR) {
+                    holder.answerTv.setBackgroundResource(R.drawable.shape_oval_exercises_error_color_8dp);
+                } else {
+                    holder.answerTv.setBackgroundResource(R.drawable.shape_oval_exercises_right_color_8dp);
+                }
+                break;
+            default:
+                break;
+        }
         return convertView;
     }
 
@@ -58,8 +80,8 @@ public class ExercisesNumberViewAdapter extends BaseAdapter {
         TextView answerTv;
 
         ViewHolder(View view) {
-            indexOfTv = (TextView) view.findViewById(R.id.item_exercises_number_tv);
-            answerTv = (TextView) view.findViewById(R.id.item_exercises_number_answer_tv);
+            indexOfTv = view.findViewById(R.id.item_exercises_number_tv);
+            answerTv = view.findViewById(R.id.item_exercises_number_answer_tv);
         }
     }
 }

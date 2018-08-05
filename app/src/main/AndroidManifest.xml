@@ -174,7 +174,8 @@
         <activity android:name=".activity.teacher.TeacherRemarkActivity" />
         <activity android:name=".activity.teacher.TeacherRemarkResultActivity" />
         <activity android:name=".activity.student.StudentHomeWorkReportActivity" />
-        <activity android:name=".activity.student.StudentMsgActivity"></activity>
+        <activity android:name=".activity.student.StudentMsgActivity" />
+        <activity android:name=".activity.teacher.TeacherLookTaskStudentSelectDetailActivity"></activity>
     </application>
 
 </manifest>

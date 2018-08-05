@@ -12,6 +12,7 @@ import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.adapter.ClassRoomManageTeacherAdapter;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.ClassRoomModel;
 import com.huisu.iyoox.entity.TeacherModel;
 import com.huisu.iyoox.entity.User;
@@ -19,6 +20,7 @@ import com.huisu.iyoox.entity.base.BaseTeacherModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.TabToast;
 
 import java.util.ArrayList;
 
@@ -37,7 +39,6 @@ public class ClassRoomManageTeacherActivity extends BaseActivity implements MyOn
         user = UserManager.getInstance().getUser();
         configView = findViewById(R.id.tv_submit);
         configView.setText("编辑");
-        configView.setVisibility(View.VISIBLE);
         deleteTv = findViewById(R.id.delete_teacher_tv);
         recyclerView = findViewById(R.id.teacher_manage_class_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
@@ -51,6 +52,11 @@ public class ClassRoomManageTeacherActivity extends BaseActivity implements MyOn
         setTitle("教师管理");
         if (classRoomModel != null) {
             postClassRoomTeacherDetailsHttp();
+        }
+        if (classRoomModel.getIsadmin() == Constant.IS_ADMIE) {
+            configView.setVisibility(View.VISIBLE);
+        } else {
+            configView.setVisibility(View.GONE);
         }
     }
 
@@ -77,6 +83,7 @@ public class ClassRoomManageTeacherActivity extends BaseActivity implements MyOn
     protected void setEvent() {
         setBack();
         configView.setOnClickListener(this);
+        deleteTv.setOnClickListener(this);
         mAdapter.setOnItemClickListener(this);
     }
 
@@ -88,6 +95,9 @@ public class ClassRoomManageTeacherActivity extends BaseActivity implements MyOn
                     return;
                 }
                 setBtnType();
+                break;
+            case R.id.delete_teacher_tv:
+                TabToast.showMiddleToast(this, "该功能暂未实现");
                 break;
             default:
                 break;
@@ -134,6 +144,7 @@ public class ClassRoomManageTeacherActivity extends BaseActivity implements MyOn
         } else {
             deleteTv.setEnabled(false);
         }
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

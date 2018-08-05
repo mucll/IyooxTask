@@ -42,7 +42,8 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
     private View versionView;
     private List<GradeListModel> gradeModels;
     private SelectGradeDialog gradeDialog;
-    private int gradeCode = 0;
+    //默认一年级
+    private int gradeCode = 1;
 
     private int subjectId = 0;
     private SubjectModel subjectModel;
@@ -115,7 +116,7 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
                     @Override
                     public void getGradeType(GradeListModel gradeModel, int gradeCode) {
                         gradeTv.setText(gradeModel.getName());
-                        RegisterTeacherSubjectActivity.this.gradeCode = gradeCode + 1;
+                        RegisterTeacherSubjectActivity.this.gradeCode = gradeCode;
                         setSubjectEmpty();
                     }
                 };

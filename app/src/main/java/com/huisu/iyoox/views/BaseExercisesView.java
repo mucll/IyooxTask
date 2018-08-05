@@ -89,6 +89,8 @@ public abstract class BaseExercisesView extends FrameLayout {
 
     public abstract void showStudentAnswer();
 
+    public abstract void showClassDetailLayout();
+
     /**
      * 选择答案//可以重写监听用开自动翻页到下题
      */

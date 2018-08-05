@@ -126,7 +126,6 @@ public class CommonRequest {
 //    private static final MediaType FILE_TYPE = MediaType.parse("application/x-www-form-urlencoded");
 //    private static final MediaType FILE_TYPE = MediaType.parse("application/octet-stream");
 //    private static final MediaType FILE_TYPE = MediaType.parse("multipart/form-data; charset=utf-8");
-
     public static Request createMultiPostRequest(String url, RequestParams params) {
 
         MultipartBody.Builder requestBody = new MultipartBody.Builder();

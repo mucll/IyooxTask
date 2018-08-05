@@ -44,7 +44,7 @@ public class RegisterPersonDetailsActivity extends BaseActivity implements View.
     private EditText nameEditText, genderEditText, gradeEditText;
     private SelectSexDialog sexDialog;
     private String sexCode = SelectSexDialog.MAN_CODE;
-    private int gradeCode = 0;
+    private int gradeCode = 1;
     private SelectGradeDialog gradeDialog;
     private Button nextBt;
     private String userId;
@@ -54,14 +54,14 @@ public class RegisterPersonDetailsActivity extends BaseActivity implements View.
 
     @Override
     protected void initView() {
-        nextBt = (Button) findViewById(R.id.register_person_details_next_bt);
+        nextBt = findViewById(R.id.register_person_details_next_bt);
         //名字
-        nameEditText = (EditText) findViewById(R.id.register_name_edit_text);
+        nameEditText = findViewById(R.id.register_name_edit_text);
         //性别
-        genderEditText = (EditText) findViewById(R.id.register_gender_text);
+        genderEditText = findViewById(R.id.register_gender_text);
         genderEditText.setFocusable(false);
         //年级
-        gradeEditText = (EditText) findViewById(R.id.register_select_grade_text);
+        gradeEditText = findViewById(R.id.register_select_grade_text);
         gradeEditText.setFocusable(false);
         contentView = findViewById(R.id.register_person_details_content);
     }
@@ -176,7 +176,7 @@ public class RegisterPersonDetailsActivity extends BaseActivity implements View.
      */
     private void postSetUserInfo() {
         loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
-        RequestCenter.setUserInfo(userId, nameEditText.getText().toString(), sexCode, gradeCode + 1 + "", new DisposeDataListener() {
+        RequestCenter.setUserInfo(userId, nameEditText.getText().toString(), sexCode, gradeCode + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 loading.dismiss();

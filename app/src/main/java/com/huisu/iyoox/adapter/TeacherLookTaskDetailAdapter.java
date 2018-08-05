@@ -2,6 +2,7 @@ package com.huisu.iyoox.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,10 @@ import android.widget.TextView;
 import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.entity.TaskTeacherLookStudentModel;
+import com.huisu.iyoox.util.ImageLoader;
+
+import java.util.ArrayList;
 
 /**
  * Function:
@@ -23,9 +28,11 @@ public class TeacherLookTaskDetailAdapter extends RecyclerView.Adapter<TeacherLo
     private MyOnItemClickListener onItemClickListener;
     private Context context;
     private int type;
+    private ArrayList<TaskTeacherLookStudentModel> models;
 
-    public TeacherLookTaskDetailAdapter(Context context, int type) {
+    public TeacherLookTaskDetailAdapter(Context context, ArrayList<TaskTeacherLookStudentModel> models, int type) {
         this.context = context;
+        this.models = models;
         this.type = type;
     }
 
@@ -38,11 +45,14 @@ public class TeacherLookTaskDetailAdapter extends RecyclerView.Adapter<TeacherLo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-        holder.nameTv.setText("学生" + (position + 1));
+        TaskTeacherLookStudentModel model = models.get(position);
+        holder.nameTv.setText(model.getStudent_name());
+        ImageLoader.load(context, holder.studentIcon, TextUtils.isEmpty(model.getAvatar()) ? "" : model.getAvatar()
+                , R.drawable.student_photo_default, 0);
         switch (type) {
             case Constant.TASK_STUDENT_FINISHED:
-                holder.indexOfTv.setText(position + 1 + "");
+                holder.indexOfTv.setText(model.getPaiming() + "");
+                holder.rateTv.setText(model.getZhengquelv() + "%");
                 break;
             case Constant.TASK_STUDENT_UNFINISH:
                 holder.indexOfTv.setVisibility(View.GONE);
@@ -56,7 +66,7 @@ public class TeacherLookTaskDetailAdapter extends RecyclerView.Adapter<TeacherLo
 
     @Override
     public int getItemCount() {
-        return 20;
+        return models == null ? 0 : models.size();
     }
 
     public void setOnItemClickListener(MyOnItemClickListener onItemClickListener) {
@@ -68,9 +78,11 @@ public class TeacherLookTaskDetailAdapter extends RecyclerView.Adapter<TeacherLo
         private TextView nameTv;
         private TextView rateTv;
         private ImageView nextIv;
+        private ImageView studentIcon;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            studentIcon = itemView.findViewById(R.id.student_icon_iv);
             indexOfTv = itemView.findViewById(R.id.student_indexof_tv);
             nameTv = itemView.findViewById(R.id.task_detail_student_name_tv);
             rateTv = itemView.findViewById(R.id.task_detail_rate_tv);

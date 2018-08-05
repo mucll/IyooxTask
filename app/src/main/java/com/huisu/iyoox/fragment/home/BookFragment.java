@@ -21,23 +21,16 @@ import com.huisu.iyoox.entity.base.BaseVideoModel;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
-import com.huisu.iyoox.swipetoloadlayout.OnLoadMoreListener;
 import com.huisu.iyoox.swipetoloadlayout.OnRefreshListener;
 import com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout;
-import com.huisu.iyoox.util.LogUtil;
-import com.huisu.iyoox.util.TabToast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-
 /**
- * @author: dl
- * @function: 教材Fragment
- * @date: 18/6/28
+ * 学生首页教材Fragment
  */
-public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuSelectDataChangedListener, OnLoadMoreListener, OnRefreshListener {
+public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuSelectDataChangedListener, OnRefreshListener {
 
     private View view;
     private SubjectModel subjectModel;
@@ -51,7 +44,11 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
     private String gradeDetailId;
     private final int default_code = 0;
     private ArrayList<VideoGroupModel> videoModels = new ArrayList<>();
+    /**
+     * 做了调整不做分页 但是参数还是要传
+     */
     private int page = 1;
+    private View emptyView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,6 +98,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
      * 初始化控件
      */
     private void initView() {
+        emptyView = view.findViewById(R.id.book_fragment_empty_view);
         mListView = view.findViewById(R.id.swipe_target);
         bookTypeView = view.findViewById(R.id.book_type_view);
         swipeToLoadLayout = view.findViewById(R.id.swipeToLoadLayout);
@@ -158,19 +156,13 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
                         swipeToLoadLayout.setLoadingMore(false);
                         swipeToLoadLayout.setRefreshing(false);
                         BaseVideoModel baseVideoModel = (BaseVideoModel) responseObj;
-                        if (baseVideoModel.code == 1) {
-                            if (page == 1) {
-                                videoModels.clear();
-                            }
+                        if (baseVideoModel.code == Constant.POST_SUCCESS_CODE) {
+                            videoModels.clear();
                             if (baseVideoModel.data != null && baseVideoModel.data.size() > 0) {
                                 videoModels.addAll(baseVideoModel.data);
+                                emptyView.setVisibility(View.GONE);
                             } else {
-                                if (page > 1) {
-                                    page--;
-                                    TabToast.showMiddleToast(getContext(), "没有更多数据");
-                                }
-                                mAdapter.notifyDataSetChanged();
-                                return;
+                                emptyView.setVisibility(View.VISIBLE);
                             }
                             mAdapter.notifyDataSetChanged();
                             for (int i = 0; i < videoModels.size(); i++) {
@@ -190,7 +182,6 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
 
     private void setEvent() {
         bookTypeView.setOnMenuSelectDataChangedListener(this);
-        swipeToLoadLayout.setOnLoadMoreListener(this);
         swipeToLoadLayout.setOnRefreshListener(this);
         mListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -255,20 +246,6 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
             initData();
             init = true;
         }
-    }
-
-    @Override
-    public void onLoadMore() {
-        page++;
-        BookDetailsModel editionModel = bookTypeView.getSelectJiaoCaiData();
-        BookChapterModel chapterModel = bookTypeView.getSelectZhangJieData();
-        if (editionModel == null || chapterModel == null) {
-            initData();
-        } else {
-            postDetailsData(editionModel.getJiaocai_id(), editionModel.getGrade_detail_id(),
-                    chapterModel.getZhangjie_id(), bookTypeView.getSelectZhiShiDianData());
-        }
-
     }
 
     @Override

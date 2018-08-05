@@ -20,6 +20,8 @@ import com.huisu.iyoox.entity.base.BaseSubjectModel;
 import com.huisu.iyoox.entity.base.BaseTaskResultModel;
 import com.huisu.iyoox.entity.base.BaseTaskStudentListModel;
 import com.huisu.iyoox.entity.base.BaseTaskTeacherListModel;
+import com.huisu.iyoox.entity.base.BaseTaskTeacherLookClassModel;
+import com.huisu.iyoox.entity.base.BaseTaskTeacherLookTimuModel;
 import com.huisu.iyoox.entity.base.BaseTeacherModel;
 import com.huisu.iyoox.entity.base.BaseTrialCardModel;
 import com.huisu.iyoox.entity.base.BaseUser;
@@ -244,6 +246,7 @@ public class RequestCenter {
         params.put("shipin_id", shipinId);
         RequestCenter.postRequest(HttpConstants.getVideoData, params, listener, BaseVideoTimuModel.class);
     }
+
     /**
      * 获取视频題目
      */
@@ -510,6 +513,16 @@ public class RequestCenter {
     }
 
     /**
+     * 老师管理班级移除老师
+     */
+    public static void classRemoveTeacher(String teacherIds, String classId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("teacher_ids", teacherIds);
+        params.put("class_room_id", classId);
+        RequestCenter.postRequest(HttpConstants.classRemoveTeacher, params, listener, null);
+    }
+
+    /**
      * 老师查看班级作业列表
      */
     public static void teacherTaskList(String userId, String classId, String type, String page, DisposeDataListener listener) {
@@ -519,5 +532,44 @@ public class RequestCenter {
         params.put("type", type);
         params.put("pageindex", page);
         RequestCenter.postRequest(HttpConstants.teacherTaskList, params, listener, BaseTaskTeacherListModel.class);
+    }
+
+    /**
+     * 老师查看班级作业详情
+     */
+    public static void teacherTaskDetail(String workId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("work_id", workId);
+        RequestCenter.postRequest(HttpConstants.teacherTaskDetail, params, listener, BaseTaskTeacherLookClassModel.class);
+    }
+
+    /**
+     * 老师查看班级作业详情全班学生题目选择情况
+     */
+    public static void teacherLookTaskTimuDetails(String workId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("work_id", workId);
+        RequestCenter.postRequest(HttpConstants.teacherLookTaskTimuDetails, params, listener, BaseExercisesModel.class);
+    }
+
+    /**
+     * 老师查看某个学生的某个作业的详情
+     */
+    public static void teacherLookStudentDetails(String workId, String studentId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("work_id", workId);
+        params.put("student_id", studentId);
+        RequestCenter.postRequest(HttpConstants.teacherLookStudentDetails, params, listener, BaseTaskTeacherLookTimuModel.class);
+    }
+
+    /**
+     * 老师点评某次作业
+     */
+    public static void dianpingStudentWork(String workId, String studentId, String dianping, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("work_id", workId);
+        params.put("student_id", studentId);
+        params.put("dianping", dianping);
+        RequestCenter.postRequest(HttpConstants.dianpingStudentWork, params, listener, null);
     }
 }

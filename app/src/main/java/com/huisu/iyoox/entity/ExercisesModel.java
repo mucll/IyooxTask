@@ -19,10 +19,11 @@ public class ExercisesModel implements Serializable {
     private int type;
     private String chooseanswer;
     private int is_correct;
-    private String A;
 
     private ExercisesChooseModel option_One;
     private StudentAnswersModel answersModel;
+    private List<ExercisesStudentDetailModel> correct_list;
+    private List<ExercisesStudentDetailModel> wrong_list;
 
     public String getDaan() {
         return daan.trim();
@@ -110,5 +111,21 @@ public class ExercisesModel implements Serializable {
 
     public void setIs_correct(int is_correct) {
         this.is_correct = is_correct;
+    }
+
+    public List<ExercisesStudentDetailModel> getCorrect_list() {
+        return correct_list;
+    }
+
+    public void setCorrect_list(List<ExercisesStudentDetailModel> correct_list) {
+        this.correct_list = correct_list;
+    }
+
+    public List<ExercisesStudentDetailModel> getWrong_list() {
+        return wrong_list;
+    }
+
+    public void setWrong_list(List<ExercisesStudentDetailModel> wrong_list) {
+        this.wrong_list = wrong_list;
     }
 }

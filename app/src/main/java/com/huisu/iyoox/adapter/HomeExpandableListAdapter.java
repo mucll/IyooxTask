@@ -1,6 +1,7 @@
 package com.huisu.iyoox.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,17 +62,27 @@ public class HomeExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_home_list_group_layout, parent, false);
             groupitem = new Groupitem();
             groupitem.textView = convertView.findViewById(R.id.item_book_chapter_tv);
+            groupitem.moduleRemarkTv = convertView.findViewById(R.id.group_module_remark_tv);
             convertView.setTag(groupitem);
         } else {
             groupitem = (Groupitem) convertView.getTag();
         }
         VideoGroupModel groupModel = data.get(groupPosition);
-        groupitem.textView.setText(groupModel.getZhangjie_name());
+        if (!TextUtils.isEmpty(groupModel.getZhangjie_name())) {
+            groupitem.textView.setText(groupModel.getZhangjie_name());
+            groupitem.textView.setVisibility(View.VISIBLE);
+        } else {
+            groupitem.textView.setVisibility(View.INVISIBLE);
+        }
+        if (!TextUtils.isEmpty(groupModel.getModule_remark())) {
+            groupitem.moduleRemarkTv.setText("P" + groupModel.getModule_remark());
+        }
         return convertView;
     }
 
     class Groupitem {
         TextView textView;
+        TextView moduleRemarkTv;
     }
 
     @Override

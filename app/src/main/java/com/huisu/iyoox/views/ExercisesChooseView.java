@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.adapter.ExercisesClassDetailAdapter;
 import com.huisu.iyoox.entity.ExercisesChooseModel;
 import com.huisu.iyoox.entity.ExercisesModel;
 import com.huisu.iyoox.entity.StudentAnswersModel;
@@ -41,6 +42,21 @@ public class ExercisesChooseView extends BaseExercisesView {
     LinearLayout helpLayout;
     @Bind(R.id.content_webview)
     HtmlTextView contentWebview;
+    @Bind(R.id.exercises_correct_ll)
+    LinearLayout exercisesCorrectLayout;
+    @Bind(R.id.exercises_correct_tv)
+    TextView exercisesCorrectTv;
+    @Bind(R.id.exercises_correct_egv)
+    EbagGridView exercisesCorrectEgv;
+    @Bind(R.id.exercises_wrong_ll)
+    LinearLayout exercisesWrongLayout;
+    @Bind(R.id.exercises_wrong_tv)
+    TextView exercisesWrongTv;
+    @Bind(R.id.exercises_wrong_egv)
+    EbagGridView exercisesWrongEgv;
+    @Bind(R.id.exercises_class_details_ll)
+    LinearLayout classDetailLayout;
+
 
     ExercisesModel bean;
 
@@ -58,6 +74,8 @@ public class ExercisesChooseView extends BaseExercisesView {
      * 选项view的集合
      */
     private List<View> chooseLists = new ArrayList<>();
+    private ExercisesClassDetailAdapter correctAdapter;
+    private ExercisesClassDetailAdapter wrongAdapter;
 
     public ExercisesChooseView(Context context) {
         this(context, null);
@@ -173,6 +191,23 @@ public class ExercisesChooseView extends BaseExercisesView {
                 checkBox.setBackground(context.getResources().getDrawable(R.drawable.answer_right));
                 content.setBackground(context.getResources().getDrawable(R.drawable.shape_r4_stoke_maincolor));
             }
+        }
+    }
+
+    @Override
+    public void showClassDetailLayout() {
+        classDetailLayout.setVisibility(View.VISIBLE);
+        if (bean.getCorrect_list() != null && bean.getCorrect_list().size() > 0) {
+            exercisesCorrectLayout.setVisibility(View.VISIBLE);
+            exercisesCorrectTv.setText("解答正确的学生(共" + bean.getCorrect_list().size() + "人)");
+            correctAdapter = new ExercisesClassDetailAdapter(context, bean.getCorrect_list());
+            exercisesCorrectEgv.setAdapter(correctAdapter);
+        }
+        if (bean.getWrong_list() != null && bean.getWrong_list().size() > 0) {
+            exercisesWrongLayout.setVisibility(View.VISIBLE);
+            exercisesWrongTv.setText("解答错误的学生(共" + bean.getWrong_list().size() + "人)");
+            wrongAdapter = new ExercisesClassDetailAdapter(context, bean.getWrong_list());
+            exercisesWrongEgv.setAdapter(wrongAdapter);
         }
     }
 

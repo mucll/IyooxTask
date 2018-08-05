@@ -33,7 +33,7 @@ public class SelectGradeDialog implements AdapterView.OnItemClickListener {
     private List<GradeListModel> gradeModels;
 
     public SelectGradeDialog(Context context, List<GradeListModel> gradeModels, int selectGrade) {
-        this.selectGrad = selectGrade;
+        this.selectGrad = selectGrade - 1;
         this.gradeModels = gradeModels;
         dialog = new Dialog(context,
                 R.style.Transparent2);
@@ -64,7 +64,7 @@ public class SelectGradeDialog implements AdapterView.OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         selectGrad = position;
-        getGradeType(gradeModels.get(position), selectGrad);
+        getGradeType(gradeModels.get(position), selectGrad + 1);
         dialog.dismiss();
     }
 }

@@ -22,6 +22,6 @@
         android:gravity="center"
         android:text="A"
         android:textColor="@color/white"
-        android:textSize="@dimen/f_16" />
+        android:textSize="@dimen/f_14" />
 
 </LinearLayout>

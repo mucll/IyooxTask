@@ -18,6 +18,7 @@ import com.huisu.iyoox.entity.base.BaseExercisesModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.JsonUtils;
+import com.huisu.iyoox.views.Loading;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +33,12 @@ public class TeacherSelectExercisesActivity extends BaseActivity implements View
     private ArrayList<ExercisesModel> models = new ArrayList<>();
     private TeacherSelectExercisesAdapter mAdapter;
     private TextView submit;
+    private View emptyView;
+    private Loading loading;
 
     @Override
     protected void initView() {
+        emptyView = findViewById(R.id.empty_view);
         submit = findViewById(R.id.teacher_select_exercises_submit_tv);
         submit.setEnabled(false);
         recyclerView = findViewById(R.id.teacher_select_exercises_recycler_view);
@@ -58,13 +62,20 @@ public class TeacherSelectExercisesActivity extends BaseActivity implements View
     }
 
     private void postExercisesDataHttp() {
+        loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
         RequestCenter.teacherSelectExercisesData(videoTitleModel.getShipin_id() + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
+                loading.dismiss();
                 models.clear();
                 BaseExercisesModel baseExercisesModel = (BaseExercisesModel) responseObj;
-                if (baseExercisesModel.data != null && baseExercisesModel.data.size() > 0) {
-                    models.addAll(baseExercisesModel.data);
+                if (baseExercisesModel.code == Constant.POST_SUCCESS_CODE) {
+                    if (baseExercisesModel.data != null && baseExercisesModel.data.size() > 0) {
+                        models.addAll(baseExercisesModel.data);
+                        emptyView.setVisibility(View.GONE);
+                    } else {
+                        emptyView.setVisibility(View.VISIBLE);
+                    }
                 }
                 setSubmitEnable();
                 mAdapter.notifyDataSetChanged();
@@ -72,7 +83,7 @@ public class TeacherSelectExercisesActivity extends BaseActivity implements View
 
             @Override
             public void onFailure(Object reasonObj) {
-
+                loading.dismiss();
             }
         });
     }
@@ -112,7 +123,7 @@ public class TeacherSelectExercisesActivity extends BaseActivity implements View
         }
         String timuIds = JsonUtils.jsonFromObject(jsonlist);
         TeacherSendTaskActivity.start(this, timuIds, videoTitleModel.getZhishidian_id()
-                ,getIntent().getIntExtra("taskType", Constant.ERROR_CODE));
+                , getIntent().getIntExtra("taskType", Constant.ERROR_CODE));
     }
 
     @Override

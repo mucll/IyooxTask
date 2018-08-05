@@ -196,9 +196,29 @@ public class HttpConstants {
      */
     public static String joinClassroom = ROOT_URL + "/classroom/join_classroom";
     /**
+     * 老师管理班级移除老师
+     */
+    public static String classRemoveTeacher = ROOT_URL + "/user/remove_classroom_teachers";
+    /**
      * 老师查看班级作业列表
      */
     public static String teacherTaskList = ROOT_URL + "/work/my_published_work";
+    /**
+     * 老师查看班级作业详情
+     */
+    public static String teacherTaskDetail = ROOT_URL + "/work/submit_work_detail";
+    /**
+     * 老师查看班级作业题目详情
+     */
+    public static String teacherLookTaskTimuDetails = ROOT_URL + "/work/see_work_timu_detail";
+    /**
+     * 查看某个学生的某个作业的详情
+     */
+    public static String teacherLookStudentDetails = ROOT_URL + "/work/see_student_work_detail";
+    /**
+     * 点评某次作业
+     */
+    public static String dianpingStudentWork = ROOT_URL + "/work/dianping_student_work";
 
 }
 

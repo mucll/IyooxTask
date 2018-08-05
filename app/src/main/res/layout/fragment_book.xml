@@ -32,16 +32,29 @@
             android:groupIndicator="@null"
             android:scrollbars="none" />
 
-        <com.huisu.iyoox.views.LoadMoreView
-            android:id="@id/swipe_load_more_footer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dip_10"
-            android:layout_marginTop="@dimen/dip_10"
-            android:gravity="center" />
-
     </com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout>
 
+    <RelativeLayout
+        android:id="@+id/book_fragment_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/book_fragment_empty_view_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/home_course_kong" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/book_fragment_empty_view_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_24"
+            android:text="哎呀,暂时没有数据呢,看看别的吧"
+            android:textColor="@color/color999" />
+    </RelativeLayout>
 
     <com.huisu.iyoox.complexmenu.SelectMenuView
         android:id="@+id/book_type_view"

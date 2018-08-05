@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.WindowManager;
+import android.widget.Button;
 
+import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 
 /**
@@ -56,6 +58,10 @@ public class DialogUtil {
                 .create();
         dialog.setCancelable(false);
         dialog.show();
+        Button button = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        if (button != null) {
+            button.setTextColor(context.getResources().getColor(R.color.color999));
+        }
         WindowManager.LayoutParams params =
                 dialog.getWindow().getAttributes();
         if (BaseActivity.getScreenWidth(context) < BaseActivity.getScreenHeigth(context)) {

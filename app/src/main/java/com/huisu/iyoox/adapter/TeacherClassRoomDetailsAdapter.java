@@ -46,7 +46,7 @@ public class TeacherClassRoomDetailsAdapter extends RecyclerView.Adapter<Teacher
         holder.name.setText(model.getStudent_name());
         ImageLoader.load(context, holder.head,
                 TextUtils.isEmpty(model.getStudent_avatar()) ? "" : model.getStudent_avatar(),
-                R.drawable.student_default, 0);
+                R.drawable.student_photo_default, 0);
     }
 
     @Override

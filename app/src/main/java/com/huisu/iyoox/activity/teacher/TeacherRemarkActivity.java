@@ -11,11 +11,20 @@ import android.widget.TextView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
+import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.TabToast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class TeacherRemarkActivity extends BaseActivity implements View.OnClickListener {
 
     private EditText msgEt;
     private TextView submitTv;
+    private int workId;
+    private int studentId;
 
     @Override
     protected void initView() {
@@ -26,6 +35,8 @@ public class TeacherRemarkActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void initData() {
         setTitle("教师点评");
+        workId = getIntent().getIntExtra("workId", Constant.ERROR_CODE);
+        studentId = getIntent().getIntExtra("studentId", Constant.ERROR_CODE);
     }
 
     @Override
@@ -40,7 +51,7 @@ public class TeacherRemarkActivity extends BaseActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() > 0) {
+                if (s.toString().trim().length() > 0) {
                     submitTv.setEnabled(true);
                 } else {
                     submitTv.setEnabled(false);
@@ -63,10 +74,38 @@ public class TeacherRemarkActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.submit_tv:
-                TeacherRemarkResultActivity.start(this);
+                postHttp();
                 break;
             default:
                 break;
+        }
+    }
+
+    private void postHttp() {
+        if (workId != Constant.ERROR_CODE && studentId != Constant.ERROR_CODE) {
+            RequestCenter.dianpingStudentWork(workId + "", studentId + "", msgEt.getText().toString().trim(), new DisposeDataListener() {
+                @Override
+                public void onSuccess(Object responseObj) {
+                    JSONObject jsonObject = (JSONObject) responseObj;
+                    try {
+                        int code = jsonObject.getInt("code");
+                        if (code == Constant.POST_SUCCESS_CODE) {
+                            TeacherRemarkResultActivity.start(TeacherRemarkActivity.this);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Object reasonObj) {
+
+                }
+            });
+        } else {
+            TabToast.showMiddleToast(context, "数据发送错误");
+            setResult(RESULT_OK);
+            finish();
         }
     }
 
@@ -79,8 +118,10 @@ public class TeacherRemarkActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    public static void start(Context context) {
+    public static void start(Context context, int workId, int studentId) {
         Intent intent = new Intent(context, TeacherRemarkActivity.class);
+        intent.putExtra("workId", workId);
+        intent.putExtra("studentId", studentId);
         ((Activity) context).startActivityForResult(intent, 1);
     }
 }

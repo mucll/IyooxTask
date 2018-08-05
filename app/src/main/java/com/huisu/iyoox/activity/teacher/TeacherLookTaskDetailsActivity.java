@@ -4,6 +4,7 @@ package com.huisu.iyoox.activity.teacher;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,10 +16,16 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.entity.TaskTeacherLookClassModel;
+import com.huisu.iyoox.entity.base.BaseTaskTeacherLookClassModel;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.fragment.teacher.TeacherLookTaskDetailFragment;
+import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.views.Loading;
 import com.huisu.iyoox.views.MyFragmentLayout_line;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -30,10 +37,14 @@ public class TeacherLookTaskDetailsActivity extends BaseActivity {
     private ArrayList<BaseFragment> fragments = new ArrayList<>();
     private PieChart timelyPC;
     private PieChart correctPC;
+    private TextView taskNameTv;
+    private int workId;
+    private Loading loading;
 
     @Override
     protected void initView() {
         mFragmentLayout = findViewById(R.id.teacher_look_task_detail_layout);
+        taskNameTv = findViewById(R.id.task_name_tv);
         timelyPC = findViewById(R.id.teacher_look_task_delete_timely_pc);
         correctPC = findViewById(R.id.teacher_look_task_delete_correct_pc);
     }
@@ -41,9 +52,35 @@ public class TeacherLookTaskDetailsActivity extends BaseActivity {
     @Override
     protected void initData() {
         setTitle("作业完成详情");
-        initChart(timelyPC, 25, R.color.red64);
-        initChart(correctPC, 75, R.color.ex_right_color);
-        initFragment();
+        workId = getIntent().getIntExtra("workId", Constant.ERROR_CODE);
+        if (workId != Constant.ERROR_CODE) {
+            postTaskDetailDataHttp();
+        }
+    }
+
+    private TaskTeacherLookClassModel model;
+
+    private void postTaskDetailDataHttp() {
+        loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
+        RequestCenter.teacherTaskDetail(workId + "", new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                loading.dismiss();
+                BaseTaskTeacherLookClassModel baseModel = (BaseTaskTeacherLookClassModel) responseObj;
+                if (baseModel.code == Constant.POST_SUCCESS_CODE && baseModel.data != null) {
+                    model = baseModel.data;
+                    taskNameTv.setText(model.getWork().getName());
+                    initChart(timelyPC, model.getWork().getZhunshilv(), R.color.red64);
+                    initChart(correctPC, model.getWork().getZhengqulv(), R.color.ex_right_color);
+                    initFragment();
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                loading.dismiss();
+            }
+        });
     }
 
     @Override
@@ -83,13 +120,16 @@ public class TeacherLookTaskDetailsActivity extends BaseActivity {
         TeacherLookTaskDetailFragment fragment = new TeacherLookTaskDetailFragment();
         Bundle b = new Bundle();
         b.putInt("type", type);
+        b.putString("title", TextUtils.isEmpty(model.getWork().getName()) ? "" : model.getWork().getName());
+        b.putInt("workId", workId);
+        b.putSerializable("model", model);
         fragment.setArguments(b);
         return fragment;
     }
 
-    public static void start(Context context, int taskId) {
+    public static void start(Context context, int workId) {
         Intent intent = new Intent(context, TeacherLookTaskDetailsActivity.class);
-        intent.putExtra("taskId", taskId);
+        intent.putExtra("workId", workId);
         context.startActivity(intent);
     }
 

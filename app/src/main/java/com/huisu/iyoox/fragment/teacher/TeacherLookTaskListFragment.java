@@ -155,15 +155,15 @@ public class TeacherLookTaskListFragment extends BaseFragment implements OnLoadM
     public void onShow() {
         if (!init) {
             swipeToLoadLayout.setRefreshing(true);
-            postTaskListHttp();
             init = true;
         }
     }
 
     @Override
     public void onItemClick(int position, View view) {
+        TaskTeacherListModel model = models.get(position);
         if (Constant.TASK_SEND_CODE == type) {
-            TeacherLookTaskDetailsActivity.start(getContext(), Constant.ERROR_CODE);
+            TeacherLookTaskDetailsActivity.start(getContext(), model.getId());
         }
     }
 }

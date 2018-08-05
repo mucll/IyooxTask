@@ -91,7 +91,7 @@ public class TeacherClassRoomConfigActivity extends BaseActivity implements View
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.class_delete_tv:
-                DialogUtil.show("提示", "确认刪除该班级?", "确认", "取消", (Activity) context,
+                DialogUtil.show("提示", "确认刪除该班级？删除后无法恢复!", "确认", "取消", (Activity) context,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -166,6 +166,7 @@ public class TeacherClassRoomConfigActivity extends BaseActivity implements View
 
     /**
      * 锁定班级
+     *
      * @param type
      */
     private void postLockClassRoomHttp(final int type) {

@@ -89,6 +89,11 @@ public class Constant {
      */
     public static final int STUDENT_TASK_FINISHED = 5;
 
+    /**
+     * 老师看班级作业详情
+     */
+    public static final int TEACHER_LOOK_TASK = 6;
+
 //----------------------------------科目ID---------------------------------------
 
     /**
@@ -137,6 +142,16 @@ public class Constant {
      */
     public static final int CLASS_ADD = 1;
 
+    /**
+     * 不是班级管理员
+     */
+    public static final int IS_UN_ADMIE = 0;
+    /**
+     * 是班级管理员
+     */
+    public static final int IS_ADMIE = 1;
+
+
     //----------------------------------结果界面---------------------------------------
 
     /**
@@ -148,6 +163,15 @@ public class Constant {
      * 布置作业
      */
     public static final int CREATE_TASK_RESULT = 1;
+    /**
+     * 题目number比率显示
+     */
+    public static final int NUMBER_RATE = 1;
+    /**
+     * 题目number回答选项显示
+     */
+    public static final int NUMBER_ANSWER = 2;
+
 
     //----------------------------------作业类型---------------------------------------
 
@@ -181,7 +205,7 @@ public class Constant {
      */
     public static final int TASK_STUDENT_UNFINISH = 2;
     /**
-     * 学生未完成
+     * 题目统计
      */
     public static final int TASK_EXERCISES_NUMBER = 3;
     /**
