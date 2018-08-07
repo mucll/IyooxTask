@@ -91,7 +91,6 @@ public class ErrorExercisesFragment extends BaseFragment {
         mVp.setOverScrollMode(View.OVER_SCROLL_NEVER);
         emptyView = view.findViewById(R.id.empty_view);
         //控制两幅图之间的间距
-        mVp.setPageMargin(10);
         mVp.setPageTransformer(true, new ZoomOutPageTransformer());
         //viewPager左右两边滑动无效的处理
         view.findViewById(R.id.ll_gallery_outer).setOnTouchListener(new View.OnTouchListener() {
@@ -120,7 +119,7 @@ public class ErrorExercisesFragment extends BaseFragment {
             final SubjectModel subjectModel = models.get(position);
             ImageView img = view.findViewById(R.id.img_item_img);
             img.setImageResource(getSubjectResId(subjectModel.getKemu_id()));
-            img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

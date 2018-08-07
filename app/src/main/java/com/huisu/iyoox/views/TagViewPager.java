@@ -38,7 +38,7 @@ public class TagViewPager extends RelativeLayout implements
     private int size = 16;
     private int margin = 5;
     private LinearLayout tagImageLayout;
-    private List<ImageView> imageList = new ArrayList<ImageView>();
+    private List<ImageView> imageList = new ArrayList<>();
     private int marginButtom = 20;
     private int scollStatus = 0;
     /**

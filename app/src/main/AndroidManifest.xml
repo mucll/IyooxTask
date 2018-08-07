@@ -167,15 +167,36 @@
         <activity
             android:name=".activity.teacher.TeacherSendTaskActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-        <activity android:name=".activity.teacher.TeacherClassRoomConfigActivity" />
-        <activity android:name=".activity.teacher.TeacherLookTaskListActivity" />
-        <activity android:name=".activity.teacher.TeacherLookTaskDetailsActivity" />
-        <activity android:name=".activity.teacher.TeacherLookStudentTaskDetailActivity" />
-        <activity android:name=".activity.teacher.TeacherRemarkActivity" />
-        <activity android:name=".activity.teacher.TeacherRemarkResultActivity" />
-        <activity android:name=".activity.student.StudentHomeWorkReportActivity" />
-        <activity android:name=".activity.student.StudentMsgActivity" />
-        <activity android:name=".activity.teacher.TeacherLookTaskStudentSelectDetailActivity"></activity>
+        <activity
+            android:name=".activity.teacher.TeacherClassRoomConfigActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".activity.teacher.TeacherLookTaskListActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".activity.teacher.TeacherLookTaskDetailsActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".activity.teacher.TeacherLookStudentTaskDetailActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".activity.teacher.TeacherRemarkActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".activity.teacher.TeacherRemarkResultActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".activity.student.StudentHomeWorkReportActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".activity.student.StudentMsgActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".activity.teacher.TeacherLookTaskStudentSelectDetailActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
     </application>
 
 </manifest>

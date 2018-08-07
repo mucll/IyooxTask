@@ -20,7 +20,7 @@
         android:layout_marginTop="@dimen/dip_8"
         android:background="@drawable/shape_trial_card_r10px"
         android:gravity="center"
-        android:hint="请输入11位试用码"
+        android:hint="请输入销售手机号(若有)"
         android:inputType="number"
         android:maxLength="11"
         android:textColor="@color/color333"
@@ -36,25 +36,27 @@
         android:layout_marginRight="@dimen/dip_16"
         android:layout_marginTop="@dimen/dip_8"
         android:background="@drawable/shape_trial_card_r10px"
+        android:cursorVisible="false"
         android:gravity="center"
-        android:hint="试用卡卡号"
+        android:hint="激活码"
         android:textColor="@color/color333"
         android:textSize="@dimen/f_15" />
 
-    <EditText
-        android:id="@+id/trial_card_select_grade_tv"
-        style="@style/person_details_layout_tv_style"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_40"
-        android:layout_marginBottom="@dimen/dip_8"
-        android:layout_marginLeft="@dimen/dip_16"
-        android:layout_marginRight="@dimen/dip_16"
-        android:layout_marginTop="@dimen/dip_8"
-        android:background="@drawable/shape_trial_card_r10px"
-        android:gravity="center"
-        android:hint="请选择年级"
-        android:textColor="@color/color333"
-        android:textSize="@dimen/f_15" />
+    <!--<EditText-->
+        <!--android:id="@+id/trial_card_select_grade_tv"-->
+        <!--style="@style/person_details_layout_tv_style"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/dip_40"-->
+        <!--android:layout_marginBottom="@dimen/dip_8"-->
+        <!--android:layout_marginLeft="@dimen/dip_16"-->
+        <!--android:layout_marginRight="@dimen/dip_16"-->
+        <!--android:layout_marginTop="@dimen/dip_8"-->
+        <!--android:background="@drawable/shape_trial_card_r10px"-->
+        <!--android:cursorVisible="false"-->
+        <!--android:gravity="center"-->
+        <!--android:hint="请选择要激活的年级"-->
+        <!--android:textColor="@color/color333"-->
+        <!--android:textSize="@dimen/f_15" />-->
 
     <TextView
         android:layout_width="match_parent"

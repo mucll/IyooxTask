@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/select_white_bg"
     android:gravity="center_vertical"
-    android:minHeight="@dimen/dip_53"
+    android:minHeight="@dimen/dip_54"
     android:orientation="horizontal">
 
 

@@ -42,8 +42,8 @@ import java.util.Map;
  */
 public class PersonalDataActivity extends BaseActivity implements View.OnClickListener {
 
-    private View headLayout, accountLayout, userNameLayout, sexLayout, gradeLayout, classLayout;
-    private TextView accountTv, userNameTv, sexTv, gradeTv, classTv;
+    private View headLayout, accountLayout, userNameLayout, sexLayout, gradeLayout;
+    private TextView accountTv, userNameTv, sexTv, gradeTv;
     private HeadView headView;
     private User user;
     private ChangeHeaderImgDialog mHeaderImgDialog;
@@ -69,14 +69,12 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         userNameLayout = findViewById(R.id.person_user_name_ll);
         sexLayout = findViewById(R.id.person_sex_ll);
         gradeLayout = findViewById(R.id.person_grade_ll);
-        classLayout = findViewById(R.id.person_class_ll);
 
         headView = findViewById(R.id.person_iv);
         accountTv = findViewById(R.id.person_account_tv);
         userNameTv = findViewById(R.id.person_user_name_tv);
         sexTv = findViewById(R.id.person_sex_tv);
         gradeTv = findViewById(R.id.person_grade_tv);
-        classTv = findViewById(R.id.person_class_tv);
 
         studentContentView = findViewById(R.id.student_content_ll);
         teacherContentView = findViewById(R.id.teacher_content_ll);
@@ -114,7 +112,6 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
             userNameTv.setText(!TextUtils.isEmpty(user.getName()) ? user.getName() : "");
             gradeTv.setText(user.getGradeName());
             sexTv.setText(user.getSex() == 0 ? "女" : "男");
-            classTv.setText(TextUtils.isEmpty(user.getClassroom_name()) ? "" : user.getClassroom_name());
         }
     }
 

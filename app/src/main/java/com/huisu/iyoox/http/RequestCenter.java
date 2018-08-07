@@ -254,9 +254,10 @@ public class RequestCenter {
     /**
      * 获取视频題目
      */
-    public static void getVideoTimu(String shipinId, DisposeDataListener listener) {
+    public static void getVideoTimu(String shipinId, String zhishidianId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("shipin_id", shipinId);
+        params.put("zhishidian_id", zhishidianId);
         RequestCenter.postRequest(HttpConstants.getVideoTimu, params, listener, BaseVideoTimuModel.class);
     }
 
@@ -388,10 +389,9 @@ public class RequestCenter {
     /**
      * 绑定激活码
      */
-    public static void getStudentBindCard(String id, String gradeId, DisposeDataListener listener) {
+    public static void getStudentBindCard(String id, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("id", id);
-        params.put("grade_id", gradeId);
         RequestCenter.postRequest(HttpConstants.getStudentBindCard, params, listener, null);
     }
 

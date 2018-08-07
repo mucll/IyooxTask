@@ -153,7 +153,7 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
      */
     private void postExercisesData() {
         loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
-        RequestCenter.getVideoTimu(videoId, new DisposeDataListener() {
+        RequestCenter.getVideoTimu(videoId, zhishiId, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 loading.dismiss();
@@ -166,7 +166,11 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
                         chronometer.setBase(SystemClock.elapsedRealtime());
                         chronometer.start();
                         initFragment(urlModel.getTimu_list(), baseVideoUrlModel.data.getShipin_name(), Constant.STUDENT_DOING);
+                    } else {
+                        TabToast.showMiddleToast(context, "暂无习题");
                     }
+                } else {
+                    TabToast.showMiddleToast(context, "暂无习题");
                 }
             }
 

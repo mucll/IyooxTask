@@ -15,6 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -50,7 +52,7 @@ import java.util.List;
 /**
  * 学生端 -班级Fragment
  */
-public class ClassFragment extends BaseFragment implements View.OnClickListener {
+public class ClassFragment extends BaseFragment implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     private View view;
     private RecyclerView mRecyclerView;
@@ -67,6 +69,8 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
     private NestedScrollView scrollView;
     private View emptyView;
     private Loading loading;
+    private LinearLayout tagImageLayout;
+    private List<ImageView> imageList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,6 +88,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
         emptyView = view.findViewById(R.id.empty_view_layout);
         addClassBt = view.findViewById(R.id.add_class_bt);
         titleTv = view.findViewById(R.id.title_bar_tv);
+        tagImageLayout = view.findViewById(R.id.student_class_tag_image_layout);
 
         mChart = view.findViewById(R.id.chart_line);
         mViewPager = view.findViewById(R.id.class_fragment_view_pager);
@@ -98,23 +103,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
 
     private void setEvent() {
         addClassBt.setOnClickListener(this);
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mViewPager.resetHeight(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-
-        });
+        mViewPager.addOnPageChangeListener(this);
         mViewPager.resetHeight(0);
     }
 
@@ -176,6 +165,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
         initChatLine();
         rankingModels.clear();
         rankingModels.addAll(data.getZhishidian_list());
+        initTagImage(rankingModels.size(), 0);
         mViewPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager()));
     }
 
@@ -209,6 +199,30 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
         }
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        mViewPager.resetHeight(position);
+        for (int i = 0; i < imageList.size(); i++) {
+            if (tagImageId_seleced != 0) {
+                if (i == position) {
+                    imageList.get(position).setImageResource(tagImageId_seleced);
+                } else {
+                    imageList.get(i).setImageResource(tagImageId_nomorl);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
     /**
      * 自定义适配器
      */
@@ -234,6 +248,41 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
             return classRankingFragment;
         }
     }
+
+    /**
+     * @param count2 viewpager实际数据数量
+     */
+    private int tagImageId_seleced = R.drawable.shape_photo_tag_select;
+    private int tagImageId_nomorl = R.drawable.shape_photo_tag_nomal;
+
+    private void initTagImage(int count, int position) {
+        tagImageLayout.removeAllViews();
+        imageList.clear();
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(16,
+                16);
+        params.setMargins(8, 0, 8, 0);
+        for (int i = 0; i < count; i++) {
+            ImageView view1 = new ImageView(getContext());
+            view1.setLayoutParams(params);
+            if (tagImageId_seleced != 0) {
+                if (i == position) {
+                    view1.setImageResource(tagImageId_seleced);
+                } else {
+                    view1.setImageResource(tagImageId_nomorl);
+                }
+            }
+            view1.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageList.add(view1);
+            tagImageLayout.addView(view1);
+        }
+//        tagImageLayout.bringToFront();
+        if (count <= 1) {
+            tagImageLayout.setVisibility(View.GONE);
+        } else {
+            tagImageLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     /**
      * 设置趋势图

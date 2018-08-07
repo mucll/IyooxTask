@@ -55,16 +55,24 @@ public class TrialCardActivity extends BaseActivity implements View.OnClickListe
 
         mEditText = findViewById(R.id.trial_card_et);
         cardCodeTv = findViewById(R.id.trial_card_code_tv);
-        selectGrade = findViewById(R.id.trial_card_select_grade_tv);
+//        selectGrade = findViewById(R.id.trial_card_select_grade_tv);
+        cardCodeTv.setEnabled(false);
         cardCodeTv.setFocusable(false);
-        selectGrade.setFocusable(false);
+        cardCodeTv.setFocusableInTouchMode(false);
+        cardCodeTv.setLongClickable(false);
+        cardCodeTv.setTextIsSelectable(false);
+
+//        selectGrade.setFocusable(false);
+//        selectGrade.setFocusableInTouchMode(false);
+//        selectGrade.setLongClickable(false);
+//        selectGrade.setTextIsSelectable(false);
 
         submitBt = findViewById(R.id.card_submit_bt);
     }
 
     @Override
     protected void initData() {
-        setTitle("试用卡兑换");
+        setTitle("激活卡兑换");
         postGrade();
     }
 
@@ -72,7 +80,7 @@ public class TrialCardActivity extends BaseActivity implements View.OnClickListe
     protected void setEvent() {
         setBack();
         submitBt.setOnClickListener(this);
-        selectGrade.setOnClickListener(this);
+//        selectGrade.setOnClickListener(this);
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -153,22 +161,24 @@ public class TrialCardActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.trial_card_select_grade_tv:
-                if (gradeModels == null) {
-                    postGrade();
-                    return;
-                }
-                gradeDialog = new SelectGradeDialog(this, gradeModels, gradeCode) {
-                    @Override
-                    public void getGradeType(GradeListModel gradeModel, int gradeCode) {
-                        selectGrade.setText(gradeModel.getName());
-                        TrialCardActivity.this.gradeCode = gradeCode;
-                        setViewEnable();
-                    }
-                };
-                break;
+//            case R.id.trial_card_select_grade_tv:
+//                if (gradeModels == null) {
+//                    postGrade();
+//                    return;
+//                }
+//                gradeDialog = new SelectGradeDialog(this, gradeModels, gradeCode) {
+//                    @Override
+//                    public void getGradeType(GradeListModel gradeModel, int gradeCode) {
+//                        selectGrade.setText(gradeModel.getName());
+//                        TrialCardActivity.this.gradeCode = gradeCode;
+//                        setViewEnable();
+//                    }
+//                };
+//                break;
             case R.id.card_submit_bt:
-                postStudentCardHttp();
+                TabToast.showMiddleToast(context, "激活成功");
+                finish();
+//                postStudentCardHttp();
                 break;
         }
     }
@@ -177,7 +187,7 @@ public class TrialCardActivity extends BaseActivity implements View.OnClickListe
      * 绑定
      */
     private void postStudentCardHttp() {
-        RequestCenter.getStudentBindCard(trialCardModel.getId() + "", gradeCode + 1 + "", new DisposeDataListener() {
+        RequestCenter.getStudentBindCard(trialCardModel.getId() + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 JSONObject jsonObject = (JSONObject) responseObj;
@@ -203,8 +213,9 @@ public class TrialCardActivity extends BaseActivity implements View.OnClickListe
      */
     private void setViewEnable() {
         if (!TextUtils.isEmpty(mEditText.getText().toString()) &&
-                !TextUtils.isEmpty(cardCodeTv.getText().toString()) &&
-                !TextUtils.isEmpty(selectGrade.getText().toString())) {
+                !TextUtils.isEmpty(cardCodeTv.getText().toString())) {
+//             &&
+//            !TextUtils.isEmpty(selectGrade.getText().toString())
             submitBt.setEnabled(true);
         } else {
             submitBt.setEnabled(false);

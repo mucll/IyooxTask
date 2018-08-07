@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.SearchActivity;
 import com.huisu.iyoox.activity.student.StudentMsgActivity;
 import com.huisu.iyoox.entity.GradeListModel;
 import com.huisu.iyoox.entity.SubjectModel;
@@ -56,6 +57,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private int selectPageIndexof = 0;
     private View msgView;
     private View newMsgView;
+    private View searchIv;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,6 +80,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
      */
     private void initView() {
         studentGradeTv = view.findViewById(R.id.student_grade_tv);
+        searchIv = view.findViewById(R.id.search_icon_iv);
         msgView = view.findViewById(R.id.home_fragment_msg_ll);
         mTabView = view.findViewById(R.id.fragment_home_tab_view);
         mViewPager = view.findViewById(R.id.fragment_home_page);
@@ -133,7 +136,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                     if (count > 0) {
                         newMsgView.setVisibility(View.VISIBLE);
                     } else {
-                        newMsgView.setVisibility(View.GONE);
+                        newMsgView.setVisibility(View.INVISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -205,6 +208,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
      */
     private void setEvent() {
         mViewPager.addOnPageChangeListener(this);
+        searchIv.setOnClickListener(this);
         studentGradeTv.setOnClickListener(this);
         msgView.setOnClickListener(this);
         mTabView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -252,8 +256,11 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 gradeDialog.show();
                 break;
             case R.id.home_fragment_msg_ll:
-                newMsgView.setVisibility(View.GONE);
+                newMsgView.setVisibility(View.INVISIBLE);
                 StudentMsgActivity.start(getContext());
+                break;
+            case R.id.search_icon_iv:
+                SearchActivity.start(getContext());
                 break;
             default:
                 break;

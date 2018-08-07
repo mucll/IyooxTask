@@ -60,9 +60,15 @@ public class RegisterPersonDetailsActivity extends BaseActivity implements View.
         //性别
         genderEditText = findViewById(R.id.register_gender_text);
         genderEditText.setFocusable(false);
+        genderEditText.setFocusableInTouchMode(false);
+        genderEditText.setLongClickable(false);
+        genderEditText.setTextIsSelectable(false);
         //年级
         gradeEditText = findViewById(R.id.register_select_grade_text);
         gradeEditText.setFocusable(false);
+        gradeEditText.setFocusableInTouchMode(false);
+        gradeEditText.setLongClickable(false);
+        gradeEditText.setTextIsSelectable(false);
         contentView = findViewById(R.id.register_person_details_content);
     }
 

@@ -5,8 +5,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dip_90"
-        android:layout_weight="1">
+        android:layout_height="@dimen/dip_90">
 
         <ImageView
             android:id="@+id/collect_bg_iv"
@@ -43,7 +42,6 @@
                     android:layout_marginTop="@dimen/dip_8"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="一元一次方程"
                     android:textColor="@color/white"
                     android:textSize="@dimen/f_12" />
             </LinearLayout>

@@ -109,8 +109,8 @@ public class TeacherLookTaskListFragment extends BaseFragment implements OnLoadM
     }
 
     private void initView() {
-        swipeToLoadLayout = view.findViewById(R.id.swipeToLoadLayout);
         emptyView = view.findViewById(R.id.task_list_teacher_empty_view);
+        swipeToLoadLayout = view.findViewById(R.id.swipeToLoadLayout);
         mRecyclerView = view.findViewById(R.id.swipe_target);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mAdapter = new TeacherLookTaskListAdapter(getContext(), models, type);
@@ -127,7 +127,6 @@ public class TeacherLookTaskListFragment extends BaseFragment implements OnLoadM
         if (Constant.TASK_SEND_CODE == type) {
             if (!init) {
                 swipeToLoadLayout.setRefreshing(true);
-                postTaskListHttp();
                 init = true;
             }
         }

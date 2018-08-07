@@ -48,6 +48,7 @@ public class TeacherSelectExercisesAdapter extends RecyclerView.Adapter<TeacherS
         String count = String.format("<font color='#FF5629'>(%s) </font>%s.", type, (position + 1));
         StringBuilder sb = new StringBuilder();
         sb.append(count).append(model.getTigan());
+//        sb.append("<img src=\"http://vimg2.ws.126.net/image/snapshot/2016/11/I/M/VC62HMUIM.jpg\" height=\"200\" width=\"200\" />");
         String s = sb.toString().replaceAll("style='max-width:100%'", "style='max-width:100%;height:auto;'");
         //显示题干
         if (!s.equals(holder.tiGanView.text)) {

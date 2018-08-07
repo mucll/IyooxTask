@@ -35,6 +35,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 老师填写作业信息并发布
+ */
 public class TeacherSendTaskActivity extends BaseActivity implements View.OnClickListener {
 
     private String timuIds;
