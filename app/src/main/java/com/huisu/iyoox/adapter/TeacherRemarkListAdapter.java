@@ -43,10 +43,12 @@ public class TeacherRemarkListAdapter extends RecyclerView.Adapter<TeacherRemark
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         DianPingListModel model = models.get(position);
-        holder.nameTv.setText(model.getName());
-        holder.zhengquelv.setText(model.getZhengquelv() + "%");
-        holder.timeTv.setText(StringUtils.getTimeString(model.getEnd_time()));
-        holder.tiJiaoTv.setText("提交率:" + model.getTijiaolv() + "%");
+        holder.nameTv.setText(model.getWork_name());
+        holder.zhengquelv.setText(model.getCorrect_rate_avg() + "%");
+        holder.timeTv.setText(StringUtils.getTimeString(model.getEnd_time())+"截止");
+        holder.tiJiaoTv.setText("提交率:" + model.getSubmit_rate() + "%");
+        holder.classNameTv.setText(model.getClassroom_name());
+        holder.typeTv.setText("【" + model.getType_name() + "】");
     }
 
     @Override
@@ -67,13 +69,17 @@ public class TeacherRemarkListAdapter extends RecyclerView.Adapter<TeacherRemark
         private TextView timeTv;
         private TextView zhengquelv;
         private TextView tiJiaoTv;
+        private TextView classNameTv;
+        private TextView typeTv;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            typeTv = itemView.findViewById(R.id.teacher_remark_list_type_tv);
             nameTv = itemView.findViewById(R.id.teacher_remark_list_task_name_tv);
             timeTv = itemView.findViewById(R.id.teacher_remark_list_end_time_tv);
             tiJiaoTv = itemView.findViewById(R.id.teacher_remark_list_tijiaolv_tv);
             zhengquelv = itemView.findViewById(R.id.teacher_remark_list_zhengquelv_tv);
+            classNameTv = itemView.findViewById(R.id.teacher_remark_list_class_name_tv);
             itemView.setOnClickListener(this);
         }
 

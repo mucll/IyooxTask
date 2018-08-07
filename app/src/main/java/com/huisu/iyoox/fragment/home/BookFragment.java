@@ -197,6 +197,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
     @Override
     public void onEditonChanged(BookDetailsModel editionModel) {
         page = 1;
+        bookTypeView.setRefresh(editionModel,default_code);
         swipeToLoadLayout.setLoadingMore(false);
         swipeToLoadLayout.setRefreshing(true);
     }

@@ -470,9 +470,12 @@ public class RequestCenter {
     /**
      * 老师布置作业成功 提醒家长
      */
-    public static void notifyParents(String workId, DisposeDataListener listener) {
+    public static void notifyParents(String recieverIds,String message_body,String messageType ,String messageAction,DisposeDataListener listener) {
         RequestParams params = new RequestParams();
-        params.put("work_id", workId);
+        params.put("reciever_ids", recieverIds);
+        params.put("message_body", message_body);
+        params.put("message_type", messageType);
+        params.put("message_action", messageAction);
         RequestCenter.postRequest(HttpConstants.notifyParents, params, listener, null);
     }
 
@@ -583,7 +586,7 @@ public class RequestCenter {
     public static void teacherDianPingList(String userId, String pageindex, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("teacher_id", userId);
-        params.put("pageindex", pageindex);
+        params.put("page_index", pageindex);
         RequestCenter.postRequest(HttpConstants.teacherDianPingList, params, listener, BaseDianPingListModel.class);
     }
 

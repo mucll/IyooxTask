@@ -14,6 +14,7 @@ import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.base.BaseSendTaskResultModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.JsonUtils;
 
 /**
  * 老师成功创建班级后结果界面
@@ -58,9 +59,7 @@ public class TeacherCreateClassResultActivity extends BaseActivity implements Vi
         switch (v.getId()) {
             case R.id.task_submit_home_bt:
                 if (resultModel.data != null && resultModel.data.size() > 0) {
-                    for (int i = 0; i < resultModel.data.size(); i++) {
-                        postRemindHomeHttp(resultModel.data.get(i));
-                    }
+                    postRemindHomeHttp(JsonUtils.jsonFromObject(resultModel.data));
                 }
                 taskBt.setEnabled(false);
                 break;
@@ -72,8 +71,8 @@ public class TeacherCreateClassResultActivity extends BaseActivity implements Vi
         }
     }
 
-    private void postRemindHomeHttp(int taskId) {
-        RequestCenter.notifyParents(taskId + "", new DisposeDataListener() {
+    private void postRemindHomeHttp(String taskIds) {
+        RequestCenter.notifyParents(taskIds, "", Constant.MSG_NOTIFICATION + "", Constant.NOTIFICATION_SEND_TASK + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 finish();

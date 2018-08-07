@@ -65,6 +65,11 @@ public class ItemVideoView extends FrameLayout implements AdapterView.OnItemClic
         mAdapter.notifyDataSetChanged();
     }
 
+    public void clearData() {
+        videoTitleModels.clear();
+        mAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         VideoTitleModel titleModel = videoTitleModels.get(position);

@@ -226,7 +226,7 @@ public class HttpConstants {
     /**
      * 点评集合
      */
-    public static String teacherDianPingList = ROOT_URL + "/work/teacher_dianping_work_list";
+    public static String teacherDianPingList = ROOT_URL + "/work/stu_work_submint_list";
     /**
      * 学生收藏视频
      */

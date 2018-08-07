@@ -28,6 +28,9 @@ public class Constant {
      */
     public static final int MSG_SYSTEM = 2;
 
+    public static final int NOTIFICATION_SEND_TASK = 1;
+
+
 //----------------------------------密码界面根据type显示不同的界面---------------------------------------
     /**
      * 注册设置密码

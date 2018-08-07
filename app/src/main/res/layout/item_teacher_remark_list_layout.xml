@@ -21,16 +21,36 @@
                 android:layout_width="@dimen/dip_60"
                 android:layout_height="@dimen/dip_60"
                 android:layout_centerVertical="true"
-                android:src="@drawable/comment_type_practice" />
+                android:src="@drawable/comment_type_practice2" />
 
             <TextView
                 android:id="@+id/teacher_remark_list_zhengquelv_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dip_4"
+                android:layout_marginTop="@dimen/dip_2"
                 android:textColor="@color/white"
-                android:textSize="@dimen/f_16" />
+                android:textSize="@dimen/f_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="正确率"
+                android:textColor="@color/white"
+                android:textSize="@dimen/f_12" />
+
+            <TextView
+                android:id="@+id/teacher_remark_list_class_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/dip_4"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/f_12" />
         </RelativeLayout>
 
         <LinearLayout
@@ -47,18 +67,21 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/teacher_remark_list_type_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/dip_13"
+                    android:layout_marginRight="@dimen/dip_4"
                     android:textColor="@color/color333"
-                    android:textSize="@dimen/f_16" />
+                    android:textSize="@dimen/f_14" />
 
                 <TextView
                     android:id="@+id/teacher_remark_list_task_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:textColor="@color/color333"
-                    android:textSize="@dimen/f_14" />
+                    android:textSize="@dimen/f_16" />
             </LinearLayout>
 
             <LinearLayout

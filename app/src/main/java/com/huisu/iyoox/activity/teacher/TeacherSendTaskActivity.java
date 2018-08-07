@@ -27,6 +27,7 @@ import com.huisu.iyoox.util.StringUtils;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.DateTimeDialog;
 import com.huisu.iyoox.views.DialogSelectClass;
+import com.huisu.iyoox.views.Loading;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,6 +57,7 @@ public class TeacherSendTaskActivity extends BaseActivity implements View.OnClic
     private List<ClassRoomModel> models = new ArrayList<>();
     private String classIds;
     private int zhishidianId;
+    private Loading loading;
 
     @Override
     protected void initView() {
@@ -238,6 +240,7 @@ public class TeacherSendTaskActivity extends BaseActivity implements View.OnClic
             startTimeString = DateUtils.sdf3.format(new Date(System.currentTimeMillis()));
         }
         int taskType = getIntent().getIntExtra("taskType", Constant.ERROR_CODE);
+        loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
         RequestCenter.teacherSendTask(user.getUserId(), taskNameView.getText().toString().trim(), classIds, timuIds
                 , startTimeString, ednTimeTv.getText().toString().trim()
                 , TextUtils.isEmpty(msgEditView.getText().toString().trim()) ? "" : msgEditView.getText().toString().trim()
@@ -245,6 +248,7 @@ public class TeacherSendTaskActivity extends BaseActivity implements View.OnClic
                 , new DisposeDataListener() {
                     @Override
                     public void onSuccess(Object responseObj) {
+                        loading.dismiss();
                         BaseSendTaskResultModel baseModel = (BaseSendTaskResultModel) responseObj;
                         TeacherCreateClassResultActivity.start(context, Constant.CREATE_TASK_RESULT, "", baseModel);
                         setResult(RESULT_OK);
@@ -253,7 +257,7 @@ public class TeacherSendTaskActivity extends BaseActivity implements View.OnClic
 
                     @Override
                     public void onFailure(Object reasonObj) {
-
+                        loading.dismiss();
                     }
                 });
     }

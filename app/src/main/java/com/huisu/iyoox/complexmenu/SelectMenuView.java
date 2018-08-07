@@ -105,7 +105,7 @@ public class SelectMenuView extends LinearLayout {
                 setAllUnSelect();
                 dismissPopupWindow();
                 mEditonText.setText(model.getName());
-                setRefresh(editionModel);
+                setRefresh(editionModel, 0);
             }
         });
 
@@ -126,6 +126,8 @@ public class SelectMenuView extends LinearLayout {
                 mKnowledgeList.addAll(mChapterList.get(rightIndex).getZhishidianArr());
                 mKnowledgeHolder.refreshData(mKnowledgeList, 0);
                 mKnowledgeText.setText(mKnowledgeList.get(0));
+                KnowledgeModel = mKnowledgeList.get(0);
+
             }
         });
 
@@ -154,18 +156,18 @@ public class SelectMenuView extends LinearLayout {
         super.onFinishInflate();
         View.inflate(mContext, R.layout.layout_search_menu, this);
 
-        mEditonText = (TextView) findViewById(R.id.subject);
-        mEditonImage = (ImageView) findViewById(R.id.img_sub);
+        mEditonText = findViewById(R.id.subject);
+        mEditonImage = findViewById(R.id.img_sub);
 
-        mChapterText = (TextView) findViewById(R.id.comprehensive_sorting);
-        mChapterImage = (ImageView) findViewById(R.id.img_cs);
+        mChapterText = findViewById(R.id.comprehensive_sorting);
+        mChapterImage = findViewById(R.id.img_cs);
 
-        mKnowledgeText = (TextView) findViewById(R.id.tv_select);
-        mKnowledgeImage = (ImageView) findViewById(R.id.img_sc);
+        mKnowledgeText = findViewById(R.id.tv_select);
+        mKnowledgeImage = findViewById(R.id.img_sc);
 
-        mContentLayout = (RelativeLayout) findViewById(R.id.rl_content);
+        mContentLayout = findViewById(R.id.rl_content);
         mPopupWindowView = View.inflate(mContext, R.layout.layout_search_menu_content, null);
-        mMainContentLayout = (FrameLayout) mPopupWindowView.findViewById(R.id.rl_main);
+        mMainContentLayout = mPopupWindowView.findViewById(R.id.rl_main);
         mEditonView = findViewById(R.id.ll_subject);
         mChapterView = findViewById(R.id.ll_sort);
         mKnowledgeView = findViewById(R.id.ll_select);
@@ -390,24 +392,33 @@ public class SelectMenuView extends LinearLayout {
         mKnowledgeList.clear();
         mKnowledgeList.addAll(chapterModel.getZhishidianArr());
         mKnowledgeText.setText(mKnowledgeList.get(default_code));
+        KnowledgeModel = mKnowledgeList.get(default_code);
         mKnowledgeHolder.refreshData(mKnowledgeList, default_code);
     }
 
-    private void setRefresh(BookDetailsModel editionModel) {
+    public void setRefresh(BookDetailsModel bookDetailsModel, int default_code) {
+        //初始化教材版本
+        editionModel = bookDetailsModel;
+        mEditonText.setText(bookDetailsModel.getName());
         //初始化章节
         this.mChapterList.clear();
-        this.mChapterList.addAll(editionModel.getZhangjielist());
-        chapterModel = mChapterList.get(0);
+        this.mChapterList.addAll(bookDetailsModel.getZhangjielist());
+        chapterModel = mChapterList.get(default_code);
         mChapterText.setText(chapterModel.getName());
         List<String> chapter = new ArrayList<>();
         for (BookChapterModel chapterModel : mChapterList) {
             chapter.add(chapterModel.getName());
         }
-        mChapterHolder.refreshData(chapter, 0);
+        mChapterHolder.refreshData(chapter, default_code);
         //初始化知识点
         mKnowledgeList.clear();
         mKnowledgeList.addAll(chapterModel.getZhishidianArr());
-        mKnowledgeText.setText(mKnowledgeList.get(0));
-        mKnowledgeHolder.refreshData(mKnowledgeList, 0);
+        mKnowledgeText.setText(mKnowledgeList.get(default_code));
+        KnowledgeModel = mKnowledgeList.get(default_code);
+        mKnowledgeHolder.refreshData(mKnowledgeList, default_code);
+    }
+
+    public void setRefreshZhangjie() {
+
     }
 }
