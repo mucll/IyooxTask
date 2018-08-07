@@ -7,6 +7,7 @@ import com.huisu.iyoox.entity.base.BaseCheckMsgCode;
 import com.huisu.iyoox.entity.base.BaseClassRankingModel;
 import com.huisu.iyoox.entity.base.BaseClassRoomModel;
 import com.huisu.iyoox.entity.base.BaseClassRoomResultModel;
+import com.huisu.iyoox.entity.base.BaseCollectModel;
 import com.huisu.iyoox.entity.base.BaseDianPingListModel;
 import com.huisu.iyoox.entity.base.BaseExercisesModel;
 import com.huisu.iyoox.entity.base.BaseGradeListModel;
@@ -242,9 +243,11 @@ public class RequestCenter {
     /**
      * 获取视频列表
      */
-    public static void getVideoData(String shipinId, DisposeDataListener listener) {
+    public static void getVideoData(String userId, String zhishidianId, String shipinId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("shipin_id", shipinId);
+        params.put("zhishidian_id", zhishidianId);
+        params.put("student_id", userId);
         RequestCenter.postRequest(HttpConstants.getVideoData, params, listener, BaseVideoTimuModel.class);
     }
 
@@ -582,5 +585,58 @@ public class RequestCenter {
         params.put("teacher_id", userId);
         params.put("pageindex", pageindex);
         RequestCenter.postRequest(HttpConstants.teacherDianPingList, params, listener, BaseDianPingListModel.class);
+    }
+
+    /**
+     * 学生收藏视频
+     */
+    public static void collectZhishidian(String userId, String zhishidianId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("student_id", userId);
+        params.put("zhishidian_id", zhishidianId);
+        RequestCenter.postRequest(HttpConstants.collectZhishidian, params, listener, null);
+    }
+
+    /**
+     * 老师修改信息
+     */
+    public static void modifyTeacherInfo(String userId, String teacherName, String xuekeId,
+                                         String jiaocaiId, String gradeDetailId, String gradeId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("teacher_id", userId);
+        params.put("teacher_name", teacherName);
+        params.put("xueke_id", xuekeId);
+        params.put("jiaocai_id", jiaocaiId);
+        params.put("grade_detail_id", gradeDetailId);
+        params.put("grade_id", gradeId);
+        RequestCenter.postRequest(HttpConstants.modifyTeacherInfo, params, listener, null);
+    }
+
+    /**
+     * 学生收藏列表
+     */
+    public static void getCollectList(String userId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("student_id", userId);
+        RequestCenter.postRequest(HttpConstants.getCollectList, params, listener, BaseCollectModel.class);
+    }
+
+    /**
+     * 新消息
+     */
+    public static void getNewMessageCount(String userId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("receiver_id", userId);
+        RequestCenter.postRequest(HttpConstants.getNewMessageCount, params, listener, null);
+    }
+
+    /**
+     * 消息列表
+     */
+    public static void getMsgList(String userId, String type, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("receiver_id", userId);
+        params.put("message_type", type);
+        RequestCenter.postRequest(HttpConstants.getMsgList, params, listener, null);
     }
 }

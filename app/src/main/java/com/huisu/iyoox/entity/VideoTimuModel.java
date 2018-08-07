@@ -13,6 +13,7 @@ public class VideoTimuModel {
     private String shipin_name;
     private String shipin_url;
     private List<ExercisesModel> timu_list;
+    private boolean is_shipin_collected;
 
     public int getJiaocai_id() {
         return jiaocai_id;
@@ -52,5 +53,13 @@ public class VideoTimuModel {
 
     public void setTimu_list(List<ExercisesModel> timu_list) {
         this.timu_list = timu_list;
+    }
+
+    public boolean isIs_shipin_collected() {
+        return is_shipin_collected;
+    }
+
+    public void setIs_shipin_collected(boolean is_shipin_collected) {
+        this.is_shipin_collected = is_shipin_collected;
     }
 }

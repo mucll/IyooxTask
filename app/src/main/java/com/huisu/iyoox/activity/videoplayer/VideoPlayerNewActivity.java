@@ -31,10 +31,12 @@ import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.adapter.VideoPlayerListAdapter;
 import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.VideoTimuModel;
 import com.huisu.iyoox.entity.VideoTitleModel;
 import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
 import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.PolyvScreenUtils;
 import com.huisu.iyoox.util.TabToast;
@@ -105,14 +107,19 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
     private boolean isPlay = false;
     private View shareView;
     private View collectView;
+    private View backView;
     private TextView collectTv;
     private boolean isCollect;
+    private User user;
+    private VideoTimuModel urlModel;
+    private boolean showBack = false;
 
     @Override
     protected void initView() {
         bitrate = getIntent().getIntExtra("bitrate", PolyvBitRate.ziDong.getNum());
         isMustFromLocal = getIntent().getBooleanExtra("isMustFromLocal", false);
 
+        backView = findViewById(R.id.polyv_screen_back_iv);
         shareView = findViewById(R.id.video_share_rl);
         collectView = findViewById(R.id.video_collect_rl);
         collectTv = findViewById(R.id.video_collect_tv);
@@ -210,18 +217,11 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
 
     @Override
     protected void initData() {
+        user = UserManager.getInstance().getUser();
         selectModel = (VideoTitleModel) getIntent().getSerializableExtra("selectModel");
         zhishidianName = getIntent().getStringExtra("zhangjieName");
         List<VideoTitleModel> videoTitleModels = (List<VideoTitleModel>) getIntent().getSerializableExtra("models");
         if (selectModel != null) {
-            List<VideoTitleModel> models = LitePal.where("zhishidian_id = ?", String.valueOf(selectModel.getZhishidian_id())).find(VideoTitleModel.class);
-            if (models != null && models.size() > 0) {
-                collectTv.setSelected(true);
-                isCollect = true;
-            } else {
-                isCollect = false;
-                collectTv.setSelected(false);
-            }
             postVideoUrlData(selectModel.getShipin_id());
         }
         if (videoTitleModels != null && videoTitleModels.size() > 0) {
@@ -236,18 +236,34 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
     }
 
     private void postVideoUrlData(final int videoId) {
-        RequestCenter.getVideoData(videoId + "", new DisposeDataListener() {
+        RequestCenter.getVideoData(user.getUserId(), selectModel.getZhishidian_id() + "", videoId + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 BaseVideoTimuModel baseVideoUrlModel = (BaseVideoTimuModel) responseObj;
                 if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE) {
                     if (baseVideoUrlModel.data != null) {
-                        VideoTimuModel urlModel = baseVideoUrlModel.data;
+                        showBack = true;
+                        backView.setVisibility(View.GONE);
+                        urlModel = baseVideoUrlModel.data;
+                        //是否收藏
+                        if (urlModel.isIs_shipin_collected()) {
+                            isCollect = true;
+                            collectTv.setSelected(true);
+                        } else {
+                            isCollect = false;
+                            collectTv.setSelected(false);
+                        }
+                        //高亮选中的
                         mAdapter.setSelectId(selectModel.getZhishidian_id());
                         mAdapter.notifyDataSetChanged();
+                        //视频ID
                         vid = urlModel.getShipin_url();
                         play(vid, bitrate, false, isMustFromLocal);
                     } else {
+                        if (!showBack) {
+                            backView.setVisibility(View.VISIBLE);
+                        }
+                        collectTv.setSelected(false);
                         TabToast.showMiddleToast(context, "暂无视频");
                     }
                 }
@@ -264,34 +280,49 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.video_collect_rl:
-                setCollect();
+                postCollectHttp();
                 break;
             case R.id.video_share_rl:
+                break;
+            case R.id.polyv_screen_back_iv:
+                finish();
                 break;
             default:
                 break;
         }
     }
 
-    private void setCollect() {
-        if (isCollect) return;
-        boolean success = false;
-        if (selectModel != null) {
-            success = selectModel.save();
+    /**
+     * 调用收藏接口
+     */
+    private void postCollectHttp() {
+        if (urlModel == null) {
+            TabToast.showMiddleToast(context, "暂无视频");
+            return;
         }
-        if (success) {
-            isCollect = true;
-            collectTv.setSelected(true);
-            TabToast.showMiddleToast(this, "收藏成功");
-        } else {
-            collectTv.setSelected(false);
-            TabToast.showMiddleToast(this, "收藏成功失败");
+        if (isCollect) {
+            TabToast.showMiddleToast(context, "该视频已收藏");
+            return;
         }
+        RequestCenter.collectZhishidian(user.getUserId(), selectModel.getZhishidian_id() + "", new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                isCollect = true;
+                collectTv.setSelected(true);
+                TabToast.showMiddleToast(context, "收藏成功");
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
     }
 
     @Override
     protected void setEvent() {
         shareView.setOnClickListener(this);
+        backView.setOnClickListener(this);
         collectView.setOnClickListener(this);
         mAdapter.setOnItemClickListener(this);
 

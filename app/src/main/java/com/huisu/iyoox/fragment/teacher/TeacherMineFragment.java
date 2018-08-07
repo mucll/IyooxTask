@@ -18,6 +18,9 @@ import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.ConfigMainActivity;
 import com.huisu.iyoox.activity.LoginActivity;
 import com.huisu.iyoox.activity.PersonalDataActivity;
+import com.huisu.iyoox.activity.register.TeacherSelectSubjectActivity;
+import com.huisu.iyoox.activity.register.TeacherSelectSubjectVersionActivity;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.manager.ActivityStackManager;
@@ -38,6 +41,8 @@ public class TeacherMineFragment extends BaseFragment implements View.OnClickLis
     private User user;
     private View configLayout;
     private View servicePhoneLayout;
+    private View selectSubjectView;
+    private View selectVersionView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,11 +62,13 @@ public class TeacherMineFragment extends BaseFragment implements View.OnClickLis
         configLayout = view.findViewById(R.id.mine_setting_layout);
         //客服
         servicePhoneLayout = view.findViewById(R.id.mine_service_phone_layout);
+        selectSubjectView = view.findViewById(R.id.mine_teacher_select_subject_ll);
+        selectVersionView = view.findViewById(R.id.mine_teacher_select_version_ll);
     }
 
     private void initData() {
         user = UserManager.getInstance().getUser();
-        headView.setHead(user.getUserId(), user.getName(),  TextUtils.isEmpty(user.getAvatar()) ? "" : user.getAvatar(),user.getType());
+        headView.setHead(user.getUserId(), user.getName(), TextUtils.isEmpty(user.getAvatar()) ? "" : user.getAvatar(), user.getType());
         userName.setText(user.getName());
     }
 
@@ -79,6 +86,12 @@ public class TeacherMineFragment extends BaseFragment implements View.OnClickLis
             case R.id.mine_setting_layout:
                 //设置
                 ConfigMainActivity.start(getContext());
+                break;
+            case R.id.mine_teacher_select_subject_ll:
+                TeacherSelectSubjectActivity.start(getContext(), user.getGrade(), user.getXueke_id(), Constant.USER_ALTER);
+                break;
+            case R.id.mine_teacher_select_version_ll:
+                TeacherSelectSubjectVersionActivity.start(getContext(), Constant.USER_ALTER);
                 break;
             default:
                 break;
@@ -119,6 +132,8 @@ public class TeacherMineFragment extends BaseFragment implements View.OnClickLis
         headView.setOnClickListener(this);
         configLayout.setOnClickListener(this);
         servicePhoneLayout.setOnClickListener(this);
+        selectSubjectView.setOnClickListener(this);
+        selectVersionView.setOnClickListener(this);
     }
 
 }

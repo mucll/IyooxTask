@@ -22,11 +22,11 @@ public class Constant {
     /**
      * 通知消息
      */
-    public static final int NOTIFICATION_MSG = 1;
+    public static final int MSG_NOTIFICATION = 1;
     /**
      * 系统消息
      */
-    public static final int SYSTEM_MSG = 2;
+    public static final int MSG_SYSTEM = 2;
 
 //----------------------------------密码界面根据type显示不同的界面---------------------------------------
     /**
@@ -62,6 +62,15 @@ public class Constant {
      * 老师身份
      */
     public static final int TEACHER_TYPE = 2;
+    /**
+     * 注册
+     */
+    public static final int USER_LOOK = 1;
+    /**
+     * 修改
+     */
+    public static final int USER_ALTER = 2;
+
 
 //----------------------------------学生做题状态或查看状态---------------------------------------
     /**

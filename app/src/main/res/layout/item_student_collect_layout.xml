@@ -9,9 +9,10 @@
         android:layout_weight="1">
 
         <ImageView
+            android:id="@+id/collect_bg_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/home_course1_bg" />
 
         <LinearLayout
@@ -26,6 +27,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/collect_subject_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dip_10"
@@ -34,7 +36,7 @@
                     android:textSize="@dimen/f_10" />
 
                 <TextView
-                    android:id="@+id/student_collect_zhishidian_name"
+                    android:id="@+id/student_collect_video_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dip_10"
@@ -47,17 +49,18 @@
             </LinearLayout>
 
             <TextView
-                android:layout_width="@dimen/dip_40"
+                android:id="@+id/video_grade_detail_tv"
+                android:layout_width="@dimen/dip_44"
                 android:layout_height="@dimen/dip_14"
                 android:layout_marginLeft="@dimen/dip_8"
                 android:layout_marginRight="@dimen/dip_10"
                 android:layout_marginTop="@dimen/dip_8"
                 android:background="@color/edf9cd"
+                android:ellipsize="end"
                 android:gravity="center"
-                android:text="人教版"
+                android:maxLines="1"
                 android:textColor="@color/color333"
-                android:textSize="@dimen/f_10"
-                android:visibility="invisible" />
+                android:textSize="@dimen/f_10" />
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

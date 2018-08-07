@@ -54,6 +54,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/student_content_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@drawable/shape_divider_line_1px"
@@ -138,5 +139,59 @@
                 android:textColor="@color/color999"
                 android:textSize="@dimen/f_15" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/teacher_content_ll"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/shape_divider_line_1px"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:id="@+id/teacher_person_user_name_ll"
+            style="@style/person_details_layout_style"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/person_details_layout_tv_style"
+                android:text="姓名" />
+
+            <TextView
+                android:id="@+id/teacher_person_user_name_tv"
+                style="@style/person_details_layout_tv_style"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/dip_8"
+                android:drawableRight="@drawable/homework_finished_forward"
+                android:gravity="right|center_vertical"
+                android:paddingRight="@dimen/dip_16"
+                android:textColor="@color/color999"
+                android:textSize="@dimen/f_15" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/teacher_person_grade_ll"
+            style="@style/person_details_layout_style"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/person_details_layout_tv_style"
+                android:text="年级" />
+
+            <TextView
+                android:id="@+id/teacher_person_grade_tv"
+                style="@style/person_details_layout_tv_style"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/dip_8"
+                android:drawableRight="@drawable/homework_finished_forward"
+                android:gravity="right|center_vertical"
+                android:paddingRight="@dimen/dip_16"
+                android:textColor="@color/color999"
+                android:textSize="@dimen/f_15" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

@@ -3,12 +3,14 @@ package com.huisu.iyoox.activity.student;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
 import com.huisu.iyoox.Interface.TaskStatus;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.fragment.StudentMsgFragment;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.views.MyFragmentLayout_line;
@@ -31,31 +33,30 @@ public class StudentMsgActivity extends BaseActivity {
 
     private void initFragment() {
         fragments.clear();
-        fragments.add(getFragment(TaskStatus.FINISH));
-        fragments.add(getFragment(TaskStatus.UNFINISH));
+        fragments.add(getFragment(Constant.MSG_NOTIFICATION));
+        fragments.add(getFragment(Constant.MSG_SYSTEM));
         mFragmentLayout.setScorllToNext(true);
         mFragmentLayout.setScorll(true);
         mFragmentLayout.setWhereTab(1);
         mFragmentLayout.setTabHeight(6, getResources().getColor(R.color.main_text_color), false);
-        mFragmentLayout
-                .setOnChangeFragmentListener(new MyFragmentLayout_line.ChangeFragmentListener() {
-                    @Override
-                    public void change(int lastPosition, int positon,
-                                       View lastTabView, View currentTabView) {
-                        ((TextView) lastTabView.findViewById(R.id.tab_text))
-                                .setTextColor(getResources().getColor(R.color.color333));
-                        ((TextView) currentTabView.findViewById(R.id.tab_text))
-                                .setTextColor(getResources().getColor(R.color.main_text_color));
-                        fragments.get(positon).onShow();
-                    }
-                });
+        mFragmentLayout.setOnChangeFragmentListener(new MyFragmentLayout_line.ChangeFragmentListener() {
+            @Override
+            public void change(int lastPosition, int positon,
+                               View lastTabView, View currentTabView) {
+                ((TextView) lastTabView.findViewById(R.id.tab_text))
+                        .setTextColor(getResources().getColor(R.color.color333));
+                ((TextView) currentTabView.findViewById(R.id.tab_text))
+                        .setTextColor(getResources().getColor(R.color.main_text_color));
+                fragments.get(positon).onShow();
+            }
+        });
         mFragmentLayout.setAdapter(fragments, R.layout.tablayout_student_msg, 0x203);
     }
 
-    private StudentMsgFragment getFragment(String type) {
+    private StudentMsgFragment getFragment(int type) {
         StudentMsgFragment fragment = new StudentMsgFragment();
         Bundle b = new Bundle();
-        b.putString("type", type);
+        b.putInt("type", type);
         fragment.setArguments(b);
         return fragment;
     }

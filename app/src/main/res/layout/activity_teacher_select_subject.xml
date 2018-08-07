@@ -8,12 +8,23 @@
 
     <include layout="@layout/layout_title_bar_all" />
 
-    <com.huisu.iyoox.views.EbagGridView
-        android:id="@+id/teacher_select_subject_grid_view"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dip_16"
-        android:gravity="center"
-        android:numColumns="3"
-        android:verticalSpacing="@dimen/dip_12" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.huisu.iyoox.views.EbagGridView
+                android:id="@+id/teacher_select_subject_grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dip_16"
+                android:gravity="center"
+                android:numColumns="3"
+                android:verticalSpacing="@dimen/dip_12" />
+        </FrameLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

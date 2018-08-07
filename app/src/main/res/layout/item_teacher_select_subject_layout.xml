@@ -27,8 +27,8 @@
 
             <ImageView
                 android:id="@+id/subject_icon_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dip_30"
+                android:layout_height="@dimen/dip_30"
                 android:src="@drawable/subject_yu" />
 
             <TextView

@@ -52,7 +52,7 @@ public class PolyvPlayerMediaController extends PolyvBaseMediaController impleme
     // 竖屏的控制栏
     private RelativeLayout rl_port;
     // 竖屏的切屏按钮，竖屏的播放/暂停按钮
-    private ImageView iv_land, iv_play;
+    private ImageView iv_land, iv_play, polyv_screen_iv;
     // 竖屏的显示播放进度控件
     private TextView tv_curtime, tv_tottime;
     // 竖屏的进度条
@@ -207,6 +207,7 @@ public class PolyvPlayerMediaController extends PolyvBaseMediaController impleme
     private void findIdAndNew() {
         //竖屏的view
         rl_port = view.findViewById(R.id.rl_port);
+        polyv_screen_iv = view.findViewById(R.id.polyv_screen_iv);
         iv_land = view.findViewById(R.id.iv_land);
         iv_play = view.findViewById(R.id.iv_play);
         tv_curtime = view.findViewById(R.id.tv_curtime);
@@ -277,6 +278,7 @@ public class PolyvPlayerMediaController extends PolyvBaseMediaController impleme
 
     private void initView() {
         iv_land.setOnClickListener(this);
+        polyv_screen_iv.setOnClickListener(this);
         iv_port.setOnClickListener(this);
         iv_play.setOnClickListener(this);
         iv_play_land.setOnClickListener(this);
@@ -853,6 +855,11 @@ public class PolyvPlayerMediaController extends PolyvBaseMediaController impleme
         switch (view.getId()) {
             case R.id.iv_land:
                 changeToLandscape();
+                break;
+            case R.id.polyv_screen_iv:
+                if (videoActivity != null) {
+                    videoActivity.finish();
+                }
                 break;
             case R.id.iv_port:
                 changeToPortrait();

@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.entity.CollectModel;
 import com.huisu.iyoox.entity.ExercisesModel;
 import com.huisu.iyoox.entity.VideoTitleModel;
 
@@ -23,9 +26,9 @@ import java.util.List;
  */
 public class StudentCollectAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<VideoTitleModel> models;
+    private ArrayList<CollectModel> models;
 
-    public StudentCollectAdapter(Context context, ArrayList<VideoTitleModel> models) {
+    public StudentCollectAdapter(Context context, ArrayList<CollectModel> models) {
         this.context = context;
         this.models = models;
     }
@@ -36,7 +39,7 @@ public class StudentCollectAdapter extends BaseAdapter {
     }
 
     @Override
-    public VideoTitleModel getItem(int position) {
+    public CollectModel getItem(int position) {
         return models.get(position);
     }
 
@@ -55,16 +58,45 @@ public class StudentCollectAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        VideoTitleModel titleModel = getItem(position);
-        holder.zhishidianName.setText(titleModel.getShipin_name());
+        CollectModel titleModel = getItem(position);
+        String string = titleModel.getGrade_name() +
+                titleModel.getXueke_name() +
+                titleModel.getGrade_detail_name();
+        holder.subjectTv.setText(string);
+        holder.videoNameTv.setText(titleModel.getVedio_name());
+        holder.gradeDetailTv.setText(titleModel.getJiaocai_name());
+        holder.iconBgIv.setBackgroundResource(getResId(titleModel.getJiaocai_id()));
         return convertView;
     }
 
+    private int getResId(int kemuId) {
+        switch (kemuId) {
+            case Constant.SUBJECT_YUWEN:
+                return R.drawable.bg_course_chinese2;
+            case Constant.SUBJECT_SHUXUE:
+                return R.drawable.bg_course_math2;
+            case Constant.SUBJECT_ENGLISH:
+                return R.drawable.bg_course_english2;
+            case Constant.SUBJECT_WULI:
+                return R.drawable.bg_course_physics2;
+            case Constant.SUBJECT_HUAXUE:
+                return R.drawable.bg_course_chemical2;
+            default:
+                return 1;
+        }
+    }
+
     static class ViewHolder {
-        TextView zhishidianName;
+        ImageView iconBgIv;
+        TextView videoNameTv;
+        TextView gradeDetailTv;
+        TextView subjectTv;
 
         ViewHolder(View view) {
-            zhishidianName = view.findViewById(R.id.student_collect_zhishidian_name);
+            iconBgIv = view.findViewById(R.id.collect_bg_iv);
+            videoNameTv = view.findViewById(R.id.student_collect_video_name);
+            gradeDetailTv = view.findViewById(R.id.video_grade_detail_tv);
+            subjectTv = view.findViewById(R.id.collect_subject_name_tv);
         }
     }
 }

@@ -133,7 +133,7 @@ public class TeacherCreateTaskActivity extends BaseActivity implements DropdownB
         switch (v.getId()) {
             case R.id.tv_submit:
                 TeacherSelectSubjectVersionActivity.start(this, gradeCode,
-                        kemu_id, versionId, versionDetailId);
+                        kemu_id, versionId, versionDetailId, Constant.USER_LOOK);
                 break;
             default:
                 break;

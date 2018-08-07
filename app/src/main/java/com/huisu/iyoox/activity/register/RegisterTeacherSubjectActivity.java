@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.MainActivity;
 import com.huisu.iyoox.activity.base.BaseActivity;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.BookEditionModel;
 import com.huisu.iyoox.entity.GradeListModel;
 import com.huisu.iyoox.entity.SubjectModel;
@@ -125,12 +126,12 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
                 if (gradeCode == 0) {
                     return;
                 }
-                TeacherSelectSubjectActivity.start(this, gradeCode, subjectId);
+                TeacherSelectSubjectActivity.start(this, gradeCode, subjectId, Constant.USER_LOOK);
                 break;
             case R.id.register_version_ll:
                 if (subjectModel != null) {
                     TeacherSelectSubjectVersionActivity.start(this, gradeCode,
-                            subjectModel.getKemu_id(), versionId, versionDetailId);
+                            subjectModel.getKemu_id(), versionId, versionDetailId, Constant.USER_LOOK);
                 }
                 break;
             case R.id.register_teacher_submit_bt:

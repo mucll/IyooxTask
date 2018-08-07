@@ -17,10 +17,12 @@ import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.adapter.VideoPlayerListAdapter;
 import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.VideoTimuModel;
 import com.huisu.iyoox.entity.VideoTitleModel;
 import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
 import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.MyJZVideoPlayerStandard;
@@ -52,6 +54,7 @@ public class VideoPlayerActivity extends BaseActivity implements MyJZVideoPlayer
     private TextView zhangjieCount;
     private View zhangjieContent;
     private String zhishidianName;
+    private User user;
 
     @Override
     protected void initView() {
@@ -75,6 +78,7 @@ public class VideoPlayerActivity extends BaseActivity implements MyJZVideoPlayer
 
     @Override
     protected void initData() {
+        user = UserManager.getInstance().getUser();
         selectModel = (VideoTitleModel) getIntent().getSerializableExtra("selectModel");
         zhishidianName = getIntent().getStringExtra("zhangjieName");
         List<VideoTitleModel> videoTitleModels = (List<VideoTitleModel>) getIntent().getSerializableExtra("models");
@@ -93,7 +97,7 @@ public class VideoPlayerActivity extends BaseActivity implements MyJZVideoPlayer
     }
 
     private void postVideoUrlData(final int videoId) {
-        RequestCenter.getVideoData(videoId + "", new DisposeDataListener() {
+        RequestCenter.getVideoData(user.getUserId(), selectModel.getZhishidian_id() + "", videoId + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 BaseVideoTimuModel baseVideoUrlModel = (BaseVideoTimuModel) responseObj;

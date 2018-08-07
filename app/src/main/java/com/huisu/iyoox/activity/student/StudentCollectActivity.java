@@ -13,7 +13,14 @@ import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.activity.videoplayer.VideoPlayerActivity;
 import com.huisu.iyoox.activity.videoplayer.VideoPlayerNewActivity;
 import com.huisu.iyoox.adapter.StudentCollectAdapter;
+import com.huisu.iyoox.entity.CollectModel;
+import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.VideoTitleModel;
+import com.huisu.iyoox.entity.base.BaseCollectModel;
+import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.manager.UserManager;
+import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.views.Loading;
 
 import org.litepal.LitePal;
 
@@ -30,8 +37,10 @@ public class StudentCollectActivity extends BaseActivity implements AdapterView.
     private GridView gridView;
     private StudentCollectAdapter mAdapter;
 
-    private ArrayList<VideoTitleModel> models = new ArrayList<>();
+    private ArrayList<CollectModel> models = new ArrayList<>();
     private View emptyView;
+    private User user;
+    private Loading loading;
 
     @Override
     protected void initView() {
@@ -44,15 +53,33 @@ public class StudentCollectActivity extends BaseActivity implements AdapterView.
     @Override
     protected void initData() {
         setTitle("我的收藏");
-        List<VideoTitleModel> titleModels = LitePal.findAll(VideoTitleModel.class);
-        if (titleModels != null && titleModels.size() > 0) {
-            models.clear();
-            models.addAll(titleModels);
-            mAdapter.notifyDataSetChanged();
-            emptyView.setVisibility(View.GONE);
-        } else {
-            emptyView.setVisibility(View.VISIBLE);
-        }
+        user = UserManager.getInstance().getUser();
+        postCollectDataHttp();
+    }
+
+    private void postCollectDataHttp() {
+        loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
+        RequestCenter.getCollectList(user.getUserId(), new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                loading.dismiss();
+                models.clear();
+                BaseCollectModel baseModel = (BaseCollectModel) responseObj;
+                if (baseModel.data != null && baseModel.data.size() > 0) {
+                    emptyView.setVisibility(View.GONE);
+                    models.addAll(baseModel.data);
+                } else {
+                    emptyView.setVisibility(View.VISIBLE);
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                loading.dismiss();
+                emptyView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -74,9 +101,17 @@ public class StudentCollectActivity extends BaseActivity implements AdapterView.
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        VideoTitleModel model = models.get(position);
+        CollectModel model = models.get(position);
+        VideoTitleModel titleModel = new VideoTitleModel();
+        titleModel.setShipin_id(model.getVedio_id());
+        titleModel.setShipin_name(model.getVedio_name());
+        titleModel.setZhishidian_id(model.getZhishidian_id());
+        List<VideoTitleModel> videoTitleModels = new ArrayList<>();
+        videoTitleModels.add(titleModel);
         Intent intent = new Intent(context, VideoPlayerNewActivity.class);
-        intent.putExtra("selectModel", model);
+        intent.putExtra("selectModel", titleModel);
+        intent.putExtra("zhangjieName", model.getZhishidian_name());
+        intent.putExtra("models", (Serializable) videoTitleModels);
         startActivity(intent);
     }
 }

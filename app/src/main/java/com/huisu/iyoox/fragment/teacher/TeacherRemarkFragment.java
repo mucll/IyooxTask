@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.teacher.TeacherLookTaskDetailsActivity;
 import com.huisu.iyoox.adapter.TeacherLookTaskListAdapter;
 import com.huisu.iyoox.adapter.TeacherRemarkListAdapter;
 import com.huisu.iyoox.constant.Constant;
@@ -71,6 +72,7 @@ public class TeacherRemarkFragment extends BaseFragment implements MyOnItemClick
     private void setEvent() {
         swipeToLoadLayout.setOnLoadMoreListener(this);
         swipeToLoadLayout.setOnRefreshListener(this);
+        mAdapter.setOnItemClickListener(this);
     }
 
     private void initData() {
@@ -114,7 +116,8 @@ public class TeacherRemarkFragment extends BaseFragment implements MyOnItemClick
 
     @Override
     public void onItemClick(int position, View view) {
-
+        DianPingListModel model = models.get(position);
+        TeacherLookTaskDetailsActivity.start(getContext(), model.getWork_id());
     }
 
     private void closeLoading() {

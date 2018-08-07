@@ -7,9 +7,9 @@ package com.huisu.iyoox.http;
  */
 public class HttpConstants {
     //外网
-    private static final String ROOT_URL = "http://www.sunvke.com/api";
+//    private static final String ROOT_URL = "http://www.sunvke.com/api";
     //刘栋
-//    private static final String ROOT_URL = "http://8jbew0j.hk1.mofasuidao.cn/api";
+    private static final String ROOT_URL = "http://8jbew0j.hk1.mofasuidao.cn/api";
     //王佳浩
 //    private static final String ROOT_URL = "http://mpvbsjh.hk1.mofasuidao.cn/api";
 
@@ -186,7 +186,11 @@ public class HttpConstants {
     /**
      * 老师布置作业成功 提醒家长
      */
-    public static String notifyParents = ROOT_URL + "/message/notify_parents";
+    public static String notifyParents = ROOT_URL + "/message/insert_message";
+    /**
+     * 新消息
+     */
+    public static String getNewMessageCount = ROOT_URL + "/message/get_new_message_count";
     /**
      * 老师删除班级
      */
@@ -223,6 +227,23 @@ public class HttpConstants {
      * 点评集合
      */
     public static String teacherDianPingList = ROOT_URL + "/work/teacher_dianping_work_list";
+    /**
+     * 学生收藏视频
+     */
+    public static String collectZhishidian = ROOT_URL + "/zhishidian/collect_zhishidian_shipin";
+
+    /**
+     * 老师修改用户信息
+     */
+    public static String modifyTeacherInfo = ROOT_URL + "/user/modify_teacher_info";
+    /**
+     * 学生收藏列表
+     */
+    public static String getCollectList = ROOT_URL + "/zhishidian/get_collected_zhishidian_shipin_list";
+    /**
+     * 消息列表
+     */
+    public static String getMsgList = ROOT_URL + "/message/get_message_list";
 
 }
 

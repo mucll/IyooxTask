@@ -163,4 +163,20 @@ public class StringUtils {
         return time;
     }
 
+    /**
+     * 判断姓名是否合法的姓名
+     * 姓名必须是以汉字开头，后面只能包括汉字、字母 、数字和点号，长度在2-10个字符
+     *
+     * @param personName
+     */
+    public static boolean isRightName(String personName) {
+        if (TextUtils.isEmpty(personName)) {
+            return false;
+        }
+        boolean b = false;
+        Pattern p = Pattern.compile("^([\\u4e00-\\u9fa5][\\u4e00-\\u9fa5a-zA-Z\\d\\s\\·]{1,9})$"); // 验证账号
+        Matcher m = p.matcher(personName);
+        return m.matches();
+    }
+
 }

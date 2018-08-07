@@ -31,6 +31,9 @@ import com.huisu.iyoox.views.GradeDialog;
 import com.huisu.iyoox.views.LocationIndicatorView;
 import com.huisu.iyoox.views.SelectGradeDialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +55,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private int selectPosition = 0;
     private int selectPageIndexof = 0;
     private View msgView;
+    private View newMsgView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +69,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         setEvent();
         initPage();
         postHomeData();
+        postMsgNewData();
         return view;
     }
 
@@ -76,6 +81,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         msgView = view.findViewById(R.id.home_fragment_msg_ll);
         mTabView = view.findViewById(R.id.fragment_home_tab_view);
         mViewPager = view.findViewById(R.id.fragment_home_page);
+        newMsgView = view.findViewById(R.id.home_fragment_msg_hint_view);
 
         subjectModels.clear();
         SubjectModel subjectModel = new SubjectModel();
@@ -113,6 +119,30 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
             @Override
             public void onFailure(Object reasonObj) {
+            }
+        });
+    }
+
+    private void postMsgNewData() {
+        RequestCenter.getNewMessageCount(user.getUserId(), new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                JSONObject jsonObject = (JSONObject) responseObj;
+                try {
+                    int count = jsonObject.getInt("data");
+                    if (count > 0) {
+                        newMsgView.setVisibility(View.VISIBLE);
+                    } else {
+                        newMsgView.setVisibility(View.GONE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
             }
         });
     }
@@ -187,6 +217,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
     }
 
     @Override
@@ -221,6 +252,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 gradeDialog.show();
                 break;
             case R.id.home_fragment_msg_ll:
+                newMsgView.setVisibility(View.GONE);
                 StudentMsgActivity.start(getContext());
                 break;
             default:
