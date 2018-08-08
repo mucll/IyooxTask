@@ -7,9 +7,9 @@ package com.huisu.iyoox.http;
  */
 public class HttpConstants {
     //外网
-    private static final String ROOT_URL = "http://www.sunvke.com/api";
+//    private static final String ROOT_URL = "http://www.sunvke.com/api";
     //刘栋
-//    private static final String ROOT_URL = "http://8jbew0j.hk1.mofasuidao.cn/api";
+    private static final String ROOT_URL = "http://8jbew0j.hk1.mofasuidao.cn/api";
     //王佳浩
 //    private static final String ROOT_URL = "http://mpvbsjh.hk1.mofasuidao.cn/api";
 

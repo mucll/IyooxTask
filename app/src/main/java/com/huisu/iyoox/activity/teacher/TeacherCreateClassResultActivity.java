@@ -72,17 +72,18 @@ public class TeacherCreateClassResultActivity extends BaseActivity implements Vi
     }
 
     private void postRemindHomeHttp(String taskIds) {
-        RequestCenter.notifyParents(taskIds, "", Constant.MSG_NOTIFICATION + "", Constant.NOTIFICATION_SEND_TASK + "", new DisposeDataListener() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                finish();
-            }
+        RequestCenter.notifyParents("", "", Constant.MSG_NOTIFICATION + "", Constant.NOTIFICATION_SEND_TASK + "",
+                taskIds, new DisposeDataListener() {
+                    @Override
+                    public void onSuccess(Object responseObj) {
+                        finish();
+                    }
 
-            @Override
-            public void onFailure(Object reasonObj) {
+                    @Override
+                    public void onFailure(Object reasonObj) {
 
-            }
-        });
+                    }
+                });
     }
 
     @Override

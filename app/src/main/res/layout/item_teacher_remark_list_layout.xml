@@ -57,7 +57,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dip_8"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -70,7 +69,6 @@
                     android:id="@+id/teacher_remark_list_type_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/dip_4"
                     android:textColor="@color/color333"
                     android:textSize="@dimen/f_14" />
 

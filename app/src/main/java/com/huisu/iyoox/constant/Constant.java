@@ -27,8 +27,18 @@ public class Constant {
      * 系统消息
      */
     public static final int MSG_SYSTEM = 2;
-
+    /**
+     * 消息-发作业
+     */
     public static final int NOTIFICATION_SEND_TASK = 1;
+    /**
+     * 消息-点评
+     */
+    public static final int NOTIFICATION_DP = 2;
+    /**
+     * 消息-提醒交作业
+     */
+    public static final int NOTIFICATION_REMIND = 3;
 
 
 //----------------------------------密码界面根据type显示不同的界面---------------------------------------

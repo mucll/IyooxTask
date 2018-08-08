@@ -519,14 +519,6 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
         VideoTitleModel model = models.get(position);
         if (model.getZhishidian_id() != selectModel.getZhishidian_id()) {
             this.selectModel = model;
-            List<VideoTitleModel> models = LitePal.where("zhishidian_id = ?", String.valueOf(selectModel.getZhishidian_id())).find(VideoTitleModel.class);
-            if (models != null && models.size() > 0) {
-                collectTv.setSelected(true);
-                isCollect = true;
-            } else {
-                isCollect = false;
-                collectTv.setSelected(false);
-            }
             postVideoUrlData(model.getShipin_id());
         }
     }

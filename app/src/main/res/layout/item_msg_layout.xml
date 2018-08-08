@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dip_76"
-        android:layout_marginLeft="@dimen/dip_8"
-        android:layout_marginRight="@dimen/dip_8"
-        android:layout_marginTop="@dimen/dip_8"
+        android:layout_margin="@dimen/dip_8"
         android:background="@drawable/select_white_r4_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/item_msg_icon_iv"
-            android:layout_width="@dimen/dip_60"
-            android:layout_height="@dimen/dip_60"
+            android:layout_width="@dimen/dip_40"
+            android:layout_height="@dimen/dip_40"
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/dip_8"
-            android:src="@drawable/homework_yu" />
+            android:src="@drawable/message_homework" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -57,12 +55,37 @@
                 android:id="@+id/item_msg_content_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dip_6"
                 android:layout_marginRight="@dimen/dip_16"
                 android:layout_marginTop="@dimen/dip_8"
                 android:textColor="@color/color999"
                 android:textSize="@dimen/f_12" />
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dip_16"
+            android:layout_marginTop="@dimen/dip_8"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_msg_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/color666"
+                android:textSize="@dimen/f_12" />
+
+            <View
+                android:id="@+id/item_new_msg_view"
+                android:layout_width="@dimen/dip_6"
+                android:layout_height="@dimen/dip_6"
+                android:layout_below="@id/item_msg_time_tv"
+                android:layout_marginTop="@dimen/dip_16"
+                android:background="@drawable/shape_msg_hint" />
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

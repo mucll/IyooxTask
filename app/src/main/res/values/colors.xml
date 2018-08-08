@@ -157,5 +157,6 @@
     <color name="center_right_botton_color_purple">#dda0dd</color>
     <color name="center_left_text_color_gray">#aaaaaa</color>
     <color name="activity_color_translucence">#80000000</color>
+    <color name="vip_buy_color">#F39801</color>
 
 </resources>

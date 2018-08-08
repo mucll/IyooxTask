@@ -38,6 +38,7 @@
             android:src="@drawable/comment_comment_finished" />
 
         <TextView
+            android:id="@+id/success_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/teacher_task_iv"
@@ -45,6 +46,18 @@
             android:layout_marginTop="@dimen/dip_16"
             android:text="点评成功"
             android:textColor="@color/color666"
+            android:textSize="@dimen/f_16" />
+
+        <Button
+            android:id="@+id/remark_student_bt"
+            android:layout_width="@dimen/dip_320"
+            android:layout_height="@dimen/dip_40"
+            android:layout_below="@id/success_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_22"
+            android:background="@drawable/select_button_bg_maincolor"
+            android:text="通知学生"
+            android:textColor="@color/white"
             android:textSize="@dimen/f_16" />
 
     </RelativeLayout>

@@ -19,6 +19,7 @@ import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.ConfigMainActivity;
 import com.huisu.iyoox.activity.PatriarchActivity;
 import com.huisu.iyoox.activity.PersonalDataActivity;
+import com.huisu.iyoox.activity.VIPbuyActivity;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.activity.student.StudentCacheVideoActivity;
 import com.huisu.iyoox.activity.student.StudentCollectActivity;
@@ -95,7 +96,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private void initData() {
         user = UserManager.getInstance().getUser();
-        mHeadView.setHead(user.getUserId(), user.getName(), TextUtils.isEmpty(user.getAvatar()) ? "" : user.getAvatar(),user.getType());
+        mHeadView.setHead(user.getUserId(), user.getName(), TextUtils.isEmpty(user.getAvatar()) ? "" : user.getAvatar(), user.getType());
         userName.setText(user.getName());
     }
 
@@ -129,7 +130,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.mine_purchase_history_ll:
                 //购买记录
-                StudentPurchaseHistoryActivity.start(getContext());
+                VIPbuyActivity.start(getContext());
                 break;
             case R.id.mine_trial_card_ll:
                 //购买记录

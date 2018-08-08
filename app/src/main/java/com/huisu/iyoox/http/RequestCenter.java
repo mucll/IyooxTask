@@ -12,6 +12,7 @@ import com.huisu.iyoox.entity.base.BaseDianPingListModel;
 import com.huisu.iyoox.entity.base.BaseExercisesModel;
 import com.huisu.iyoox.entity.base.BaseGradeListModel;
 import com.huisu.iyoox.entity.base.BaseHomeWorkResultModel;
+import com.huisu.iyoox.entity.base.BaseNotificationMsgModel;
 import com.huisu.iyoox.entity.base.BasePhoneModel;
 import com.huisu.iyoox.entity.base.BaseRegisterResultModel;
 import com.huisu.iyoox.entity.base.BaseScreenSubjectVersionModel;
@@ -470,12 +471,14 @@ public class RequestCenter {
     /**
      * 老师布置作业成功 提醒家长
      */
-    public static void notifyParents(String recieverIds,String message_body,String messageType ,String messageAction,DisposeDataListener listener) {
+    public static void notifyParents(String recieverIds, String message_body, String messageType, String messageAction,
+                                     String workIds, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
-        params.put("reciever_ids", recieverIds);
+        params.put("receiver_ids", recieverIds);
         params.put("message_body", message_body);
         params.put("message_type", messageType);
-        params.put("message_action", messageAction);
+        params.put("message_business_type", messageAction);
+        params.put("message_business_ids", workIds);
         RequestCenter.postRequest(HttpConstants.notifyParents, params, listener, null);
     }
 
@@ -636,10 +639,11 @@ public class RequestCenter {
     /**
      * 消息列表
      */
-    public static void getMsgList(String userId, String type, DisposeDataListener listener) {
+    public static void getMsgList(String userId, String type, String pageindex, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("receiver_id", userId);
         params.put("message_type", type);
-        RequestCenter.postRequest(HttpConstants.getMsgList, params, listener, null);
+        params.put("pageindex", pageindex);
+        RequestCenter.postRequest(HttpConstants.getMsgList, params, listener, BaseNotificationMsgModel.class);
     }
 }

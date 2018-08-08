@@ -90,7 +90,7 @@ public class TeacherRemarkActivity extends BaseActivity implements View.OnClickL
                     try {
                         int code = jsonObject.getInt("code");
                         if (code == Constant.POST_SUCCESS_CODE) {
-                            TeacherRemarkResultActivity.start(TeacherRemarkActivity.this);
+                            TeacherRemarkResultActivity.start(TeacherRemarkActivity.this, studentId,workId, msgEt.getText().toString().trim());
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

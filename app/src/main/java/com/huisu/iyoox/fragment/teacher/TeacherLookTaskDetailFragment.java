@@ -21,7 +21,12 @@ import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.TaskTeacherLookClassModel;
 import com.huisu.iyoox.entity.TaskTeacherLookStudentModel;
 import com.huisu.iyoox.fragment.base.BaseFragment;
+import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.JsonUtils;
+import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.ExercisesNumberView;
+import com.huisu.iyoox.views.Loading;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +34,7 @@ import java.util.List;
 /**
  * 老师查看班级作业详情Fragment
  */
-public class TeacherLookTaskDetailFragment extends BaseFragment implements MyOnItemClickListener {
+public class TeacherLookTaskDetailFragment extends BaseFragment implements MyOnItemClickListener, View.OnClickListener {
 
     private View view;
     private RecyclerView mRecyclerView;
@@ -44,6 +49,8 @@ public class TeacherLookTaskDetailFragment extends BaseFragment implements MyOnI
     private ArrayList<TaskTeacherLookStudentModel> childModels = new ArrayList<>();
     private TextView unfinishTv;
     private ExercisesNumberView numberView;
+    private View submitTV;
+    private Loading loading;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,7 @@ public class TeacherLookTaskDetailFragment extends BaseFragment implements MyOnI
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_teacher_look_task_detail, container, false);
         numberView = view.findViewById(R.id.teacher_look_task_number_view);
+        submitTV = view.findViewById(R.id.submit_tv);
         finishedView = view.findViewById(R.id.teacher_look_task_student_finished_ll);
         unfinishView = view.findViewById(R.id.teacher_look_task_student_unfinish_ll);
         unfinishTv = view.findViewById(R.id.teacher_look_task_student_unfinish_tv);
@@ -123,12 +131,53 @@ public class TeacherLookTaskDetailFragment extends BaseFragment implements MyOnI
         if (Constant.TASK_STUDENT_FINISHED == type) {
             mAdapter.setOnItemClickListener(this);
         }
-
+        submitTV.setOnClickListener(this);
     }
 
     @Override
     public void onItemClick(int position, View view) {
         TaskTeacherLookStudentModel model = childModels.get(position);
         TeacherLookStudentTaskDetailActivity.start(getContext(), workId, model);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.submit_tv:
+                setHttpData();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void setHttpData() {
+        ArrayList<Integer> ints = new ArrayList<>();
+        for (TaskTeacherLookStudentModel model : childModels) {
+            ints.add(model.getStudent_id());
+        }
+        postRemindHomeHttp(JsonUtils.jsonFromObject(ints));
+    }
+
+    private void postRemindHomeHttp(String studentIds) {
+        List<Integer> workIds = new ArrayList<>();
+        workIds.add(workId);
+        loading = Loading.show(null, getContext(), getString(R.string.loading_one_hint_text));
+        RequestCenter.notifyParents(studentIds,
+                "",
+                Constant.MSG_NOTIFICATION + "",
+                Constant.NOTIFICATION_REMIND + "",
+                JsonUtils.jsonFromObject(workIds), new DisposeDataListener() {
+                    @Override
+                    public void onSuccess(Object responseObj) {
+                        loading.dismiss();
+                        TabToast.showMiddleToast(getContext(), "提醒成功");
+                    }
+
+                    @Override
+                    public void onFailure(Object reasonObj) {
+                        loading.dismiss();
+                    }
+                });
     }
 }

@@ -283,7 +283,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         public BaseFragment getItem(int position) {
             BaseFragment bookFragment;
             if (position == 0) {
-                bookFragment = new HomePageFragment();
+                bookFragment = new NewHomePageFragment();
             } else {
                 String gradeId = gradeListModels.get(selectPosition).getGrade_id() + "";
                 String gradeDetailId = gradeListModels.get(selectPosition).getGrade_detail_id() + "";
