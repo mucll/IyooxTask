@@ -95,6 +95,7 @@ dependencies {
     implementation files('libs/renderscript-v8.jar')
     implementation files('libs/mpchartlib.jar')
     implementation files('libs/gson-2.2.2.jar')
+    implementation files('libs/alipaySdk-20180601.jar')
     implementation 'me.panavtec:drawableview:0.6.0'
     implementation 'org.litepal.android:core:2.0.0'
     implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'

@@ -113,28 +113,6 @@ public class StringUtils {
         return (int) (value * scale + 0.5f);
     }
 
-    /**
-     * 禁止EditText输入特殊字符
-     *
-     * @param editText EditText输入框
-     */
-    public static void setEditTextInputSpeChat(EditText editText) {
-        InputFilter filter = new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                String speChat = "[`~!@#$%^&*()+=|{}':;',\\[\\]<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
-                Pattern pattern = Pattern.compile(speChat);
-                Matcher matcher = pattern.matcher(source.toString());
-                if (matcher.find()) {
-                    return "";
-                } else {
-                    return source;
-                }
-            }
-        };
-        editText.setFilters(new InputFilter[]{filter});
-    }
-
     public static String getTimeString(String time) {
         if (TextUtils.isEmpty(time)) {
             return "";
@@ -160,6 +138,20 @@ public class StringUtils {
             time = time.split("T")[0] + " " + time.split("T")[1];
         }
         time = DateUtils.formatTimesMD(time);
+        return time;
+    }
+
+    public static String getTimeStringYMD(String time) {
+        if (TextUtils.isEmpty(time)) {
+            return "";
+        }
+        if (time.contains(".")) {
+            time = time.split("\\.")[0];
+        }
+        if (time.contains("T")) {
+            time = time.split("T")[0] + " " + time.split("T")[1];
+        }
+        time = DateUtils.formatTimesymd(time);
         return time;
     }
 

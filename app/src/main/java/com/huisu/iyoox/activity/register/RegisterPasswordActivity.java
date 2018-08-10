@@ -50,7 +50,6 @@ public class RegisterPasswordActivity extends BaseActivity implements TextWatche
     @Override
     protected void initView() {
         passwordEditText = findViewById(R.id.register_password_edit_text);
-        StringUtils.setEditTextInputSpeChat(passwordEditText);
         titleTv = findViewById(R.id.passwrod_title_tv);
         nextBt = findViewById(R.id.register_password_next_bt);
         contentView = findViewById(R.id.register_password_content_layout);

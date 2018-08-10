@@ -121,7 +121,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dip_22"
             android:background="@drawable/select_button_bg_maincolor"
-            android:text="通知家长"
+            android:text="通知家长和学生"
             android:textColor="@color/white"
             android:textSize="@dimen/f_16" />
     </RelativeLayout>

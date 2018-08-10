@@ -163,12 +163,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void setBack() {
         try {
             ImageButton backBtn = (ImageButton) findViewById(R.id.menu_back);
-            backBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
+            if (backBtn != null) {
+                backBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

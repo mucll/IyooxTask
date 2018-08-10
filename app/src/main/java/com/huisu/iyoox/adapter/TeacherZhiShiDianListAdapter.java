@@ -64,7 +64,7 @@ public class TeacherZhiShiDianListAdapter extends BaseExpandableListAdapter {
             groupitem = (Groupitem) convertView.getTag();
         }
         VideoModel groupModel = data.get(groupPosition);
-        groupitem.textView.setText(groupPosition + 1 + "." + groupModel.getZhishidian_name());
+        groupitem.textView.setText(groupModel.getZhishidian_name());
         return convertView;
     }
 
@@ -83,7 +83,7 @@ public class TeacherZhiShiDianListAdapter extends BaseExpandableListAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         final VideoTitleModel videoModel = data.get(groupPosition).getShipinlist().get(childPosition);
-        holder.zhishidianTv.setText(groupPosition + 1 + "." + (childPosition + 1) + "." + videoModel.getShipin_name());
+        holder.zhishidianTv.setText(videoModel.getShipin_name());
         return convertView;
     }
 

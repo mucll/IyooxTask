@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/item_msg_icon_iv"
-            android:layout_width="@dimen/dip_40"
-            android:layout_height="@dimen/dip_40"
+            android:layout_width="@dimen/dip_50"
+            android:layout_height="@dimen/dip_50"
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/dip_8"
             android:src="@drawable/message_homework" />
@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dip_8"
+            android:layout_marginRight="@dimen/dip_8"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -46,7 +46,6 @@
                     android:id="@+id/task_start_time_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/dip_16"
                     android:textColor="@color/color999"
                     android:textSize="@dimen/f_12" />
             </LinearLayout>
@@ -55,8 +54,9 @@
                 android:id="@+id/item_msg_content_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dip_16"
-                android:layout_marginTop="@dimen/dip_8"
+                android:layout_marginTop="@dimen/dip_4"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:textColor="@color/color999"
                 android:textSize="@dimen/f_12" />
 
@@ -65,7 +65,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/dip_16"
+            android:layout_marginRight="@dimen/dip_8"
             android:layout_marginTop="@dimen/dip_8"
             android:gravity="center_horizontal"
             android:orientation="vertical">

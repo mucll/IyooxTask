@@ -12,6 +12,7 @@ import com.huisu.iyoox.entity.base.BaseDianPingListModel;
 import com.huisu.iyoox.entity.base.BaseExercisesModel;
 import com.huisu.iyoox.entity.base.BaseGradeListModel;
 import com.huisu.iyoox.entity.base.BaseHomeWorkResultModel;
+import com.huisu.iyoox.entity.base.BaseLearningCardModel;
 import com.huisu.iyoox.entity.base.BaseNotificationMsgModel;
 import com.huisu.iyoox.entity.base.BasePhoneModel;
 import com.huisu.iyoox.entity.base.BaseRegisterResultModel;
@@ -31,6 +32,7 @@ import com.huisu.iyoox.entity.base.BaseUser;
 import com.huisu.iyoox.entity.base.BaseVideoGroupModel;
 import com.huisu.iyoox.entity.base.BaseVideoModel;
 import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
+import com.huisu.iyoox.entity.base.BaseVipCardModel;
 import com.huisu.iyoox.okhttp.CommonOkHttpClient;
 import com.huisu.iyoox.okhttp.listener.DisposeDataHandle;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
@@ -390,9 +392,10 @@ public class RequestCenter {
     /**
      * 绑定激活码
      */
-    public static void getStudentBindCard(String id, DisposeDataListener listener) {
+    public static void getStudentBindCard(String userId, String code, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
-        params.put("id", id);
+        params.put("student_id", userId);
+        params.put("no", code);
         RequestCenter.postRequest(HttpConstants.getStudentBindCard, params, listener, null);
     }
 
@@ -645,5 +648,33 @@ public class RequestCenter {
         params.put("message_type", type);
         params.put("pageindex", pageindex);
         RequestCenter.postRequest(HttpConstants.getMsgList, params, listener, BaseNotificationMsgModel.class);
+    }
+
+    /**
+     * 学习卡列表
+     */
+    public static void getLearningCardList(String userId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("user_id", userId);
+        params.put("is_valid", "1");
+        RequestCenter.postRequest(HttpConstants.getLearningCardList, params, listener, BaseLearningCardModel.class);
+    }
+
+    /**
+     * VIP会员列表
+     */
+    public static void getVipList(DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        RequestCenter.postRequest(HttpConstants.getVipList, params, listener, BaseVipCardModel.class);
+    }
+
+    /**
+     * VIP会员列表
+     */
+    public static void getPayJson(String userId, String typeId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("user_id",userId);
+        params.put("jihuo_type",typeId);
+        RequestCenter.postRequest(HttpConstants.getPayJson, params, listener, null);
     }
 }

@@ -7,9 +7,9 @@ package com.huisu.iyoox.http;
  */
 public class HttpConstants {
     //外网
-//    private static final String ROOT_URL = "http://www.sunvke.com/api";
+    private static final String ROOT_URL = "http://www.sunvke.com/api";
     //刘栋
-    private static final String ROOT_URL = "http://8jbew0j.hk1.mofasuidao.cn/api";
+//    private static final String ROOT_URL = "http://8jbew0j.hk1.mofasuidao.cn/api";
     //王佳浩
 //    private static final String ROOT_URL = "http://mpvbsjh.hk1.mofasuidao.cn/api";
 
@@ -145,11 +145,11 @@ public class HttpConstants {
     /**
      * 获取激活码
      */
-    public static String getJiHuoCode = ROOT_URL + "/jihuoma/get_jihuoma";
+    public static String getJiHuoCode = ROOT_URL + "/jihuoma/get_jihuoma_by_employee_phone";
     /**
      * 激活 激活码
      */
-    public static String getStudentBindCard = ROOT_URL + "/jihuoma/jihuoma_bind_grade";
+    public static String getStudentBindCard = ROOT_URL + "/jihuoma/jihuoma_active";
     /**
      * 老师创建班级
      */
@@ -244,6 +244,18 @@ public class HttpConstants {
      * 消息列表
      */
     public static String getMsgList = ROOT_URL + "/message/get_message_list";
+    /**
+     * 学习卡列表
+     */
+    public static String getLearningCardList = ROOT_URL + "/jihuoma/get_student_jihuoma_list";
+    /**
+     * 获取Vip会员列表
+     */
+    public static String getVipList = ROOT_URL + "/jihuoma/get_jihuoma_type_list";
+    /**
+     * 支付接口
+     */
+    public static String getPayJson = ROOT_URL + "/alipay/get_pay_json";
 
 }
 

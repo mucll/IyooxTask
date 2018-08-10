@@ -2,7 +2,6 @@ package com.huisu.iyoox.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.View;
@@ -24,6 +23,7 @@ import com.huisu.iyoox.fragment.teacher.TeacherRemarkFragment;
 import com.huisu.iyoox.fragment.teacher.TeacherCreateTaskFragment;
 import com.huisu.iyoox.fragment.teacher.TeacherMineFragment;
 import com.huisu.iyoox.manager.UserManager;
+import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.util.StatusBarUtil;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.MyFragmentLayout;
@@ -31,7 +31,6 @@ import com.huisu.iyoox.views.MyFragmentLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.jzvd.JZVideoPlayer;
 
 /**
  * @author: dl
@@ -111,7 +110,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
     }
 
     @Override

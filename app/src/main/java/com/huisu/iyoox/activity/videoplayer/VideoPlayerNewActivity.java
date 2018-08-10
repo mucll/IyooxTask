@@ -28,6 +28,7 @@ import com.easefun.polyvsdk.video.listener.IPolyvOnVideoPlayErrorListener2;
 import com.easefun.polyvsdk.video.listener.IPolyvOnVideoStatusListener;
 import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.VipBuyActivity;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.adapter.VideoPlayerListAdapter;
 import com.huisu.iyoox.constant.Constant;
@@ -40,8 +41,6 @@ import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.PolyvScreenUtils;
 import com.huisu.iyoox.util.TabToast;
-
-import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +107,7 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
     private View shareView;
     private View collectView;
     private View backView;
+    private View bipBuyView;
     private TextView collectTv;
     private boolean isCollect;
     private User user;
@@ -119,6 +119,7 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
         bitrate = getIntent().getIntExtra("bitrate", PolyvBitRate.ziDong.getNum());
         isMustFromLocal = getIntent().getBooleanExtra("isMustFromLocal", false);
 
+        bipBuyView = findViewById(R.id.vip_buy_rl);
         backView = findViewById(R.id.polyv_screen_back_iv);
         shareView = findViewById(R.id.video_share_rl);
         collectView = findViewById(R.id.video_collect_rl);
@@ -287,6 +288,9 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
             case R.id.polyv_screen_back_iv:
                 finish();
                 break;
+            case R.id.vip_buy_rl:
+                VipBuyActivity.start(context);
+                break;
             default:
                 break;
         }
@@ -321,6 +325,7 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
 
     @Override
     protected void setEvent() {
+        bipBuyView.setOnClickListener(this);
         shareView.setOnClickListener(this);
         backView.setOnClickListener(this);
         collectView.setOnClickListener(this);

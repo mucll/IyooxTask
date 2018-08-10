@@ -133,22 +133,23 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener,
             public void onSuccess(Object responseObj) {
                 loading.dismiss();
                 BaseClassRankingModel baseClassRankingModel = (BaseClassRankingModel) responseObj;
-                if (baseClassRankingModel.code == Constant.POST_SUCCESS_CODE) {
-                    if (baseClassRankingModel.data != null) {
-                        setPostData(baseClassRankingModel.data);
-                        emptyView.setVisibility(View.GONE);
-                        scrollView.setVisibility(View.VISIBLE);
-                        titleTv.setText(baseClassRankingModel.data.getClassroom_name());
-                    } else {
-                        scrollView.setVisibility(View.GONE);
-                        emptyView.setVisibility(View.VISIBLE);
-                    }
+                if (baseClassRankingModel.data != null) {
+                    setPostData(baseClassRankingModel.data);
+                    emptyView.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.VISIBLE);
+                    titleTv.setText(baseClassRankingModel.data.getClassroom_name());
+                } else {
+                    scrollView.setVisibility(View.GONE);
+                    emptyView.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Object reasonObj) {
                 loading.dismiss();
+                scrollView.setVisibility(View.GONE);
+                emptyView.setVisibility(View.VISIBLE);
+                addClassBt.setVisibility(View.GONE);
             }
         });
     }

@@ -19,23 +19,18 @@ import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.ConfigMainActivity;
 import com.huisu.iyoox.activity.PatriarchActivity;
 import com.huisu.iyoox.activity.PersonalDataActivity;
-import com.huisu.iyoox.activity.VIPbuyActivity;
+import com.huisu.iyoox.activity.VipBuyActivity;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.activity.student.StudentCacheVideoActivity;
 import com.huisu.iyoox.activity.student.StudentCollectActivity;
 import com.huisu.iyoox.activity.student.StudentLearningCardActivity;
 import com.huisu.iyoox.activity.student.StudentLearningHistoryActivity;
-import com.huisu.iyoox.activity.student.StudentPurchaseHistoryActivity;
 import com.huisu.iyoox.activity.student.TrialCardActivity;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.util.DialogUtil;
-import com.huisu.iyoox.views.ChangeHeaderImgDialog;
 import com.huisu.iyoox.views.HeadView;
-
-
-import java.io.File;
 
 /**
  * @author: dl
@@ -129,11 +124,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 StudentCollectActivity.start(getContext());
                 break;
             case R.id.mine_purchase_history_ll:
-                //购买记录
-                VIPbuyActivity.start(getContext());
+                //VIP会员
+                VipBuyActivity.start(getContext());
                 break;
             case R.id.mine_trial_card_ll:
-                //购买记录
+                //激活
                 TrialCardActivity.start(getContext());
                 break;
             case R.id.mine_learning_card_layout:
