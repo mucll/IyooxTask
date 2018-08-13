@@ -7,7 +7,11 @@ package com.huisu.iyoox.http;
  */
 public class HttpConstants {
     //外网
-    private static final String ROOT_URL = "http://www.sunvke.com/api";
+    private static final String BASE_URL = "http://www.sunvke.com/";
+
+    private static final String ROOT_URL = BASE_URL + "api";
+
+    public static final String APP_DOWNLOAD = BASE_URL + "app/zaixian.apk";
     //刘栋
 //    private static final String ROOT_URL = "http://8jbew0j.hk1.mofasuidao.cn/api";
     //王佳浩
@@ -256,6 +260,8 @@ public class HttpConstants {
      * 支付接口
      */
     public static String getPayJson = ROOT_URL + "/alipay/get_pay_json";
+
+    public static String judgeVersionUpdate = ROOT_URL + "/version/get_current_latest_version";
 
 }
 

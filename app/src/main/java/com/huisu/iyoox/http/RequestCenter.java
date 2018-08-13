@@ -29,6 +29,7 @@ import com.huisu.iyoox.entity.base.BaseTaskTeacherLookTimuModel;
 import com.huisu.iyoox.entity.base.BaseTeacherModel;
 import com.huisu.iyoox.entity.base.BaseTrialCardModel;
 import com.huisu.iyoox.entity.base.BaseUser;
+import com.huisu.iyoox.entity.base.BaseVersionModel;
 import com.huisu.iyoox.entity.base.BaseVideoGroupModel;
 import com.huisu.iyoox.entity.base.BaseVideoModel;
 import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
@@ -36,6 +37,7 @@ import com.huisu.iyoox.entity.base.BaseVipCardModel;
 import com.huisu.iyoox.okhttp.CommonOkHttpClient;
 import com.huisu.iyoox.okhttp.listener.DisposeDataHandle;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.okhttp.listener.DisposeDownloadListener;
 import com.huisu.iyoox.okhttp.request.CommonRequest;
 import com.huisu.iyoox.okhttp.request.RequestParams;
 import com.huisu.iyoox.util.LogUtil;
@@ -64,6 +66,14 @@ public class RequestCenter {
         //打印请求地址
         LogUtil.e(url);
         CommonOkHttpClient.post(CommonRequest.createPostRequest(url, params),
+                new DisposeDataHandle(listener, clazz));
+    }
+
+    /**
+     * 文件上传
+     */
+    public static void downloadFile(String url, RequestParams params, DisposeDownloadListener listener, String clazz) {
+        CommonOkHttpClient.downloadFile(CommonRequest.createPostRequest(url, params),
                 new DisposeDataHandle(listener, clazz));
     }
 
@@ -673,8 +683,16 @@ public class RequestCenter {
      */
     public static void getPayJson(String userId, String typeId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
-        params.put("user_id",userId);
-        params.put("jihuo_type",typeId);
+        params.put("user_id", userId);
+        params.put("jihuo_type", typeId);
         RequestCenter.postRequest(HttpConstants.getPayJson, params, listener, null);
+    }
+
+    /**
+     * 判断更新
+     */
+    public static void judgeVersionUpdate(DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        RequestCenter.postRequest(HttpConstants.judgeVersionUpdate, params, listener, BaseVersionModel.class);
     }
 }

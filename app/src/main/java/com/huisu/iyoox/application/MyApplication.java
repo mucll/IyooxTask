@@ -2,7 +2,9 @@ package com.huisu.iyoox.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Build;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,6 +13,8 @@ import com.easefun.polyvsdk.PolyvDevMountInfo;
 import com.easefun.polyvsdk.PolyvDownloaderManager;
 import com.easefun.polyvsdk.PolyvSDKClient;
 import com.huisu.iyoox.BuildConfig;
+import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.MainActivity;
 import com.huisu.iyoox.util.PolyvStorageUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -26,8 +30,11 @@ import java.util.ArrayList;
 public class MyApplication extends Application {
     public static final String TAG = MyApplication.class.getSimpleName();
 
+
     public static String CACHEPATH = Environment.getExternalStorageDirectory()
             .getAbsolutePath() + "/iyoox/";
+    public static String DOWNLOAD_ROOT_DIR = "download";
+    public static String DOWNLOAD_URL = CACHEPATH + "/" + DOWNLOAD_ROOT_DIR + "/";
 
     private static MyApplication mApplication = null;
 
@@ -41,10 +48,28 @@ public class MyApplication extends Application {
         mApplication = this;
         LitePalApplication.initialize(this);
         initUMeng();
+        initCache();
+        try {//必须加上/否则剪切照片可能会出错
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                builder.detectFileUriExposure();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // 创建默认的ImageLoader配置参数
         ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(this);
         ImageLoader.getInstance().init(configuration);
         initPolyvCilent();
+    }
+
+
+    private void initCache() {
+        File file = new File(CACHEPATH);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
     }
 
     //加密秘钥和加密向量，在后台->设置->API接口中获取，用于解密SDK加密串

@@ -12,6 +12,8 @@ import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.User;
+import com.huisu.iyoox.entity.VersionBean;
+import com.huisu.iyoox.entity.base.BaseVersionModel;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.fragment.home.ClassFragment;
 import com.huisu.iyoox.fragment.home.ErrorExercisesFragment;
@@ -22,10 +24,13 @@ import com.huisu.iyoox.fragment.teacher.TeacherClassFragment;
 import com.huisu.iyoox.fragment.teacher.TeacherRemarkFragment;
 import com.huisu.iyoox.fragment.teacher.TeacherCreateTaskFragment;
 import com.huisu.iyoox.fragment.teacher.TeacherMineFragment;
+import com.huisu.iyoox.http.HttpConstants;
+import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
-import com.huisu.iyoox.util.LogUtil;
-import com.huisu.iyoox.util.StatusBarUtil;
+import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.TabToast;
+import com.huisu.iyoox.util.UpDataUtils;
+import com.huisu.iyoox.util.VersionUtil;
 import com.huisu.iyoox.views.MyFragmentLayout;
 
 import java.util.ArrayList;
@@ -110,6 +115,36 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        postVersionHttp();
+    }
+
+    private void postVersionHttp() {
+        RequestCenter.judgeVersionUpdate(new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                BaseVersionModel baseModel = (BaseVersionModel) responseObj;
+                if (baseModel.data.getVersion1() > 0) {
+                    VersionBean versionBean = new VersionBean();
+                    versionBean.setDownloadUrl(baseModel.data.getZaixian_url());
+                    versionBean.setVersionRemark(baseModel.data.getZiaxian_remark());
+                    versionBean.setVersionMixno(baseModel.data.getVersion1());
+                    getVersion(versionBean);
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
+    }
+
+    //对比版本号
+    private void getVersion(VersionBean bean) {
+        int versionCode = VersionUtil.getVersionCode(this);
+        if (versionCode < bean.getVersionMixno()) {//强制
+            new UpDataUtils(this).isUpdata(UpDataUtils.FORCE_TYPE, bean);
+        }
     }
 
     @Override
