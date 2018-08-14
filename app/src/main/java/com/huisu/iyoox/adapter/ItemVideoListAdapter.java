@@ -61,16 +61,26 @@ public class ItemVideoListAdapter extends BaseAdapter {
         holder.videoIcon.setSelected(true);
         holder.videoState.setSelected(true);
         holder.videoName.setText(titleModel.getShipin_name());
-        holder.videoStateContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, TaskStudentHomeWorkActivity.class);
-                intent.putExtra("videoId", titleModel.getShipin_id() + "");
-                intent.putExtra("zhishiId", titleModel.getZhishidian_id() + "");
-                intent.putExtra("type", Constant.STUDENT_DOING);
-                context.startActivity(intent);
-            }
-        });
+        if (titleModel.getTimu_count() > 0) {
+            holder.videoStateContent.setVisibility(View.VISIBLE);
+            holder.videoStateContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, TaskStudentHomeWorkActivity.class);
+                    intent.putExtra("videoId", titleModel.getShipin_id() + "");
+                    intent.putExtra("zhishiId", titleModel.getZhishidian_id() + "");
+                    intent.putExtra("type", Constant.STUDENT_DOING);
+                    context.startActivity(intent);
+                }
+            });
+        } else {
+            holder.videoStateContent.setVisibility(View.GONE);
+        }
+        if (titleModel.getSort() == 1) {
+            holder.isSort.setVisibility(View.VISIBLE);
+        } else {
+            holder.isSort.setVisibility(View.GONE);
+        }
         return convertView;
     }
 
@@ -79,12 +89,14 @@ public class ItemVideoListAdapter extends BaseAdapter {
         private TextView videoName;
         private TextView videoState;
         private View videoStateContent;
+        private View isSort;
 
         public ViewHolder(View view) {
             videoIcon = view.findViewById(R.id.item_book_video_icon_iv);
             videoName = view.findViewById(R.id.item_video_name_tv);
             videoState = view.findViewById(R.id.item_video_state);
             videoStateContent = view.findViewById(R.id.item_video_state_content);
+            isSort = view.findViewById(R.id.is_sort);
         }
     }
 }

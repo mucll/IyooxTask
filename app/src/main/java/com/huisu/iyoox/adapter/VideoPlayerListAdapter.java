@@ -61,17 +61,29 @@ public class VideoPlayerListAdapter extends RecyclerView.Adapter<VideoPlayerList
             holder.videoState.setSelected(false);
             holder.videoName.setSelected(false);
         }
+
         holder.videoName.setText(model.getShipin_name());
-        holder.videoStateContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, TaskStudentHomeWorkActivity.class);
-                intent.putExtra("videoId", model.getShipin_id() + "");
-                intent.putExtra("zhishiId", model.getZhishidian_id() + "");
-                intent.putExtra("type", Constant.STUDENT_DOING);
-                context.startActivity(intent);
-            }
-        });
+        if (model.getTimu_count() > 0) {
+            holder.videoStateContent.setVisibility(View.VISIBLE);
+            holder.videoStateContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, TaskStudentHomeWorkActivity.class);
+                    intent.putExtra("videoId", model.getShipin_id() + "");
+                    intent.putExtra("zhishiId", model.getZhishidian_id() + "");
+                    intent.putExtra("type", Constant.STUDENT_DOING);
+                    context.startActivity(intent);
+                }
+            });
+        } else {
+            holder.videoStateContent.setVisibility(View.GONE);
+        }
+
+        if (model.getSort() == 1) {
+            holder.isSort.setVisibility(View.VISIBLE);
+        } else {
+            holder.isSort.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -88,6 +100,7 @@ public class VideoPlayerListAdapter extends RecyclerView.Adapter<VideoPlayerList
         private TextView videoName;
         private TextView videoState;
         private View videoStateContent;
+        private View isSort;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -95,6 +108,7 @@ public class VideoPlayerListAdapter extends RecyclerView.Adapter<VideoPlayerList
             videoName = itemView.findViewById(R.id.item_video_name_tv);
             videoState = itemView.findViewById(R.id.item_video_state);
             videoStateContent = itemView.findViewById(R.id.item_video_state_content);
+            isSort = itemView.findViewById(R.id.is_sort);
             itemView.setOnClickListener(this);
         }
 

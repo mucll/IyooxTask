@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.entity.GradeListModel;
-import com.huisu.iyoox.views.canvasview.MyCanvasView;
 
 import java.util.ArrayList;
 

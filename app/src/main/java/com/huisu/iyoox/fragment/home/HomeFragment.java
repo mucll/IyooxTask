@@ -29,6 +29,7 @@ import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.util.StatusBarUtil;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.GradeDialog;
+import com.huisu.iyoox.views.GradeNewDialog;
 import com.huisu.iyoox.views.LocationIndicatorView;
 import com.huisu.iyoox.views.SelectGradeDialog;
 
@@ -52,8 +53,8 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private List<SubjectModel> subjectModels = new ArrayList<>();
     private User user;
     private ArrayList<GradeListModel> gradeListModels = new ArrayList<>();
-    private MyPagerAdapter myPagerAdapter;
     private int selectPosition = 0;
+    private GradeListModel selectModel;
     private int selectPageIndexof = 0;
     private View msgView;
     private View newMsgView;
@@ -111,6 +112,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                         //获取默认勾选的position
                         if (gradeListModel.getGrade_id() == user.getGrade() && gradeListModel.getGrade_detail_id() == 1) {
                             selectPosition = i;
+                            selectModel = gradeListModel;
                             break;
                         }
                     }
@@ -164,7 +166,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
      */
     private void initData() {
         subjectModels.clear();
-        subjectModels.addAll(gradeListModels.get(selectPosition).getKemuArr());
+        subjectModels.addAll(selectModel.getKemuArr());
         for (SubjectModel model : subjectModels) {
             model.setSelect(false);
         }
@@ -182,12 +184,12 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
      * 初始化viewpager
      */
     private void initPage() {
-        myPagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
+        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(myPagerAdapter);
         mViewPager.setCurrentItem(0);
-        if (gradeListModels.size() > 0 && gradeListModels.size() >= selectPosition && gradeListModels.get(selectPosition).getKemuArr().size() >= 2) {
+        if (selectModel != null) {
             //多缓存一个首页的界面
-            int fragmentCount = gradeListModels.get(selectPosition).getKemuArr().size() + 1;
+            int fragmentCount = selectModel.getKemuArr().size() + 1;
             mViewPager.setOffscreenPageLimit(fragmentCount - 1);
             //跳转到上次记录的界面
             if (fragmentCount > selectPageIndexof) {
@@ -244,16 +246,27 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 if (gradeListModels.size() == 0) {
                     return;
                 }
-                GradeDialog gradeDialog = new GradeDialog(getContext(), gradeListModels, selectPosition) {
+//                GradeDialog gradeDialog = new GradeDialog(getContext(), gradeListModels, selectPosition) {
+//                    @Override
+//                    public void getGradePosition(int position) {
+//                        HomeFragment.this.selectPosition = position;
+//                        studentGradeTv.setText(gradeListModels.get(position).getName());
+//                        initData();
+//                        initPage();
+//                    }
+//                };
+//                gradeDialog.show();
+                GradeNewDialog gradeDialog = new GradeNewDialog(getContext(), gradeListModels, selectModel) {
                     @Override
-                    public void getGradePosition(int position) {
-                        HomeFragment.this.selectPosition = position;
-                        studentGradeTv.setText(gradeListModels.get(position).getName());
+                    public void getGradePosition(GradeListModel model) {
+                        HomeFragment.this.selectModel = model;
+                        studentGradeTv.setText(selectModel.getName());
                         initData();
                         initPage();
                     }
                 };
                 gradeDialog.show();
+                gradeDialog.setCanceledOnTouchOutside(true);
                 break;
             case R.id.home_fragment_msg_ll:
                 newMsgView.setVisibility(View.INVISIBLE);
@@ -285,9 +298,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             if (position == 0) {
                 bookFragment = new NewHomePageFragment();
             } else {
-                String gradeId = gradeListModels.get(selectPosition).getGrade_id() + "";
-                String gradeDetailId = gradeListModels.get(selectPosition).getGrade_detail_id() + "";
-                SubjectModel subjectModel = gradeListModels.get(selectPosition).getKemuArr().get(position - 1);
+                String gradeId = selectModel.getGrade_id() + "";
+                String gradeDetailId = selectModel.getGrade_detail_id() + "";
+                SubjectModel subjectModel = selectModel.getKemuArr().get(position - 1);
                 bookFragment = getFragment(gradeId, gradeDetailId, subjectModel);
             }
             fragments.add(bookFragment);
@@ -303,14 +316,13 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         public Object instantiateItem(ViewGroup container, int position) {
             BaseFragment baseFragment = (BaseFragment) super.instantiateItem(container, position);
             if (position != 0) {
-                GradeListModel tab = gradeListModels.get(selectPosition);
-                baseFragment.updateArguments(tab.getGrade_id() + "",
-                        tab.getGrade_detail_id() + "",
-                        tab.getKemuArr().get(position - 1));
+                SubjectModel subjectModel = selectModel.getKemuArr().get(position - 1);
+                baseFragment.updateArguments(selectModel.getGrade_id() + "",
+                        selectModel.getGrade_detail_id() + "", subjectModel
+                );
             }
             return baseFragment;
         }
-
     }
 
     private BookFragment getFragment(String gradeId, String gradeDetailId, SubjectModel model) {

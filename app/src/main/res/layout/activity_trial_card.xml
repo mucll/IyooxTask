@@ -94,4 +94,12 @@
         android:text="马上激活"
         android:textColor="@color/white"
         android:textSize="@dimen/f_16" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dip_8"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_jihuoma_bg" />
 </LinearLayout>

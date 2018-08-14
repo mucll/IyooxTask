@@ -50,7 +50,7 @@ public class StudentMsgActivity extends BaseActivity {
                 fragments.get(positon).onShow();
             }
         });
-        mFragmentLayout.setAdapter(fragments, R.layout.tablayout_student_msg, 0x203);
+        mFragmentLayout.setAdapter(fragments, R.layout.tablayout_student_msg, 0x213);
     }
 
     private StudentMsgFragment getFragment(int type) {

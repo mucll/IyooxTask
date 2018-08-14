@@ -112,16 +112,19 @@ public class DialogDownloadApp extends Dialog {
                 try {
                     File file = new File(savePath);
                     if (!file.exists()) {
-                        file.mkdir();
+                        file.mkdirs();
                     }
                     File fileApk = new File(saveFileName);
+
                     if (!fileApk.exists()) {
                         fileApk.createNewFile();
                     }
-                    if (null != fileApk && fileApk.length() < totalLenth) {
+
+                    if (fileApk != null && fileApk.length() < totalLenth) {
                         fileApk.delete();
                         fileApk.createNewFile();
                     }
+
                     if (conn.getResponseCode() != HttpsURLConnection.HTTP_OK) {
                         Message msgError = new Message();
                         msgError.what = DOWNLOAD_ERROR;
@@ -161,7 +164,7 @@ public class DialogDownloadApp extends Dialog {
                     canceled = true;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Message msgError = new Message();
+                    Message msgError = mHandler.obtainMessage();
                     msgError.what = DOWNLOAD_ERROR;
                     mHandler.sendMessage(msgError);
                 } finally {

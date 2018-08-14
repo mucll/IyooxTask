@@ -29,6 +29,19 @@
         android:textColor="@drawable/select_video_state_text_color"
         android:textSize="@dimen/f_14" />
 
+    <TextView
+        android:id="@+id/is_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dip_2"
+        android:layout_marginRight="@dimen/dip_2"
+        android:background="@drawable/select_screen_maincolor_r14_bg"
+        android:padding="@dimen/dip_4"
+        android:text="试看"
+        android:textColor="@color/maincolor"
+        android:textSize="@dimen/f_12" />
+
     <FrameLayout
         android:id="@+id/item_video_state_content"
         android:layout_width="wrap_content"

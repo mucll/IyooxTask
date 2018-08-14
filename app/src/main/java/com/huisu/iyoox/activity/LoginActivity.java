@@ -16,8 +16,10 @@ import com.huisu.iyoox.activity.register.RegisterPasswordActivity;
 import com.huisu.iyoox.activity.register.RegisterPhoneVerificationCodeActivity;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.PhoneModel;
+import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.base.BasePhoneModel;
 import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.util.SoftKeyBoardListener;
@@ -26,6 +28,8 @@ import com.huisu.iyoox.util.StringUtils;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.Loading;
 import com.huisu.iyoox.views.PhoneEditText;
+
+import org.litepal.LitePal;
 
 /**
  * @author: dl
@@ -42,14 +46,13 @@ public class LoginActivity extends BaseActivity implements PhoneEditText.onPhone
 
     @Override
     protected void initView() {
-        mPhoneEditText = (PhoneEditText) findViewById(R.id.login_phone_edit_text);
-        nextBt = (Button) findViewById(R.id.login_phone_next_bt);
+        mPhoneEditText = findViewById(R.id.login_phone_edit_text);
+        nextBt = findViewById(R.id.login_phone_next_bt);
         editContetView = findViewById(R.id.login_edit_content);
     }
 
     @Override
     protected void initData() {
-
     }
 
     @Override

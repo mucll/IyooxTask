@@ -113,7 +113,7 @@ public class TeacherLookTaskDetailsActivity extends BaseActivity {
                 fragments.get(positon).onShow();
             }
         });
-        mFragmentLayout.setAdapter(fragments, R.layout.tablayout_teacher_look_task_detail, 0x203);
+        mFragmentLayout.setAdapter(fragments, R.layout.tablayout_teacher_look_task_detail, 0x233);
     }
 
     private TeacherLookTaskDetailFragment getFragment(int type) {

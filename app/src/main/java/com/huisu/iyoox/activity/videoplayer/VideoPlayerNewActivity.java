@@ -244,7 +244,6 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
                 if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE) {
                     if (baseVideoUrlModel.data != null) {
                         showBack = true;
-                        backView.setVisibility(View.GONE);
                         urlModel = baseVideoUrlModel.data;
                         //是否收藏
                         if (urlModel.isIs_shipin_collected()) {
@@ -259,7 +258,12 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
                         mAdapter.notifyDataSetChanged();
                         //视频ID
                         vid = urlModel.getShipin_url();
-                        play(vid, bitrate, false, isMustFromLocal);
+                        if (!TextUtils.isEmpty(vid)) {
+                            backView.setVisibility(View.GONE);
+                            play(vid, bitrate, false, isMustFromLocal);
+                        } else {
+                            TabToast.showMiddleToast(context, "暂无视频");
+                        }
                     } else {
                         if (!showBack) {
                             backView.setVisibility(View.VISIBLE);

@@ -63,8 +63,8 @@ public class ConfigMainActivity extends BaseActivity implements View.OnClickList
      * 退出登录
      */
     private void logout() {
-        LitePal.deleteAll(User.class);
         ActivityStackManager.getActivityStackManager().popAllActivity();
+        LitePal.deleteAll(User.class);
         UserManager.getInstance().removeUser();
         LoginActivity.start(this);
     }

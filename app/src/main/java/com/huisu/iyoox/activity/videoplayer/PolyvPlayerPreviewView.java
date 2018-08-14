@@ -1,5 +1,6 @@
 package com.huisu.iyoox.activity.videoplayer;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -26,112 +27,124 @@ import java.io.File;
 
 /**
  * 预览图视图
+ *
  * @author Lion 2016-3-3
  */
 public class PolyvPlayerPreviewView extends RelativeLayout {
-	private static final String TAG = PolyvPlayerPreviewView.class.getSimpleName();
-	private Context mContext = null;
-	private ImageView mPreviewImage = null;
-	private ImageButton mStartBtn = null;
-	private Callback mCallback = null;
-	private DisplayImageOptions mOptions = null;
+    private static final String TAG = PolyvPlayerPreviewView.class.getSimpleName();
+    private Context mContext = null;
+    private ImageView mPreviewImage = null;
+    private ImageButton mStartBtn = null;
+    private Callback mCallback = null;
+    private DisplayImageOptions mOptions = null;
+    private View backView = null;
 
     public PolyvPlayerPreviewView(Context context) {
         this(context, null);
     }
-    
+
     public PolyvPlayerPreviewView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
-    
+
     public PolyvPlayerPreviewView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mContext = context;
         initViews();
     }
-    
+
     private void initViews() {
-    	LayoutInflater.from(getContext()).inflate(R.layout.polyv_player_preview_view, this);
-		mPreviewImage = (ImageView) findViewById(R.id.preview_image);
-		mStartBtn = (ImageButton) findViewById(R.id.start_btn);
-		mStartBtn.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if (mCallback != null) {
-					mCallback.onClickStart();
-				}
+        LayoutInflater.from(getContext()).inflate(R.layout.polyv_player_preview_view, this);
+        mPreviewImage = findViewById(R.id.preview_image);
+        backView = findViewById(R.id.polyv_player_back_iv);
+        backView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mContext != null) {
+                    ((Activity) mContext).finish();
+                }
+            }
+        });
+        mStartBtn = findViewById(R.id.start_btn);
+        mStartBtn.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (mCallback != null) {
+                    mCallback.onClickStart();
+                }
 
                 hide();
-			}
-		});
-    	
-    	if (mOptions == null) {
-    		mOptions = new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.polyv_avatar_def) // 设置图片在下载期间显示的图片
-    				.showImageForEmptyUri(R.drawable.polyv_avatar_def)// 设置图片Uri为空或是错误的时候显示的图片
-    				.showImageOnFail(R.drawable.polyv_avatar_def) // 设置图片加载/解码过程中错误时候显示的图片
-    				.bitmapConfig(Bitmap.Config.RGB_565)// 设置图片的解码类型
-    				.cacheInMemory(true)// 设置下载的图片是否缓存在内存中
-    				.cacheOnDisk(true)// 设置下载的图片是否缓存在SD卡中
-    				.displayer(new FadeInBitmapDisplayer(100))// 是否图片加载好后渐入的动画时间
-    				.imageScaleType(ImageScaleType.IN_SAMPLE_INT).build();// 构建完成
-		}
+            }
+        });
+
+        if (mOptions == null) {
+            mOptions = new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.polyv_avatar_def) // 设置图片在下载期间显示的图片
+                    .showImageForEmptyUri(R.drawable.polyv_avatar_def)// 设置图片Uri为空或是错误的时候显示的图片
+                    .showImageOnFail(R.drawable.polyv_avatar_def) // 设置图片加载/解码过程中错误时候显示的图片
+                    .bitmapConfig(Bitmap.Config.RGB_565)// 设置图片的解码类型
+                    .cacheInMemory(true)// 设置下载的图片是否缓存在内存中
+                    .cacheOnDisk(true)// 设置下载的图片是否缓存在SD卡中
+                    .displayer(new FadeInBitmapDisplayer(100))// 是否图片加载好后渐入的动画时间
+                    .imageScaleType(ImageScaleType.IN_SAMPLE_INT).build();// 构建完成
+        }
     }
 
     /**
      * 设置图片并显示
+     *
      * @param vid
      */
     public void show(String vid) {
-		new LoadVideoJson(vid).execute();
+        new LoadVideoJson(vid).execute();
         setVisibility(View.VISIBLE);
     }
 
-	private class LoadVideoJson extends AsyncTask<String, Void, PolyvVideoVO> {
+    private class LoadVideoJson extends AsyncTask<String, Void, PolyvVideoVO> {
 
-		private final String mVid;
+        private final String mVid;
 
-		LoadVideoJson(String vid) {
-			mVid = vid;
-		}
+        LoadVideoJson(String vid) {
+            mVid = vid;
+        }
 
-		@Override
-		protected PolyvVideoVO doInBackground(String... params) {
-			PolyvVideoVO video = null;
-			try {
-				video = PolyvSDKUtil.loadVideoJSON2Video(mVid);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+        @Override
+        protected PolyvVideoVO doInBackground(String... params) {
+            PolyvVideoVO video = null;
+            try {
+                video = PolyvSDKUtil.loadVideoJSON2Video(mVid);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-			return video;
-		}
+            return video;
+        }
 
-		@Override
-		protected void onPostExecute(PolyvVideoVO v) {
-			super.onPostExecute(v);
-			if (v == null) {
-				return;
-			}
+        @Override
+        protected void onPostExecute(PolyvVideoVO v) {
+            super.onPostExecute(v);
+            if (v == null) {
+                return;
+            }
 
-			if (TextUtils.isEmpty(v.getFirstImage())) {
-				return;
-			}
+            if (TextUtils.isEmpty(v.getFirstImage())) {
+                return;
+            }
 
-			int index = 0;
-			if (v.getFirstImage().contains("/")) {
-				index = v.getFirstImage().lastIndexOf("/");
-			}
+            int index = 0;
+            if (v.getFirstImage().contains("/")) {
+                index = v.getFirstImage().lastIndexOf("/");
+            }
 
-			String fileName = v.getFirstImage().substring(index);
-			File file = PolyvDownloadDirUtil.getFileFromExtraResourceDir(mVid, fileName);
-			if (file != null) {
-				mPreviewImage.setImageURI(Uri.parse(file.getAbsolutePath()));
-			} else {
-				ImageLoader.getInstance().displayImage(v.getFirstImage(), mPreviewImage, mOptions, new PolyvAnimateFirstDisplayListener());
-			}
-		}
-	}
+            String fileName = v.getFirstImage().substring(index);
+            File file = PolyvDownloadDirUtil.getFileFromExtraResourceDir(mVid, fileName);
+            if (file != null) {
+                mPreviewImage.setImageURI(Uri.parse(file.getAbsolutePath()));
+            } else {
+                ImageLoader.getInstance().displayImage(v.getFirstImage(), mPreviewImage, mOptions, new PolyvAnimateFirstDisplayListener());
+            }
+        }
+    }
 
     /**
      * 隐藏
@@ -139,18 +152,18 @@ public class PolyvPlayerPreviewView extends RelativeLayout {
     public void hide() {
         setVisibility(View.GONE);
     }
-    
+
     @Override
-	public boolean onTouchEvent(MotionEvent event) {
-    	super.onTouchEvent(event);
-		return true;
-	}
+    public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
+        return true;
+    }
 
     public void setCallback(Callback callback) {
-    	mCallback = callback;
+        mCallback = callback;
     }
 
     public interface Callback {
-    	public void onClickStart();
+        public void onClickStart();
     }
 }

@@ -14,6 +14,7 @@ import com.huisu.iyoox.entity.base.BaseGradeListModel;
 import com.huisu.iyoox.entity.base.BaseHomeWorkResultModel;
 import com.huisu.iyoox.entity.base.BaseLearningCardModel;
 import com.huisu.iyoox.entity.base.BaseNotificationMsgModel;
+import com.huisu.iyoox.entity.base.BaseOtherBookModel;
 import com.huisu.iyoox.entity.base.BasePhoneModel;
 import com.huisu.iyoox.entity.base.BaseRegisterResultModel;
 import com.huisu.iyoox.entity.base.BaseScreenSubjectVersionModel;
@@ -72,9 +73,9 @@ public class RequestCenter {
     /**
      * 文件上传
      */
-    public static void downloadFile(String url, RequestParams params, DisposeDownloadListener listener, String clazz) {
-        CommonOkHttpClient.downloadFile(CommonRequest.createPostRequest(url, params),
-                new DisposeDataHandle(listener, clazz));
+    public static void downloadFile(String url, String filePath, DisposeDownloadListener listener) {
+        CommonOkHttpClient.downloadFile(CommonRequest.createPostRequest(url, null),
+                new DisposeDataHandle(listener, filePath));
     }
 
     /**
@@ -684,7 +685,7 @@ public class RequestCenter {
     public static void getPayJson(String userId, String typeId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("user_id", userId);
-        params.put("jihuo_type", typeId);
+        params.put("jihuoma_type", typeId);
         RequestCenter.postRequest(HttpConstants.getPayJson, params, listener, null);
     }
 
@@ -694,5 +695,21 @@ public class RequestCenter {
     public static void judgeVersionUpdate(DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         RequestCenter.postRequest(HttpConstants.judgeVersionUpdate, params, listener, BaseVersionModel.class);
+    }
+
+    /**
+     * 国学
+     */
+    public static void guoxueList(DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        RequestCenter.postRequest(HttpConstants.guoxueList, params, listener, BaseOtherBookModel.class);
+    }
+
+    /**
+     * 艺术
+     */
+    public static void yishuList(DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        RequestCenter.postRequest(HttpConstants.yishuList, params, listener, BaseOtherBookModel.class);
     }
 }

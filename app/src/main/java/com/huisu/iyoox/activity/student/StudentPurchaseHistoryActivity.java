@@ -65,7 +65,7 @@ public class StudentPurchaseHistoryActivity extends BaseActivity {
                         fragments.get(positon).onShow();
                     }
                 });
-        mFragmentLayout.setAdapter(fragments, R.layout.tablayout_student_purchase_history, 0x203);
+        mFragmentLayout.setAdapter(fragments, R.layout.tablayout_student_purchase_history, 0x223);
     }
 
     private StudentPurchaseHistoryFragment getFragment(String type) {

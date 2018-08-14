@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -15,13 +16,22 @@ import android.widget.ImageView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
+import com.huisu.iyoox.application.MyApplication;
 import com.huisu.iyoox.entity.User;
+import com.huisu.iyoox.entity.VersionBean;
+import com.huisu.iyoox.entity.base.BaseVersionModel;
+import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
+import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.util.SaveDate;
 import com.huisu.iyoox.util.StringUtils;
+import com.huisu.iyoox.util.UpDataUtils;
+import com.huisu.iyoox.util.VersionUtil;
 
 import org.litepal.LitePal;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 
 /**
@@ -61,7 +71,7 @@ public class StartActivity extends Activity {
 
     private ImageView iconBottomIv, iconBoxIv, iconPersonIv, iconBookIv, iconBIv, iconGuangIv,
             iconBookTwoIv, iconErrorIv, iconHatIv, iconPenIv, iconrAIv, iconrRubberIv,
-            twoPenIv, iconrPercentageIv,jbdIv;
+            twoPenIv, iconrPercentageIv, jbdIv;
     private int height;
 
     @Override
@@ -69,10 +79,41 @@ public class StartActivity extends Activity {
         super.onCreate(savedInstanceState);
         hiddenStatusBar();
         setContentView(R.layout.activity_loading_layout);
-        //停留2S
-        handler.sendEmptyMessageDelayed(0, 3000);
         initView();
+        initData();
         anim();
+        postVersionHttp();
+    }
+
+    private void postVersionHttp() {
+        RequestCenter.judgeVersionUpdate(new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                BaseVersionModel baseModel = (BaseVersionModel) responseObj;
+                if (baseModel.data.getVersion1() > 0) {
+                    VersionBean versionBean = new VersionBean();
+                    versionBean.setDownloadUrl(baseModel.data.getZaixian_url());
+                    versionBean.setVersionRemark(baseModel.data.getZiaxian_remark());
+                    versionBean.setVersionMixno(baseModel.data.getVersion1());
+                    getVersion(versionBean);
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
+    }
+
+    //对比版本号
+    private void getVersion(VersionBean bean) {
+        int versionCode = VersionUtil.getVersionCode(this);
+        if (versionCode < bean.getVersionMixno()) {//强制
+            new UpDataUtils(this).isUpdata(UpDataUtils.FORCE_TYPE, bean);
+        } else {
+            handler.sendEmptyMessageDelayed(0, 3000);
+        }
     }
 
     private void anim() {
@@ -278,4 +319,46 @@ public class StartActivity extends Activity {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
     }
+
+
+    private void initData() {
+        MyApplication.CACHEPATH = getRootFilePath();
+        MyApplication.DOWNLOAD_URL = MyApplication.CACHEPATH + File.separator + MyApplication.DOWNLOAD_ROOT_DIR;
+    }
+
+    /**
+     * 是否有SD卡
+     */
+    public static boolean hasSDCard() {
+        String status = Environment.getExternalStorageState();
+        if (!status.equals(Environment.MEDIA_MOUNTED)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 获取下载存放文件的根目录
+     */
+    public static String getRootFilePath() {
+        if (hasSDCard()) {
+            // =========================================================================
+            // =========================================================================
+            // /mnt/sdcard/android/data/
+            // =========================================================================
+            // =========================================================================
+
+            return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator +
+                    "iyoox";
+        } else {
+            // =========================================================================
+            // =========================================================================
+            // /data/data/
+            // =========================================================================
+            // =========================================================================
+            return Environment.getDataDirectory().getAbsolutePath() + File.separator + "iyoox";
+
+        }
+    }
+
 }

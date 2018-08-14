@@ -41,6 +41,6 @@ public class LogUtil {
     public static void e(String msg) {
         if (!BuildConfig.LOGSHOW)
             return;
-        Log.e("sundata", msg);
+        Log.e("iyoox", msg);
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.adapter.HomeExpandableListAdapter;
@@ -14,15 +15,19 @@ import com.huisu.iyoox.complexmenu.SelectMenuView;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.BookChapterModel;
 import com.huisu.iyoox.entity.BookDetailsModel;
+import com.huisu.iyoox.entity.OtherBookModel;
 import com.huisu.iyoox.entity.SubjectModel;
 import com.huisu.iyoox.entity.VideoGroupModel;
 import com.huisu.iyoox.entity.base.BaseBookDetailsModel;
+import com.huisu.iyoox.entity.base.BaseOtherBookModel;
 import com.huisu.iyoox.entity.base.BaseVideoModel;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.swipetoloadlayout.OnRefreshListener;
 import com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout;
+import com.huisu.iyoox.views.Loading;
+import com.huisu.iyoox.views.MyFragmentLayout_line;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +41,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
     private SubjectModel subjectModel;
     private ExpandableListView mListView;
     private List<BookDetailsModel> bookDetailsModels = new ArrayList<>();
+    private ArrayList<OtherBookModel> otherModels = new ArrayList<>();
     private HomeExpandableListAdapter mAdapter;
     private SelectMenuView bookTypeView;
     private SwipeToLoadLayout swipeToLoadLayout;
@@ -49,6 +55,10 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
      */
     private int page = 1;
     private View emptyView;
+    private Loading loading;
+
+    private MyFragmentLayout_line myFragmentLayout;
+    private View bookView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,8 +98,6 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_book, container, false);
         }
-        initView();
-        setEvent();
         return view;
     }
 
@@ -98,20 +106,44 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
      * 初始化控件
      */
     private void initView() {
-        emptyView = view.findViewById(R.id.book_fragment_empty_view);
-        mListView = view.findViewById(R.id.swipe_target);
-        bookTypeView = view.findViewById(R.id.book_type_view);
-        swipeToLoadLayout = view.findViewById(R.id.swipeToLoadLayout);
-        mAdapter = new HomeExpandableListAdapter(getContext(), videoModels);
-        mListView.setAdapter(mAdapter);
-        bookTypeView.dismissAllPopupWindow();
+        myFragmentLayout = view.findViewById(R.id.other_fragment_layout);
+        myFragmentLayout.removeAllViews();
+        videoModels.clear();
+        bookView = view.findViewById(R.id.book_fragment_rl);
+        if (subjectModel == null) return;
+        if (subjectModel.getKemu_id() == Constant.SUBJECT_GUOXUE) {
+            myFragmentLayout.setVisibility(View.VISIBLE);
+            bookView.setVisibility(View.VISIBLE);
+        } else if (subjectModel.getKemu_id() == Constant.SUBJECT_YISHU) {
+            myFragmentLayout.setVisibility(View.VISIBLE);
+            bookView.setVisibility(View.GONE);
+        } else {
+            bookView.setVisibility(View.VISIBLE);
+            myFragmentLayout.setVisibility(View.GONE);
+            emptyView = view.findViewById(R.id.book_fragment_empty_view);
+            mListView = view.findViewById(R.id.swipe_target);
+            bookTypeView = view.findViewById(R.id.book_type_view);
+            swipeToLoadLayout = view.findViewById(R.id.swipeToLoadLayout);
+            mAdapter = new HomeExpandableListAdapter(getContext(), videoModels);
+            mListView.setAdapter(mAdapter);
+            bookTypeView.dismissAllPopupWindow();
+        }
     }
 
     /**
      * 初始化默认信息
      */
     private void initData() {
-        postBookDetailsData();
+        initView();
+        if (subjectModel == null) return;
+        if (subjectModel.getKemu_id() == Constant.SUBJECT_GUOXUE) {
+            postGuoXueDataHttp();
+        } else if (subjectModel.getKemu_id() == Constant.SUBJECT_YISHU) {
+            postYiShuDataHttp();
+        } else {
+            setEvent();
+            postBookDetailsData();
+        }
     }
 
     /**
@@ -197,7 +229,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
     @Override
     public void onEditonChanged(BookDetailsModel editionModel) {
         page = 1;
-        bookTypeView.setRefresh(editionModel,default_code);
+        bookTypeView.setRefresh(editionModel, default_code);
         swipeToLoadLayout.setLoadingMore(false);
         swipeToLoadLayout.setRefreshing(true);
     }
@@ -260,5 +292,93 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
             postDetailsData(editionModel.getJiaocai_id(), editionModel.getGrade_detail_id(),
                     chapterModel.getZhangjie_id(), bookTypeView.getSelectZhiShiDianData());
         }
+    }
+
+    private void postGuoXueDataHttp() {
+        loading = Loading.show(null, getContext(), getString(R.string.loading_one_hint_text));
+        RequestCenter.guoxueList(new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                otherModels.clear();
+                loading.dismiss();
+                BaseOtherBookModel baseModel = (BaseOtherBookModel) responseObj;
+                if (baseModel.data != null && baseModel.data.size() > 0) {
+                    otherModels.addAll(baseModel.data);
+                    initFragment();
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                loading.dismiss();
+            }
+        });
+    }
+
+    private void postYiShuDataHttp() {
+        loading = Loading.show(null, getContext(), getString(R.string.loading_one_hint_text));
+        RequestCenter.yishuList(new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                otherModels.clear();
+                loading.dismiss();
+                BaseOtherBookModel baseModel = (BaseOtherBookModel) responseObj;
+                if (baseModel.data != null && baseModel.data.size() > 0) {
+                    otherModels.addAll(baseModel.data);
+                    initFragment();
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                loading.dismiss();
+            }
+        });
+    }
+
+    private ArrayList<BaseFragment> fragments = new ArrayList();
+
+    private void initFragment() {
+        fragments.clear();
+        if (otherModels.get(Constant.other_book_one) != null) {
+            fragments.add(getFragment(Constant.other_book_one, otherModels.get(Constant.other_book_one)));
+        }
+        if (otherModels.get(Constant.other_book_two) != null) {
+            fragments.add(getFragment(Constant.other_book_two, otherModels.get(Constant.other_book_two)));
+        }
+        if (otherModels.get(Constant.other_book_three) != null) {
+            fragments.add(getFragment(Constant.other_book_three, otherModels.get(Constant.other_book_three)));
+        }
+        myFragmentLayout.setScorllToNext(true);
+        myFragmentLayout.setScorll(true);
+        myFragmentLayout.setWhereTab(1);
+        myFragmentLayout.setTabHeight(6, getResources().getColor(R.color.main_text_color), false);
+        myFragmentLayout
+                .setOnChangeFragmentListener(new MyFragmentLayout_line.ChangeFragmentListener() {
+                    @Override
+                    public void change(int lastPosition, int positon,
+                                       View lastTabView, View currentTabView) {
+                        ((TextView) lastTabView.findViewById(R.id.tab_text))
+                                .setTextColor(getResources().getColor(R.color.color333));
+                        ((TextView) currentTabView.findViewById(R.id.tab_text))
+                                .setTextColor(getResources().getColor(R.color.main_text_color));
+                        fragments.get(positon).onShow();
+                    }
+                });
+        if (subjectModel.getKemu_id() == Constant.SUBJECT_GUOXUE) {
+            myFragmentLayout.setAdapter(fragments, R.layout.tablayout_other_book, 0x253);
+        } else if (subjectModel.getKemu_id() == Constant.SUBJECT_YISHU) {
+            myFragmentLayout.setAdapter(fragments, R.layout.tablayout_other_two_book, 0x254);
+        }
+
+    }
+
+    private OtherBookDetailFragment getFragment(int taskType, OtherBookModel model) {
+        OtherBookDetailFragment fragment = new OtherBookDetailFragment();
+        Bundle b = new Bundle();
+        b.putInt("type", taskType);
+        b.putSerializable("model", model);
+        fragment.setArguments(b);
+        return fragment;
     }
 }

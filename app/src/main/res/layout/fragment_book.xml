@@ -7,57 +7,68 @@
     android:orientation="vertical"
     tools:context="com.huisu.iyoox.fragment.home.HomeFragment">
 
-    <com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout
-        android:id="@+id/swipeToLoadLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dip_40"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <com.huisu.iyoox.views.RefreshHeadView
-            android:id="@id/swipe_refresh_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="@dimen/dip_10"
-            android:paddingTop="@dimen/dip_10" />
-
-        <ExpandableListView
-            android:id="@id/swipe_target"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@color/windowsbg"
-            android:divider="@null"
-            android:dividerHeight="0dp"
-            android:groupIndicator="@null"
-            android:scrollbars="none" />
-
-    </com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout>
-
     <RelativeLayout
-        android:id="@+id/book_fragment_empty_view"
+        android:id="@+id/book_fragment_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/book_fragment_empty_view_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/home_course_kong" />
+        <com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout
+            android:id="@+id/swipeToLoadLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dip_40"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/book_fragment_empty_view_icon"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dip_24"
-            android:text="哎呀,暂时没有数据呢,看看别的吧"
-            android:textColor="@color/color999" />
+            <com.huisu.iyoox.views.RefreshHeadView
+                android:id="@id/swipe_refresh_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dip_10"
+                android:paddingTop="@dimen/dip_10" />
+
+            <ExpandableListView
+                android:id="@id/swipe_target"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/windowsbg"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:groupIndicator="@null"
+                android:scrollbars="none" />
+
+        </com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout>
+
+        <RelativeLayout
+            android:id="@+id/book_fragment_empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/book_fragment_empty_view_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/home_course_kong" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/book_fragment_empty_view_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dip_24"
+                android:text="哎呀,暂时没有数据呢,看看别的吧"
+                android:textColor="@color/color999" />
+        </RelativeLayout>
+
+        <com.huisu.iyoox.complexmenu.SelectMenuView
+            android:id="@+id/book_type_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 
-    <com.huisu.iyoox.complexmenu.SelectMenuView
-        android:id="@+id/book_type_view"
+    <com.huisu.iyoox.views.MyFragmentLayout_line
+        android:id="@+id/other_fragment_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 </RelativeLayout>

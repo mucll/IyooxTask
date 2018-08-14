@@ -64,4 +64,7 @@
     <string name="exp_after">稍后再说</string>
     <string name="exit_app">退出应用</string>
     <string name="exp_now">立即体验</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

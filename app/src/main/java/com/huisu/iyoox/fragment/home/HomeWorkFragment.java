@@ -67,7 +67,7 @@ public class HomeWorkFragment extends BaseFragment {
                         fragments.get(positon).onShow();
                     }
                 });
-        myFragmentLayout.setAdapter(fragments, R.layout.tablayout_student_task, 0x203);
+        myFragmentLayout.setAdapter(fragments, R.layout.tablayout_student_task, 0x257);
     }
 
     private StudentTaskListFragment getFragment(String taskType) {

@@ -142,6 +142,19 @@ public class Constant {
      * 化学ID
      */
     public static final int SUBJECT_HUAXUE = 5;
+    /**
+     * 国学
+     */
+    public static final int SUBJECT_GUOXUE = 6;
+    /**
+     * 艺术
+     */
+    public static final int SUBJECT_YISHU = 7;
+
+    public static final int other_book_one = 0;
+    public static final int other_book_two = 1;
+    public static final int other_book_three = 2;
+
     //----------------------------------班级---------------------------------------
 
     /**

@@ -30,11 +30,9 @@ import java.util.ArrayList;
 public class MyApplication extends Application {
     public static final String TAG = MyApplication.class.getSimpleName();
 
-
-    public static String CACHEPATH = Environment.getExternalStorageDirectory()
-            .getAbsolutePath() + "/iyoox/";
+    public static String CACHEPATH = "";
     public static String DOWNLOAD_ROOT_DIR = "download";
-    public static String DOWNLOAD_URL = CACHEPATH + "/" + DOWNLOAD_ROOT_DIR + "/";
+    public static String DOWNLOAD_URL = "";
 
     private static MyApplication mApplication = null;
 

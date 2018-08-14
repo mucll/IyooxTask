@@ -13,9 +13,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.entity.User;
+import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.util.SaveDate;
 import com.huisu.iyoox.util.StringUtils;
 import com.huisu.iyoox.views.TagViewPager;
+
+import org.litepal.LitePal;
 
 /**
  * @author: dl
@@ -47,7 +51,7 @@ public class GuideActivity extends Activity {
 //                    .SCREEN_ORIENTATION_PORTRAIT);//竖屏
 //        }
         setContentView(R.layout.activity_guide_layout);
-        viewPager = (TagViewPager) findViewById(R.id.tagViewPager);
+        viewPager = findViewById(R.id.tagViewPager);
         viewPager.init(R.drawable.shape_photo_tag_select, R.drawable.shape_photo_tag_nomal, 16,
                 8, 2, 60);
         viewPager.setAutoNext(false, 0);
@@ -55,9 +59,9 @@ public class GuideActivity extends Activity {
             @Override
             public View getView(ViewGroup container, int position) {
                 View v = View.inflate(GuideActivity.this, R.layout.item_guide, null);
-                ImageView iv = (ImageView) v.findViewById(R.id.imageView);
+                ImageView iv = v.findViewById(R.id.imageView);
                 iv.setScaleType(ImageView.ScaleType.FIT_XY);
-                Button btn = (Button) v.findViewById(R.id.button);
+                Button btn = v.findViewById(R.id.button);
                 iv.setImageResource(imageIds[position]);
                 container.addView(v);
                 if (position == imageIds.length - 1) {
@@ -66,7 +70,13 @@ public class GuideActivity extends Activity {
                         @Override
                         public void onClick(View v) {
                             SaveDate.getInstence(GuideActivity.this).setVersion(StringUtils.getCurrentVersion(GuideActivity.this));
-                            LoginActivity.start(GuideActivity.this);
+                            User user = LitePal.findFirst(User.class);
+                            if (user != null) {
+                                UserManager.getInstance().setUser(user);
+                                MainActivity.start(GuideActivity.this);
+                            } else {
+                                LoginActivity.start(GuideActivity.this);
+                            }
                             GuideActivity.this.finish();
                         }
                     });

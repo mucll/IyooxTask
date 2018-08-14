@@ -110,6 +110,13 @@
         <item name="android:windowAnimationStyle">@style/mypopwindow_anim_style</item>
     </style>
 
+    <style name="Transparent6">
+        <item name="android:windowBackground">@color/trans</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/mypopwindow_anim_style_other</item>
+    </style>
+
     <!-- ######全屏dialog黑背景###### -->
     <style name="blackDialog" parent="Transparent">
         <item name="android:windowBackground">@color/black</item>
@@ -121,6 +128,14 @@
     <!-- ######pop###### -->
     <style name="mypopwindow_anim_style">
         <item name="android:windowEnterAnimation">@anim/popshow</item>
+        <!-- 指定显示的动画xml -->
+
+        <item name="android:windowExitAnimation">@anim/pophidden</item>
+        <!-- 指定消失的动画xml -->
+    </style>
+
+    <style name="mypopwindow_anim_style_other">
+        <item name="android:windowEnterAnimation">@anim/popshow_uptobelow</item>
         <!-- 指定显示的动画xml -->
 
         <item name="android:windowExitAnimation">@anim/pophidden</item>
