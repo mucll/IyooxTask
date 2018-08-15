@@ -7,8 +7,8 @@ package com.huisu.iyoox.http;
  */
 public class HttpConstants {
     //外网
-//    private static final String BASE_URL = "http://www.sunvke.com/";
-    private static final String BASE_URL = "http://8jbew0j.hk1.mofasuidao.cn/";
+    private static final String BASE_URL = "http://www.sunvke.com/";
+//    private static final String BASE_URL = "http://8jbew0j.hk1.mofasuidao.cn/";
 
     private static final String ROOT_URL = BASE_URL + "api";
 

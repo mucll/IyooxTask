@@ -115,13 +115,14 @@ public class DialogDownloadApp extends Dialog {
                         file.mkdirs();
                     }
                     File fileApk = new File(saveFileName);
-
-                    if (!fileApk.exists()) {
+                    LogUtil.e(savePath);
+                    LogUtil.e(saveFileName);
+                    if (fileApk != null && fileApk.length() < totalLenth) {
+                        fileApk.delete();
                         fileApk.createNewFile();
                     }
 
-                    if (fileApk != null && fileApk.length() < totalLenth) {
-                        fileApk.delete();
+                    if (!fileApk.exists()) {
                         fileApk.createNewFile();
                     }
 

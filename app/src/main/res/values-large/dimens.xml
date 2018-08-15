@@ -68,5 +68,6 @@
     <dimen name="dip_160">240dip</dimen>
     <dimen name="dip_200">300dip</dimen>
     <dimen name="dip_320">420dip</dimen>
+    <dimen name="dip_400">600dip</dimen>
     <dimen name="msg_count_shape">26dip</dimen>
 </resources>

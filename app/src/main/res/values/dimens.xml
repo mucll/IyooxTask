@@ -93,6 +93,7 @@
     <dimen name="dip_280">280dip</dimen>
     <dimen name="dip_320">320dip</dimen>
     <dimen name="dip_322">322dip</dimen>
+    <dimen name="dip_400">400dip</dimen>
     <dimen name="textSize_small">14sp</dimen>
     <dimen name="fab_size_normal">100dp</dimen>
     <!-- 3 -->

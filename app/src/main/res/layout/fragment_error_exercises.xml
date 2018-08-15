@@ -11,9 +11,10 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_gallery_vp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="50dp"
+        android:layout_width="@dimen/dip_320"
+        android:layout_height="@dimen/dip_400"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/title_height"
         android:clipChildren="false" />
 
     <TextView

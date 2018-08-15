@@ -93,7 +93,7 @@ public class GradeNewDialog extends Dialog implements RadioGroup.OnCheckedChange
         WindowManager m = ((Activity) context).getWindowManager();
         Display d = m.getDefaultDisplay();  //为获取屏幕宽、高
         android.view.WindowManager.LayoutParams p = getWindow().getAttributes();  //获取对话框当前的参数值
-        p.height = (int) (d.getHeight() * 0.7);   //高度设置为屏幕的0.3
+        p.height = (int) (d.getHeight() * 0.7);   //高度设置为屏幕的0.7
         p.gravity = Gravity.TOP;
         getWindow().setAttributes(p);     //设置生效
     }

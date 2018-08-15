@@ -17,8 +17,8 @@ android {
         applicationId "com.huisu.iyoox"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 8
-        versionName "1.0.8"
+        versionCode 7
+        versionName "1.0.7"
         multiDexEnabled true
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 

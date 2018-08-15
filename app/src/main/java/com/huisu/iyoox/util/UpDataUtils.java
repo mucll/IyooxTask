@@ -1,11 +1,15 @@
 package com.huisu.iyoox.util;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.IBinder;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -13,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.VersionBean;
 import com.huisu.iyoox.manager.ActivityStackManager;
 import com.huisu.iyoox.service.DownloadApkService;
@@ -141,8 +146,12 @@ public class UpDataUtils {
         tv.setText(R.string.update_now);
         tv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                dialog.dismiss();
-                showForceDownloadDialog(downLoad_url);//url 链接
+                if (hasPermission(Constant.WRITE_READ_EXTERNAL_PERMISSION)) {
+                    dialog.dismiss();
+                    showForceDownloadDialog(downLoad_url);//url 链接
+                } else {
+                    requestPermission(Constant.WRITE_READ_EXTERNAL_CODE, Constant.WRITE_READ_EXTERNAL_PERMISSION);
+                }
             }
         });
         tv = (TextView) dialog.findViewById(R.id.left_btn);
@@ -201,5 +210,24 @@ public class UpDataUtils {
         dialog.setCancelable(false);
         dialog.setOnKeyListener(noKeylistener);
         dialog.show();
+    }
+
+    public boolean hasPermission(String... permissions) {
+
+        for (String permisson : permissions) {
+            if (ContextCompat.checkSelfPermission(context, permisson)
+                    != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 申请指定的权限.
+     */
+    public void requestPermission(int code, String... permissions) {
+
+        ActivityCompat.requestPermissions((Activity) context, permissions, code);
     }
 }

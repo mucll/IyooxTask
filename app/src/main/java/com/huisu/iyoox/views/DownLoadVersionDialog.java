@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -55,17 +56,13 @@ public class DownLoadVersionDialog extends Dialog {
 
     public void show() {
         super.show();
+        WindowManager.LayoutParams params = this.getWindow().getAttributes();
         if (BaseActivity.getScreenWidth(((Activity) context)) < BaseActivity.getScreenHeigth(((Activity)
                 context))) {
-            WindowManager.LayoutParams params =
-                    this.getWindow().getAttributes();
             params.width = (int) (MainActivity.getScreenWidth(((Activity) context)) * 5.0f / 7.0f);
-            this.getWindow().setAttributes(params);
         } else {
-            WindowManager.LayoutParams params =
-                    this.getWindow().getAttributes();
             params.width = (int) (MainActivity.getScreenWidth(((Activity) context)) * 1f / 2f);
-            this.getWindow().setAttributes(params);
         }
+        this.getWindow().setAttributes(params);
     }
 }
