@@ -1,6 +1,8 @@
 package com.huisu.iyoox.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.CollectModel;
@@ -24,9 +27,19 @@ import java.util.List;
  * @author dinglai
  * @since JDK 1.8
  */
-public class StudentCollectAdapter extends BaseAdapter {
+public class StudentCollectAdapter extends RecyclerView.Adapter<StudentCollectAdapter.ViewHolder> {
     private Context context;
     private ArrayList<CollectModel> models;
+    private MyOnItemClickListener onItemClickListener;
+    private boolean isConfig = false;
+
+    public void setOnItemClickListener(MyOnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setConfig(boolean isConfig) {
+        this.isConfig = isConfig;
+    }
 
     public StudentCollectAdapter(Context context, ArrayList<CollectModel> models) {
         this.context = context;
@@ -34,13 +47,28 @@ public class StudentCollectAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
-        return models == null ? 0 : models.size();
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_student_collect_layout, parent, false);
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
     }
 
     @Override
-    public CollectModel getItem(int position) {
-        return models.get(position);
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        CollectModel titleModel = models.get(position);
+        String string = titleModel.getGrade_name() +
+                titleModel.getXueke_name() +
+                titleModel.getGrade_detail_name();
+        holder.subjectTv.setText(string);
+        holder.videoNameTv.setText(titleModel.getVedio_name());
+        holder.gradeDetailTv.setText(titleModel.getJiaocai_name());
+        holder.iconBgIv.setBackgroundResource(getResId(titleModel.getJiaocai_id()));
+        if (isConfig) {
+            holder.deleteTv.setVisibility(View.VISIBLE);
+            holder.deleteTv.setSelected(titleModel.isDelete());
+        } else {
+            holder.deleteTv.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -49,24 +77,8 @@ public class StudentCollectAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_student_collect_layout, null);
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        CollectModel titleModel = getItem(position);
-        String string = titleModel.getGrade_name() +
-                titleModel.getXueke_name() +
-                titleModel.getGrade_detail_name();
-        holder.subjectTv.setText(string);
-        holder.videoNameTv.setText(titleModel.getVedio_name());
-        holder.gradeDetailTv.setText(titleModel.getJiaocai_name());
-        holder.iconBgIv.setBackgroundResource(getResId(titleModel.getJiaocai_id()));
-        return convertView;
+    public int getItemCount() {
+        return models == null ? 0 : models.size();
     }
 
     private int getResId(int kemuId) {
@@ -86,17 +98,28 @@ public class StudentCollectAdapter extends BaseAdapter {
         }
     }
 
-    static class ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView iconBgIv;
         TextView videoNameTv;
         TextView gradeDetailTv;
         TextView subjectTv;
+        ImageView deleteTv;
 
-        ViewHolder(View view) {
+        public ViewHolder(View view) {
+            super(view);
             iconBgIv = view.findViewById(R.id.collect_bg_iv);
             videoNameTv = view.findViewById(R.id.student_collect_video_name);
             gradeDetailTv = view.findViewById(R.id.video_grade_detail_tv);
             subjectTv = view.findViewById(R.id.collect_subject_name_tv);
+            deleteTv = view.findViewById(R.id.is_delete_iv);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(getLayoutPosition(), v);
+            }
         }
     }
 }

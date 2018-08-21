@@ -1,0 +1,22 @@
+ext {
+
+    //==Android Third party,include Application Layer,SDK Layer==
+
+    //Build Gradle Plugin
+
+    //Android support Libraries
+    externalAndroidAppCompatV7 = 'com.android.support:appcompat-v7:27.+'
+    externalAndroidSupportV4 = 'com.android.support:support-v4:27.+'
+    externalOKHTTP = 'com.squareup.okhttp3:okhttp:3.3.0'
+    externalLeakcanary = 'com.squareup.leakcanary:leakcanary-android:1.5'
+    externalAndroidRecyclerView = 'com.android.support:recyclerview-v7:27.+'
+    externalGSON = 'com.google.code.gson:gson:2.8.0'
+    externalGlide = 'com.github.bumptech.glide:glide:3.7.0'
+
+    //Android SDK/Tools Version
+    externalCompileSdkVersion = 27
+    externalBuildToolsVersion = '27.0.3'
+    //The MinSdkVersion of the product you can add like this: externalSVideoMinSdkVersion 15
+    externalMinSdkVersion = 16
+    externalTargetSdkVersion = 23
+}

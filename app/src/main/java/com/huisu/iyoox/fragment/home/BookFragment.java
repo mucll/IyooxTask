@@ -3,10 +3,14 @@ package com.huisu.iyoox.fragment.home;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
@@ -59,6 +63,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
 
     private MyFragmentLayout_line myFragmentLayout;
     private View bookView;
+    private FrameLayout artContentView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,20 +111,25 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
      * 初始化控件
      */
     private void initView() {
+        artContentView = view.findViewById(R.id.book_Fragment_content_layout);
+        artContentView.removeAllViews();
         myFragmentLayout = view.findViewById(R.id.other_fragment_layout);
         myFragmentLayout.removeAllViews();
         videoModels.clear();
         bookView = view.findViewById(R.id.book_fragment_rl);
         if (subjectModel == null) return;
         if (subjectModel.getKemu_id() == Constant.SUBJECT_GUOXUE) {
-            myFragmentLayout.setVisibility(View.VISIBLE);
-            bookView.setVisibility(View.VISIBLE);
+            artContentView.setVisibility(View.VISIBLE);
+            myFragmentLayout.setVisibility(View.GONE);
+            bookView.setVisibility(View.GONE);
         } else if (subjectModel.getKemu_id() == Constant.SUBJECT_YISHU) {
-            myFragmentLayout.setVisibility(View.VISIBLE);
+            artContentView.setVisibility(View.VISIBLE);
+            myFragmentLayout.setVisibility(View.GONE);
             bookView.setVisibility(View.GONE);
         } else {
             bookView.setVisibility(View.VISIBLE);
             myFragmentLayout.setVisibility(View.GONE);
+            artContentView.setVisibility(View.GONE);
             emptyView = view.findViewById(R.id.book_fragment_empty_view);
             mListView = view.findViewById(R.id.swipe_target);
             bookTypeView = view.findViewById(R.id.book_type_view);
@@ -137,13 +147,22 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
         initView();
         if (subjectModel == null) return;
         if (subjectModel.getKemu_id() == Constant.SUBJECT_GUOXUE) {
-            postGuoXueDataHttp();
+//            postGuoXueDataHttp();
+            setBaseFragment();
         } else if (subjectModel.getKemu_id() == Constant.SUBJECT_YISHU) {
-            postYiShuDataHttp();
+//            postYiShuDataHttp();
+            setBaseFragment();
         } else {
             setEvent();
             postBookDetailsData();
         }
+    }
+
+    private void setBaseFragment() {
+        FragmentManager fm = getChildFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.book_Fragment_content_layout, getFragment(subjectModel.getKemu_id()));
+        ft.commit();
     }
 
     /**
@@ -378,6 +397,14 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
         Bundle b = new Bundle();
         b.putInt("type", taskType);
         b.putSerializable("model", model);
+        fragment.setArguments(b);
+        return fragment;
+    }
+
+    private ArtBookFragment getFragment(int kemuId) {
+        ArtBookFragment fragment = new ArtBookFragment();
+        Bundle b = new Bundle();
+        b.putInt("kemuId", kemuId);
         fragment.setArguments(b);
         return fragment;
     }

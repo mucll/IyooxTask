@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/coloref6"
-    android:orientation="vertical"
     tools:context="com.huisu.iyoox.fragment.home.HomeFragment">
+
 
     <RelativeLayout
         android:id="@+id/book_fragment_rl"
@@ -71,4 +71,10 @@
         android:id="@+id/other_fragment_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/book_Fragment_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </RelativeLayout>

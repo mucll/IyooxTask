@@ -9,6 +9,7 @@ import android.os.Message;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -40,20 +41,22 @@ public class VipBuyDetailActivity extends BaseActivity implements View.OnClickLi
     private static final int SDK_PAY_FLAG = 1;  //支付宝支付消息标识
 
     private View submitView;
+    private TextView cardNameView;
     private TextView goodsNameTv;
     private TextView goodsPriceTv;
-    private TextView tagTv;
     private TextView startTimeTv;
     private VipCardModel model;
     private Loading loading;
     private RadioGroup mRadioGroup;
     private User user;
+    private ImageView cardView;
 
     @Override
     protected void initView() {
+        cardView = findViewById(R.id.item_learning_card_bg_iv);
+        cardNameView = findViewById(R.id.item_learning_card_type_name);
         mRadioGroup = findViewById(R.id.radio_group_price);
         goodsNameTv = findViewById(R.id.goods_name_tv);
-        tagTv = findViewById(R.id.vip_card_tag_tv);
         startTimeTv = findViewById(R.id.vip_card_start_time);
         goodsPriceTv = findViewById(R.id.goods_price_tv);
         submitView = findViewById(R.id.submit_tv);
@@ -70,9 +73,10 @@ public class VipBuyDetailActivity extends BaseActivity implements View.OnClickLi
         }
         if (!TextUtils.isEmpty(model.getType_name())) {
             goodsNameTv.setText("商品名: " + model.getType_name());
+            cardNameView.setText("尚课啦" + model.getType_name());
         }
-        tagTv.setText(TextUtils.isEmpty(model.getTag()) ? "" : model.getTag());
         startTimeTv.setText(TextUtils.isEmpty(model.getCreatedate()) ? "" : "起始时间: " + StringUtils.getTimeStringYMD(model.getCreatedate()));
+        cardView.setImageResource(StringUtils.getCardResId(model.getId()));
     }
 
     @Override

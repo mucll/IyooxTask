@@ -11,13 +11,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
-import com.huisu.iyoox.complexmenu.holder.SubjectGridHolder;
 import com.huisu.iyoox.complexmenu.holder.SubjectHolder;
+import com.huisu.iyoox.complexmenu.holder.SubjectRecyclerHolder;
 import com.huisu.iyoox.entity.BookChapterModel;
 import com.huisu.iyoox.entity.BookDetailsModel;
-import com.huisu.iyoox.entity.BookEditionModel;
 import com.huisu.iyoox.util.StringUtils;
-import com.huisu.iyoox.util.TabToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +43,7 @@ public class SelectMenuView extends LinearLayout {
     /**
      * 教材版本
      */
-    private SubjectGridHolder mEditonHolder;
+    private SubjectRecyclerHolder mEditonHolder;
     private boolean isEditionSelect;
     /**
      * 章节
@@ -93,8 +91,8 @@ public class SelectMenuView extends LinearLayout {
     private void init() {
 
         //教材版本
-        mEditonHolder = new SubjectGridHolder(mContext);
-        mEditonHolder.setOnRightListViewItemSelectedListener(new SubjectGridHolder.OnRightListViewItemSelectedListener() {
+        mEditonHolder = new SubjectRecyclerHolder(mContext);
+        mEditonHolder.setOnRightListViewItemSelectedListener(new SubjectRecyclerHolder.OnRightListViewItemSelectedListener() {
             @Override
             public void OnRightListViewItemSelected(int rightIndex, BookDetailsModel model) {
                 editionModel = mEditonList.get(rightIndex);

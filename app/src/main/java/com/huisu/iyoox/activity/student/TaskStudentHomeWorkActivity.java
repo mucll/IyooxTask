@@ -82,10 +82,14 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
      */
     private void studentDoing() {
         setTitle("课后习题");
-        videoId = getIntent().getStringExtra("videoId");
+        VideoTimuModel urlModel = (VideoTimuModel) getIntent().getSerializableExtra("model");
         zhishiId = getIntent().getStringExtra("zhishiId");
-        if (!TextUtils.isEmpty(videoId)) {
-            postExercisesData();
+        if (urlModel != null) {
+            //计时器清零
+            chronometer.setVisibility(View.VISIBLE);
+            chronometer.setBase(SystemClock.elapsedRealtime());
+            chronometer.start();
+            initFragment(urlModel.getTimu_list(), urlModel.getShipin_name(), Constant.STUDENT_DOING);
         }
     }
 
@@ -148,38 +152,6 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
         }
     }
 
-    /**
-     * 获取知识点作业题目信息
-     */
-    private void postExercisesData() {
-        loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
-        RequestCenter.getVideoTimu(videoId, zhishiId, new DisposeDataListener() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                loading.dismiss();
-                BaseVideoTimuModel baseVideoUrlModel = (BaseVideoTimuModel) responseObj;
-                if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE && baseVideoUrlModel.data != null) {
-                    VideoTimuModel urlModel = baseVideoUrlModel.data;
-                    if (urlModel.getTimu_list() != null && urlModel.getTimu_list().size() > 0) {
-                        //计时器清零
-                        chronometer.setVisibility(View.VISIBLE);
-                        chronometer.setBase(SystemClock.elapsedRealtime());
-                        chronometer.start();
-                        initFragment(urlModel.getTimu_list(), baseVideoUrlModel.data.getShipin_name(), Constant.STUDENT_DOING);
-                    } else {
-                        TabToast.showMiddleToast(context, "暂无习题");
-                    }
-                } else {
-                    TabToast.showMiddleToast(context, "暂无习题");
-                }
-            }
-
-            @Override
-            public void onFailure(Object reasonObj) {
-                loading.dismiss();
-            }
-        });
-    }
 
     /**
      * 初始化Fragment
@@ -247,7 +219,7 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
         intent.putExtra("type", type);
         if (type == Constant.STUDENT_DOING) {
             intent.putExtra("zhishiId", zhishiId);
-            intent.putExtra("zhishidianName", zhishidianName);
+            intent.putExtra("zhishiName", zhishidianName);
             startActivity(intent);
             finish();
         } else if (type == Constant.STUDENT_HOME_WORK) {

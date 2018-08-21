@@ -43,13 +43,8 @@ public class StudentLearningCardAdapter extends RecyclerView.Adapter<StudentLear
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         LearningCardModel model = models.get(position);
-        if (model.getPrice() == 0) {
-            holder.videoIcon.setImageResource(R.drawable.learning_card_1);
-        } else {
-            holder.videoIcon.setImageResource(R.drawable.learning_card_shi);
-        }
-        holder.typeName.setText(model.getType_name());
-        holder.tagTv.setText(model.getTag());
+        holder.videoIcon.setImageResource(StringUtils.getCardResId(model.getId()));
+        holder.typeName.setText("尚课啦"+model.getType_name());
         holder.endTimeTv.setText("有效期:" + StringUtils.getTimeStringYMD(model.getEnd_date()));
     }
 
@@ -61,14 +56,12 @@ public class StudentLearningCardAdapter extends RecyclerView.Adapter<StudentLear
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView videoIcon;
         private TextView typeName;
-        private TextView tagTv;
         private TextView endTimeTv;
 
         public ViewHolder(View itemView) {
             super(itemView);
             videoIcon = itemView.findViewById(R.id.item_learning_card_bg_iv);
             typeName = itemView.findViewById(R.id.item_learning_card_type_name);
-            tagTv = itemView.findViewById(R.id.item_learning_card_tag_tv);
             endTimeTv = itemView.findViewById(R.id.item_learning_card_end_time);
             itemView.setOnClickListener(this);
         }

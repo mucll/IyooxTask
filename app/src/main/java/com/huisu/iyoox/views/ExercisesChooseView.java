@@ -38,6 +38,8 @@ public class ExercisesChooseView extends BaseExercisesView {
     HtmlTextView analysisView;
     @Bind(R.id.daan_html_text_view)
     HtmlTextView daanView;
+    @Bind(R.id.fenxi_html_text_view)
+    HtmlTextView fenxiView;
     @Bind(R.id.help_layout)
     LinearLayout helpLayout;
     @Bind(R.id.content_webview)
@@ -94,32 +96,31 @@ public class ExercisesChooseView extends BaseExercisesView {
         this.bean = info;
         view = View.inflate(context, R.layout.layout_exercise_choose_view, null);
         ButterKnife.bind(this, view);
+        //设置题目答案数据
+        String daanText = "【答案】" + (TextUtils.isEmpty(info.getDaan()) ? "无" : info.getDaan());
+        daanView.setHtmlFromString(daanText, false);
         //设置题目解析数据
-        String analysisContent = "【解析】" + info.getJiexi();
-        if (!TextUtils.isEmpty(analysisContent)) {
+        if (!TextUtils.isEmpty(info.getJiexi())) {
+            analysisView.setVisibility(View.VISIBLE);
+            String analysisContent = "【解析】" + info.getJiexi();
             analysisView.setHtmlFromString(analysisContent, false);
-            if (isImageClick) {
-                analysisView.setImageClick();
-            }
         } else {
-            analysisView.setHtmlFromString("", false);
-        }        //设置题目解析数据
-        String daanText = "【答案】" + info.getDaan();
-        if (!TextUtils.isEmpty(analysisContent)) {
-            daanView.setHtmlFromString(daanText, false);
-        } else {
-            daanView.setHtmlFromString("", false);
+            analysisView.setVisibility(View.GONE);
         }
-        StringBuilder sb = new StringBuilder();
-        //自动换行
-        sb.append(bean.getTigan());
-        String s = sb.toString().replaceAll("style='max-width:100%'", "style='max-width:100%;height:auto;'");
-        contentWebview.setVisibility(VISIBLE);
-        if (!TextUtils.isEmpty(s)) {
-            contentWebview.setHtmlFromString(s, false);
+        //设置题目分析数据
+        if (!TextUtils.isEmpty(info.getFenxi())) {
+            fenxiView.setVisibility(View.VISIBLE);
+            String fenxiText = "【分析】" + info.getFenxi();
+            fenxiView.setHtmlFromString(fenxiText, false);
+        } else {
+            fenxiView.setVisibility(View.GONE);
+        }
+        if (!TextUtils.isEmpty(bean.getTigan())) {
+            contentWebview.setHtmlFromString(bean.getTigan(), false);
         } else {
             contentWebview.setHtmlFromString("", false);
         }
+        //设置选项
         if (bean.getOption_One() != null) {
             ExercisesChooseModel mData = bean.getOption_One();
 //        填充选项

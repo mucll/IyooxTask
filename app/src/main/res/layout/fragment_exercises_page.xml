@@ -83,5 +83,6 @@
         android:background="@color/maincolor"
         android:text="提交答案"
         android:textColor="@color/white"
+        android:textSize="@dimen/f_16"
         android:visibility="gone" />
 </LinearLayout>

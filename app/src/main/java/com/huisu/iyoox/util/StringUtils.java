@@ -10,6 +10,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.huisu.iyoox.R;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
@@ -169,6 +171,28 @@ public class StringUtils {
         Pattern p = Pattern.compile("^([\\u4e00-\\u9fa5][\\u4e00-\\u9fa5a-zA-Z\\d\\s\\·]{1,9})$"); // 验证账号
         Matcher m = p.matcher(personName);
         return m.matches();
+    }
+
+    /**
+     * VIP图片类型
+     *
+     * @param id VIP类别Id
+     */
+    public static int getCardResId(int id) {
+        switch (id) {
+            case 1://试用卡
+                return R.drawable.learning_card_shi;
+            case 2://月卡
+                return R.drawable.icon_vip_one;
+            case 3://半年
+                return R.drawable.icon_vip_two;
+            case 8://年卡
+                return R.drawable.icon_vip_three;
+            case 9://3年卡
+                return R.drawable.icon_vip_four;
+            default:
+                return R.drawable.icon_vip_one;
+        }
     }
 
 }

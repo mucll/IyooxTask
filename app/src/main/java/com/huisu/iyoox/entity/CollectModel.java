@@ -18,6 +18,7 @@ public class CollectModel {
     private String jiaocai_name;
     private String grade_detail_name;
     private String xueke_name;
+    private boolean isDelete;
 
     public int getVedio_id() {
         return vedio_id;
@@ -97,5 +98,13 @@ public class CollectModel {
 
     public void setZhishidian_name(String zhishidian_name) {
         this.zhishidian_name = zhishidian_name;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 }

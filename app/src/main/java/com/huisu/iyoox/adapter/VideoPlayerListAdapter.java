@@ -14,8 +14,16 @@ import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.student.TaskStudentHomeWorkActivity;
 import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.entity.User;
+import com.huisu.iyoox.entity.VideoTimuModel;
 import com.huisu.iyoox.entity.VideoTitleModel;
+import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
+import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.manager.UserManager;
+import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.LogUtil;
+import com.huisu.iyoox.util.TabToast;
+import com.huisu.iyoox.views.Loading;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +40,13 @@ public class VideoPlayerListAdapter extends RecyclerView.Adapter<VideoPlayerList
     private ArrayList<VideoTitleModel> models;
     private int selectId;
     private MyOnItemClickListener onItemClickListener;
+    private Loading loading;
+    private User user;
 
     public VideoPlayerListAdapter(Context context, ArrayList<VideoTitleModel> models) {
         this.context = context;
         this.models = models;
+        user = UserManager.getInstance().getUser();
     }
 
     public void setSelectId(int selectId) {
@@ -68,11 +79,7 @@ public class VideoPlayerListAdapter extends RecyclerView.Adapter<VideoPlayerList
             holder.videoStateContent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, TaskStudentHomeWorkActivity.class);
-                    intent.putExtra("videoId", model.getShipin_id() + "");
-                    intent.putExtra("zhishiId", model.getZhishidian_id() + "");
-                    intent.putExtra("type", Constant.STUDENT_DOING);
-                    context.startActivity(intent);
+                    postExercisesData(model.getShipin_id() + "", model.getZhishidian_id() + "");
                 }
             });
         } else {
@@ -118,5 +125,39 @@ public class VideoPlayerListAdapter extends RecyclerView.Adapter<VideoPlayerList
                 onItemClickListener.onItemClick(getLayoutPosition(), v);
             }
         }
+    }
+
+    /**
+     * 获取知识点作业题目信息
+     */
+    private void postExercisesData(String videoId, String zhishiId) {
+        if (user == null) return;
+        loading = Loading.show(null, context, context.getString(R.string.loading_one_hint_text));
+        RequestCenter.getVideoTimu(user.getUserId(), videoId, zhishiId, new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                loading.dismiss();
+                BaseVideoTimuModel baseVideoUrlModel = (BaseVideoTimuModel) responseObj;
+                if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE && baseVideoUrlModel.data != null) {
+                    VideoTimuModel urlModel = baseVideoUrlModel.data;
+                    //判断是否有题
+                    if (urlModel.getTimu_list() != null && urlModel.getTimu_list().size() > 0) {
+                        Intent intent = new Intent(context, TaskStudentHomeWorkActivity.class);
+                        intent.putExtra("model", urlModel);
+                        intent.putExtra("type", Constant.STUDENT_DOING);
+                        context.startActivity(intent);
+                    } else {
+                        TabToast.showMiddleToast(context, "暂无习题");
+                    }
+                } else {
+                    TabToast.showMiddleToast(context, "暂无习题");
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                loading.dismiss();
+            }
+        });
     }
 }

@@ -6,11 +6,19 @@
     android:background="@null"
     android:visibility="visible">
 
-    <ImageView
-        android:id="@+id/polyv_screen_iv"
-        style="@style/iv_click_controller_land_top"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:src="@drawable/polyv_btn_back_s" />
+        android:alpha="0.7"
+        android:background="@color/top_left_layout_color_black">
+
+        <ImageView
+            android:id="@+id/polyv_screen_iv"
+            style="@style/iv_click_controller_land_top"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/polyv_btn_back_s" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

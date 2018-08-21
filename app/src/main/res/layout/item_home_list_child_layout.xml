@@ -23,6 +23,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/dip_2"
+                android:layout_marginTop="@dimen/dip_2"
                 android:src="@drawable/home_pic_jcjj_other" />
 
             <LinearLayout

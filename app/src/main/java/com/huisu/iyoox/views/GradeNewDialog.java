@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.adapter.SelectGradeNewAdapter;
 import com.huisu.iyoox.entity.GradeListModel;
+import com.huisu.iyoox.util.StringUtils;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,7 @@ public class GradeNewDialog extends Dialog implements RadioGroup.OnCheckedChange
                 dismiss();
             }
         });
-        int i = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56, context.getResources().getDisplayMetrics());
+        int i = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, StringUtils.isPad(context) ? 68 : 56, context.getResources().getDisplayMetrics());
         view.setPadding(0, i, 0, 0);
         radioGroup = view.findViewById(R.id.radio_group_grade);
         gridView = view.findViewById(R.id.grade_new_grid_view);

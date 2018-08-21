@@ -37,7 +37,10 @@
         android:layout_marginLeft="@dimen/dip_2"
         android:layout_marginRight="@dimen/dip_2"
         android:background="@drawable/select_screen_maincolor_r14_bg"
-        android:padding="@dimen/dip_4"
+        android:paddingBottom="@dimen/dip_2"
+        android:paddingLeft="@dimen/dip_4"
+        android:paddingRight="@dimen/dip_4"
+        android:paddingTop="@dimen/dip_2"
         android:text="试看"
         android:textColor="@color/maincolor"
         android:textSize="@dimen/f_12" />

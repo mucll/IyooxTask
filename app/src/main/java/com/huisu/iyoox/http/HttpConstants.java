@@ -270,10 +270,16 @@ public class HttpConstants {
      * 国学列表
      */
     public static String guoxueList = ROOT_URL + "/zhishidian/get_guoxue";
+    public static String guoxueDetail = ROOT_URL + "/zhishidian/get_guoxue_detail";
     /**
      * 艺术列表
      */
     public static String yishuList = ROOT_URL + "/zhishidian/get_yishu";
+    public static String yishuDetail = ROOT_URL + "/zhishidian/get_yishu_detail";
+    /**
+     * 删除收藏
+     */
+    public static String deleteCollect = ROOT_URL + "/zhishidian/cancel_collected_zhishidian_shipin";
 }
 
 

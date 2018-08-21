@@ -113,12 +113,18 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
     private User user;
     private VideoTimuModel urlModel;
     private boolean showBack = false;
+    private TextView userHintView;
+    private TextView userHintOtherView;
+    private View imageHintView;
 
     @Override
     protected void initView() {
         bitrate = getIntent().getIntExtra("bitrate", PolyvBitRate.ziDong.getNum());
         isMustFromLocal = getIntent().getBooleanExtra("isMustFromLocal", false);
 
+        userHintView = findViewById(R.id.user_hint_tv);
+        userHintOtherView = findViewById(R.id.user_hint_other_tv);
+        imageHintView = findViewById(R.id.image_hint_iv);
         bipBuyView = findViewById(R.id.vip_buy_rl);
         backView = findViewById(R.id.polyv_screen_back_iv);
         shareView = findViewById(R.id.video_share_rl);
@@ -223,6 +229,7 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
         zhishidianName = getIntent().getStringExtra("zhangjieName");
         List<VideoTitleModel> videoTitleModels = (List<VideoTitleModel>) getIntent().getSerializableExtra("models");
         if (selectModel != null) {
+            userHintView.setText(selectModel.getShipin_name());
             postVideoUrlData(selectModel.getShipin_id());
         }
         if (videoTitleModels != null && videoTitleModels.size() > 0) {
@@ -240,6 +247,7 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
         RequestCenter.getVideoData(user.getUserId(), selectModel.getZhishidian_id() + "", videoId + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
+                userHintView.setText(selectModel.getShipin_name());
                 BaseVideoTimuModel baseVideoUrlModel = (BaseVideoTimuModel) responseObj;
                 if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE) {
                     if (baseVideoUrlModel.data != null) {
@@ -260,6 +268,9 @@ public class VideoPlayerNewActivity extends BaseActivity implements MyOnItemClic
                         vid = urlModel.getShipin_url();
                         if (!TextUtils.isEmpty(vid)) {
                             backView.setVisibility(View.GONE);
+                            userHintView.setVisibility(View.GONE);
+                            userHintOtherView.setVisibility(View.GONE);
+                            imageHintView.setVisibility(View.GONE);
                             play(vid, bitrate, false, isMustFromLocal);
                         } else {
                             TabToast.showMiddleToast(context, "暂无视频");

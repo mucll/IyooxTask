@@ -168,7 +168,7 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
      * 初始化知识点作业信息
      */
     private void studentDoing() {
-        title = getIntent().getStringExtra("zhishidianName");
+        title = getIntent().getStringExtra("zhishiName");
         zhishiId = getIntent().getStringExtra("zhishiId");
         ArrayList<ExercisesModel> models = (ArrayList<ExercisesModel>) getIntent().getSerializableExtra("data");
         if (models != null && models.size() > 0) {

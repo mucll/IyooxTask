@@ -119,7 +119,7 @@ public class ErrorExercisesFragment extends BaseFragment {
             final SubjectModel subjectModel = models.get(position);
             ImageView img = view.findViewById(R.id.img_item_img);
             img.setImageResource(getSubjectResId(subjectModel.getKemu_id()));
-            img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            img.setScaleType(ImageView.ScaleType.FIT_XY);
             img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

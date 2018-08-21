@@ -1,6 +1,8 @@
 package com.huisu.iyoox.util;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -10,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.util.LruCache;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,10 +25,10 @@ import com.huisu.iyoox.activity.base.BaseActivity;
 public class UrlImageGetter implements Html.ImageGetter {
     public static LruCache<String, Bitmap> cache = new LruCache<String, Bitmap>(5 * 1024 * 1024);
     public Bitmap bitmap;
+    private Activity activity;
     Context c;
     TextView container;
     int width;
-    ;
 
     /**
      * @param t
@@ -34,6 +37,7 @@ public class UrlImageGetter implements Html.ImageGetter {
     public UrlImageGetter(TextView t, Context c) {
         this.c = c;
         this.container = t;
+        activity = BaseActivity.getActivityFromView(t);
         width = c.getResources().getDisplayMetrics().widthPixels;
     }
 
@@ -65,7 +69,7 @@ public class UrlImageGetter implements Html.ImageGetter {
             UrlImageGetter.this.bitmap = caheBitmap;
             return urlDrawable;
         }
-        if(c instanceof Activity&&((Activity) c).isFinishing()){
+        if (c instanceof Activity && ((Activity) c).isFinishing()) {
             return urlDrawable;
         }
         Glide.with(c)
@@ -87,7 +91,7 @@ public class UrlImageGetter implements Html.ImageGetter {
                         }
                         Bitmap resource = drawableToBitmap(drawable);
                         if (resource.getWidth() < BaseActivity.getScreenWidth((
-                                (Activity) c)) * 2 / 3
+                                activity)) * 1 / 2
                                 && resource
                                 .getHeight() > 50) {
                             Matrix matrix = new Matrix();
@@ -103,11 +107,11 @@ public class UrlImageGetter implements Html.ImageGetter {
                                     matrix, false);
                         }
                         if (resource.getWidth() > (BaseActivity.getScreenWidth((
-                                (Activity) c)) -BaseActivity.getScreenScale((Activity) c) * 16)) {
+                                activity)) - BaseActivity.getScreenScale(activity) * 16)) {
                             int maxWidth = (int) (BaseActivity.getScreenWidth((
-                                    (Activity) c)) -
+                                    activity)) -
                                     BaseActivity
-                                            .getScreenScale((Activity) c) * 16);
+                                            .getScreenScale(activity) * 16);
                             Matrix matrix1 = new Matrix();
                             matrix1.postScale(((float) maxWidth) / resource.getWidth(), (
                                     (float) maxWidth)
@@ -143,4 +147,5 @@ public class UrlImageGetter implements Html.ImageGetter {
             }
         }
     }
+
 }

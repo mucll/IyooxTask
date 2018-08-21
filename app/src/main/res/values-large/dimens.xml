@@ -12,10 +12,13 @@
     <dimen name="f_10">16sp</dimen>
     <dimen name="f_11">17sp</dimen>
     <dimen name="f_12">18sp</dimen>
+    <dimen name="f_12_pad">22sp</dimen>
     <dimen name="f_13">19sp</dimen>
     <dimen name="f_14">20sp</dimen>
+    <dimen name="f_14_pad">24sp</dimen>
     <dimen name="f_15">21sp</dimen>
     <dimen name="f_16">22sp</dimen>
+    <dimen name="f_16_pad">28sp</dimen>
     <dimen name="f_17">23sp</dimen>
     <dimen name="f_18">24sp</dimen>
     <dimen name="f_19">25sp</dimen>
@@ -46,6 +49,7 @@
     <dimen name="dip_32">44dip</dimen>
     <dimen name="dip_36">48dip</dimen>
     <dimen name="dip_40">52dip</dimen>
+    <dimen name="top_layout_height_s">52dip</dimen>
     <dimen name="dip_44">56dip</dimen>
     <dimen name="dip_48">70dip</dimen>
     <dimen name="dip_50">75dip</dimen>
@@ -55,19 +59,25 @@
     <dimen name="dip_64">96dip</dimen>
     <dimen name="dip_67">100dip</dimen>
     <dimen name="dip_71">108dip</dimen>
+    <dimen name="dip_71_pad">120dip</dimen>
     <dimen name="dip_76">114dip</dimen>
     <dimen name="dip_80">120dip</dimen>
     <dimen name="dip_90">140dip</dimen>
+    <dimen name="dip_90_pad">200dip</dimen>
     <dimen name="dip_94">144dip</dimen>
     <dimen name="dip_100">150dip</dimen>
     <dimen name="dip_110">165dip</dimen>
     <dimen name="dip_120">200dip</dimen>
     <dimen name="dip_130">195dip</dimen>
     <dimen name="dip_140">210dip</dimen>
+    <dimen name="dip_140_pad">300dip</dimen>
     <dimen name="dip_150">225dip</dimen>
     <dimen name="dip_160">240dip</dimen>
     <dimen name="dip_200">300dip</dimen>
+    <dimen name="dip_200_pad">500dip</dimen>
     <dimen name="dip_320">420dip</dimen>
+    <dimen name="dip_320_pad">500dip</dimen>
     <dimen name="dip_400">600dip</dimen>
+    <dimen name="dip_400_pad">800dip</dimen>
     <dimen name="msg_count_shape">26dip</dimen>
 </resources>

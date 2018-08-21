@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dip_140"
+    android:layout_height="@dimen/dip_140_pad"
     android:layout_marginBottom="@dimen/dip_8"
     android:layout_marginLeft="@dimen/dip_16"
     android:layout_marginRight="@dimen/dip_16"
@@ -10,13 +10,14 @@
 
     <ImageView
         android:id="@+id/item_learning_card_bg_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
         android:src="@drawable/learning_card_shi" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/dip_140_pad"
         android:paddingLeft="@dimen/dip_16">
 
         <TextView
@@ -26,7 +27,7 @@
             android:layout_marginTop="@dimen/dip_16"
             android:text="尚课啦全站通学习卡"
             android:textColor="@color/white"
-            android:textSize="@dimen/f_18" />
+            android:textSize="@dimen/f_20" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,28 +36,7 @@
             android:layout_marginTop="@dimen/dip_16"
             android:text="有效期内可无限观看海量视频"
             android:textColor="@color/white"
-            android:textSize="@dimen/f_12" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dip_16">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/learning_card_tag" />
-
-            <TextView
-                android:id="@+id/item_learning_card_tag_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="试用卡"
-                android:textColor="@color/holo_red_light"
-                android:textSize="@dimen/f_14" />
-        </RelativeLayout>
+            android:textSize="@dimen/f_14" />
 
         <TextView
             android:id="@+id/item_learning_card_end_time"
@@ -66,7 +46,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="@dimen/dip_8"
             android:layout_marginRight="@dimen/dip_16"
-            android:textColor="@color/color333"
+            android:textColor="@color/white"
             android:textSize="@dimen/f_10" />
     </RelativeLayout>
 </RelativeLayout>

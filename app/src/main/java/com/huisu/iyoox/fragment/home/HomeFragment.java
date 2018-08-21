@@ -53,8 +53,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private List<SubjectModel> subjectModels = new ArrayList<>();
     private User user;
     private ArrayList<GradeListModel> gradeListModels = new ArrayList<>();
-    private int selectPosition = 0;
-    private GradeListModel selectModel;
+    public static GradeListModel selectModel;
     private int selectPageIndexof = 0;
     private View msgView;
     private View newMsgView;
@@ -111,7 +110,6 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                         GradeListModel gradeListModel = gradeListModels.get(i);
                         //获取默认勾选的position
                         if (gradeListModel.getGrade_id() == user.getGrade() && gradeListModel.getGrade_detail_id() == 1) {
-                            selectPosition = i;
                             selectModel = gradeListModel;
                             break;
                         }
@@ -184,7 +182,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
      * 初始化viewpager
      */
     private void initPage() {
-        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
+        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(myPagerAdapter);
         mViewPager.setCurrentItem(0);
         if (selectModel != null) {

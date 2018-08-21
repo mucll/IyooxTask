@@ -2,12 +2,11 @@ package com.huisu.iyoox.activity.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +17,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
@@ -298,6 +296,30 @@ public abstract class BaseActivity extends AppCompatActivity {
             screenScale = dm.scaledDensity;
         }
         return screenScale;
+    }
+
+    /**
+     * try get host activity from view.
+     * views hosted on floating window like dialog     and toast will sure return null.
+     * @return host activity; or null if not available
+     */
+    public static Activity getActivityFromView(View view) {
+
+        Context context = view.getContext();
+
+        while (context instanceof ContextWrapper) {
+
+            if (context instanceof Activity) {
+
+                return (Activity) context;
+
+            }
+
+            context = ((ContextWrapper) context).getBaseContext();
+
+        }
+
+        return null;
     }
 
 }

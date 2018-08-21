@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dip_8">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dip_90">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_90_pad">
 
         <ImageView
             android:id="@+id/collect_bg_iv"
@@ -60,5 +61,15 @@
                 android:textColor="@color/color333"
                 android:textSize="@dimen/f_10" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/is_delete_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dip_4"
+            android:layout_marginTop="@dimen/dip_4"
+            android:src="@drawable/select_checkbox_onlyone"
+            android:visibility="gone" />
     </RelativeLayout>
 </FrameLayout>

@@ -9,97 +9,121 @@
     tools:context="com.huisu.iyoox.activity.videoplayer.VideoPlayerActivity">
 
     <RelativeLayout
+        android:id="@+id/view_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/dip_204"
+        android:background="@color/top_text_color_black">
 
-        <RelativeLayout
-            android:id="@+id/view_layout"
+        <com.easefun.polyvsdk.video.PolyvVideoView
+            android:id="@+id/polyv_video_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dip_204"
-            android:background="@color/top_text_color_black">
+            android:layout_height="match_parent" />
 
-            <com.easefun.polyvsdk.video.PolyvVideoView
-                android:id="@+id/polyv_video_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+        <com.huisu.iyoox.activity.videoplayer.PolyvPlayerMediaController
+            android:id="@+id/polyv_player_media_controller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+        <!-- 视频在加载过程中显示的进度条 -->
+        <ProgressBar
+            android:id="@+id/loading_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+        <!-- 快进进度 -->
+        <com.huisu.iyoox.activity.videoplayer.PolyvPlayerProgressView
+            android:id="@+id/polyv_player_progress_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+        <!--亮度 -->
+        <com.huisu.iyoox.activity.videoplayer.PolyvPlayerLightView
+            android:id="@+id/polyv_player_light_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+        <!--音频 -->
+        <com.huisu.iyoox.activity.videoplayer.PolyvPlayerVolumeView
+            android:id="@+id/polyv_player_volume_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
 
-            <com.huisu.iyoox.activity.videoplayer.PolyvPlayerMediaController
-                android:id="@+id/polyv_player_media_controller"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
-            <!-- 视频在加载过程中显示的进度条 -->
-            <ProgressBar
-                android:id="@+id/loading_progress"
+        <com.huisu.iyoox.activity.videoplayer.PolyvPlayerPreviewView
+            android:id="@+id/polyv_player_first_start_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/video_error_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.7"
+            android:background="@android:color/black"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/video_error_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
-                android:visibility="gone" />
-            <!-- 快进进度 -->
-            <com.huisu.iyoox.activity.videoplayer.PolyvPlayerProgressView
-                android:id="@+id/polyv_player_progress_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
-            <!--亮度 -->
-            <com.huisu.iyoox.activity.videoplayer.PolyvPlayerLightView
-                android:id="@+id/polyv_player_light_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
-            <!--音频 -->
-            <com.huisu.iyoox.activity.videoplayer.PolyvPlayerVolumeView
-                android:id="@+id/polyv_player_volume_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                tools:text="请检查网络" />
 
-            <com.huisu.iyoox.activity.videoplayer.PolyvPlayerPreviewView
-                android:id="@+id/polyv_player_first_start_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/video_error_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.7"
-                android:background="@android:color/black"
-                android:clickable="true"
+            <TextView
+                android:id="@+id/video_error_retry"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/polyv_error_back"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:visibility="gone">
+                android:text="点击重试"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/video_error_content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    tools:text="请检查网络" />
+        <ImageView
+            android:id="@+id/image_hint_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/video_play_bg" />
 
-                <TextView
-                    android:id="@+id/video_error_retry"
-                    android:layout_width="200dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/polyv_error_back"
-                    android:gravity="center"
-                    android:text="点击重试"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/user_hint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/f_16" />
+
+        <TextView
+            android:id="@+id/user_hint_other_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_hint_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_12"
+            android:text="加入VIP即可畅享名师视频"
+            android:textColor="@color/holo_red_light"
+            android:textSize="@dimen/f_18" />
+
 
         <ImageView
             android:id="@+id/polyv_screen_back_iv"
-            style="@style/iv_click_controller_land_top"
+            android:layout_width="@dimen/top_layout_height_s"
+            android:layout_height="@dimen/top_layout_height_s"
             android:layout_alignParentTop="true"
+            android:scaleType="center"
             android:src="@drawable/polyv_btn_back_s" />
     </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/video_zhangjia_content_layout"
@@ -206,9 +230,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="立即购买"
-                android:textColor="@color/color333"
-                android:textSize="@dimen/f_12" />
+                android:text="成为VIP"
+                android:textColor="@color/white"
+                android:textSize="@dimen/f_14" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

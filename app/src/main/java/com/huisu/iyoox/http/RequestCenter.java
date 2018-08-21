@@ -1,6 +1,8 @@
 package com.huisu.iyoox.http;
 
 import com.huisu.iyoox.entity.base.BaseAddClassRoomModel;
+import com.huisu.iyoox.entity.base.BaseArtBookModel;
+import com.huisu.iyoox.entity.base.BaseArtBookZSDModel;
 import com.huisu.iyoox.entity.base.BaseBookDetailsModel;
 import com.huisu.iyoox.entity.base.BaseBookEditionModel;
 import com.huisu.iyoox.entity.base.BaseCheckMsgCode;
@@ -268,9 +270,10 @@ public class RequestCenter {
     /**
      * 获取视频題目
      */
-    public static void getVideoTimu(String shipinId, String zhishidianId, DisposeDataListener listener) {
+    public static void getVideoTimu(String userId, String shipinId, String zhishidianId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("shipin_id", shipinId);
+        params.put("student_id", userId);
         params.put("zhishidian_id", zhishidianId);
         RequestCenter.postRequest(HttpConstants.getVideoTimu, params, listener, BaseVideoTimuModel.class);
     }
@@ -706,10 +709,48 @@ public class RequestCenter {
     }
 
     /**
+     * 国学类型
+     */
+    public static void artGuoXueList(DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        RequestCenter.postRequest(HttpConstants.guoxueList, params, listener, BaseArtBookModel.class);
+    }
+
+    /**
+     * 国学详情
+     */
+    public static void guoxueDetail(String gradeId, String zhangjie, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("grade_id", gradeId);
+        params.put("zhangjie", zhangjie);
+        RequestCenter.postRequest(HttpConstants.guoxueDetail, params, listener, BaseArtBookZSDModel.class);
+    }
+
+    /**
      * 艺术
      */
     public static void yishuList(DisposeDataListener listener) {
         RequestParams params = new RequestParams();
-        RequestCenter.postRequest(HttpConstants.yishuList, params, listener, BaseOtherBookModel.class);
+        RequestCenter.postRequest(HttpConstants.yishuList, params, listener, BaseArtBookModel.class);
+    }
+
+    /**
+     * 艺术详情
+     */
+    public static void yishuDetail(String gradeId, String zhangjie, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("grade_id", gradeId);
+        params.put("zhangjie", zhangjie);
+        RequestCenter.postRequest(HttpConstants.yishuDetail, params, listener, BaseArtBookZSDModel.class);
+    }
+
+    /**
+     * 删除收藏
+     */
+    public static void deleteCollect(String userId, String zhishidianId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("student_id", userId);
+        params.put("zhishidian_ids", zhishidianId);
+        RequestCenter.postRequest(HttpConstants.deleteCollect, params, listener, BaseOtherBookModel.class);
     }
 }

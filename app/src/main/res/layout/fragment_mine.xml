@@ -18,48 +18,202 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white">
 
             <ImageView
                 android:id="@+id/headbg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dip_200_pad"
                 android:scaleType="fitXY"
-                android:src="@drawable/user_bg" />
+                android:src="@drawable/icon_mine_no_vip_bg" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dip_12"
+                android:text="个人中心"
+                android:textColor="@color/white"
+                android:textSize="@dimen/f_18" />
 
             <RelativeLayout
                 android:id="@+id/mine_fragment_top_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true">
-
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_16"
+                    android:layout_marginRight="@dimen/dip_16"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <com.huisu.iyoox.views.HeadView
+                            android:id="@+id/user_icon"
+                            android:layout_width="@dimen/dip_71_pad"
+                            android:layout_height="@dimen/dip_71_pad" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/user_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/dip_4"
+                                android:layout_marginLeft="@dimen/dip_8"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="张三"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/f_16_pad" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/dip_4"
+                                android:layout_marginLeft="@dimen/dip_8"
+                                android:layout_marginTop="@dimen/dip_8"
+                                android:text="已高效学习5天"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/f_12_pad" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dip_12"
+                        android:background="@color/white_76" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_vip_xueba" />
+
+                        <TextView
+                            android:id="@+id/item_learning_card_end_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dip_8"
+                            android:text="有效期:2021.05.21"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/f_12_pad" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_60"
+                android:layout_alignParentBottom="true"
+                android:background="@color/black_12"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <com.huisu.iyoox.views.HeadView
-                        android:id="@+id/user_icon"
-                        android:layout_width="@dimen/dip_71"
-                        android:layout_height="@dimen/dip_71"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="@dimen/dip_16" />
-
                     <TextView
-                        android:id="@+id/user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/dip_4"
-                        android:layout_marginTop="@dimen/dip_8"
+                        android:text="0"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/f_16" />
+                        android:textSize="@dimen/f_14_pad" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dip_4"
+                        android:text="看视频数"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/f_14_pad" />
                 </LinearLayout>
-            </RelativeLayout>
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/dip_12"
+                    android:layout_marginTop="@dimen/dip_12"
+                    android:background="@color/white_76" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/f_14_pad" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dip_4"
+                        android:text="做题数"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/f_14_pad" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/dip_12"
+                    android:layout_marginTop="@dimen/dip_12"
+                    android:background="@color/white_76" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/f_14_pad" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dip_4"
+                        android:text="完成作业"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/f_14_pad" />
+                </LinearLayout>
+            </LinearLayout>
         </RelativeLayout>
 
         <LinearLayout
@@ -67,8 +221,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dip_12"
             android:background="@color/white"
-            android:paddingBottom="@dimen/dip_16"
-            android:paddingTop="@dimen/dip_16">
+            android:paddingBottom="@dimen/dip_8"
+            android:paddingTop="@dimen/dip_8">
 
             <LinearLayout
                 android:id="@+id/mine_cache_ll"
@@ -90,7 +244,7 @@
                     android:id="@+id/mine_cache_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dip_8"
+                    android:layout_marginTop="@dimen/dip_4"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="缓存"
@@ -118,7 +272,7 @@
                     android:id="@+id/mine_collect_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dip_8"
+                    android:layout_marginTop="@dimen/dip_4"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="收藏"
@@ -146,7 +300,7 @@
                     android:id="@+id/mine_purchase_history_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dip_8"
+                    android:layout_marginTop="@dimen/dip_4"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="VIP会员"
@@ -173,7 +327,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dip_8"
+                    android:layout_marginTop="@dimen/dip_4"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="激活"

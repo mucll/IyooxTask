@@ -3,18 +3,16 @@ package com.huisu.iyoox.application;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
-import android.os.Environment;
 import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.alivc.player.AliVcMediaPlayer;
 import com.easefun.polyvsdk.PolyvDevMountInfo;
 import com.easefun.polyvsdk.PolyvDownloaderManager;
 import com.easefun.polyvsdk.PolyvSDKClient;
 import com.huisu.iyoox.BuildConfig;
-import com.huisu.iyoox.R;
-import com.huisu.iyoox.activity.MainActivity;
 import com.huisu.iyoox.util.PolyvStorageUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -60,8 +58,9 @@ public class MyApplication extends Application {
         ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(this);
         ImageLoader.getInstance().init(configuration);
         initPolyvCilent();
+        //初始化播放器
+        AliVcMediaPlayer.init(getApplicationContext());
     }
-
 
     private void initCache() {
         File file = new File(CACHEPATH);

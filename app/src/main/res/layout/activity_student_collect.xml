@@ -12,14 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <GridView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/student_collect_list_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:horizontalSpacing="@dimen/dip_12"
-            android:numColumns="2"
-            android:padding="@dimen/dip_16"
-            android:verticalSpacing="@dimen/dip_12" />
+            android:layout_height="match_parent" />
 
         <RelativeLayout
             android:id="@+id/student_collect_empty_view"
@@ -56,5 +52,17 @@
                 android:textColor="@color/color999"
                 android:textSize="@dimen/f_10" />
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/delete_tv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_40"
+            android:layout_alignParentBottom="true"
+            android:background="@color/holo_red_light"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:textSize="@dimen/f_14"
+            android:visibility="gone" />
     </RelativeLayout>
 </LinearLayout>

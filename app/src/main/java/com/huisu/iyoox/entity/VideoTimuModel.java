@@ -1,5 +1,6 @@
 package com.huisu.iyoox.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @function:
  * @date: 2018/7/12
  */
-public class VideoTimuModel {
+public class VideoTimuModel implements Serializable{
     private int jiaocai_id;
     private int shipin_id;
     private String shipin_name;

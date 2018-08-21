@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorf7"
+    android:orientation="vertical"
+    tools:context=".fragment.home.ArtBookFragment">
+
+    <RelativeLayout
+        android:id="@+id/art_fragment_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/book_fragment_empty_view_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/home_course_kong" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/book_fragment_empty_view_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dip_24"
+            android:text="哎呀,暂时没有数据呢,看看别的吧"
+            android:textColor="@color/color999" />
+    </RelativeLayout>
+
+    <com.huisu.iyoox.complexmenu.SelectFengMianView
+        android:id="@+id/art_book_type_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout
+        android:id="@+id/swipeToLoadLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/art_book_type_view"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.huisu.iyoox.views.RefreshHeadView
+            android:id="@id/swipe_refresh_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_10" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@id/swipe_target"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout>
+
+
+</RelativeLayout>

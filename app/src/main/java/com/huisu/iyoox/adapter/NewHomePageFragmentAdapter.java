@@ -12,6 +12,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.VipBuyActivity;
+import com.youth.banner.Banner;
+import com.youth.banner.loader.ImageLoader;
 
 import java.util.List;
 
@@ -69,7 +72,13 @@ public class NewHomePageFragmentAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof NewHomePageFragmentAdapter.HeadHolder) { // 头部
             NewHomePageFragmentAdapter.HeadHolder headHolder = (NewHomePageFragmentAdapter.HeadHolder) holder;
-            getRadioGroup(headHolder.radioGroup);
+            setBanner(headHolder.mBanner);
+            headHolder.vipIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    VipBuyActivity.start(context);
+                }
+            });
         } else if (holder instanceof NewHomePageFragmentAdapter.ContentHolder) { // 内容
             NewHomePageFragmentAdapter.ContentHolder myHolder = (NewHomePageFragmentAdapter.ContentHolder) holder;
             myHolder.imageView.setImageResource(getResId(position - 1));
@@ -77,6 +86,10 @@ public class NewHomePageFragmentAdapter extends RecyclerView.Adapter {
     }
 
     public void getRadioGroup(RadioGroup radioGroup) {
+
+    }
+
+    public void setBanner(Banner banner) {
 
     }
 
@@ -110,11 +123,15 @@ public class NewHomePageFragmentAdapter extends RecyclerView.Adapter {
 
     // 头部
     private class HeadHolder extends RecyclerView.ViewHolder {
-        private RadioGroup radioGroup;
+//        RadioGroup radioGroup;
+        Banner mBanner;
+        ImageView vipIv;
 
         public HeadHolder(View itemView) {
             super(itemView);
-            radioGroup = itemView.findViewById(R.id.home_page_radio_group);
+            mBanner = itemView.findViewById(R.id.home_page_banner);
+            vipIv = itemView.findViewById(R.id.home_page_vip_iv);
+//            radioGroup = itemView.findViewById(R.id.home_page_radio_group);
         }
     }
 

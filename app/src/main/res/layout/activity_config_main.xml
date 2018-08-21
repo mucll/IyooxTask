@@ -29,22 +29,17 @@
             android:textSize="@dimen/f_15" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/dip_50"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:paddingLeft="16dp"
         android:paddingRight="8dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="消息提醒"
-            android:textColor="@color/black_87"
-            android:textSize="@dimen/f_16" />
+            style="@style/person_details_layout_tv_style"
+            android:text="消息提醒" />
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/switch_1"
@@ -53,43 +48,41 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:checked="true" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/black_05" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/clear"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dip_50"
         android:background="@drawable/select_white_bg"
         android:clickable="true"
-        android:orientation="horizontal"
-        android:padding="16dp"
+        android:paddingLeft="@dimen/dip_16"
+        android:paddingRight="@dimen/dip_16"
         android:visibility="visible">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:text="清除缓存"
-            android:textColor="@color/black_87"
-            android:textSize="@dimen/f_16" />
+            style="@style/person_details_layout_tv_style"
+            android:layout_centerVertical="true"
+            android:text="清除缓存" />
 
         <TextView
             android:id="@+id/tv_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:drawablePadding="8dp"
             android:drawableRight="@drawable/icon_next_black"
             android:text="0M"
             android:textColor="@color/black_54"
             android:textSize="@dimen/f_13" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -97,58 +90,58 @@
         android:background="@color/black_05" />
 
     <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:background="@color/white"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:paddingLeft="16dp"-->
-        <!--android:paddingRight="8dp">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:background="@color/white"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:paddingLeft="16dp"-->
+    <!--android:paddingRight="8dp">-->
 
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="允许2G/3G/4G网络在线播放视频"-->
-            <!--android:textColor="@color/black_87"-->
-            <!--android:textSize="@dimen/f_16" />-->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:text="允许2G/3G/4G网络在线播放视频"-->
+    <!--android:textColor="@color/black_87"-->
+    <!--android:textSize="@dimen/f_16" />-->
 
-        <!--<android.support.v7.widget.SwitchCompat-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:checked="false" />-->
+    <!--<android.support.v7.widget.SwitchCompat-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:checked="false" />-->
     <!--</LinearLayout>-->
 
     <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1px"-->
-        <!--android:background="@color/black_05" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1px"-->
+    <!--android:background="@color/black_05" />-->
 
     <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:background="@color/white"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:paddingLeft="16dp"-->
-        <!--android:paddingRight="8dp">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:background="@color/white"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:paddingLeft="16dp"-->
+    <!--android:paddingRight="8dp">-->
 
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="允许2G/3G/4G网络缓存视频"-->
-            <!--android:textColor="@color/black_87"-->
-            <!--android:textSize="@dimen/f_16" />-->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:text="允许2G/3G/4G网络缓存视频"-->
+    <!--android:textColor="@color/black_87"-->
+    <!--android:textSize="@dimen/f_16" />-->
 
-        <!--<android.support.v7.widget.SwitchCompat-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:checked="false" />-->
+    <!--<android.support.v7.widget.SwitchCompat-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:checked="false" />-->
     <!--</LinearLayout>-->
 
     <TextView

@@ -15,8 +15,7 @@ import com.huisu.iyoox.entity.BookEditionModel;
 import java.util.List;
 
 /**
- * 科目
- * Created by vonchenchen on 2016/4/5 0005.
+ * 章节 知识点
  */
 public class SubjectHolder extends BaseWidgetHolder<List<String>> {
 
