@@ -37,36 +37,52 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/f_18" />
 
+
             <RelativeLayout
                 android:id="@+id/mine_fragment_top_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true">
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dip_16"
+                android:layout_marginRight="@dimen/dip_16">
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dip_16"
-                    android:layout_marginRight="@dimen/dip_16"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dip_110_pad"
                         android:layout_weight="3"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <com.huisu.iyoox.views.HeadView
-                            android:id="@+id/user_icon"
-                            android:layout_width="@dimen/dip_71_pad"
-                            android:layout_height="@dimen/dip_71_pad" />
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.huisu.iyoox.views.HeadView
+                                android:id="@+id/user_icon"
+                                android:layout_width="@dimen/dip_71_pad"
+                                android:layout_height="@dimen/dip_71_pad"
+                                android:layout_centerVertical="true" />
+
+                            <ImageView
+                                android:id="@+id/huang_guan_iv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/icon_vip_img"
+                                android:visibility="invisible" />
+                        </RelativeLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
                             android:orientation="vertical">
 
                             <TextView
@@ -77,17 +93,16 @@
                                 android:layout_marginLeft="@dimen/dip_8"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:text="张三"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/f_16_pad" />
 
                             <TextView
+                                android:id="@+id/active_date_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="@dimen/dip_4"
                                 android:layout_marginLeft="@dimen/dip_8"
                                 android:layout_marginTop="@dimen/dip_8"
-                                android:text="已高效学习5天"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/f_12_pad" />
                         </LinearLayout>
@@ -95,8 +110,7 @@
 
                     <View
                         android:layout_width="0.5dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/dip_12"
+                        android:layout_height="@dimen/dip_60"
                         android:background="@color/white_76" />
 
                     <LinearLayout
@@ -107,22 +121,49 @@
                         android:orientation="vertical">
 
                         <ImageView
+                            android:id="@+id/user_vip_type_iv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/icon_vip_xueba" />
+                            android:src="@drawable/icon_vip_xueba"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:id="@+id/shiyong_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/user_no_vip_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:text="试用账号"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/f_12_pad" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dip_4"
+                                android:src="@drawable/icon_become_vip" />
+                        </LinearLayout>
 
                         <TextView
-                            android:id="@+id/item_learning_card_end_time"
+                            android:id="@+id/user_vip_end_time_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dip_8"
-                            android:text="有效期:2021.05.21"
                             android:textColor="@color/white"
                             android:textSize="@dimen/f_12_pad" />
                     </LinearLayout>
                 </LinearLayout>
 
+
             </RelativeLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,6 +180,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/look_shipin_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -169,6 +211,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/look_timu_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -199,6 +242,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/look_work_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -39,6 +40,7 @@ public class StudentWriteExercisesErrorActivity extends BaseActivity implements 
     private FragmentManager manager;
     private ExercisesPageFragment fragment;
     private Loading loading;
+    private String subjectName;
     private int subjectId;
     private User user;
     private String jiaoCaiId, zhiShiDianId;
@@ -54,6 +56,7 @@ public class StudentWriteExercisesErrorActivity extends BaseActivity implements 
     @Override
     protected void initData() {
         user = UserManager.getInstance().getUser();
+        subjectName = getIntent().getStringExtra("subjectName");
         subjectId = getIntent().getIntExtra("subjectId", Constant.ERROR_CODE);
         if (subjectId != Constant.ERROR_CODE) {
             postSubjectData();
@@ -83,7 +86,7 @@ public class StudentWriteExercisesErrorActivity extends BaseActivity implements 
                 BaseExercisesModel baseVideoUrlModel = (BaseExercisesModel) responseObj;
                 if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE && baseVideoUrlModel.data != null) {
                     if (baseVideoUrlModel.data != null && baseVideoUrlModel.data.size() > 0) {
-                        initFragment(baseVideoUrlModel.data, "");
+                        initFragment(baseVideoUrlModel.data, TextUtils.isEmpty(subjectName) ? "" : subjectName);
                     }
                 }
             }

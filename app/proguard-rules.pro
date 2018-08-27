@@ -52,7 +52,6 @@
  -keep public class com.android.vending.licensing.ILicensingService
  -keep public class com.google.vending.licensing.ILicensingService
  -keep public class * extends android.support.v4.app.Fragment
- -ignorewarning
  -dump class_files.txt
  -printseeds seeds.txt
  -printusage unused.txt
@@ -68,6 +67,7 @@
 -keep class com.android.volley.**{*;}
 -keep class com.github.mikephil.charting.**{*;}
 -keep class android.support.design.**{*;}
+-dontwarn android.net.**
 -keep class android.net.**{*;}
 -keep class com.nostra13.**{*;}
 -keep class com.nineoldandroids.**{*;}
@@ -125,9 +125,6 @@
 }
 
 -keep class android.app.enterprise.** {*;}
--keep public class com.gongwu.wherecollect.R$*{
-public static final int *;
-}
 
 
 -keepclassmembers class ** {
@@ -156,7 +153,7 @@ public static final int *;
 -keepclassmembers class * {
    public <init> (org.json.JSONObject);
 }
--keep public class [com.huisu.iyoox].R$*{
+-keep public class com.huisu.iyoox.R$*{
 public static final int *;
 }
 
@@ -311,4 +308,9 @@ public static final int *;
 -keep class com.youth.banner.** {
     *;
  }
+-keep class com.alivc.player.**{*;}
+-keep class com.aliyun.vodplayer.**{*;}
+-keep class com.aliyun.vodplayerview.**{*;}
+-keep class com.aliyun.clientinforeport.**{*;}
+-dontwarn com.alivc.player.**
 

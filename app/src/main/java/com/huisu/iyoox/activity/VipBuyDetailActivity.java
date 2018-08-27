@@ -19,6 +19,8 @@ import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.activity.student.StudentLearningCardActivity;
 import com.huisu.iyoox.alipay.PayResult;
+import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.entity.PrePayWeChatEntity;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.VipCardModel;
 import com.huisu.iyoox.http.RequestCenter;
@@ -28,6 +30,9 @@ import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.util.StringUtils;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.Loading;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -107,6 +112,7 @@ public class VipBuyDetailActivity extends BaseActivity implements View.OnClickLi
                     postPayJsonHttp();
                 } else {
                     TabToast.showMiddleToast(context, "微信");
+//                    postWXPayJsonHttp();
                 }
                 break;
         }
@@ -125,6 +131,22 @@ public class VipBuyDetailActivity extends BaseActivity implements View.OnClickLi
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                loading.dismiss();
+            }
+        });
+    }
+
+    private void postWXPayJsonHttp() {
+        loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
+        RequestCenter.getWXPayJson(user.getUserId(), model.getId() + "", new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                loading.dismiss();
+                JSONObject jsonObject = (JSONObject) responseObj;
             }
 
             @Override
@@ -197,6 +219,45 @@ public class VipBuyDetailActivity extends BaseActivity implements View.OnClickLi
 
         ;
     };
+
+    //PrePayWeChatEntity 服务器返回给我们微信支付的参数
+    private void WeChatPay(PrePayWeChatEntity data) {
+
+        if (data == null) {
+            //判断是否为空。丢一个toast，给个提示。比如服务器异常，错误啥的
+            TabToast.showMiddleToast(this, "服务器异常");
+            return;
+        }
+
+        IWXAPI api = WXAPIFactory.createWXAPI(this, Constant.WX_APP_ID);
+
+        if (!api.isWXAppInstalled() && !api.isWXAppSupportAPI()) {
+            TabToast.showMiddleToast(this, "请您先安装微信客户端");
+            return;
+        }
+
+        //data  根据服务器返回的json数据创建的实体类对象
+        PayReq req = new PayReq();
+
+        req.appId = data.getAppid();
+
+        req.partnerId = data.getPartnerid();
+
+        req.prepayId = data.getPrepayid();
+
+        req.packageValue = data.getPkgstr();
+
+        req.nonceStr = data.getNoncestr();
+
+        req.timeStamp = data.getTimestamp();
+
+        req.sign = data.getSign();
+
+        api.registerApp(data.getAppid());
+
+        //发起请求
+        api.sendReq(req);
+    }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {

@@ -82,6 +82,7 @@ public class NewHomePageFragmentAdapter extends RecyclerView.Adapter {
         } else if (holder instanceof NewHomePageFragmentAdapter.ContentHolder) { // 内容
             NewHomePageFragmentAdapter.ContentHolder myHolder = (NewHomePageFragmentAdapter.ContentHolder) holder;
             myHolder.imageView.setImageResource(getResId(position - 1));
+//            myHolder.imageView.setBackgroundResource(getResIds(position - 1));
         }
     }
 
@@ -116,6 +117,29 @@ public class NewHomePageFragmentAdapter extends RecyclerView.Adapter {
         }
     }
 
+    private int getResIds(int type) {
+        switch (type) {
+            case 0:
+                return R.color.goods_color_1;
+            case 1:
+                return R.color.goods_color_2;
+            case 2:
+                return R.color.goods_color_3;
+            case 3:
+                return R.color.goods_color_4;
+            case 4:
+                return R.color.goods_color_5;
+            case 5:
+                return R.color.goods_color_6;
+            case 6:
+                return R.color.goods_color_7;
+            case 7:
+                return R.color.goods_color_8;
+            default:
+                return R.color.goods_color_1;
+        }
+    }
+
     @Override
     public int getItemCount() {
         return list.size() + HEAD_COUNT;
@@ -123,7 +147,7 @@ public class NewHomePageFragmentAdapter extends RecyclerView.Adapter {
 
     // 头部
     private class HeadHolder extends RecyclerView.ViewHolder {
-//        RadioGroup radioGroup;
+        //        RadioGroup radioGroup;
         Banner mBanner;
         ImageView vipIv;
 

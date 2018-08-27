@@ -88,6 +88,7 @@ public class CommonRequest {
                 urlBuilder.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
             }
         }
+        LogUtil.e(urlBuilder.toString());
         //添加请求头
         Headers.Builder mHeaderBuild = new Headers.Builder();
         if (headers != null) {

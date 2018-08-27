@@ -82,7 +82,7 @@ public class ItemVideoListAdapter extends BaseAdapter {
         } else {
             holder.videoStateContent.setVisibility(View.GONE);
         }
-        if (titleModel.getSort() == 1) {
+        if (titleModel.getSort() > 0 && titleModel.getSort() <= 3) {
             holder.isSort.setVisibility(View.VISIBLE);
         } else {
             holder.isSort.setVisibility(View.GONE);

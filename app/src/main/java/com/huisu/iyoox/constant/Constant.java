@@ -10,6 +10,10 @@ import android.os.Environment;
  */
 public class Constant {
 
+
+    public static final String WX_APP_ID = "wx4a498229ebec148f";
+
+
     /**
      * 网络请求成功
      */

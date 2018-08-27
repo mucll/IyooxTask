@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dip_2"
@@ -26,9 +26,19 @@
 
                 <TextView
                     android:id="@+id/zhishidian_name_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:padding="@dimen/dip_8"
+                    android:textColor="@color/black_87"
+                    android:textSize="@dimen/f_18" />
+
+                <TextView
+                    android:id="@+id/fragment_current_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dip_8"
                     android:textColor="@color/black_87"
                     android:textSize="@dimen/f_18" />
 
@@ -36,21 +46,11 @@
                     android:id="@+id/fragment_exercises_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dip_8"
                     android:textColor="@color/black_54"
                     android:textSize="@dimen/f_16" />
 
-                <TextView
-                    android:id="@+id/fragment_current_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/fragment_exercises_count"
-                    android:textColor="@color/black_87"
-                    android:textSize="@dimen/f_18" />
-            </RelativeLayout>
+            </LinearLayout>
 
             <ProgressBar
                 android:id="@+id/exercises_progress_bar"

@@ -96,7 +96,7 @@ public class DateUtils {
     }
 
     /**
-     * 返回MM-dd HH:mm
+     * 返回yyyy-MM-dd
      *
      * @param time
      * @return

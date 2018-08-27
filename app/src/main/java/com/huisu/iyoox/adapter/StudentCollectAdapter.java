@@ -62,10 +62,9 @@ public class StudentCollectAdapter extends RecyclerView.Adapter<StudentCollectAd
         holder.subjectTv.setText(string);
         holder.videoNameTv.setText(titleModel.getVedio_name());
         holder.gradeDetailTv.setText(titleModel.getJiaocai_name());
-        holder.iconBgIv.setBackgroundResource(getResId(titleModel.getJiaocai_id()));
+        holder.iconBgIv.setImageResource(getResId(titleModel.getXueke_id()));
         if (isConfig) {
             holder.deleteTv.setVisibility(View.VISIBLE);
-            holder.deleteTv.setSelected(titleModel.isDelete());
         } else {
             holder.deleteTv.setVisibility(View.GONE);
         }
@@ -94,7 +93,7 @@ public class StudentCollectAdapter extends RecyclerView.Adapter<StudentCollectAd
             case Constant.SUBJECT_HUAXUE:
                 return R.drawable.bg_course_chemical2;
             default:
-                return 1;
+                return R.drawable.bg_course_chinese2;
         }
     }
 
@@ -103,7 +102,7 @@ public class StudentCollectAdapter extends RecyclerView.Adapter<StudentCollectAd
         TextView videoNameTv;
         TextView gradeDetailTv;
         TextView subjectTv;
-        ImageView deleteTv;
+        View deleteTv;
 
         public ViewHolder(View view) {
             super(view);

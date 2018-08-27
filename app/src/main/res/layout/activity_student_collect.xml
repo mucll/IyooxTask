@@ -52,17 +52,5 @@
                 android:textColor="@color/color999"
                 android:textSize="@dimen/f_10" />
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/delete_tv"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dip_40"
-            android:layout_alignParentBottom="true"
-            android:background="@color/holo_red_light"
-            android:gravity="center"
-            android:text="删除"
-            android:textColor="@color/white"
-            android:textSize="@dimen/f_14"
-            android:visibility="gone" />
     </RelativeLayout>
 </LinearLayout>

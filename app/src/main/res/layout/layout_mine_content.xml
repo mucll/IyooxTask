@@ -72,14 +72,26 @@
             android:src="@drawable/user_icon_parent" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dip_20"
-            android:drawableRight="@drawable/homework_finished_forward"
+            android:layout_weight="1"
             android:text="家长端"
             android:textColor="@color/black_87"
             android:textSize="@dimen/f_16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:drawableLeft="@drawable/shape_oval_red_color_8dp"
+            android:drawablePadding="@dimen/dip_4"
+            android:drawableRight="@drawable/homework_finished_forward"
+            android:text="学习更专注"
+            android:textColor="@color/black_87"
+            android:textSize="@dimen/f_14" />
+
     </LinearLayout>
 
     <LinearLayout

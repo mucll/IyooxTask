@@ -67,11 +67,14 @@
     <dimen name="dip_94">144dip</dimen>
     <dimen name="dip_100">150dip</dimen>
     <dimen name="dip_110">165dip</dimen>
+    <dimen name="dip_110_pad">200dip</dimen>
     <dimen name="dip_120">200dip</dimen>
     <dimen name="dip_130">195dip</dimen>
+    <dimen name="dip_130_pad">225dip</dimen>
     <dimen name="dip_140">210dip</dimen>
     <dimen name="dip_140_pad">300dip</dimen>
     <dimen name="dip_150">225dip</dimen>
+    <dimen name="dip_150_pad">260dip</dimen>
     <dimen name="dip_160">240dip</dimen>
     <dimen name="dip_200">300dip</dimen>
     <dimen name="dip_200_pad">500dip</dimen>
@@ -80,4 +83,6 @@
     <dimen name="dip_400">600dip</dimen>
     <dimen name="dip_400_pad">800dip</dimen>
     <dimen name="msg_count_shape">26dip</dimen>
+    <dimen name="home_image_dp">225dip</dimen>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.huisu.iyoox.activity.videoplayer;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -42,6 +43,7 @@ import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.PolyvScreenUtils;
 import com.huisu.iyoox.util.TabToast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

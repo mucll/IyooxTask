@@ -7,12 +7,13 @@ package com.huisu.iyoox.http;
  */
 public class HttpConstants {
     //外网
-    private static final String BASE_URL = "http://www.sunvke.com/";
+//    private static final String BASE_URL = "http://www.sunvke.com";
+    private static final String BASE_URL = "http://8jbew0j.hk1.mofasuidao.cn";
 //    private static final String BASE_URL = "http://8jbew0j.hk1.mofasuidao.cn/";
 
-    private static final String ROOT_URL = BASE_URL + "api";
+    private static final String ROOT_URL = BASE_URL + "/api";
 
-    public static final String APP_DOWNLOAD = BASE_URL + "app/zaixian.apk";
+    public static final String APP_DOWNLOAD = BASE_URL + "/app/zaixian.apk";
     //刘栋
 //    private static final String ROOT_URL = "http://8jbew0j.hk1.mofasuidao.cn/api";
     //王佳浩
@@ -258,9 +259,13 @@ public class HttpConstants {
      */
     public static String getVipList = ROOT_URL + "/jihuoma/get_jihuoma_type_list";
     /**
-     * 支付接口
+     * 支付宝 支付接口
      */
     public static String getPayJson = ROOT_URL + "/alipay/get_pay_json";
+    /**
+     * 微信 支付接口
+     */
+    public static String getWXPayJson = ROOT_URL + "/weixinpay/get_weixin_pay_param";
     /**
      * 版本接口
      */
@@ -280,6 +285,14 @@ public class HttpConstants {
      * 删除收藏
      */
     public static String deleteCollect = ROOT_URL + "/zhishidian/cancel_collected_zhishidian_shipin";
+    /**
+     * 获取学生VIP 做题数 完成作业次数
+     */
+    public static String getUserCenterInfo = ROOT_URL + "/user/get_user_center_info";
+    /**
+     * 阿里云获取PlayAuth
+     */
+    public static String getplayAuth = ROOT_URL + "/vod/get_play_auth";
 }
 
 

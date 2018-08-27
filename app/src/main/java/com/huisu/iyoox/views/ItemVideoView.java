@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
+import com.huisu.iyoox.activity.videoplayer.ALiYunVideoPlayActivity;
 import com.huisu.iyoox.activity.videoplayer.VideoPlayerActivity;
 import com.huisu.iyoox.activity.videoplayer.VideoPlayerNewActivity;
 import com.huisu.iyoox.adapter.ItemVideoListAdapter;
@@ -73,7 +74,7 @@ public class ItemVideoView extends FrameLayout implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         VideoTitleModel titleModel = videoTitleModels.get(position);
-        Intent intent = new Intent(context, VideoPlayerNewActivity.class);
+        Intent intent = new Intent(context, ALiYunVideoPlayActivity.class);
         intent.putExtra("selectModel", titleModel);
         intent.putExtra("zhangjieName", zhangjieName);
         intent.putExtra("models", (Serializable) videoTitleModels);

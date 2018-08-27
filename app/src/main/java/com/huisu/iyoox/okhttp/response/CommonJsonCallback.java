@@ -2,7 +2,6 @@ package com.huisu.iyoox.okhttp.response;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
 
 import com.huisu.iyoox.application.MyApplication;
 import com.huisu.iyoox.constant.Constant;
@@ -84,7 +83,7 @@ public class CommonJsonCallback implements Callback {
         mDeliveryHandler.post(new Runnable() {
             @Override
             public void run() {
-                TabToast.showMiddleToast(MyApplication.getApplication().getApplicationContext(), "网络异常");
+                TabToast.showMiddleToast(MyApplication.getApplication().getApplicationContext(), "请检查您的网络");
                 mListener.onFailure(new OkHttpException(NETWORK_ERROR, ioexception));
             }
         });
@@ -128,9 +127,9 @@ public class CommonJsonCallback implements Callback {
             /**
              * 协议确定后看这里如何修改
              */
-            JSONObject result = new JSONObject(responseObj.toString());
             //打印日志 方便查看
             LogUtil.e(responseObj.toString());
+            JSONObject result = new JSONObject(responseObj.toString());
             int code = result.getInt("code");
             if (code != Constant.POST_SUCCESS_CODE) {
                 TabToast.showMiddleToast(MyApplication.getApplication().getApplicationContext(), result.getString("msg"));

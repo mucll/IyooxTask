@@ -9,7 +9,6 @@ import com.huisu.iyoox.okhttp.response.CommonJsonCallback;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import java.util.jar.Attributes;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;

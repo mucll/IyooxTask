@@ -11,6 +11,7 @@ import java.util.List;
 public class SubjectModel implements Serializable {
     private int kemu_id;
     private String name;
+    private String kemu_name;
     private boolean isSelect;
 
     public int getKemu_id() {
@@ -35,5 +36,13 @@ public class SubjectModel implements Serializable {
 
     public void setSelect(boolean select) {
         isSelect = select;
+    }
+
+    public String getKemu_name() {
+        return kemu_name;
+    }
+
+    public void setKemu_name(String kemu_name) {
+        this.kemu_name = kemu_name;
     }
 }

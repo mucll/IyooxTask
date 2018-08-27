@@ -8,7 +8,7 @@
     <com.youth.banner.Banner
         android:id="@+id/home_page_banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_150"
+        android:layout_height="@dimen/dip_150_pad"
         app:indicator_drawable_selected="@drawable/selected_radius"
         app:indicator_drawable_unselected="@drawable/unselected_radius"
         app:indicator_height="8dp"
@@ -18,7 +18,7 @@
     <ImageView
         android:id="@+id/home_page_vip_iv"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_150"
+        android:layout_height="@dimen/dip_130_pad"
         android:scaleType="fitXY"
         android:src="@drawable/icon_new_home_pager_vip" />
     <!--<LinearLayout-->

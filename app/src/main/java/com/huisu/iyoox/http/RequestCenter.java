@@ -32,6 +32,7 @@ import com.huisu.iyoox.entity.base.BaseTaskTeacherLookTimuModel;
 import com.huisu.iyoox.entity.base.BaseTeacherModel;
 import com.huisu.iyoox.entity.base.BaseTrialCardModel;
 import com.huisu.iyoox.entity.base.BaseUser;
+import com.huisu.iyoox.entity.base.BaseUserContentModel;
 import com.huisu.iyoox.entity.base.BaseVersionModel;
 import com.huisu.iyoox.entity.base.BaseVideoGroupModel;
 import com.huisu.iyoox.entity.base.BaseVideoModel;
@@ -86,6 +87,15 @@ public class RequestCenter {
     public static void postUpFile(String url, RequestParams params, DisposeDataListener listener, Class<?> clazz) {
         CommonOkHttpClient.get(CommonRequest.createMultiPostRequest(url, params),
                 new DisposeDataHandle(listener, clazz));
+    }
+
+    /**
+     * 阿里云获取PlayAuth
+     */
+    public static void getplayAuth(String vodId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("video_id", vodId);
+        RequestCenter.getRequest(HttpConstants.getplayAuth, params, listener, null);
     }
 
     /**
@@ -683,13 +693,23 @@ public class RequestCenter {
     }
 
     /**
-     * VIP会员列表
+     *  支付接口
      */
     public static void getPayJson(String userId, String typeId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("user_id", userId);
         params.put("jihuoma_type", typeId);
         RequestCenter.postRequest(HttpConstants.getPayJson, params, listener, null);
+    }
+
+    /**
+     * 支付接口
+     */
+    public static void getWXPayJson(String userId, String typeId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("user_id", userId);
+        params.put("jihuoma_type", typeId);
+        RequestCenter.postRequest(HttpConstants.getWXPayJson, params, listener, null);
     }
 
     /**
@@ -752,5 +772,14 @@ public class RequestCenter {
         params.put("student_id", userId);
         params.put("zhishidian_ids", zhishidianId);
         RequestCenter.postRequest(HttpConstants.deleteCollect, params, listener, BaseOtherBookModel.class);
+    }
+
+    /**
+     * 获取学生VIP 做题数 完成作业次数
+     */
+    public static void getUserCenterInfo(String userId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("user_id", userId);
+        RequestCenter.postRequest(HttpConstants.getUserCenterInfo, params, listener, BaseUserContentModel.class);
     }
 }

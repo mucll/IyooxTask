@@ -5,7 +5,8 @@
     android:background="@drawable/select_white_bg"
     android:gravity="center_vertical"
     android:minHeight="@dimen/dip_54"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingRight="@dimen/dip_16">
 
 
     <ImageView
@@ -35,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/dip_2"
-        android:layout_marginRight="@dimen/dip_2"
+        android:layout_marginRight="@dimen/dip_8"
         android:background="@drawable/select_screen_maincolor_r14_bg"
         android:paddingBottom="@dimen/dip_2"
         android:paddingLeft="@dimen/dip_4"
@@ -48,8 +49,7 @@
     <FrameLayout
         android:id="@+id/item_video_state_content"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingRight="@dimen/dip_16">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/item_video_state"

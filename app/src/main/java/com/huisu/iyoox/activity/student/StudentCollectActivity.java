@@ -2,6 +2,7 @@ package com.huisu.iyoox.activity.student;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
+import com.huisu.iyoox.activity.videoplayer.ALiYunVideoPlayActivity;
 import com.huisu.iyoox.activity.videoplayer.VideoPlayerNewActivity;
 import com.huisu.iyoox.adapter.StudentCollectAdapter;
 import com.huisu.iyoox.entity.CollectModel;
@@ -20,6 +22,7 @@ import com.huisu.iyoox.entity.base.BaseCollectModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.DialogUtil;
 import com.huisu.iyoox.util.JsonUtils;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.Loading;
@@ -44,12 +47,10 @@ public class StudentCollectActivity extends BaseActivity implements View.OnClick
     private TextView configView;
     private boolean isConfig = false;
     private RecyclerView mRecyclerView;
-    private TextView deleteTv;
 
     @Override
     protected void initView() {
         emptyView = findViewById(R.id.student_collect_empty_view);
-        deleteTv = findViewById(R.id.delete_tv);
         configView = findViewById(R.id.tv_submit);
         configView.setVisibility(View.VISIBLE);
         mRecyclerView = findViewById(R.id.student_collect_list_view);
@@ -97,7 +98,6 @@ public class StudentCollectActivity extends BaseActivity implements View.OnClick
     protected void setEvent() {
         setBack();
         configView.setOnClickListener(this);
-        deleteTv.setOnClickListener(this);
         mAdapter.setOnItemClickListener(this);
     }
 
@@ -114,13 +114,18 @@ public class StudentCollectActivity extends BaseActivity implements View.OnClick
 
 
     @Override
-    public void onItemClick(int position, View view) {
+    public void onItemClick(final int position, View view) {
         if (!isConfig) {
             startVideoActivity(position);
         } else {
-            CollectModel model = models.get(position);
-            model.setDelete(!model.isDelete());
-            mAdapter.notifyDataSetChanged();
+            DialogUtil.show("提示", "是否删除收藏?", "确认", "取消", this,
+                    new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            selectDeleteData(position);
+                        }
+                    }, null);
         }
     }
 
@@ -132,7 +137,7 @@ public class StudentCollectActivity extends BaseActivity implements View.OnClick
         titleModel.setZhishidian_id(model.getZhishidian_id());
         List<VideoTitleModel> videoTitleModels = new ArrayList<>();
         videoTitleModels.add(titleModel);
-        Intent intent = new Intent(context, VideoPlayerNewActivity.class);
+        Intent intent = new Intent(context, ALiYunVideoPlayActivity.class);
         intent.putExtra("selectModel", titleModel);
         intent.putExtra("zhangjieName", model.getZhishidian_name());
         intent.putExtra("models", (Serializable) videoTitleModels);
@@ -148,51 +153,34 @@ public class StudentCollectActivity extends BaseActivity implements View.OnClick
                     configView.setText("完成");
                 } else {
                     configView.setText("编辑");
-                    setListDataOriginalState();
                 }
-                deleteTv.setVisibility(isConfig ? View.VISIBLE : View.GONE);
                 mAdapter.setConfig(isConfig);
                 mAdapter.notifyDataSetChanged();
-                break;
-            case R.id.delete_tv:
-                selectDeleteData();
                 break;
             default:
                 break;
         }
     }
 
-    private void setListDataOriginalState() {
-        for (CollectModel model : models) {
-            model.setDelete(false);
-        }
-    }
-
-    private void selectDeleteData() {
+    private void selectDeleteData(int position) {
+        CollectModel model = models.get(position);
         List<String> strings = new ArrayList<>();
-        for (CollectModel model : models) {
-            if (model.isDelete()) {
-                strings.add(model.getZhishidian_id() + "");
-            }
-        }
+        strings.add(model.getZhishidian_id() + "");
         if (strings.size() > 0) {
-            deleteCollect(JsonUtils.jsonFromObject(strings));
+            deleteCollect(JsonUtils.jsonFromObject(strings),position);
         } else {
             TabToast.showMiddleToast(context, "请勾选要删除的视频");
         }
     }
 
-    private void deleteCollect(String jsons) {
+    private void deleteCollect(String jsons,final int position) {
         loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
         RequestCenter.deleteCollect(user.getUserId(), jsons, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 loading.dismiss();
-                isConfig = !isConfig;
-                configView.setText("编辑");
-                mAdapter.setConfig(isConfig);
-                deleteTv.setVisibility(isConfig ? View.VISIBLE : View.GONE);
-                postCollectDataHttp();
+                models.remove(position);
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override

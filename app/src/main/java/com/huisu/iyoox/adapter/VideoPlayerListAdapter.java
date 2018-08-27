@@ -86,7 +86,7 @@ public class VideoPlayerListAdapter extends RecyclerView.Adapter<VideoPlayerList
             holder.videoStateContent.setVisibility(View.GONE);
         }
 
-        if (model.getSort() == 1) {
+        if (model.getSort() > 0 && model.getSort() <= 3) {
             holder.isSort.setVisibility(View.VISIBLE);
         } else {
             holder.isSort.setVisibility(View.GONE);

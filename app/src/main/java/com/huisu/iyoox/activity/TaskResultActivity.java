@@ -1,10 +1,12 @@
 package com.huisu.iyoox.activity;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -50,6 +52,7 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
     private TextView zhishidianTv, scoreTv, commentTv, jianyiTv, sortTv, timesTv, exercisesCountTv;
     private RatingBar nanduBar;
     private int type;
+    private ScrollView mScrollView;
 
     @Override
     protected void initView() {
@@ -69,6 +72,8 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
 
         mNumberAdapter = new AnswerResultNumberAdapter(context, exercisesModels);
         mGridView.setAdapter(mNumberAdapter);
+
+        mScrollView = findViewById(R.id.task_result_scroll_view);
     }
 
     @Override
@@ -242,6 +247,12 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
         //时间
         exercisesCountTv.setText(data.getTimu_count() + "");
 
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                mScrollView.fullScroll(ScrollView.FOCUS_UP);
+            }
+        });
     }
 
     @Override

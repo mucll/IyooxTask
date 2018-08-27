@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.application.MyApplication;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.VersionBean;
 import com.huisu.iyoox.entity.base.BaseVersionModel;

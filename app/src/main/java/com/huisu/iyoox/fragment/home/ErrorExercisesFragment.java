@@ -125,6 +125,7 @@ public class ErrorExercisesFragment extends BaseFragment {
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), StudentWriteExercisesErrorActivity.class);
                     intent.putExtra("subjectId", subjectModel.getKemu_id());
+                    intent.putExtra("subjectName", subjectModel.getKemu_name()+"错题");
                     getContext().startActivity(intent);
                 }
             });

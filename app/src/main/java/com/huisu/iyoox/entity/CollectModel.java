@@ -18,7 +18,7 @@ public class CollectModel {
     private String jiaocai_name;
     private String grade_detail_name;
     private String xueke_name;
-    private boolean isDelete;
+    private int xueke_id;
 
     public int getVedio_id() {
         return vedio_id;
@@ -100,11 +100,11 @@ public class CollectModel {
         this.zhishidian_name = zhishidian_name;
     }
 
-    public boolean isDelete() {
-        return isDelete;
+    public int getXueke_id() {
+        return xueke_id;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public void setXueke_id(int xueke_id) {
+        this.xueke_id = xueke_id;
     }
 }

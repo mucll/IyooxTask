@@ -115,6 +115,7 @@ public class ExercisesChooseView extends BaseExercisesView {
         } else {
             fenxiView.setVisibility(View.GONE);
         }
+        //题干
         if (!TextUtils.isEmpty(bean.getTigan())) {
             contentWebview.setHtmlFromString(bean.getTigan(), false);
         } else {
@@ -137,6 +138,9 @@ public class ExercisesChooseView extends BaseExercisesView {
                 setChooseData("D", mData.getD());
             }
         }
+        if (isResultShowAnalysis && bean.getAnswersModel() != null) {
+            showStudentAnswer();
+        }
         this.addView(view);
     }
 
@@ -154,7 +158,7 @@ public class ExercisesChooseView extends BaseExercisesView {
         checkBox.setText(key);
         htmlTextView.setHtmlFromString(value, false);
         //学生做题时,看是否已选择选项
-        if (bean.getAnswersModel() != null && key.equals(bean.getAnswersModel().getChooseAnswer())) {
+        if (!isResultShowAnalysis && bean.getAnswersModel() != null && key.equals(bean.getAnswersModel().getChooseAnswer())) {
             checkBox.setChecked(true);
             content.setSelected(true);
         }
@@ -275,16 +279,33 @@ public class ExercisesChooseView extends BaseExercisesView {
     /**
      * @param enable 是否可以作答
      */
+    private boolean anserEnable;
+
     @Override
     public void setAnserEnable(boolean enable) {
-        if (enable) {
+        this.anserEnable = enable;
+        if (anserEnable) {
             //遍历选项集合设置点击事件
             for (int i = 0; i < chooseLists.size(); i++) {
                 final int j = i;
-                View view = chooseLists.get(i);
+                final View view = chooseLists.get(i);
                 view.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (!anserEnable) return;
+                        //做错题的时候,显示分析
+                        if (isResultShowAnalysis) {
+                            AppCompatCheckBox checkBox = view.findViewById(R.id.select_checkbox);
+                            //学生作的答按对象
+                            StudentAnswersModel answer = new StudentAnswersModel();
+                            answer.setTiMuId(bean.getTimu_id());
+                            answer.setChooseAnswer(checkBox.getText().toString());
+                            bean.setAnswersModel(answer);
+                            anserEnable = false;
+                            helpLayout.setVisibility(View.VISIBLE);
+                            showStudentAnswer();
+                            return;
+                        }
                         //遍历选项集合，先都修改为false然后在根据点击的view设置为true
                         for (int a = 0; a < chooseLists.size(); a++) {
                             AppCompatCheckBox checkBox = chooseLists.get(a).findViewById(R.id
@@ -302,10 +323,6 @@ public class ExercisesChooseView extends BaseExercisesView {
                                 answer.setChooseAnswer(checkBox.getText().toString());
                                 bean.setAnswersModel(answer);
                             }
-                        }
-                        //做错题的时候,显示分析
-                        if (isResultShowAnalysis && helpLayout.getVisibility() == View.GONE) {
-                            helpLayout.setVisibility(View.VISIBLE);
                         }
                         hd.postDelayed(runnable, 200);
                     }

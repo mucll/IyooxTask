@@ -180,14 +180,19 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
                 };
                 //回调
                 view.setCallBack(callBack);
-                //数据
-                view.init(bean);
                 //答案模式
                 view.resultShowAnalysis(isResultShowAnalysis);
+                //数据
+                view.init(bean);
                 //是否显示解析
                 view.showHelp(showHelp);
                 //是否可作答
-                view.setAnserEnable(setEnable);
+                //错题模式,并作答了 不让再作答
+                if (isResultShowAnalysis && bean.getAnswersModel() != null) {
+                    view.setAnserEnable(false);
+                } else {
+                    view.setAnserEnable(setEnable);
+                }
                 //学生作答后,显示答案对比
                 if (showStudentAnswer) {
                     view.showStudentAnswer();

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.huisu.iyoox.R;
 import com.youth.banner.loader.ImageLoader;
 
 /**
@@ -25,7 +26,11 @@ public class GlideImageLoader extends ImageLoader {
          切记不要胡乱强转！
          */
         //Glide 加载图片简单用法
-        Glide.with(context).load(path).into(imageView);
+        Glide.with(context)
+                .load(path)
+                .placeholder(R.drawable.home_banner2)
+                .error(R.drawable.home_banner2)
+                .into(imageView);
     }
 
 }

@@ -7,10 +7,12 @@
 
     <ImageView
         android:id="@+id/new_page_iv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="@dimen/dip_10"
-        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_image_dp"
+        android:scaleType="centerInside"
+        android:layout_marginRight="@dimen/dip_6"
+        android:layout_marginLeft="@dimen/dip_6"
+        android:layout_marginBottom="@dimen/dip_4"
+        android:layout_marginTop="@dimen/dip_4"
         android:src="@drawable/home_page_1" />
 </LinearLayout>

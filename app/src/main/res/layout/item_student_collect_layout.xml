@@ -62,14 +62,19 @@
                 android:textSize="@dimen/f_10" />
         </LinearLayout>
 
-        <ImageView
+        <RelativeLayout
             android:id="@+id/is_delete_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dip_4"
-            android:layout_marginTop="@dimen/dip_4"
-            android:src="@drawable/select_checkbox_onlyone"
-            android:visibility="gone" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_26"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_delete_white" />
+
+        </RelativeLayout>
     </RelativeLayout>
 </FrameLayout>

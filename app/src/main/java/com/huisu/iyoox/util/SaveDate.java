@@ -83,4 +83,14 @@ public class SaveDate {
     public boolean getBreathLook(String uid) {
         return sharedPreferences.getBoolean(String.format("breathlook%s", uid), false);
     }
+
+    public void setUserContent(String uid, String json) {
+        Editor ed = sharedPreferences.edit();
+        ed.putString(String.format("usercontent%s", uid), json);
+        ed.commit();
+    }
+
+    public String getUserContent(String uid) {
+        return sharedPreferences.getString(String.format("usercontent%s", uid), "");
+    }
 }

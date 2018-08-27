@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -193,6 +195,17 @@ public class StringUtils {
             default:
                 return R.drawable.icon_vip_one;
         }
+    }
+
+    public static boolean isWifi(Context mContext) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) mContext
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info= connectivityManager.getActiveNetworkInfo();
+        if (info!= null
+                && info.getType() == ConnectivityManager.TYPE_WIFI) {
+            return true;
+        }
+        return false;
     }
 
 }
