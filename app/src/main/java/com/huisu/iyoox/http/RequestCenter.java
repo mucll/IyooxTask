@@ -18,6 +18,7 @@ import com.huisu.iyoox.entity.base.BaseLearningCardModel;
 import com.huisu.iyoox.entity.base.BaseNotificationMsgModel;
 import com.huisu.iyoox.entity.base.BaseOtherBookModel;
 import com.huisu.iyoox.entity.base.BasePhoneModel;
+import com.huisu.iyoox.entity.base.BasePrePayWeChatEntity;
 import com.huisu.iyoox.entity.base.BaseRegisterResultModel;
 import com.huisu.iyoox.entity.base.BaseScreenSubjectVersionModel;
 import com.huisu.iyoox.entity.base.BaseSendMsgCodeModel;
@@ -693,7 +694,7 @@ public class RequestCenter {
     }
 
     /**
-     *  支付接口
+     * 支付接口
      */
     public static void getPayJson(String userId, String typeId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -709,7 +710,7 @@ public class RequestCenter {
         RequestParams params = new RequestParams();
         params.put("user_id", userId);
         params.put("jihuoma_type", typeId);
-        RequestCenter.postRequest(HttpConstants.getWXPayJson, params, listener, null);
+        RequestCenter.postRequest(HttpConstants.getWXPayJson, params, listener, BasePrePayWeChatEntity.class);
     }
 
     /**
@@ -781,5 +782,15 @@ public class RequestCenter {
         RequestParams params = new RequestParams();
         params.put("user_id", userId);
         RequestCenter.postRequest(HttpConstants.getUserCenterInfo, params, listener, BaseUserContentModel.class);
+    }
+
+    /**
+     * 获取学生VIP 做题数 完成作业次数
+     */
+    public static void addShiPinCount(String userId, String zhishidianId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("student_id", userId);
+        params.put("zhishidian_id", zhishidianId);
+        RequestCenter.postRequest(HttpConstants.addShiPinCount, params, listener, null);
     }
 }

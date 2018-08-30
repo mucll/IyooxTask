@@ -42,6 +42,7 @@ import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.util.StringUtils;
 import com.huisu.iyoox.views.Loading;
 import com.huisu.iyoox.views.WrapContentHeightViewPager;
@@ -83,11 +84,13 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener,
     }
 
     private void initView() {
+        LogUtil.e("ClassFragment");
         user = UserManager.getInstance().getUser();
         scrollView = view.findViewById(R.id.class_scroll_view);
         emptyView = view.findViewById(R.id.empty_view_layout);
         addClassBt = view.findViewById(R.id.add_class_bt);
         titleTv = view.findViewById(R.id.title_bar_tv);
+        titleTv.setText("我的班级");
         tagImageLayout = view.findViewById(R.id.student_class_tag_image_layout);
 
         mChart = view.findViewById(R.id.chart_line);
@@ -118,8 +121,6 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener,
     }
 
     private void isAddClassRoom() {
-        titleTv.setText("我的班级");
-        user = UserManager.getInstance().getUser();
         postClassRankingData();
     }
 
@@ -127,6 +128,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener,
      * 请求数据
      */
     private void postClassRankingData() {
+        if (user == null) return;
         loading = Loading.show(null, getContext(), getString(R.string.loading_one_hint_text));
         RequestCenter.getClassRanking(user.getUserId(), new DisposeDataListener() {
             @Override

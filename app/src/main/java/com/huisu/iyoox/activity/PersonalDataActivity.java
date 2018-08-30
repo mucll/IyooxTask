@@ -26,14 +26,11 @@ import com.huisu.iyoox.views.HeadView;
 import com.huisu.iyoox.views.Loading;
 import com.huisu.iyoox.views.SelectGradeDialog;
 
-import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: dl

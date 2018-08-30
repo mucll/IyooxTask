@@ -3,64 +3,68 @@ package com.huisu.iyoox.manager;
 
 import com.huisu.iyoox.entity.User;
 
+import org.litepal.LitePal;
+
 /**
- * @description 单例管理登陆用户信息
  * @author renzhiqiang
+ * @description 单例管理登陆用户信息
  * @date 2015年8月19日
  */
 public class UserManager {
 
-	private static UserManager userManager = null;
-	private User user = null;
+    private static UserManager userManager = null;
+    private User user = null;
 
-	public static UserManager getInstance() {
+    public static UserManager getInstance() {
 
-		if (userManager == null) {
+        if (userManager == null) {
 
-			synchronized (UserManager.class) {
+            synchronized (UserManager.class) {
 
-				if (userManager == null) {
+                if (userManager == null) {
 
-					userManager = new UserManager();
-				}
-				return userManager;
-			}
-		} else {
+                    userManager = new UserManager();
+                }
+                return userManager;
+            }
+        } else {
 
-			return userManager;
-		}
-	}
+            return userManager;
+        }
+    }
 
-	/**
-	 * init the user
-	 * 
-	 * @param user
-	 */
-	public void setUser(User user) {
+    /**
+     * init the user
+     *
+     * @param user
+     */
+    public void setUser(User user) {
 
-		this.user = user;
-	}
+        this.user = user;
+    }
 
-	public boolean hasLogined() {
+    public boolean hasLogined() {
 
-		return user == null ? false : true;
-	}
+        return user == null ? false : true;
+    }
 
-	/**
-	 * has user info
-	 * 
-	 * @return
-	 */
-	public User getUser() {
+    /**
+     * has user info
+     *
+     * @return
+     */
+    public User getUser() {
+        if (this.user == null) {
+            this.user = LitePal.findFirst(User.class);
+        }
+        return this.user;
+    }
 
-		return this.user;
-	}
+    /**
+     * remove the user info
+     */
+    public void removeUser() {
 
-	/**
-	 * remove the user info
-	 */
-	public void removeUser() {
-
-		this.user = null;
-	}
+        this.user = null;
+    }
 }

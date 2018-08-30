@@ -17,6 +17,7 @@ import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.VipBuyActivity;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.constant.EventBusMsg;
 import com.huisu.iyoox.entity.TrialCardModel;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.base.BaseTrialCardModel;
@@ -26,6 +27,7 @@ import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.Loading;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -140,6 +142,7 @@ public class TrialCardActivity extends BaseActivity implements View.OnClickListe
                     if (code == Constant.POST_SUCCESS_CODE) {
                         TabToast.showMiddleToast(context, "成功激活卡号");
                         StudentLearningCardActivity.start(context);
+                        EventBus.getDefault().post(new EventBusMsg.finishMsg());
                         finish();
                     }
                 } catch (JSONException e) {

@@ -54,6 +54,7 @@
     <dimen name="dip_26">26dip</dimen>
     <dimen name="dip_27">27dip</dimen>
     <dimen name="dip_30">30dip</dimen>
+    <dimen name="dip_30_pad">30dip</dimen>
     <dimen name="dip_32">32dip</dimen>
     <dimen name="dip_34">34dip</dimen>
     <dimen name="dip_28">28dip</dimen>
@@ -61,6 +62,7 @@
     <dimen name="dip_36">36dip</dimen>
     <dimen name="dip_40">40dip</dimen>
     <dimen name="dip_44">44dip</dimen>
+    <dimen name="dip_44_pad">44dip</dimen>
     <dimen name="dip_45">45dip</dimen>
     <dimen name="dip_48">48dip</dimen>
     <dimen name="dip_50">50dip</dimen>

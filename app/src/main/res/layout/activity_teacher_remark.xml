@@ -12,7 +12,7 @@
     <EditText
         android:id="@+id/teacher_send_msg_et"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_180"
+        android:layout_height="@dimen/dip_120"
         android:layout_margin="@dimen/dip_16"
         android:background="@color/white"
         android:gravity="top"

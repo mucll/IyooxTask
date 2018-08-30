@@ -62,9 +62,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (view == null) {
-            view = inflater.inflate(R.layout.fragment_hone, container, false);
-        }
+        view = inflater.inflate(R.layout.fragment_hone, container, false);
         user = UserManager.getInstance().getUser();
         initTab();
         initView();

@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -50,20 +51,9 @@ public class StartActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             StartActivity activity = mActivity.get();
-            if (activity != null) {
-                if (StringUtils.getCurrentVersion(activity) == SaveDate.getInstence(activity)
-                        .getVersion()) {
-                    User user = LitePal.findFirst(User.class);
-                    if (user != null) {
-                        UserManager.getInstance().setUser(user);
-                        MainActivity.start(activity);
-                    } else {
-                        LoginActivity.start(activity);
-                    }
-                } else {
-                    GuideActivity.start(activity);
-                }
-                activity.finish();
+            if (activity != null && !init) {
+                init = true;
+                startMainActivity(activity);
             }
         }
     }
@@ -74,16 +64,22 @@ public class StartActivity extends Activity {
             iconBookTwoIv, iconErrorIv, iconHatIv, iconPenIv, iconrAIv, iconrRubberIv,
             twoPenIv, iconrPercentageIv, jbdIv;
     private int height;
+    private static boolean init = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         hiddenStatusBar();
         setContentView(R.layout.activity_loading_layout);
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            finish();
+            return;
+        }
         initView();
         initData();
         anim();
         postVersionHttp();
+        handler.sendEmptyMessageDelayed(0, 3000);
     }
 
     private void postVersionHttp() {
@@ -96,7 +92,9 @@ public class StartActivity extends Activity {
                     versionBean.setDownloadUrl(baseModel.data.getZaixian_url());
                     versionBean.setVersionRemark(baseModel.data.getZiaxian_remark());
                     versionBean.setVersionMixno(baseModel.data.getVersion1());
-                    getVersion(versionBean);
+                    if (!init) {
+                        getVersion(versionBean);
+                    }
                 }
             }
 
@@ -109,10 +107,13 @@ public class StartActivity extends Activity {
 
     //对比版本号
     private void getVersion(VersionBean bean) {
+        if (init) return;
         int versionCode = VersionUtil.getVersionCode(this);
         if (versionCode < bean.getVersionMixno()) {//强制
+            init = true;
             new UpDataUtils(this).isUpdata(UpDataUtils.FORCE_TYPE, bean);
         } else {
+            init = false;
             handler.sendEmptyMessageDelayed(0, 3000);
         }
     }
@@ -325,6 +326,22 @@ public class StartActivity extends Activity {
     private void initData() {
         MyApplication.CACHEPATH = getRootFilePath();
         MyApplication.DOWNLOAD_URL = MyApplication.CACHEPATH + File.separator + MyApplication.DOWNLOAD_ROOT_DIR;
+    }
+
+    private static void startMainActivity(Activity activity) {
+        if (StringUtils.getCurrentVersion(activity) == SaveDate.getInstence(activity)
+                .getVersion()) {
+            User user = LitePal.findFirst(User.class);
+            if (user != null) {
+                UserManager.getInstance().setUser(user);
+                MainActivity.start(activity);
+            } else {
+                LoginActivity.start(activity);
+            }
+        } else {
+            GuideActivity.start(activity);
+        }
+        activity.finish();
     }
 
     /**

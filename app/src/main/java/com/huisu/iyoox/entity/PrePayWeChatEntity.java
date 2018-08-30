@@ -9,67 +9,67 @@ package com.huisu.iyoox.entity;
  */
 public class PrePayWeChatEntity {
 
-    private String appid;
-    private String partnerid;
-    private String prepayid;
-    private String pkgstr;
-    private String noncestr;
-    private String timestamp;
-    private String sign;
+    private String AppID;
+    private String Package;
+    private String NonceStr;
+    private String Timestamp;
+    private String Sign;
+    private String PrepayId;
+    private String MerchantID;
 
-    public String getAppid() {
-        return appid;
+    public String getAppID() {
+        return AppID;
     }
 
-    public void setAppid(String appid) {
-        this.appid = appid;
+    public void setAppID(String appID) {
+        AppID = appID;
     }
 
-    public String getPartnerid() {
-        return partnerid;
+    public String getPackage() {
+        return Package;
     }
 
-    public void setPartnerid(String partnerid) {
-        this.partnerid = partnerid;
+    public void setPackage(String aPackage) {
+        Package = aPackage;
     }
 
-    public String getPrepayid() {
-        return prepayid;
+    public String getNonceStr() {
+        return NonceStr;
     }
 
-    public void setPrepayid(String prepayid) {
-        this.prepayid = prepayid;
-    }
-
-    public String getPkgstr() {
-        return pkgstr;
-    }
-
-    public void setPkgstr(String pkgstr) {
-        this.pkgstr = pkgstr;
-    }
-
-    public String getNoncestr() {
-        return noncestr;
-    }
-
-    public void setNoncestr(String noncestr) {
-        this.noncestr = noncestr;
+    public void setNonceStr(String nonceStr) {
+        NonceStr = nonceStr;
     }
 
     public String getTimestamp() {
-        return timestamp;
+        return Timestamp;
     }
 
     public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+        Timestamp = timestamp;
     }
 
     public String getSign() {
-        return sign;
+        return Sign;
     }
 
     public void setSign(String sign) {
-        this.sign = sign;
+        Sign = sign;
+    }
+
+    public String getPrepayId() {
+        return PrepayId;
+    }
+
+    public void setPrepayId(String prepayId) {
+        PrepayId = prepayId;
+    }
+
+    public String getMerchantID() {
+        return MerchantID;
+    }
+
+    public void setMerchantID(String merchantID) {
+        MerchantID = merchantID;
     }
 }

@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.huisu.iyoox.activity.VipCardResultActivity;
+import com.huisu.iyoox.activity.student.StudentLearningCardActivity;
 import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.constant.EventBusMsg;
 import com.huisu.iyoox.util.TabToast;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -12,6 +15,8 @@ import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
@@ -50,6 +55,8 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
             switch (code) {
                 case 0:
                     // 去本地确认支付结果
+                    // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                    EventBus.getDefault().post(new EventBusMsg.finishActivity());
                     finish();
                     break;
                 case -2:

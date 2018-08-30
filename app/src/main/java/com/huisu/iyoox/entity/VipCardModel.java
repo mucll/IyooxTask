@@ -15,6 +15,7 @@ public class VipCardModel implements Serializable {
     private String tag;
     private double price;
     private String createdate;
+    private String enddate;
 
     public String getType_name() {
         return type_name;
@@ -54,5 +55,13 @@ public class VipCardModel implements Serializable {
 
     public void setCreatedate(String createdate) {
         this.createdate = createdate;
+    }
+
+    public String getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
     }
 }

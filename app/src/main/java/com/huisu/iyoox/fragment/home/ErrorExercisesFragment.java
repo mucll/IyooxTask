@@ -53,7 +53,12 @@ public class ErrorExercisesFragment extends BaseFragment {
     @Override
     public void onShow() {
         super.onShow();
-        postStudentErrorData(user.getUserId());
+        if (user == null) {
+            user = UserManager.getInstance().getUser();
+        }
+        if (user != null) {
+            postStudentErrorData(user.getUserId());
+        }
     }
 
     /**
@@ -125,7 +130,7 @@ public class ErrorExercisesFragment extends BaseFragment {
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), StudentWriteExercisesErrorActivity.class);
                     intent.putExtra("subjectId", subjectModel.getKemu_id());
-                    intent.putExtra("subjectName", subjectModel.getKemu_name()+"错题");
+                    intent.putExtra("subjectName", subjectModel.getKemu_name() + "错题");
                     getContext().startActivity(intent);
                 }
             });

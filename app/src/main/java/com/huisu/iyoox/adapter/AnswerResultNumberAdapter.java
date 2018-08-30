@@ -63,6 +63,8 @@ public class AnswerResultNumberAdapter extends BaseAdapter {
             } else {
                 holder.exercisesNumberTv.setBackground(context.getResources().getDrawable(R.drawable.shape_oval_exercises_error_color_8dp));
             }
+        } else {
+            holder.exercisesNumberTv.setBackground(context.getResources().getDrawable(R.drawable.shape_oval_exercises_error_color_8dp));
         }
 
         return convertView;

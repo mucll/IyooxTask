@@ -1,6 +1,7 @@
 package com.huisu.iyoox.fragment.exercisespager;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -15,13 +16,20 @@ import android.widget.TextView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.TaskResultActivity;
+import com.huisu.iyoox.activity.student.StudentLearningCardActivity;
 import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.constant.EventBusMsg;
 import com.huisu.iyoox.entity.ExercisesModel;
 import com.huisu.iyoox.fragment.base.BaseFragment;
+import com.huisu.iyoox.util.DialogUtil;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.BaseExercisesView;
+import com.huisu.iyoox.views.ScantronDialog;
 import com.huisu.iyoox.views.TagViewPager;
 import com.huisu.iyoox.views.canvasview.CanvasDialog;
+import com.huisu.iyoox.wxapi.WXPayEntryActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,9 +75,10 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
     private Button submitBT;
     private String zhishidianName;
     private int type;
+    private TextView datiCrad;
 
 
-    private void init() {
+    private void initType() {
         switch (type) {
             case Constant.STUDENT_DOING:
                 isSroll = true;
@@ -77,6 +86,9 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
                 showHelp = View.GONE;
                 showStudentAnswer = false;
                 isResultShowAnalysis = false;
+                if (datiCrad != null) {
+                    datiCrad.setVisibility(View.VISIBLE);
+                }
                 break;
             case Constant.STUDENT_ANALYSIS:
                 isSroll = true;
@@ -84,6 +96,9 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
                 isResultShowAnalysis = false;
                 showHelp = View.VISIBLE;
                 showStudentAnswer = true;
+                if (datiCrad != null) {
+                    datiCrad.setVisibility(View.GONE);
+                }
                 break;
             case Constant.STUDENT_ERROR_DOING:
                 isSroll = true;
@@ -91,6 +106,9 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
                 isResultShowAnalysis = true;
                 showHelp = View.GONE;
                 showStudentAnswer = false;
+                if (datiCrad != null) {
+                    datiCrad.setVisibility(View.GONE);
+                }
                 break;
             case Constant.STUDENT_HOME_WORK:
                 isSroll = true;
@@ -98,6 +116,9 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
                 showHelp = View.GONE;
                 showStudentAnswer = false;
                 isResultShowAnalysis = false;
+                if (datiCrad != null) {
+                    datiCrad.setVisibility(View.VISIBLE);
+                }
                 break;
             case Constant.TEACHER_LOOK_TASK:
                 isSroll = true;
@@ -105,6 +126,9 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
                 showHelp = View.GONE;
                 showStudentAnswer = false;
                 isResultShowAnalysis = false;
+                if (datiCrad != null) {
+                    datiCrad.setVisibility(View.GONE);
+                }
                 break;
             default:
                 break;
@@ -132,8 +156,8 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_exercises_page, container, false);
         }
-        init();
         initView();
+        initType();
         initData();
         initViewPage();
         setEvent();
@@ -218,10 +242,12 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
         mProgressBar = view.findViewById(R.id.exercises_progress_bar);
         submitBT = view.findViewById(R.id.submit_bt);
         zhiShiDianNameTv = view.findViewById(R.id.zhishidian_name_tv);
+        datiCrad = view.findViewById(R.id.btn_card);
     }
 
     private void setEvent() {
         mActionButton.setOnClickListener(this);
+        datiCrad.setOnClickListener(this);
         submitBT.setOnClickListener(this);
     }
 
@@ -244,9 +270,34 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
             case R.id.submit_bt:
                 judgeStudentSelectAllExercises();
                 break;
+            case R.id.btn_card:
+                showScantron();
+                break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 显示答题卡
+     */
+    private void showScantron() {
+        ScantronDialog scantronDialog = new ScantronDialog(getActivity(), exercisesData) {
+            @Override
+            public void getPosition(int position) {
+                mViewPager.setCurrentItem(position);
+                dismiss();
+            }
+
+            @Override
+            public void getSubmit() {
+                if (listener != null) {
+                    listener.studentAnswerResult(exercisesData);
+                }
+                dismiss();
+            }
+        };
+        scantronDialog.show();
     }
 
     /**
@@ -254,15 +305,29 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
      */
     private void judgeStudentSelectAllExercises() {
         for (int i = 0; i < exercisesData.size(); i++) {
+            final int j = i;
             if (exercisesData.get(i).getAnswersModel() != null) {
+                //判断是否是最后一题
                 if (i == exercisesData.size() - 1) {
                     listener.studentAnswerResult(exercisesData);
                 }
             } else {
-                if (i != exercisesData.size() - 1) {
-                    mViewPager.setCurrentItem(i);
-                }
-                TabToast.showMiddleToast(getContext(), "尚有未做完的题目");
+                //尚有未做完的题目
+                DialogUtil.show("提示", "尚有未做完的题目,是否确定提交作业?", "继续做题", "确认提交", getActivity(),
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (j != exercisesData.size() - 1) {
+                                    mViewPager.setCurrentItem(j);
+                                }
+                            }
+                        }, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                listener.studentAnswerResult(exercisesData);
+                            }
+                        });
                 return;
             }
         }

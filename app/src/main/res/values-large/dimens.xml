@@ -46,11 +46,13 @@
     <dimen name="dip_24">36dip</dimen>
     <dimen name="dip_28">40dip</dimen>
     <dimen name="dip_30">42dip</dimen>
+    <dimen name="dip_30_pad">60dip</dimen>
     <dimen name="dip_32">44dip</dimen>
     <dimen name="dip_36">48dip</dimen>
     <dimen name="dip_40">52dip</dimen>
     <dimen name="top_layout_height_s">52dip</dimen>
     <dimen name="dip_44">56dip</dimen>
+    <dimen name="dip_44_pad">70dip</dimen>
     <dimen name="dip_48">70dip</dimen>
     <dimen name="dip_50">75dip</dimen>
     <dimen name="dip_54">81dip</dimen>

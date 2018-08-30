@@ -3,6 +3,7 @@ package com.huisu.iyoox.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -20,24 +21,33 @@ import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.activity.student.StudentLearningCardActivity;
 import com.huisu.iyoox.alipay.PayResult;
 import com.huisu.iyoox.constant.Constant;
+import com.huisu.iyoox.constant.EventBusMsg;
 import com.huisu.iyoox.entity.PrePayWeChatEntity;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.VipCardModel;
+import com.huisu.iyoox.entity.base.BasePrePayWeChatEntity;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.DialogUtil;
 import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.util.StringUtils;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.Loading;
+import com.huisu.iyoox.wxapi.WXPayEntryActivity;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
+
+import butterknife.ButterKnife;
 
 /**
  * 支付中心
@@ -65,6 +75,7 @@ public class VipBuyDetailActivity extends BaseActivity implements View.OnClickLi
         startTimeTv = findViewById(R.id.vip_card_start_time);
         goodsPriceTv = findViewById(R.id.goods_price_tv);
         submitView = findViewById(R.id.submit_tv);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -111,8 +122,7 @@ public class VipBuyDetailActivity extends BaseActivity implements View.OnClickLi
                 if (indexOf == 0) {
                     postPayJsonHttp();
                 } else {
-                    TabToast.showMiddleToast(context, "微信");
-//                    postWXPayJsonHttp();
+                    postWXPayJsonHttp();
                 }
                 break;
         }
@@ -146,7 +156,10 @@ public class VipBuyDetailActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onSuccess(Object responseObj) {
                 loading.dismiss();
-                JSONObject jsonObject = (JSONObject) responseObj;
+                BasePrePayWeChatEntity basemodel = (BasePrePayWeChatEntity) responseObj;
+                if (basemodel.data != null) {
+                    WeChatPay(basemodel.data);
+                }
             }
 
             @Override
@@ -199,12 +212,8 @@ public class VipBuyDetailActivity extends BaseActivity implements View.OnClickLi
                  */
                     // 判断resultStatus
                     if (TextUtils.equals(resultStatus, "9000")) {
-                        // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                        TabToast.showMiddleToast(context, "支付成功");
                         // 跳到成功页
-                        StudentLearningCardActivity.start(context);
-                        setResult(RESULT_OK);
-                        finish();
+                        setfinishResult();
                     } else if (TextUtils.equals(resultStatus, "6001")) {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         TabToast.showMiddleToast(context, "支付取消");
@@ -239,28 +248,51 @@ public class VipBuyDetailActivity extends BaseActivity implements View.OnClickLi
         //data  根据服务器返回的json数据创建的实体类对象
         PayReq req = new PayReq();
 
-        req.appId = data.getAppid();
+        req.appId = data.getAppID();
 
-        req.partnerId = data.getPartnerid();
+        req.partnerId = data.getMerchantID();
 
-        req.prepayId = data.getPrepayid();
+        req.prepayId = data.getPrepayId();
 
-        req.packageValue = data.getPkgstr();
+        req.packageValue = data.getPackage();
 
-        req.nonceStr = data.getNoncestr();
+        req.nonceStr = data.getNonceStr();
 
         req.timeStamp = data.getTimestamp();
 
         req.sign = data.getSign();
 
-        api.registerApp(data.getAppid());
+        api.registerApp(data.getAppID());
 
         //发起请求
-        api.sendReq(req);
+        boolean b = api.sendReq(req);
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(EventBusMsg.finishActivity msg) {
+        setfinishResult();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+        EventBus.getDefault().unregister(this);
+    }
+
+    private void setfinishResult() {
+        EventBus.getDefault().post(new EventBusMsg.finishMsg());
+        TabToast.showMiddleToast(context, "您已支付成功");
+        Intent intent = new Intent();
+        intent.putExtra("cardmodel",model);
+        setResult(RESULT_OK,intent);
+        finish();
+    }
+
+
 }

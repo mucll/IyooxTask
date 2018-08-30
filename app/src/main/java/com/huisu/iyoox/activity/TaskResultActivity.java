@@ -101,6 +101,7 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
 
     /**
      * 作业报告
+     *
      * @param timu_list
      */
     private void initTiMuData(List<ExercisesModel> timu_list) {
@@ -193,7 +194,11 @@ public class TaskResultActivity extends BaseActivity implements View.OnClickList
         for (ExercisesModel model : exercisesModels) {
             ExercisesResultModel resultModel = new ExercisesResultModel();
             resultModel.setTimu_id(Integer.parseInt(model.getTimu_id()));
-            resultModel.setIs_correct(model.getAnswersModel().isCorrect() ? 1 : 0);
+            if (model.getAnswersModel() == null) {
+                resultModel.setIs_correct(0);
+            } else {
+                resultModel.setIs_correct(model.getAnswersModel().isCorrect() ? 1 : 0);
+            }
             resultModels.add(resultModel);
         }
         String json = JsonUtils.jsonFromObject(resultModels);

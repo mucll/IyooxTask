@@ -7,9 +7,8 @@ package com.huisu.iyoox.http;
  */
 public class HttpConstants {
     //外网
-//    private static final String BASE_URL = "http://www.sunvke.com";
-    private static final String BASE_URL = "http://8jbew0j.hk1.mofasuidao.cn";
-//    private static final String BASE_URL = "http://8jbew0j.hk1.mofasuidao.cn/";
+    private static final String BASE_URL = "http://www.sunvke.com";
+//    private static final String BASE_URL = "http://8jbew0j.hk1.mofasuidao.cn";
 
     private static final String ROOT_URL = BASE_URL + "/api";
 
@@ -293,6 +292,10 @@ public class HttpConstants {
      * 阿里云获取PlayAuth
      */
     public static String getplayAuth = ROOT_URL + "/vod/get_play_auth";
+    /**
+     * 统计观看视频次数
+     */
+    public static String addShiPinCount = ROOT_URL + "/zhishidian/view_zhishidian_shipin";
 }
 
 

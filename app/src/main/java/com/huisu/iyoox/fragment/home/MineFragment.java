@@ -21,12 +21,14 @@ import com.huisu.iyoox.activity.ConfigMainActivity;
 import com.huisu.iyoox.activity.PatriarchActivity;
 import com.huisu.iyoox.activity.PersonalDataActivity;
 import com.huisu.iyoox.activity.VipBuyActivity;
+import com.huisu.iyoox.activity.VipCardResultActivity;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.activity.student.StudentCacheVideoActivity;
 import com.huisu.iyoox.activity.student.StudentCollectActivity;
 import com.huisu.iyoox.activity.student.StudentLearningCardActivity;
 import com.huisu.iyoox.activity.student.StudentLearningHistoryActivity;
 import com.huisu.iyoox.activity.student.TrialCardActivity;
+import com.huisu.iyoox.constant.EventBusMsg;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.UserContentModel;
 import com.huisu.iyoox.entity.base.BaseUserContentModel;
@@ -37,9 +39,14 @@ import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.util.DateUtils;
 import com.huisu.iyoox.util.DialogUtil;
 import com.huisu.iyoox.util.JsonUtils;
+import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.util.SaveDate;
 import com.huisu.iyoox.util.StringUtils;
 import com.huisu.iyoox.views.HeadView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * @author: dl
@@ -70,10 +77,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (view == null) {
-            view = inflater.inflate(R.layout.fragment_mine, container, false);
-        }
+        view = inflater.inflate(R.layout.fragment_mine, container, false);
         user = UserManager.getInstance().getUser();
+        EventBus.getDefault().register(this);
         initTab();
         initView();
         initUserContent();
@@ -218,6 +224,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onShow() {
         super.onShow();
+        if (user == null) {
+            user = UserManager.getInstance().getUser();
+        }
         postUserDetailHttp();
     }
 
@@ -225,6 +234,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
      * 获取学生VIP 做题数 完成作业次数
      */
     private void postUserDetailHttp() {
+        if (user == null) return;
         RequestCenter.getUserCenterInfo(user.getUserId(), new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -264,13 +274,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             huangGuanIv.setVisibility(View.VISIBLE);
             if (model.getVip_info().getName().contains("试用")) {
                 shiyongLayout.setVisibility(View.VISIBLE);
+                vipTypeIv.setVisibility(View.GONE);
                 user_no_vip_tv.setText("试用账号");
             } else {
+                shiyongLayout.setVisibility(View.GONE);
                 vipTypeIv.setVisibility(View.VISIBLE);
             }
         } else {
             shiyongLayout.setVisibility(View.VISIBLE);
             user_no_vip_tv.setText("游客");
+            vipTypeIv.setVisibility(View.GONE);
             headbg.setImageResource(R.drawable.icon_mine_no_vip_bg);
             huangGuanIv.setVisibility(View.INVISIBLE);
         }
@@ -284,5 +297,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             UserContentModel model = JsonUtils.objectFromJson(cache, UserContentModel.class);
             setUserContent(model);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(EventBusMsg.finishMsg msg) {
+        postUserDetailHttp();
     }
 }

@@ -16,8 +16,8 @@ android {
         applicationId "com.huisu.iyoox"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 17
-        versionName "1.1.7"
+        versionCode 20
+        versionName "1.1.10"
         multiDexEnabled true
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 
@@ -104,13 +104,7 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.android.support:recyclerview-v7:27.+'
     implementation 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
-    implementation 'com.easefun.polyv:polyvPlayer:2.4.0'//SDK核心包
-    implementation 'com.easefun.polyv:polyvPlayerABI:1.6.0'//SDK核心包
-    implementation 'com.easefun.polyv:polyvDownload:2.4.0'//SDK下载功能
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'//demo中图片使用
-    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
-//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.0.0
-    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
     implementation(name: 'AlivcPlayer-3.4.6', ext: 'aar')
     implementation(name: 'AlivcReporter-1.2', ext: 'aar')
     implementation(name: 'AliyunVodPlayer-3.4.6', ext: 'aar')

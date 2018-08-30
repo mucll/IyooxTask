@@ -13,7 +13,6 @@ import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.activity.videoplayer.ALiYunVideoPlayActivity;
-import com.huisu.iyoox.activity.videoplayer.VideoPlayerNewActivity;
 import com.huisu.iyoox.adapter.StudentCollectAdapter;
 import com.huisu.iyoox.entity.CollectModel;
 import com.huisu.iyoox.entity.User;

@@ -2,7 +2,10 @@ package com.huisu.iyoox.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,6 +26,7 @@ import com.huisu.iyoox.fragment.teacher.TeacherRemarkFragment;
 import com.huisu.iyoox.fragment.teacher.TeacherCreateTaskFragment;
 import com.huisu.iyoox.fragment.teacher.TeacherMineFragment;
 import com.huisu.iyoox.manager.UserManager;
+import com.huisu.iyoox.util.LogUtil;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.MyFragmentLayout;
 
@@ -39,9 +43,22 @@ public class MainActivity extends BaseActivity {
 
     private long exitTime;
     public MyFragmentLayout myFragmentLayout;
-    private List<Fragment> mFragmentList = null;
+    private List<Fragment> mFragmentList = new ArrayList();
     private final int maxTime = 2000;
     private int tabImages[][] = null;
+    private User user;
+    private FragmentManager manager;
+
+    @Override
+    public void onChildCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            user = (User) savedInstanceState.getSerializable("user");
+            UserManager.getInstance().setUser(user);
+            //重新创建Manager，防止此对象为空
+            manager = getSupportFragmentManager();
+            manager.popBackStackImmediate(null, 1);//弹出所有fragment
+        }
+    }
 
     @Override
     protected void initView() {
@@ -49,8 +66,13 @@ public class MainActivity extends BaseActivity {
         } else {
             requestPermission(Constant.WRITE_READ_EXTERNAL_CODE, Constant.WRITE_READ_EXTERNAL_PERMISSION);
         }
-        User user = UserManager.getInstance().getUser();
-        mFragmentList = new ArrayList();
+        if (user == null) {
+            user = UserManager.getInstance().getUser();
+        }
+        if (manager == null) {
+            manager = getSupportFragmentManager();
+        }
+        mFragmentList.clear();
         //区分 老师 和 学生
         if (Constant.TEACHER_TYPE == user.getType()) {
             //老师
@@ -98,10 +120,10 @@ public class MainActivity extends BaseActivity {
         });
         if (Constant.TEACHER_TYPE == user.getType()) {
             //老师
-            myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout_teacher, 0x101);
+            myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout_teacher, 0x121, manager);
         } else {
             //学生
-            myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout_student, 0x101);
+            myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout_student, 0x121, manager);
         }
         myFragmentLayout.getViewPager().setOffscreenPageLimit(mFragmentList.size());
     }
@@ -177,4 +199,17 @@ public class MainActivity extends BaseActivity {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+        outState.putSerializable("user", user);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
+
 }

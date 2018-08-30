@@ -2,6 +2,7 @@ package com.huisu.iyoox.activity.student;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,9 @@ import com.huisu.iyoox.views.Loading;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 学生 学习卡
+ */
 public class StudentLearningCardActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private User user;
@@ -37,12 +41,11 @@ public class StudentLearningCardActivity extends BaseActivity implements SwipeRe
         emptyView = findViewById(R.id.student_learning_empty_view);
 
         refreshView = findViewById(R.id.student_learning_refresh_ll);
-        refreshView.setOnRefreshListener(this);//SwipeRefreshLayout监听
         refreshView.setColorSchemeResources(R.color.maincolor);//设置颜色
         int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24,
                 getResources().getDisplayMetrics());
         refreshView.setProgressViewOffset(false, 0, height);
-        refreshView.setRefreshing(true);
+        refreshView.setOnRefreshListener(this);//SwipeRefreshLayout监听
 
         mRecyclerView = findViewById(R.id.student_learning_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -54,7 +57,13 @@ public class StudentLearningCardActivity extends BaseActivity implements SwipeRe
     protected void initData() {
         user = UserManager.getInstance().getUser();
         setTitle("学习卡");
-        postHttpData();
+        refreshView.post(new Runnable() {
+            @Override
+            public void run() {
+                refreshView.setRefreshing(true);
+                onRefresh();
+            }
+        });
     }
 
     private void postHttpData() {
@@ -98,7 +107,12 @@ public class StudentLearningCardActivity extends BaseActivity implements SwipeRe
 
     @Override
     public void onRefresh() {
-        postHttpData();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                postHttpData();
+            }
+        }, 500);
     }
 
     /**

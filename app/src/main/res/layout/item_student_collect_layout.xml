@@ -49,7 +49,7 @@
 
             <TextView
                 android:id="@+id/video_grade_detail_tv"
-                android:layout_width="@dimen/dip_44"
+                android:layout_width="@dimen/dip_44_pad"
                 android:layout_height="@dimen/dip_14"
                 android:layout_marginLeft="@dimen/dip_8"
                 android:layout_marginRight="@dimen/dip_10"

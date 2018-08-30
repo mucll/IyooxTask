@@ -1,6 +1,7 @@
 package com.huisu.iyoox.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,7 @@ public class ExercisesNumberViewAdapter extends BaseAdapter {
                 break;
             case Constant.NUMBER_ANSWER:
                 holder.indexOfTv.setText(position + 1 + "");
-                holder.answerTv.setText(model.getChooseanswer());
+                holder.answerTv.setText(TextUtils.isEmpty(model.getChooseanswer()) ? "未做" : model.getChooseanswer());
                 if (model.getIs_correct() == Constant.ANSWER_ERROR) {
                     holder.answerTv.setBackgroundResource(R.drawable.shape_oval_exercises_error_color_8dp);
                 } else {

@@ -21,6 +21,7 @@
 
     <color name="trans">#00000000</color>
     <color name="trans50">#30000000</color>
+    <color name="trans60">#50000000</color>
     <color name="head">#f5f5f5</color>
     <color name="white">#fff</color>
     <color name="black">#000</color>
@@ -43,6 +44,10 @@
     <color name="white_12">#1effffff</color>
     <color name="holo_red_light">#ffff4444</color>
 
+    <color name="btn_green_noraml">#68C270</color>
+    <color name="btn_white_pressed">#b5b5b6</color>
+    <color name="ex_correct_color">#98CB40</color>
+    <color name="ex_no_select_color">#B0B0B0</color>
 
     <!-- Android standard ICS color -->
     <color name="result_minor_text">#ffc0c0c0</color>

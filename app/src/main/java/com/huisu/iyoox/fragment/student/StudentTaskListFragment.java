@@ -75,9 +75,7 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (view == null) {
-            view = inflater.inflate(R.layout.fragment_student_task_list, container, false);
-        }
+        view = inflater.inflate(R.layout.fragment_student_task_list, container, false);
         initView();
         setEvent();
         EventBus.getDefault().register(this);
@@ -93,7 +91,9 @@ public class StudentTaskListFragment extends BaseFragment implements OnLoadMoreL
     @Override
     public void onShow() {
         if (!init) {
-            swipeToLoadLayout.setRefreshing(true);
+            if (swipeToLoadLayout != null) {
+                swipeToLoadLayout.setRefreshing(true);
+            }
             init = true;
         }
     }

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -29,7 +30,7 @@ import com.umeng.analytics.MobclickAgent;
  * @function: 所有Activity的基类，用来处理一些公共事件，如：数据统计
  * @date: 18/6/28
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends FragmentActivity {
 
     public String TAG;
     protected Context context;
@@ -76,6 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initBaseView();
         LayoutInflater.from(this).inflate(getContentView(), contentView);
         context = this;
+        onChildCreate(savedInstanceState);
         initView();
         setEvent();
         initData();
@@ -90,6 +92,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
         setTitleBarPadding();
+    }
+
+    public void onChildCreate(Bundle savedInstanceState) {
+
     }
 
     private void setTitleBarPadding() {
@@ -301,6 +307,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * try get host activity from view.
      * views hosted on floating window like dialog     and toast will sure return null.
+     *
      * @return host activity; or null if not available
      */
     public static Activity getActivityFromView(View view) {

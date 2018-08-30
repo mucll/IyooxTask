@@ -36,6 +36,15 @@
                     android:textSize="@dimen/f_18" />
 
                 <TextView
+                    android:id="@+id/btn_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dip_8"
+                    android:text="答题卡"
+                    android:textColor="@color/color333"
+                    android:textSize="@dimen/f_16" />
+
+                <TextView
                     android:id="@+id/fragment_current_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -205,12 +205,14 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
         long time = SystemClock.elapsedRealtime() - chronometer.getBase();
         String timeString = DateUtils.formatmmss(time);
         for (ExercisesModel model : exercisesData) {
-            if (model.getAnswersModel().getChooseAnswer().equals(model.getDaan())) {
-                //正确
-                model.getAnswersModel().setCorrect(true);
-            } else {
-                //错误
-                model.getAnswersModel().setCorrect(false);
+            if (model.getAnswersModel() != null) {
+                if (model.getAnswersModel().getChooseAnswer().equals(model.getDaan())) {
+                    //正确
+                    model.getAnswersModel().setCorrect(true);
+                } else {
+                    //错误
+                    model.getAnswersModel().setCorrect(false);
+                }
             }
         }
         Intent intent = new Intent(this, TaskResultActivity.class);
@@ -241,8 +243,13 @@ public class TaskStudentHomeWorkActivity extends BaseActivity implements Exercis
         for (ExercisesModel model : exercisesModels) {
             ExercisesResultModel resultModel = new ExercisesResultModel();
             resultModel.setTimu_id(Integer.parseInt(model.getTimu_id()));
-            resultModel.setIs_correct(model.getAnswersModel().isCorrect() ? Constant.ANSWER_CORRECT : Constant.ANSWER_ERROR);
-            resultModel.setChooseanswer(model.getAnswersModel().getChooseAnswer());
+            if (model.getAnswersModel() != null) {
+                resultModel.setIs_correct(model.getAnswersModel().isCorrect() ? Constant.ANSWER_CORRECT : Constant.ANSWER_ERROR);
+                resultModel.setChooseanswer(model.getAnswersModel().getChooseAnswer());
+            } else {
+                resultModel.setIs_correct(Constant.ANSWER_ERROR);
+                resultModel.setChooseanswer("");
+            }
             resultModels.add(resultModel);
         }
         String json = JsonUtils.jsonFromObject(resultModels);

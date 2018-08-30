@@ -15,6 +15,7 @@ import com.huisu.iyoox.entity.base.BaseVipCardModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.views.CustomLinearLayoutManager;
+import com.huisu.iyoox.wxapi.WXPayEntryActivity;
 
 import java.util.ArrayList;
 
@@ -98,6 +99,8 @@ public class VipBuyActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
+            VipCardModel model = (VipCardModel) data.getSerializableExtra("cardmodel");
+            VipCardResultActivity.start(VipBuyActivity.this,model);
             finish();
         }
     }

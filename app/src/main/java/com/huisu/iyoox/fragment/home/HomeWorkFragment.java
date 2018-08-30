@@ -29,9 +29,7 @@ public class HomeWorkFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (view == null) {
-            view = inflater.inflate(R.layout.fragment_home_work, container, false);
-        }
+        view = inflater.inflate(R.layout.fragment_home_work, container, false);
         initTab();
         initView();
         initFragment();
@@ -81,7 +79,9 @@ public class HomeWorkFragment extends BaseFragment {
     @Override
     public void onShow() {
         if (!init) {
-            fragments.get(myFragmentLayout.getCurrentPosition()).onShow();
+            if (myFragmentLayout != null) {
+                fragments.get(myFragmentLayout.getCurrentPosition()).onShow();
+            }
             init = true;
         }
     }

@@ -3,7 +3,9 @@ package com.huisu.iyoox.entity;
 
 import org.litepal.crud.LitePalSupport;
 
-public class User extends LitePalSupport {
+import java.io.Serializable;
+
+public class User extends LitePalSupport implements Serializable{
     private int user_id;
     private String name;
     private String phone;

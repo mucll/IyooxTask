@@ -142,6 +142,10 @@
 -keep public class com.tencent.bugly.**{*;}
 -keep class android.support.**{*;}
 
+-keep class com.tencent.mm.sdk.** {
+   *;
+}
+
 #okhttp
 -dontwarn okhttp3.**
 -keep class okhttp3.**{*;}

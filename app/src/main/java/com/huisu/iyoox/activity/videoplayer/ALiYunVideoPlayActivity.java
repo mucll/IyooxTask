@@ -370,8 +370,11 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
         public void onFirstFrameStart() {
             init = true;
             video_hint_layout.setVisibility(View.GONE);
-            ALiYunVideoPlayActivity activity = activityWeakReference.get();
-            if (activity != null) {
+//            ALiYunVideoPlayActivity activity = activityWeakReference.get();
+//            if (activity != null) {
+//            }
+            if (user != null && selectModel != null) {
+                addShiPinCount(user.getUserId(), selectModel.getZhishidian_id() + "");
             }
         }
     }
@@ -683,4 +686,22 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
 
         }
     }
+
+    /**
+     * 统计观看视频次数
+     */
+    private void addShiPinCount(String userId, String zhishiId) {
+        RequestCenter.addShiPinCount(userId, zhishiId, new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+
+            }
+        });
+    }
+
 }
