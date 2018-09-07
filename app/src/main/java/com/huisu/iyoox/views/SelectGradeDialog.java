@@ -27,16 +27,15 @@ import static com.huisu.iyoox.views.SelectSexDialog.MAN_CODE;
  */
 public class SelectGradeDialog implements AdapterView.OnItemClickListener {
     private Dialog dialog;
-    private int selectGrad = 0;
+    private int selectGrade;
     private final ListView mListView;
     private final GradeAdapter mAdapter;
     private List<GradeListModel> gradeModels;
 
     public SelectGradeDialog(Context context, List<GradeListModel> gradeModels, int selectGrade) {
-        this.selectGrad = selectGrade - 1;
+        this.selectGrade = selectGrade;
         this.gradeModels = gradeModels;
-        dialog = new Dialog(context,
-                R.style.Transparent2);
+        dialog = new Dialog(context,R.style.Transparent2);
         dialog.setCanceledOnTouchOutside(true);
         View view = View.inflate(context,
                 R.layout.layout_select_grade, null);
@@ -47,8 +46,8 @@ public class SelectGradeDialog implements AdapterView.OnItemClickListener {
             }
         });
         dialog.setContentView(view);
-        mListView = (ListView) view.findViewById(R.id.select_grade_list_view);
-        mAdapter = new GradeAdapter(context, gradeModels, selectGrad);
+        mListView = view.findViewById(R.id.select_grade_list_view);
+        mAdapter = new GradeAdapter(context, gradeModels, selectGrade);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
         Animation ani = AnimationUtils.loadAnimation(context, R.anim.push_bottom_in);
@@ -63,8 +62,8 @@ public class SelectGradeDialog implements AdapterView.OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        selectGrad = position;
-        getGradeType(gradeModels.get(position), selectGrad + 1);
+        selectGrade = gradeModels.get(position).getGrade_id();
+        getGradeType(gradeModels.get(position), selectGrade);
         dialog.dismiss();
     }
 }

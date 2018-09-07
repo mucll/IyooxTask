@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.VipBuyActivity;
 import com.youth.banner.Banner;
@@ -79,6 +80,35 @@ public class NewHomePageFragmentAdapter extends RecyclerView.Adapter {
                     VipBuyActivity.start(context);
                 }
             });
+            //1
+            headHolder.xsc_math_1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectPosition(0);
+                }
+            });
+            //2
+            headHolder.xsc_math_2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectPosition(1);
+                }
+            });
+            //3
+            headHolder.xsc_yuwen_1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectPosition(2);
+                }
+            });
+            //4
+            headHolder.xsc_english_1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectPosition(3);
+                }
+            });
+
         } else if (holder instanceof NewHomePageFragmentAdapter.ContentHolder) { // 内容
             NewHomePageFragmentAdapter.ContentHolder myHolder = (NewHomePageFragmentAdapter.ContentHolder) holder;
             myHolder.imageView.setImageResource(getResId(position - 1));
@@ -91,6 +121,10 @@ public class NewHomePageFragmentAdapter extends RecyclerView.Adapter {
     }
 
     public void setBanner(Banner banner) {
+
+    }
+
+    public void selectPosition(int position) {
 
     }
 
@@ -150,23 +184,45 @@ public class NewHomePageFragmentAdapter extends RecyclerView.Adapter {
         //        RadioGroup radioGroup;
         Banner mBanner;
         ImageView vipIv;
+        ImageView xsc_math_1;
+        ImageView xsc_math_2;
+        ImageView xsc_yuwen_1;
+        ImageView xsc_english_1;
 
         public HeadHolder(View itemView) {
             super(itemView);
             mBanner = itemView.findViewById(R.id.home_page_banner);
             vipIv = itemView.findViewById(R.id.home_page_vip_iv);
+            xsc_math_1 = itemView.findViewById(R.id.xsc_math_1);
+            xsc_math_2 = itemView.findViewById(R.id.xsc_math_2);
+            xsc_yuwen_1 = itemView.findViewById(R.id.xsc_yuwen_1);
+            xsc_english_1 = itemView.findViewById(R.id.xsc_english_1);
 //            radioGroup = itemView.findViewById(R.id.home_page_radio_group);
         }
     }
 
+    private MyOnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(MyOnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
     // 内容
-    private class ContentHolder extends RecyclerView.ViewHolder {
+    private class ContentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView imageView;
 
         public ContentHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.new_page_iv);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(getLayoutPosition(), v);
+            }
         }
     }
 

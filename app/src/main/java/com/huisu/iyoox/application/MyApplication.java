@@ -3,12 +3,18 @@ package com.huisu.iyoox.application;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 
 import com.alivc.player.AliVcMediaPlayer;
+import com.aliyun.vodplayer.downloader.AliyunDownloadConfig;
+import com.aliyun.vodplayer.downloader.AliyunDownloadManager;
+import com.huisu.iyoox.BuildConfig;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.PlatformConfig;
 
 import org.litepal.LitePalApplication;
 
@@ -46,17 +52,24 @@ public class MyApplication extends Application {
         ImageLoader.getInstance().init(configuration);
         //初始化播放器
         AliVcMediaPlayer.init(getApplicationContext());
-
+//        //设置保存密码。此密码如果更换，则之前保存的视频无法播放
+//        AliyunDownloadConfig config = new AliyunDownloadConfig();
+//        config.setSecretImagePath(Environment.getExternalStorageDirectory().getAbsolutePath() + "/aliyun/encryptedApp.dat");
+//        //        config.setDownloadPassword("123456789");
+//        //设置保存路径。请确保有SD卡访问权限。
+//        config.setDownloadDir(Environment.getExternalStorageDirectory().getAbsolutePath() + "/iyoox_save/");
+//        //设置同时下载个数
+//        config.setMaxNums(2);
+//        AliyunDownloadManager.getInstance(this).setDownloadConfig(config);
 
     }
 
 
-
     public void initUMeng() {
-//        UMConfigure.init(this, "5b83d4f5f29d9863b1000113"
-//                , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
-//        UMConfigure.setLogEnabled(BuildConfig.LOGSHOW);
-//        PlatformConfig.setWeixin("wx4a498229ebec148f", "b62f77ec061042af3925c87a8ff8bdaa");
+        UMConfigure.init(this, "5b83d4f5f29d9863b1000113"
+                , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
+        UMConfigure.setLogEnabled(BuildConfig.LOGSHOW);
+        PlatformConfig.setWeixin("wx4a498229ebec148f", "a05e58fb7ae95281497491ed8230170f");
     }
 
     @Override

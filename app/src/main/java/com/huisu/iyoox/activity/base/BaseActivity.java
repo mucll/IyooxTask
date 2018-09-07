@@ -55,6 +55,7 @@ public abstract class BaseActivity extends FragmentActivity {
      **/
     protected abstract void initView();
 
+
     /**
      * 初始化数据
      */
@@ -72,6 +73,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        copyAssets();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_layout);
         initBaseView();
@@ -109,6 +111,10 @@ public abstract class BaseActivity extends FragmentActivity {
 
     private void initBaseView() {
         contentView = findViewById(R.id.base_content_layout);
+    }
+
+    public void copyAssets() {
+
     }
 
 

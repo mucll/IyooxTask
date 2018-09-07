@@ -13,8 +13,10 @@ import com.huisu.iyoox.entity.base.BaseCollectModel;
 import com.huisu.iyoox.entity.base.BaseDianPingListModel;
 import com.huisu.iyoox.entity.base.BaseExercisesModel;
 import com.huisu.iyoox.entity.base.BaseGradeListModel;
+import com.huisu.iyoox.entity.base.BaseGuoxueYishuVodModel;
 import com.huisu.iyoox.entity.base.BaseHomeWorkResultModel;
 import com.huisu.iyoox.entity.base.BaseLearningCardModel;
+import com.huisu.iyoox.entity.base.BaseMoreCollectModel;
 import com.huisu.iyoox.entity.base.BaseNotificationMsgModel;
 import com.huisu.iyoox.entity.base.BaseOtherBookModel;
 import com.huisu.iyoox.entity.base.BasePhoneModel;
@@ -38,7 +40,9 @@ import com.huisu.iyoox.entity.base.BaseVersionModel;
 import com.huisu.iyoox.entity.base.BaseVideoGroupModel;
 import com.huisu.iyoox.entity.base.BaseVideoModel;
 import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
+import com.huisu.iyoox.entity.base.BaseVipCardListModel;
 import com.huisu.iyoox.entity.base.BaseVipCardModel;
+import com.huisu.iyoox.entity.base.BaseXscVideoModel;
 import com.huisu.iyoox.okhttp.CommonOkHttpClient;
 import com.huisu.iyoox.okhttp.listener.DisposeDataHandle;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
@@ -421,7 +425,7 @@ public class RequestCenter {
         RequestParams params = new RequestParams();
         params.put("student_id", userId);
         params.put("no", code);
-        RequestCenter.postRequest(HttpConstants.getStudentBindCard, params, listener, null);
+        RequestCenter.postRequest(HttpConstants.getStudentBindCard, params, listener, BaseVipCardModel.class);
     }
 
     /**
@@ -624,10 +628,11 @@ public class RequestCenter {
     /**
      * 学生收藏视频
      */
-    public static void collectZhishidian(String userId, String zhishidianId, DisposeDataListener listener) {
+    public static void collectZhishidian(String userId, String zhishidianId, String shipin_type, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("student_id", userId);
         params.put("zhishidian_id", zhishidianId);
+        params.put("shipin_type", shipin_type);
         RequestCenter.postRequest(HttpConstants.collectZhishidian, params, listener, null);
     }
 
@@ -690,7 +695,7 @@ public class RequestCenter {
      */
     public static void getVipList(DisposeDataListener listener) {
         RequestParams params = new RequestParams();
-        RequestCenter.postRequest(HttpConstants.getVipList, params, listener, BaseVipCardModel.class);
+        RequestCenter.postRequest(HttpConstants.getVipList, params, listener, BaseVipCardListModel.class);
     }
 
     /**
@@ -771,7 +776,7 @@ public class RequestCenter {
     public static void deleteCollect(String userId, String zhishidianId, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("student_id", userId);
-        params.put("zhishidian_ids", zhishidianId);
+        params.put("zhishidians", zhishidianId);
         RequestCenter.postRequest(HttpConstants.deleteCollect, params, listener, BaseOtherBookModel.class);
     }
 
@@ -787,10 +792,60 @@ public class RequestCenter {
     /**
      * 获取学生VIP 做题数 完成作业次数
      */
-    public static void addShiPinCount(String userId, String zhishidianId, DisposeDataListener listener) {
+    public static void addShiPinCount(String userId, String zhishidianId, String type, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
         params.put("student_id", userId);
         params.put("zhishidian_id", zhishidianId);
+        params.put("shipin_type", type);
         RequestCenter.postRequest(HttpConstants.addShiPinCount, params, listener, null);
+    }
+
+    /**
+     * 首页点击
+     */
+    public static void get_video_from_index(String userId, String zhishidianId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("student_id", userId);
+        params.put("zhishidian_id", zhishidianId);
+        RequestCenter.postRequest(HttpConstants.get_video_from_index, params, listener, null);
+    }
+
+    /**
+     * 点击国学艺术
+     */
+    public static void get_guoxue_yishu_vedio(String userId, String id, String type, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("student_id", userId);
+        params.put("type", type);
+        RequestCenter.postRequest(HttpConstants.get_guoxue_yishu_vedio, params, listener, BaseGuoxueYishuVodModel.class);
+    }
+
+    /**
+     * 学习记录
+     */
+    public static void get_xuexi_record(String userId, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("student_id", userId);
+        RequestCenter.postRequest(HttpConstants.get_xuexi_record, params, listener, BaseMoreCollectModel.class);
+    }
+
+    /**
+     * 小升初
+     */
+    public static void xiaoshengchu(DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        RequestCenter.postRequest(HttpConstants.xiaoshengchu, params, listener, BaseXscVideoModel.class);
+    }
+
+    /**
+     * 小升初详情
+     */
+    public static void get_xiaoshengchu_vedio(String userId, String id, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("module_name", "小升初专题");
+        params.put("id", id);
+        params.put("student_id", userId);
+        RequestCenter.postRequest(HttpConstants.get_xiaoshengchu_vedio, params, listener, BaseGuoxueYishuVodModel.class);
     }
 }

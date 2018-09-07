@@ -10,7 +10,7 @@ public class HttpConstants {
     private static final String BASE_URL = "http://www.sunvke.com";
 //    private static final String BASE_URL = "http://8jbew0j.hk1.mofasuidao.cn";
 
-    private static final String ROOT_URL = BASE_URL + "/api";
+    public static final String ROOT_URL = BASE_URL + "/api";
 
     public static final String APP_DOWNLOAD = BASE_URL + "/app/zaixian.apk";
     //刘栋
@@ -296,6 +296,27 @@ public class HttpConstants {
      * 统计观看视频次数
      */
     public static String addShiPinCount = ROOT_URL + "/zhishidian/view_zhishidian_shipin";
+    /**
+     * 首页点击
+     */
+    public static String get_video_from_index = ROOT_URL + "/zhishidian/get_video_from_index";
+    /**
+     * 获取国学艺术 视频地址
+     */
+    public static String get_guoxue_yishu_vedio = ROOT_URL + "/zhishidian/get_guoxue_yishu_vedio";
+
+    /**
+     * 获取记录
+     */
+    public static String get_xuexi_record = ROOT_URL + "/zhishidian/get_xuexi_record";
+    /**
+     * 小升初
+     */
+    public static String xiaoshengchu = ROOT_URL + "/xiaoshengchu/getmodule";
+    /**
+     * 小升初
+     */
+    public static String get_xiaoshengchu_vedio = ROOT_URL + "/zhishidian/get_xiaoshengchu_vedio";
 }
 
 

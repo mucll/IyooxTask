@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.ConfigMainActivity;
+import com.huisu.iyoox.activity.MainActivity;
 import com.huisu.iyoox.activity.PatriarchActivity;
 import com.huisu.iyoox.activity.PersonalDataActivity;
 import com.huisu.iyoox.activity.VipBuyActivity;
@@ -115,7 +116,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             topLayout.setPadding(0, (int) (24 * BaseActivity.getScreenScale(getActivity())), 0, 0);
         }
-
         shipinCount = view.findViewById(R.id.look_shipin_count);
         timuCount = view.findViewById(R.id.look_timu_count);
         workCount = view.findViewById(R.id.look_work_count);
@@ -143,6 +143,33 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         patriarchLayout.setOnClickListener(this);
         servicePhoneLayout.setOnClickListener(this);
         configLayout.setOnClickListener(this);
+        shiyongLayout.setOnClickListener(this);
+
+
+        view.findViewById(R.id.look_shipin_ll).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StudentLearningHistoryActivity.start(getContext());
+            }
+        });
+
+        view.findViewById(R.id.look_timu_ll).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((MainActivity) getActivity()).myFragmentLayout != null) {
+                    ((MainActivity) getActivity()).myFragmentLayout.setCurrenItem(1);
+                }
+            }
+        });
+
+        view.findViewById(R.id.look_work_ll).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((MainActivity) getActivity()).myFragmentLayout != null) {
+                    ((MainActivity) getActivity()).myFragmentLayout.setCurrenItem(2);
+                }
+            }
+        });
     }
 
     @Override
@@ -160,6 +187,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 //收藏
                 StudentCollectActivity.start(getContext());
                 break;
+            case R.id.shiyong_layout:
             case R.id.mine_purchase_history_ll:
                 //VIP会员
                 VipBuyActivity.start(getContext());
@@ -275,7 +303,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             if (model.getVip_info().getName().contains("试用")) {
                 shiyongLayout.setVisibility(View.VISIBLE);
                 vipTypeIv.setVisibility(View.GONE);
-                user_no_vip_tv.setText("试用账号");
+                user_no_vip_tv.setText("试用VIP");
             } else {
                 shiyongLayout.setVisibility(View.GONE);
                 vipTypeIv.setVisibility(View.VISIBLE);
@@ -286,6 +314,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             vipTypeIv.setVisibility(View.GONE);
             headbg.setImageResource(R.drawable.icon_mine_no_vip_bg);
             huangGuanIv.setVisibility(View.INVISIBLE);
+            vipEndTimeTv.setText("");
         }
 
     }

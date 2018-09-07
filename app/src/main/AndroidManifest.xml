@@ -233,9 +233,15 @@
             android:name=".activity.videoplayer.ALiYunVideoPlayActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
+            android:name=".activity.videoplayer.ALiYunGxYsVideoPlayActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
             android:name=".activity.VipCardResultActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".activity.WebActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
     </application>
 
 </manifest>

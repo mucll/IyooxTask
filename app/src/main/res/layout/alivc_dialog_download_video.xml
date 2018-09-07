@@ -47,12 +47,12 @@
 
         </LinearLayout>-->
 
-        <com.aliyun.vodplayerview.view.download.DownloadView
+        <com.huisu.iyoox.alivideo.download.DownloadView
             android:id="@+id/download_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </com.aliyun.vodplayerview.view.download.DownloadView>
+        </com.huisu.iyoox.alivideo.download.DownloadView>
 
 
 

@@ -12,7 +12,16 @@ public class Constant {
 
 
     public static final String WX_APP_ID = "wx4a498229ebec148f";
+    /**
+     * 小升初
+     */
+    public static final int START_VOD_TYPE = 1;
 
+    public static final int PLAY_PARAM_URL_TYPE = 2;
+
+    public static final int VIDEO_XSC_TYPE = 3;
+    public static final int VIDEO_GxYs_TYPE = 2;
+    public static final int VIDEO_ordinary_TYPE = 0;
 
     /**
      * 网络请求成功

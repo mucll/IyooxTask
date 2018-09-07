@@ -140,7 +140,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
-                                android:text="试用账号"
+                                android:text="试用VIP"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/f_12_pad" />
 
@@ -173,6 +173,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/look_shipin_ll"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -204,6 +205,7 @@
                     android:background="@color/white_76" />
 
                 <LinearLayout
+                    android:id="@+id/look_timu_ll"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -235,6 +237,7 @@
                     android:background="@color/white_76" />
 
                 <LinearLayout
+                    android:id="@+id/look_work_ll"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

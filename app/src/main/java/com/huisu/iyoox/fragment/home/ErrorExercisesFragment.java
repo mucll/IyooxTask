@@ -1,9 +1,11 @@
 package com.huisu.iyoox.fragment.home;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -32,11 +34,11 @@ import java.util.ArrayList;
  */
 public class ErrorExercisesFragment extends BaseFragment {
     private View view;
-    private LayoutInflater mLayoutInflater;
     private ViewPager mVp;
     private View emptyView;
     private User user;
     private ArrayList<SubjectModel> models = new ArrayList<>();
+    private MyAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,13 +75,14 @@ public class ErrorExercisesFragment extends BaseFragment {
                     models.clear();
                     models.addAll(baseSubjectModel.data);
                     emptyView.setVisibility(View.GONE);
-                    //设置预加载数量
-                    mVp.setOffscreenPageLimit(models.size());
-                    mVp.setAdapter(new MyAdapter());
+
                 } else {
                     emptyView.setVisibility(View.VISIBLE);
                 }
-
+                mAdapter = new MyAdapter(getContext(), models);
+                mVp.setAdapter(mAdapter);
+                //设置预加载数量
+                mVp.setOffscreenPageLimit(models.size() - 1);
             }
 
             @Override
@@ -91,7 +94,6 @@ public class ErrorExercisesFragment extends BaseFragment {
 
     private void initView() {
         user = UserManager.getInstance().getUser();
-        mLayoutInflater = LayoutInflater.from(getContext());
         mVp = view.findViewById(R.id.vp_gallery_vp);
         mVp.setOverScrollMode(View.OVER_SCROLL_NEVER);
         emptyView = view.findViewById(R.id.empty_view);
@@ -107,11 +109,19 @@ public class ErrorExercisesFragment extends BaseFragment {
     }
 
     class MyAdapter extends PagerAdapter {
+        private Context context;
+        private ArrayList<SubjectModel> subjectModels;
+
+        public MyAdapter(Context context, ArrayList<SubjectModel> subjectModels) {
+            this.context = context;
+            this.subjectModels = subjectModels;
+        }
 
         @Override
         public int getCount() {
-            return models.size();
+            return subjectModels == null ? 0 : subjectModels.size();
         }
+
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
@@ -120,7 +130,7 @@ public class ErrorExercisesFragment extends BaseFragment {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View view = mLayoutInflater.inflate(R.layout.item_img, container, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.item_img, container, false);
             final SubjectModel subjectModel = models.get(position);
             ImageView img = view.findViewById(R.id.img_item_img);
             img.setImageResource(getSubjectResId(subjectModel.getKemu_id()));
@@ -141,6 +151,11 @@ public class ErrorExercisesFragment extends BaseFragment {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
+        }
+
+        @Override
+        public int getItemPosition(@NonNull Object object) {
+            return PagerAdapter.POSITION_NONE;
         }
     }
 

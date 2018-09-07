@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,15 +44,17 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
 
     private View view;
     private SubjectModel subjectModel;
+    private SubjectModel oldModel;
     private ExpandableListView mListView;
     private List<BookDetailsModel> bookDetailsModels = new ArrayList<>();
-    private ArrayList<OtherBookModel> otherModels = new ArrayList<>();
     private HomeExpandableListAdapter mAdapter;
     private SelectMenuView bookTypeView;
     private SwipeToLoadLayout swipeToLoadLayout;
 
     private String gradeId;
     private String gradeDetailId;
+    private String oldgradeId = "";
+    private String oldgradeDetailId = "";
     private final int default_code = 0;
     private ArrayList<VideoGroupModel> videoModels = new ArrayList<>();
     /**
@@ -147,10 +150,8 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
         initView();
         if (subjectModel == null) return;
         if (subjectModel.getKemu_id() == Constant.SUBJECT_GUOXUE) {
-//            postGuoXueDataHttp();
             setBaseFragment();
         } else if (subjectModel.getKemu_id() == Constant.SUBJECT_YISHU) {
-//            postYiShuDataHttp();
             setBaseFragment();
         } else {
             setEvent();
@@ -294,9 +295,24 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
     @Override
     public void onShow() {
         super.onShow();
-        if (!init) {
-            initData();
-            init = true;
+        if (oldModel != null && !TextUtils.isEmpty(oldgradeId) && !TextUtils.isEmpty(oldgradeDetailId)) {
+            if (oldgradeId.equals(gradeId) && oldgradeDetailId.equals(gradeDetailId)
+                    && oldModel.getKemu_id() == subjectModel.getKemu_id()) {
+
+            } else {
+                initData();
+                oldModel = subjectModel;
+                oldgradeId = gradeId;
+                oldgradeDetailId = gradeDetailId;
+            }
+        } else {
+            if (!init) {
+                init = true;
+                initData();
+                oldModel = subjectModel;
+                oldgradeId = gradeId;
+                oldgradeDetailId = gradeDetailId;
+            }
         }
     }
 
@@ -311,94 +327,6 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
             postDetailsData(editionModel.getJiaocai_id(), editionModel.getGrade_detail_id(),
                     chapterModel.getZhangjie_id(), bookTypeView.getSelectZhiShiDianData());
         }
-    }
-
-    private void postGuoXueDataHttp() {
-        loading = Loading.show(null, getContext(), getString(R.string.loading_one_hint_text));
-        RequestCenter.guoxueList(new DisposeDataListener() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                otherModels.clear();
-                loading.dismiss();
-                BaseOtherBookModel baseModel = (BaseOtherBookModel) responseObj;
-                if (baseModel.data != null && baseModel.data.size() > 0) {
-                    otherModels.addAll(baseModel.data);
-                    initFragment();
-                }
-            }
-
-            @Override
-            public void onFailure(Object reasonObj) {
-                loading.dismiss();
-            }
-        });
-    }
-
-    private void postYiShuDataHttp() {
-        loading = Loading.show(null, getContext(), getString(R.string.loading_one_hint_text));
-        RequestCenter.yishuList(new DisposeDataListener() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                otherModels.clear();
-                loading.dismiss();
-                BaseOtherBookModel baseModel = (BaseOtherBookModel) responseObj;
-                if (baseModel.data != null && baseModel.data.size() > 0) {
-                    otherModels.addAll(baseModel.data);
-                    initFragment();
-                }
-            }
-
-            @Override
-            public void onFailure(Object reasonObj) {
-                loading.dismiss();
-            }
-        });
-    }
-
-    private ArrayList<BaseFragment> fragments = new ArrayList();
-
-    private void initFragment() {
-        fragments.clear();
-        if (otherModels.get(Constant.other_book_one) != null) {
-            fragments.add(getFragment(Constant.other_book_one, otherModels.get(Constant.other_book_one)));
-        }
-        if (otherModels.get(Constant.other_book_two) != null) {
-            fragments.add(getFragment(Constant.other_book_two, otherModels.get(Constant.other_book_two)));
-        }
-        if (otherModels.get(Constant.other_book_three) != null) {
-            fragments.add(getFragment(Constant.other_book_three, otherModels.get(Constant.other_book_three)));
-        }
-        myFragmentLayout.setScorllToNext(true);
-        myFragmentLayout.setScorll(true);
-        myFragmentLayout.setWhereTab(1);
-        myFragmentLayout.setTabHeight(6, getResources().getColor(R.color.main_text_color), false);
-        myFragmentLayout
-                .setOnChangeFragmentListener(new MyFragmentLayout_line.ChangeFragmentListener() {
-                    @Override
-                    public void change(int lastPosition, int positon,
-                                       View lastTabView, View currentTabView) {
-                        ((TextView) lastTabView.findViewById(R.id.tab_text))
-                                .setTextColor(getResources().getColor(R.color.color333));
-                        ((TextView) currentTabView.findViewById(R.id.tab_text))
-                                .setTextColor(getResources().getColor(R.color.main_text_color));
-                        fragments.get(positon).onShow();
-                    }
-                });
-        if (subjectModel.getKemu_id() == Constant.SUBJECT_GUOXUE) {
-            myFragmentLayout.setAdapter(fragments, R.layout.tablayout_other_book, 0x253);
-        } else if (subjectModel.getKemu_id() == Constant.SUBJECT_YISHU) {
-            myFragmentLayout.setAdapter(fragments, R.layout.tablayout_other_two_book, 0x254);
-        }
-
-    }
-
-    private OtherBookDetailFragment getFragment(int taskType, OtherBookModel model) {
-        OtherBookDetailFragment fragment = new OtherBookDetailFragment();
-        Bundle b = new Bundle();
-        b.putInt("type", taskType);
-        b.putSerializable("model", model);
-        fragment.setArguments(b);
-        return fragment;
     }
 
     private ArtBookFragment getFragment(int kemuId) {

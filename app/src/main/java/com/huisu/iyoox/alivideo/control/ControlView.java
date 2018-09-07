@@ -20,9 +20,11 @@ import android.widget.Toast;
 import com.alivc.player.VcPlayerLog;
 import com.aliyun.vodplayer.media.AliyunMediaInfo;
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.MainActivity;
 import com.huisu.iyoox.activity.videoplayer.ALiYunVideoPlayActivity;
 import com.huisu.iyoox.alivideo.AliyunScreenMode;
 import com.huisu.iyoox.alivideo.AliyunVodPlayerView;
+import com.huisu.iyoox.alivideo.constants.PlayParameter;
 import com.huisu.iyoox.alivideo.interfaces.ViewAction;
 import com.huisu.iyoox.alivideo.quality.QualityItem;
 import com.huisu.iyoox.alivideo.theme.ITheme;
@@ -47,6 +49,7 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
     //标题，控制条单独控制是否可显示
     private boolean mTitleBarCanShow = true;
     private boolean mControlBarCanShow = true;
+    private boolean mDownLoadShow = true;
     private View mTitleBar;
     private View mControlBar;
 
@@ -332,6 +335,17 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
     }
 
     /**
+     * 更新下载按钮的显示和隐藏
+     */
+    public void updateDownloadBtn() {
+        if (mAliyunScreenMode == AliyunScreenMode.Full || "localSource".equals(PlayParameter.PLAY_PARAM_TYPE)) {
+            mTitleDownload.setVisibility(GONE);
+        } else if (mAliyunScreenMode == AliyunScreenMode.Small || "vidsts".equals(PlayParameter.PLAY_PARAM_TYPE)) {
+            mTitleDownload.setVisibility(mDownLoadShow ? VISIBLE : GONE);
+        }
+    }
+
+    /**
      * 设置当前播放的清晰度
      *
      * @param currentQuality 当前清晰度
@@ -350,6 +364,14 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
     public void setForceQuality(boolean forceQuality) {
         mForceQuality = forceQuality;
         updateChangeQualityBtn();
+    }
+
+    /**
+     * 隐藏下载
+     */
+    public void hintDownLoad() {
+        mDownLoadShow = false;
+        mTitleDownload.setVisibility(View.GONE);
     }
 
     /**
@@ -417,11 +439,11 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
      */
     private void updateShowMoreBtn() {
         if (mAliyunScreenMode == AliyunScreenMode.Full) {
-            mTitleMore.setVisibility(VISIBLE);
+//            mTitleMore.setVisibility(VISIBLE);
 //            mTitleDownload.setVisibility(GONE);
         } else {
-            mTitleMore.setVisibility(GONE);
-//            mTitleDownload.setVisibility(VISIBLE);
+//            mTitleMore.setVisibility(GONE);
+            mTitleDownload.setVisibility(mDownLoadShow ? VISIBLE : GONE);
         }
     }
 
@@ -460,11 +482,11 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
 
 
     public void showMoreButton() {
-        mTitleMore.setVisibility(VISIBLE);
+//        mTitleMore.setVisibility(VISIBLE);
     }
 
     public void hideMoreButton() {
-        mTitleMore.setVisibility(GONE);
+//        mTitleMore.setVisibility(GONE);
     }
 
 
@@ -598,7 +620,8 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
      */
     private void updateTitleView() {
         if (mAliyunMediaInfo != null && mAliyunMediaInfo.getTitle() != null && !("null".equals(mAliyunMediaInfo.getTitle()))) {
-            mTitlebarText.setText(mAliyunMediaInfo.getTitle());
+//            mTitlebarText.setText(mAliyunMediaInfo.getTitle());
+            mTitlebarText.setText("");
         } else {
             mTitlebarText.setText("");
         }
@@ -691,12 +714,12 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
             mScreenLockBtn.setVisibility(VISIBLE);
 //            mScreenRecorder.setVisibility(VISIBLE);
 //            mScreenShot.setVisibility(VISIBLE);
-            mTitleMore.setVisibility(VISIBLE);
+//            mTitleMore.setVisibility(VISIBLE);
         } else {
             mScreenLockBtn.setVisibility(GONE);
 //            mScreenRecorder.setVisibility(GONE);
 //            mScreenShot.setVisibility(GONE);
-            mTitleMore.setVisibility(GONE);
+//            mTitleMore.setVisibility(GONE);
         }
     }
 
@@ -742,7 +765,7 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
 
             ControlView controlView = controlViewWeakReference.get();
             if (controlView != null) {
-                if (ALiYunVideoPlayActivity.init) {
+                if (MainActivity.vod_init) {
                     controlView.hide(HideType.Normal);
                 } else {
                     controlView.setTitleBarCanShow(true);

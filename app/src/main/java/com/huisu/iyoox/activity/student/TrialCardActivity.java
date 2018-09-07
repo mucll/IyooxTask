@@ -15,21 +15,27 @@ import android.widget.TextView;
 
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.VipBuyActivity;
+import com.huisu.iyoox.activity.VipCardResultActivity;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.constant.EventBusMsg;
 import com.huisu.iyoox.entity.TrialCardModel;
 import com.huisu.iyoox.entity.User;
+import com.huisu.iyoox.entity.VipCardModel;
 import com.huisu.iyoox.entity.base.BaseTrialCardModel;
+import com.huisu.iyoox.entity.base.BaseVipCardModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
+import com.huisu.iyoox.util.DateUtils;
 import com.huisu.iyoox.util.TabToast;
 import com.huisu.iyoox.views.Loading;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Date;
 
 /**
  * 激活码卡号兑换
@@ -136,18 +142,13 @@ public class TrialCardActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onSuccess(Object responseObj) {
                 loading.dismiss();
-                JSONObject jsonObject = (JSONObject) responseObj;
-                try {
-                    int code = jsonObject.getInt("code");
-                    if (code == Constant.POST_SUCCESS_CODE) {
-                        TabToast.showMiddleToast(context, "成功激活卡号");
-                        StudentLearningCardActivity.start(context);
-                        EventBus.getDefault().post(new EventBusMsg.finishMsg());
-                        finish();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                BaseVipCardModel baseModel = (BaseVipCardModel) responseObj;
+                if (baseModel.data != null) {
+                    VipCardResultActivity.start(context, baseModel.data);
                 }
+                //成功激活
+                EventBus.getDefault().post(new EventBusMsg.finishMsg());
+                finish();
             }
 
             @Override

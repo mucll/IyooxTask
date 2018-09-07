@@ -76,10 +76,11 @@
     <dimen name="dip_140">210dip</dimen>
     <dimen name="dip_140_pad">300dip</dimen>
     <dimen name="dip_150">225dip</dimen>
-    <dimen name="dip_150_pad">260dip</dimen>
+    <dimen name="dip_150_pad">287dip</dimen>
     <dimen name="dip_160">240dip</dimen>
     <dimen name="dip_200">300dip</dimen>
     <dimen name="dip_200_pad">500dip</dimen>
+    <dimen name="dip_240_pad">400dip</dimen>
     <dimen name="dip_320">420dip</dimen>
     <dimen name="dip_320_pad">500dip</dimen>
     <dimen name="dip_400">600dip</dimen>

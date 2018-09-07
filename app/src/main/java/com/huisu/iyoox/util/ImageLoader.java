@@ -29,7 +29,13 @@ import javax.microedition.khronos.egl.EGLSurface;
  */
 public class ImageLoader {
 
-
+    public static void load(Context context, ImageView iv, String url) {
+        Glide.with(context)
+                .load(url)
+                .dontAnimate()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(iv);
+    }
     /**
      * 普通加载图片,设置错误图片
      *

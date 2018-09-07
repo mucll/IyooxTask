@@ -1,6 +1,7 @@
 package com.huisu.iyoox.fragment.home;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,17 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
+import com.huisu.iyoox.activity.videoplayer.ALiYunGxYsVideoPlayActivity;
 import com.huisu.iyoox.adapter.ArtBookListAdapter;
 import com.huisu.iyoox.complexmenu.SelectFengMianView;
 import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.ArtBookModel;
 import com.huisu.iyoox.entity.ArtBookZSDModel;
 import com.huisu.iyoox.entity.ArtBookZhangJieModel;
+import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.base.BaseArtBookModel;
 import com.huisu.iyoox.entity.base.BaseArtBookZSDModel;
+import com.huisu.iyoox.entity.base.BaseGuoxueYishuVodModel;
 import com.huisu.iyoox.fragment.base.BaseFragment;
 import com.huisu.iyoox.http.RequestCenter;
+import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
 import com.huisu.iyoox.swipetoloadlayout.OnRefreshListener;
 import com.huisu.iyoox.swipetoloadlayout.SwipeToLoadLayout;
@@ -29,7 +35,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtBookFragment extends BaseFragment implements OnRefreshListener {
+public class ArtBookFragment extends BaseFragment implements OnRefreshListener, MyOnItemClickListener {
 
     private View view;
     private int kemuId = Constant.ERROR_CODE;
@@ -43,6 +49,8 @@ public class ArtBookFragment extends BaseFragment implements OnRefreshListener {
     private View emptyView;
     private int typeId = Constant.ERROR_CODE;
     private ArtBookZhangJieModel selectModel;
+    private int type;
+    private User user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,7 @@ public class ArtBookFragment extends BaseFragment implements OnRefreshListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_art_book, container, false);
+        user = UserManager.getInstance().getUser();
         initView();
         setEvent();
         initData();
@@ -92,6 +101,7 @@ public class ArtBookFragment extends BaseFragment implements OnRefreshListener {
                 swipeToLoadLayout.setRefreshing(true);
             }
         });
+        mAdapter.setOnItemClickListener(this);
         swipeToLoadLayout.setOnRefreshListener(this);
     }
 
@@ -114,8 +124,10 @@ public class ArtBookFragment extends BaseFragment implements OnRefreshListener {
     private void initData() {
         if (kemuId == Constant.ERROR_CODE) return;
         if (kemuId == Constant.SUBJECT_GUOXUE) {
+            type = 1;
             postGuoXueHttp();
         } else if (kemuId == Constant.SUBJECT_YISHU) {
+            type = 2;
             postYiShuHttp();
         }
     }
@@ -264,5 +276,33 @@ public class ArtBookFragment extends BaseFragment implements OnRefreshListener {
         } else if (kemuId == Constant.SUBJECT_YISHU) {
             postYiShuDetailHttp(typeId + "", selectModel.getZhangjie_name());
         }
+    }
+
+    @Override
+    public void onItemClick(int position, View view) {
+        ArtBookZSDModel model = models.get(position);
+        postVodHttp(model);
+    }
+
+    private void postVodHttp(ArtBookZSDModel model) {
+        loading = Loading.show(null, getContext(), getString(R.string.loading_one_hint_text));
+        RequestCenter.get_guoxue_yishu_vedio(user.getUserId(), model.getZhishidian_id() + "", type + "", new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                loading.dismiss();
+                BaseGuoxueYishuVodModel baseModel = (BaseGuoxueYishuVodModel) responseObj;
+                if (baseModel.data != null) {
+                    Intent intent = new Intent(getContext(), ALiYunGxYsVideoPlayActivity.class);
+                    intent.putExtra("model", baseModel.data);
+                    intent.putExtra("zhangjieName", selectModel.getZhangjie_name());
+                    getContext().startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                loading.dismiss();
+            }
+        });
     }
 }

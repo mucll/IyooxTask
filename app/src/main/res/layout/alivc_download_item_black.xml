@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_download_item_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dip_76"
+    android:layout_gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="4dp"
+    android:paddingTop="4dp">
+
+    <CheckBox
+        android:id="@+id/cb_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/alivc_checkbox_selector"
+        android:button="@null"
+        android:enabled="false"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/rl_download_video_cover_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="12dp">
+
+        <ImageView
+            android:id="@+id/iv_video_cover"
+            android:layout_width="@dimen/dip_120"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/iv_video_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_video_download_info_stats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_video_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:lines="1"
+            android:singleLine="true"
+            android:text="Title"
+            android:textColor="@color/color333"
+            android:textSize="@dimen/f_14"  />
+
+        <RelativeLayout
+            android:id="@+id/ll_download_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_video_title"
+            android:layout_marginTop="7dp">
+
+            <TextView
+                android:id="@+id/tv_download_video_stats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text=" Stats "
+                android:textColor="@color/alivc_color_player_colorAccent"
+                android:textSize="@dimen/f_14" />
+
+            <TextView
+                android:id="@+id/tv_download_video_current_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_download_video_stats"
+                android:text=" Speed "
+                android:textColor="@color/color333"
+                android:textSize="@dimen/alivc_download_font_size"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_video_total_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:text="Total Size"
+                android:textColor="@color/color333"
+                android:textSize="@dimen/f_14"  />
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_download_video"
+            style="@style/progress_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_download_info"
+            android:layout_marginTop="3dp" />
+
+    </RelativeLayout>
+</LinearLayout>

@@ -12,12 +12,16 @@ import android.widget.TextView;
 import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
+import com.huisu.iyoox.activity.videoplayer.ALiYunGxYsVideoPlayActivity;
 import com.huisu.iyoox.activity.videoplayer.ALiYunVideoPlayActivity;
 import com.huisu.iyoox.adapter.StudentCollectAdapter;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.CollectModel;
+import com.huisu.iyoox.entity.DeleteCollectModel;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.VideoTitleModel;
 import com.huisu.iyoox.entity.base.BaseCollectModel;
+import com.huisu.iyoox.entity.base.BaseGuoxueYishuVodModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
@@ -128,19 +132,70 @@ public class StudentCollectActivity extends BaseActivity implements View.OnClick
         }
     }
 
+    private void postXscDetailsHttp(String id, final String name) {
+        loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
+        RequestCenter.get_xiaoshengchu_vedio(user.getUserId(), id, new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                loading.dismiss();
+                BaseGuoxueYishuVodModel baseModel = (BaseGuoxueYishuVodModel) responseObj;
+                if (baseModel.data != null) {
+                    Intent intent = new Intent(context, ALiYunGxYsVideoPlayActivity.class);
+                    intent.putExtra("model", baseModel.data);
+                    intent.putExtra("zhangjieName", name);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                loading.dismiss();
+            }
+        });
+    }
+
     private void startVideoActivity(int position) {
         CollectModel model = models.get(position);
-        VideoTitleModel titleModel = new VideoTitleModel();
-        titleModel.setShipin_id(model.getVedio_id());
-        titleModel.setShipin_name(model.getVedio_name());
-        titleModel.setZhishidian_id(model.getZhishidian_id());
-        List<VideoTitleModel> videoTitleModels = new ArrayList<>();
-        videoTitleModels.add(titleModel);
-        Intent intent = new Intent(context, ALiYunVideoPlayActivity.class);
-        intent.putExtra("selectModel", titleModel);
-        intent.putExtra("zhangjieName", model.getZhishidian_name());
-        intent.putExtra("models", (Serializable) videoTitleModels);
-        startActivity(intent);
+        if (model.getShipin_type() == Constant.VIDEO_ordinary_TYPE) {
+            VideoTitleModel titleModel = new VideoTitleModel();
+            titleModel.setShipin_id(model.getVedio_id());
+            titleModel.setShipin_name(model.getVedio_name());
+            titleModel.setZhishidian_id(model.getZhishidian_id());
+            List<VideoTitleModel> videoTitleModels = new ArrayList<>();
+            videoTitleModels.add(titleModel);
+            Intent intent = new Intent(context, ALiYunVideoPlayActivity.class);
+            intent.putExtra("selectModel", titleModel);
+            intent.putExtra("zhangjieName", model.getZhishidian_name());
+            intent.putExtra("models", (Serializable) videoTitleModels);
+            startActivity(intent);
+        } else if (model.getShipin_type() == Constant.VIDEO_XSC_TYPE) {
+            postXscDetailsHttp(model.getVedio_id() + "", "小升初专题");
+        } else {
+            postVodHttp(model.getVedio_id() + "", model.getShipin_type() + "", model.getGrade_name());
+        }
+    }
+
+
+    private void postVodHttp(String id, String type, final String name) {
+        loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
+        RequestCenter.get_guoxue_yishu_vedio(user.getUserId(), id, type, new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                loading.dismiss();
+                BaseGuoxueYishuVodModel baseModel = (BaseGuoxueYishuVodModel) responseObj;
+                if (baseModel.data != null) {
+                    Intent intent = new Intent(context, ALiYunGxYsVideoPlayActivity.class);
+                    intent.putExtra("model", baseModel.data);
+                    intent.putExtra("zhangjieName", name);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                loading.dismiss();
+            }
+        });
     }
 
     @Override
@@ -163,16 +218,19 @@ public class StudentCollectActivity extends BaseActivity implements View.OnClick
 
     private void selectDeleteData(int position) {
         CollectModel model = models.get(position);
-        List<String> strings = new ArrayList<>();
-        strings.add(model.getZhishidian_id() + "");
-        if (strings.size() > 0) {
-            deleteCollect(JsonUtils.jsonFromObject(strings),position);
+        List<DeleteCollectModel> deleteCollectModels = new ArrayList<>();
+        DeleteCollectModel collectModel = new DeleteCollectModel();
+        collectModel.setZhishidian_id(model.getZhishidian_id() + "");
+        collectModel.setShipin_type(model.getShipin_type() + "");
+        deleteCollectModels.add(collectModel);
+        if (deleteCollectModels.size() > 0) {
+            deleteCollect(JsonUtils.jsonFromObject(deleteCollectModels), position);
         } else {
             TabToast.showMiddleToast(context, "请勾选要删除的视频");
         }
     }
 
-    private void deleteCollect(String jsons,final int position) {
+    private void deleteCollect(String jsons, final int position) {
         loading = Loading.show(null, context, getString(R.string.loading_one_hint_text));
         RequestCenter.deleteCollect(user.getUserId(), jsons, new DisposeDataListener() {
             @Override

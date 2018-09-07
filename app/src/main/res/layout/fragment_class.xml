@@ -44,8 +44,7 @@
             android:id="@+id/class_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:visibility="gone">
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -158,6 +157,15 @@
                     android:id="@+id/class_fragment_view_pager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/class_empty_text_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dip_120"
+                    android:gravity="center"
+                    android:text="暂无成绩"
+                    android:textColor="@color/color333"
+                    android:textSize="@dimen/f_16" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
@@ -166,7 +174,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/class_empty_icon_iv"

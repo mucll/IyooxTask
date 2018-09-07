@@ -71,7 +71,7 @@ public class ExercisesPageFragment extends BaseFragment implements TagViewPager.
     private TextView currentNumber;
     private TextView zhiShiDianNameTv;
     private ProgressBar mProgressBar;
-    private ImageView mActionButton;
+    private View mActionButton;
     private Button submitBT;
     private String zhishidianName;
     private int type;

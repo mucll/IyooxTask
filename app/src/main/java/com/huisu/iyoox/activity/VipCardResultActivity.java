@@ -18,12 +18,14 @@ public class VipCardResultActivity extends BaseActivity {
 
     private ImageView card_result_iv;
     private ImageView cardView;
+    private ImageView result_hint_img;
     private TextView endTimeTv;
 
     @Override
     protected void initView() {
         setWindow();
         card_result_iv = findViewById(R.id.card_result_iv);
+        result_hint_img = findViewById(R.id.result_hint_img);
         endTimeTv = findViewById(R.id.result_card_end_time_tv);
         cardView = findViewById(R.id.result_card_bg_iv);
     }
@@ -33,16 +35,29 @@ public class VipCardResultActivity extends BaseActivity {
         VipCardModel model = (VipCardModel) getIntent().getSerializableExtra("cardmodel");
         if (model != null) {
             cardView.setImageResource(getCardResultResId(model.getId()));
+            result_hint_img.setImageResource(getCardResultHintTextResId(model.getId()));
             endTimeTv.setText("有效期:" + StringUtils.getTimeStringYMD(model.getEnddate()));
-            endTimeTv.setVisibility(View.GONE);
         }
     }
 
     /**
      * VIP图片类型
+     * getCardResultHintResId
      *
      * @param id VIP类别Id
      */
+    private int getCardResultHintTextResId(int id) {
+        switch (id) {
+            case 2://月卡
+            case 3://半年
+            case 8://年卡
+            case 9://3年卡
+                return R.drawable.icon_vip_buy_result_hint_img;
+            default:
+                return R.drawable.icon_vip_jihuo_result_hint_img;
+        }
+    }
+
     private int getCardResultResId(int id) {
         switch (id) {
             case 2://月卡
@@ -54,7 +69,7 @@ public class VipCardResultActivity extends BaseActivity {
             case 9://3年卡
                 return R.drawable.icon_vip_buy_result_sannian_img;
             default:
-                return R.drawable.icon_vip_buy_result_sannian_img;
+                return R.drawable.icon_vip_jihuo_result_img;
         }
     }
 

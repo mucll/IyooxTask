@@ -12,6 +12,7 @@ import java.io.Serializable;
 public class ArtBookZSDModel implements Serializable {
     private String name;
     private String url;
+    private int zhishidian_id;
 
     public String getName() {
         return name;
@@ -27,5 +28,13 @@ public class ArtBookZSDModel implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getZhishidian_id() {
+        return zhishidian_id;
+    }
+
+    public void setZhishidian_id(int zhishidian_id) {
+        this.zhishidian_id = zhishidian_id;
     }
 }

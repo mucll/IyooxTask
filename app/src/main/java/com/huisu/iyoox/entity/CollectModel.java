@@ -19,6 +19,8 @@ public class CollectModel {
     private String grade_detail_name;
     private String xueke_name;
     private int xueke_id;
+    private int shipin_type;
+
 
     public int getVedio_id() {
         return vedio_id;
@@ -106,5 +108,13 @@ public class CollectModel {
 
     public void setXueke_id(int xueke_id) {
         this.xueke_id = xueke_id;
+    }
+
+    public int getShipin_type() {
+        return shipin_type;
+    }
+
+    public void setShipin_type(int shipin_type) {
+        this.shipin_type = shipin_type;
     }
 }

@@ -9,6 +9,10 @@ import android.os.Message;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * assets目录文件拷贝工具类
@@ -21,10 +25,17 @@ public class Commen {
     private FileOperateCallback callback;
     private volatile boolean isSuccess;
     private String errorStr;
+    private ThreadPoolExecutor threadPoolExecutor;
+    private String srcPath;
+    private String sdPath;
 
     public static Commen getInstance(Context context) {
         if (instance == null) {
-            instance = new Commen(context);
+            synchronized (Commen.class) {
+                if (instance == null) {
+                    instance = new Commen(context);
+                }
+            }
         }
         return instance;
     }
@@ -45,23 +56,33 @@ public class Commen {
                     callback.onFailed(msg.obj.toString());
                 }
             }
+            threadPoolExecutor.remove(runnable);
+            context = null;
+            instance = null;
         }
     };
 
     public Commen copyAssetsToSD(final String srcPath, final String sdPath) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                copyAssetsToDst(context, srcPath, sdPath);
-                if (isSuccess) {
-                    handler.obtainMessage(SUCCESS).sendToTarget();
-                } else {
-                    handler.obtainMessage(FAILED, errorStr).sendToTarget();
-                }
-            }
-        }).start();
+        this.srcPath = srcPath;
+        this.sdPath = sdPath;
+
+        threadPoolExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>());
+        threadPoolExecutor.execute(Executors.defaultThreadFactory().newThread(runnable));
+
         return this;
     }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            copyAssetsToDst(context, srcPath, sdPath);
+            if (isSuccess) {
+                handler.obtainMessage(SUCCESS).sendToTarget();
+            } else {
+                handler.obtainMessage(FAILED, errorStr).sendToTarget();
+            }
+        }
+    };
 
     public void setFileOperateCallback(FileOperateCallback callback) {
         this.callback = callback;
@@ -79,7 +100,7 @@ public class Commen {
                     // assets 文件夹下的目录
                     if (!"".equals(srcPath)) {
                         copyAssetsToDst(context, srcPath + File.separator + fileName,
-                            dstPath + File.separator + fileName);
+                                dstPath + File.separator + fileName);
                     } else {
                         // assets 文件夹
                         copyAssetsToDst(context, fileName, dstPath + File.separator + fileName);
@@ -104,6 +125,22 @@ public class Commen {
             errorStr = e.getMessage();
             isSuccess = false;
         }
+    }
+
+    public void onDestroy() {
+        if (threadPoolExecutor != null && runnable != null) {
+            threadPoolExecutor.remove(runnable);
+        }
+
+        if (handler != null) {
+            handler.removeMessages(SUCCESS);
+            handler.removeMessages(FAILED);
+            handler = null;
+        }
+        instance = null;
+        callback = null;
+        context = null;
+
     }
 
     public interface FileOperateCallback {

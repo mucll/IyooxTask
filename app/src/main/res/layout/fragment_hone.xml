@@ -37,6 +37,7 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dip_16"
+                android:visibility="gone"
                 android:padding="@dimen/dip_8"
                 android:src="@drawable/home_nav_search" />
 

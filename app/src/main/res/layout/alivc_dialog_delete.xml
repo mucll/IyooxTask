@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/delete_download_info_background"
-    >
+    android:background="@color/delete_download_info_background">
 
     <LinearLayout
-        android:background="@drawable/alivc_dialog_bg"
         android:id="@+id/ll_dialog_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/alivc_dialog_bg"
         android:orientation="vertical">
 
         <ImageView
@@ -19,17 +18,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="15dp"
-            android:gravity="center"
-            />
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/tv_message"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:textColor="@color/alivc_white"
-            android:layout_marginRight="20dp" />
+            android:layout_marginRight="20dp"
+            android:textColor="@color/alivc_white" />
 
         <View
             android:layout_width="match_parent"

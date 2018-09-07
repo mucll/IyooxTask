@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.huisu.iyoox.Interface.MyOnItemClickListener;
 import com.huisu.iyoox.R;
 import com.huisu.iyoox.entity.ArtBookZSDModel;
 
@@ -22,6 +23,11 @@ import java.util.List;
 public class ArtBookListAdapter extends RecyclerView.Adapter<ArtBookListAdapter.ViewHolder> {
     private Context mContext;
     private List<ArtBookZSDModel> models;
+    private MyOnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(MyOnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     public ArtBookListAdapter(Context mContext, List<ArtBookZSDModel> models) {
         this.mContext = mContext;
@@ -46,12 +52,20 @@ public class ArtBookListAdapter extends RecyclerView.Adapter<ArtBookListAdapter.
         return models == null ? 0 : models.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView name;
 
         public ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.item_zhishidian_tv);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(getLayoutPosition(), v);
+            }
         }
     }
 }

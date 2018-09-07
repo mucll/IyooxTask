@@ -55,7 +55,7 @@ public class GradeAdapter extends BaseAdapter {
         int resId = getGradeIcon(model.getGrade_id());
         holder.textView.setText(model.getName());
         holder.mIconIv.setImageResource(resId);
-        if (selectGrade == position) {
+        if (selectGrade == model.getGrade_id()) {
             holder.textView.setSelected(true);
         } else {
             holder.textView.setSelected(false);

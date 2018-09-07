@@ -3,6 +3,7 @@ package com.huisu.iyoox.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,9 +57,10 @@ public class StudentCollectAdapter extends RecyclerView.Adapter<StudentCollectAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CollectModel titleModel = models.get(position);
-        String string = titleModel.getGrade_name() +
-                titleModel.getXueke_name() +
-                titleModel.getGrade_detail_name();
+        String string =
+                (TextUtils.isEmpty(titleModel.getGrade_name()) ? "" : titleModel.getGrade_name()) +
+                        (TextUtils.isEmpty(titleModel.getXueke_name()) ? "" : titleModel.getXueke_name()) +
+                        (TextUtils.isEmpty(titleModel.getGrade_detail_name()) ? "" : titleModel.getGrade_detail_name());
         holder.subjectTv.setText(string);
         holder.videoNameTv.setText(titleModel.getVedio_name());
         holder.gradeDetailTv.setText(titleModel.getJiaocai_name());

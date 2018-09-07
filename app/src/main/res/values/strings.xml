@@ -160,4 +160,7 @@
     <string name="slivc_not_support_url">not support url download...</string>
 
     <string name="alivc_speed">speed</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

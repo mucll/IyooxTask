@@ -15,6 +15,7 @@ public class VideoTitleModel extends LitePalSupport implements Serializable {
     private int zhishidian_id;
     private int timu_count;
     private int sort;
+    private String url;
 
     public int getShipin_id() {
         return shipin_id;
@@ -54,5 +55,13 @@ public class VideoTitleModel extends LitePalSupport implements Serializable {
 
     public void setSort(int sort) {
         this.sort = sort;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

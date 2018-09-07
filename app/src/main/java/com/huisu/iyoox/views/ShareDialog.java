@@ -45,7 +45,7 @@ public class ShareDialog {
         web.setDescription(content);//描述
         final ShareAction sa = new ShareAction(((Activity) context));
         sa.withMedia(web);
-        sa.setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+        sa.setDisplayList(SHARE_MEDIA.WEIXIN)
                 .setShareboardclickCallback(new ShareBoardlistener() {
                     @Override
                     public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {

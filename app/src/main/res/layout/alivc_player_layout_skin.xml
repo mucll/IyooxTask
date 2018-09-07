@@ -26,6 +26,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dip_16"
+                android:layout_marginRight="@dimen/dip_16"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="@color/white"
                 android:textSize="@dimen/f_16" />
 
@@ -153,4 +157,16 @@
                 android:textSize="@dimen/f_14" />
         </RelativeLayout>
     </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <com.huisu.iyoox.alivideo.download.DownloadView
+            android:id="@+id/download_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
 </LinearLayout>

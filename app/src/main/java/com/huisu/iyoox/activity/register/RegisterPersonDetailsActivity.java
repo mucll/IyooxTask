@@ -44,7 +44,7 @@ public class RegisterPersonDetailsActivity extends BaseActivity implements View.
     private EditText nameEditText, genderEditText, gradeEditText;
     private SelectSexDialog sexDialog;
     private String sexCode = SelectSexDialog.MAN_CODE;
-    private int gradeCode = 1;
+    private int gradeCode;
     private SelectGradeDialog gradeDialog;
     private Button nextBt;
     private String userId;

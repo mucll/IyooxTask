@@ -72,6 +72,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener,
     private Loading loading;
     private LinearLayout tagImageLayout;
     private List<ImageView> imageList = new ArrayList<>();
+    private TextView class_empty_text_tv;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,6 +92,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener,
         addClassBt = view.findViewById(R.id.add_class_bt);
         titleTv = view.findViewById(R.id.title_bar_tv);
         titleTv.setText("我的班级");
+        class_empty_text_tv = view.findViewById(R.id.class_empty_text_tv);
         tagImageLayout = view.findViewById(R.id.student_class_tag_image_layout);
 
         mChart = view.findViewById(R.id.chart_line);
@@ -169,6 +171,11 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener,
         rankingModels.clear();
         rankingModels.addAll(data.getZhishidian_list());
         initTagImage(rankingModels.size(), 0);
+        if (rankingModels.size() > 0) {
+            class_empty_text_tv.setVisibility(View.GONE);
+        } else {
+            class_empty_text_tv.setVisibility(View.VISIBLE);
+        }
         mViewPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager()));
     }
 

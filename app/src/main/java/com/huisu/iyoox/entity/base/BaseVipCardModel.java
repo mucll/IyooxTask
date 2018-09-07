@@ -14,5 +14,5 @@ import java.util.List;
 public class BaseVipCardModel {
     public int code;
     public String msg;
-    public List<VipCardModel> data;
+    public VipCardModel data;
 }

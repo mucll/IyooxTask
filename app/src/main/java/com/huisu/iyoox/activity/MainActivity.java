@@ -21,6 +21,7 @@ import com.huisu.iyoox.fragment.home.ErrorExercisesFragment;
 import com.huisu.iyoox.fragment.home.HomeFragment;
 import com.huisu.iyoox.fragment.home.HomeWorkFragment;
 import com.huisu.iyoox.fragment.home.MineFragment;
+import com.huisu.iyoox.fragment.home.NewErrorExercisesFragment;
 import com.huisu.iyoox.fragment.teacher.TeacherClassFragment;
 import com.huisu.iyoox.fragment.teacher.TeacherRemarkFragment;
 import com.huisu.iyoox.fragment.teacher.TeacherCreateTaskFragment;
@@ -47,16 +48,13 @@ public class MainActivity extends BaseActivity {
     private final int maxTime = 2000;
     private int tabImages[][] = null;
     private User user;
-    private FragmentManager manager;
+    public static boolean vod_init = false;
 
     @Override
     public void onChildCreate(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             user = (User) savedInstanceState.getSerializable("user");
             UserManager.getInstance().setUser(user);
-            //重新创建Manager，防止此对象为空
-            manager = getSupportFragmentManager();
-            manager.popBackStackImmediate(null, 1);//弹出所有fragment
         }
     }
 
@@ -68,9 +66,6 @@ public class MainActivity extends BaseActivity {
         }
         if (user == null) {
             user = UserManager.getInstance().getUser();
-        }
-        if (manager == null) {
-            manager = getSupportFragmentManager();
         }
         mFragmentList.clear();
         //区分 老师 和 学生
@@ -94,6 +89,7 @@ public class MainActivity extends BaseActivity {
                     {R.drawable.tab_icon_class_selected, R.drawable.tab_icon_class_regular},
                     {R.drawable.tab_icon_user_selected, R.drawable.tab_icon_user_regular}};
             mFragmentList.add(new HomeFragment());
+//            mFragmentList.add(new NewErrorExercisesFragment());
             mFragmentList.add(new ErrorExercisesFragment());
             mFragmentList.add(new HomeWorkFragment());
             mFragmentList.add(new ClassFragment());
@@ -120,10 +116,10 @@ public class MainActivity extends BaseActivity {
         });
         if (Constant.TEACHER_TYPE == user.getType()) {
             //老师
-            myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout_teacher, 0x121, manager);
+            myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout_teacher, 0x121);
         } else {
             //学生
-            myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout_student, 0x121, manager);
+            myFragmentLayout.setAdapter(mFragmentList, R.layout.tablayout_student, 0x1214);
         }
         myFragmentLayout.getViewPager().setOffscreenPageLimit(mFragmentList.size());
     }
@@ -134,11 +130,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void setEvent() {
-        //横屏全屏的实现
-        //横向
-//        JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
-        //纵向
-//        JZVideoPlayer.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT;
     }
 
     @Override
@@ -173,27 +164,6 @@ public class MainActivity extends BaseActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-//    @Override
-//    public void onBackPressed() {
-//        if (JZVideoPlayer.backPress()) {
-//            return;
-//        }
-//        if (System.currentTimeMillis() - exitTime > maxTime) {
-//            exitTime = System.currentTimeMillis();
-//            TabToast.makeText(
-//                    getResources().getString(R.string.exit_destroy_app),
-//                    this);
-//        } else {
-//            finish();
-//        }
-//        super.onBackPressed();
-//    }
-
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        JZVideoPlayer.releaseAllVideos();
-//    }
 
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -207,9 +177,8 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
+    protected void onDestroy() {
+        super.onDestroy();
+        vod_init = false;
     }
-
 }

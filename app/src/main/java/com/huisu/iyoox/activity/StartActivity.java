@@ -319,6 +319,7 @@ public class StartActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        init = false;
         handler.removeCallbacksAndMessages(null);
     }
 

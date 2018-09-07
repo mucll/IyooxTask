@@ -195,8 +195,6 @@ public static final int *;
 -keep class com.umeng.socialize.handler.*
 -keep class com.umeng.weixin.handler.**
 -keep class com.umeng.weixin.handler.*
--keep class com.umeng.qq.handler.**
--keep class com.umeng.qq.handler.*
 -keep class UMMoreHandler{*;}
 -keep class com.tencent.mm.sdk.modelmsg.WXMediaMessage {*;}
 -keep class com.tencent.mm.sdk.modelmsg.** implements com.tencent.mm.sdk.modelmsg.WXMediaMessage$IMediaObject {*;}
@@ -247,7 +245,6 @@ public static final int *;
 
 -keep class com.linkedin.** { *; }
 -keep class com.android.dingtalk.share.ddsharemodule.** { *; }
--keepattributes Signature
 # 播放器混淆
 # The support library contains references to newer platform versions.
 # Don't warn about those in case this app is linking against an older
@@ -274,8 +271,6 @@ public static final int *;
 -ignorewarnings
 #保证是独立的jar,没有任何项目引用,如果不写就会认为我们所有的代码是无用的,从而把所有的代码压缩掉,导出一个空的jar
 -dontshrink
-#保护泛型
--keepattributes Signature
 
 -keep class com.easefun.polyvsdk.**{*;}
 -keep class com.chinanetcenter.wcs.**{*;}
@@ -304,10 +299,6 @@ public static final int *;
 -keep class com.alipay.tscenter.** { *; }
 -keep class com.ta.utdid2.** { *;}
 -keep class com.ut.device.** { *;}
-#bugly
--dontwarn com.tencent.bugly.**
--keep public class com.tencent.bugly.**{*;}
--keep class android.support.**{*;}
 # banner 的混淆代码
 -keep class com.youth.banner.** {
     *;

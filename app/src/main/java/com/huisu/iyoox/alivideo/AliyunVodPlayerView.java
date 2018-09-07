@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.alivc.player.AliyunErrorCode;
 import com.alivc.player.VcPlayerLog;
@@ -207,6 +208,10 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
         }
     }
 
+    public void hintDownLoad() {
+        mControlView.hintDownLoad();
+    }
+
     /**
      * 切换播放速度
      *
@@ -285,6 +290,10 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
         if (mControlView != null) {
             mControlView.hide(ViewAction.HideType.Normal);
         }
+    }
+
+    public void updateScreenShow() {
+        mControlView.updateDownloadBtn();
     }
 
 
@@ -380,8 +389,8 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
      */
     private void initOrientationWatchdog() {
         final Context context = getContext();
-        mOrientationWatchDog = new OrientationWatchDog(context);
-        mOrientationWatchDog.setOnOrientationListener(new AliyunVodPlayerView.InnerOrientationListener(this));
+//        mOrientationWatchDog = new OrientationWatchDog(context);
+//        mOrientationWatchDog.setOnOrientationListener(new AliyunVodPlayerView.InnerOrientationListener(this));
     }
 
 
@@ -785,6 +794,16 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
             public void showMore() {
                 if (mOutOnShowMoreClickListener != null) {
                     mOutOnShowMoreClickListener.showMore();
+                }
+            }
+        });
+        mControlView.setOnDownloadClickListener(new ControlView.OnDownloadClickListener() {
+            @Override
+            public void onDownloadClick() {
+                //点击下载之后弹出不同清晰度选择下载dialog
+                // 如果当前播放视频时url类型, 不允许下载
+                if (mOnPlayerViewClickListener != null) {
+                    mOnPlayerViewClickListener.onClick(mCurrentScreenMode, PlayViewType.Download);
                 }
             }
         });
@@ -2050,7 +2069,9 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
      * 暂停播放
      */
     public void pause() {
-        mControlView.setPlayState(ControlView.PlayState.NotPlaying);
+        if (mControlView != null) {
+            mControlView.setPlayState(ControlView.PlayState.NotPlaying);
+        }
 
         if (mAliyunVodPlayer == null) {
             return;

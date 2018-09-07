@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +60,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private View msgView;
     private View newMsgView;
     private View searchIv;
+    private MyPagerAdapter myPagerAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -111,6 +114,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                             selectModel = gradeListModel;
                             break;
                         }
+                    }
+                    if (selectModel == null) {
+                        selectModel = gradeListModels.get(0);
                     }
                     getSelectGradeListModel();
                 } else {
@@ -180,9 +186,12 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
      * 初始化viewpager
      */
     private void initPage() {
-        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getChildFragmentManager());
-        mViewPager.setAdapter(myPagerAdapter);
-        mViewPager.setCurrentItem(0);
+        if (myPagerAdapter == null) {
+            myPagerAdapter = new MyPagerAdapter(getChildFragmentManager(), subjectModels);
+            mViewPager.setAdapter(myPagerAdapter);
+        } else {
+            myPagerAdapter.notifyDataSetChanged();
+        }
         if (selectModel != null) {
             //多缓存一个首页的界面
             int fragmentCount = selectModel.getKemuArr().size() + 1;
@@ -190,8 +199,18 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             //跳转到上次记录的界面
             if (fragmentCount > selectPageIndexof) {
                 mViewPager.setCurrentItem(selectPageIndexof);
+                if (selectPageIndexof != 0) {
+                    //刷新当前fragment数据
+                    BaseFragment baseFragment = fragments.get(selectPageIndexof);
+                    String gradeId = selectModel.getGrade_id() + "";
+                    String gradeDetailId = selectModel.getGrade_detail_id() + "";
+                    SubjectModel subjectModel = selectModel.getKemuArr().get(selectPageIndexof - 1);
+                    baseFragment.updateArguments(gradeId, gradeDetailId, subjectModel);
+                    baseFragment.onShow();
+                }
             } else {
                 selectPageIndexof = 0;
+                mViewPager.setCurrentItem(0);
             }
         }
         if (fragments.size() > 0) {
@@ -227,6 +246,12 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         selectPageIndexof = position;
         mTabView.setSelection(position);
         BaseFragment baseFragment = fragments.get(position);
+        if (position != 0) {
+            String gradeId = selectModel.getGrade_id() + "";
+            String gradeDetailId = selectModel.getGrade_detail_id() + "";
+            SubjectModel subjectModel = selectModel.getKemuArr().get(position - 1);
+            baseFragment.updateArguments(gradeId, gradeDetailId, subjectModel);
+        }
         baseFragment.onShow();
     }
 
@@ -242,16 +267,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 if (gradeListModels.size() == 0) {
                     return;
                 }
-//                GradeDialog gradeDialog = new GradeDialog(getContext(), gradeListModels, selectPosition) {
-//                    @Override
-//                    public void getGradePosition(int position) {
-//                        HomeFragment.this.selectPosition = position;
-//                        studentGradeTv.setText(gradeListModels.get(position).getName());
-//                        initData();
-//                        initPage();
-//                    }
-//                };
-//                gradeDialog.show();
+                if (selectModel == null) return;
                 GradeNewDialog gradeDialog = new GradeNewDialog(getContext(), gradeListModels, selectModel) {
                     @Override
                     public void getGradePosition(GradeListModel model) {
@@ -283,9 +299,11 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
      */
     class MyPagerAdapter extends FragmentPagerAdapter {
 
+        private List<SubjectModel> models;
 
-        MyPagerAdapter(FragmentManager fm) {
+        MyPagerAdapter(FragmentManager fm, List<SubjectModel> models) {
             super(fm);
+            this.models = models;
         }
 
         @Override
@@ -305,7 +323,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
         @Override
         public int getCount() {
-            return subjectModels == null ? 0 : subjectModels.size();
+            return models == null ? 0 : models.size();
         }
 
         @Override
@@ -319,6 +337,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             }
             return baseFragment;
         }
+
     }
 
     private BookFragment getFragment(String gradeId, String gradeDetailId, SubjectModel model) {

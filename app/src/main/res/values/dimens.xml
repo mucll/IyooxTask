@@ -92,12 +92,13 @@
     <dimen name="dip_140">140dip</dimen>
     <dimen name="dip_140_pad">140dip</dimen>
     <dimen name="dip_150">150dip</dimen>
-    <dimen name="dip_150_pad">150dip</dimen>
+    <dimen name="dip_150_pad">130dip</dimen>
     <dimen name="dip_160">160dip</dimen>
     <dimen name="dip_180">180dip</dimen>
     <dimen name="dip_192">192dip</dimen>
     <dimen name="dip_200">200dip</dimen>
     <dimen name="dip_200_pad">230dip</dimen>
+    <dimen name="dip_240_pad">240dip</dimen>
     <dimen name="dip_204">204dip</dimen>
     <dimen name="dip_210">210dip</dimen>
     <dimen name="dip_213">213dip</dimen>

@@ -25,11 +25,12 @@ public class GlideImageLoader extends ImageLoader {
          传输的到的是什么格式，那么这种就使用Object接收和返回，你只需要强转成你传输的类型就行，
          切记不要胡乱强转！
          */
+        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         //Glide 加载图片简单用法
         Glide.with(context)
                 .load(path)
-                .placeholder(R.drawable.home_banner2)
-                .error(R.drawable.home_banner2)
+                .placeholder(R.drawable.home_banner_2)
+                .error(R.drawable.home_banner_2)
                 .into(imageView);
     }
 

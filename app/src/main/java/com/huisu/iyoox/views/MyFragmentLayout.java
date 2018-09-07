@@ -122,39 +122,9 @@ public class MyFragmentLayout extends LinearLayout implements
         viewPager.setOnPageChangeListener(this);
     }
 
-    public void setAdapter(List<Fragment> list, int tabLayoutId, int id, FragmentManager fragmentManager) {
-        this.setOrientation(LinearLayout.VERTICAL);
-        tabLayout = (LinearLayout) View.inflate(context, tabLayoutId, null);
-        tabLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-                LayoutParams.WRAP_CONTENT));
-        this.list = list;
-        fragmentAdapter = new Fragment_viewpager_Adapter(fragmentManager);
-        viewPager = new MyViewPager(context);
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, 0);
-        params.weight = 1;
-        viewPager.setLayoutParams(params);
-        viewPager.setId(id);
-        if (whereTab == 0) {
-            this.addView(viewPager);
-            this.addView(tabLayout);
-        } else {
-            this.addView(tabLayout);
-            this.addView(viewPager);
-        }
-        for (int i = 0; i < tabLayout.getChildCount(); i++) {
-            View view = tabLayout.getChildAt(i);
-            view.setClickable(true);
-            view.setOnClickListener(new tabClickLisener(i));
-        }
-        viewPager.setAdapter(fragmentAdapter);
-        viewPager.setOnPageChangeListener(this);
-    }
-
     public void overrideTabClickListenner(int position, OnClickListener onClickListener) {
         tabLayout.getChildAt(position).setOnClickListener(onClickListener);
     }
-
-    ;
 
     private class Fragment_viewpager_Adapter extends FragmentStatePagerAdapter {
 

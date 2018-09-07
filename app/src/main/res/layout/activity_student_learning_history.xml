@@ -4,7 +4,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.student.StudentLearningHistoryActivity">
+    tools:context=".activity.student.StudentCollectActivity">
 
     <include layout="@layout/layout_title_bar_all" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/jt_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_12"
+                    android:layout_marginTop="@dimen/dip_8"
+                    android:text="今天"
+                    android:visibility="gone"
+                    android:textSize="@dimen/f_16" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/jt_student_learning_history_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/zt_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_12"
+                    android:layout_marginTop="@dimen/dip_8"
+                    android:text="昨天"
+                    android:visibility="gone"
+                    android:textSize="@dimen/f_16" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/zt_student_learning_history_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/gz_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_12"
+                    android:layout_marginTop="@dimen/dip_8"
+                    android:text="更早"
+                    android:visibility="gone"
+                    android:textSize="@dimen/f_16" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/gz_student_learning_history_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:id="@+id/student_learning_history_empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/student_collect_empty_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dip_130"
+                android:src="@drawable/user_collecting_wu" />
+
+            <TextView
+                android:id="@+id/student_collect_empty_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/student_collect_empty_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dip_30"
+                android:text="暂无记录"
+                android:textColor="@color/color333"
+                android:textSize="@dimen/f_16" />
+
+        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

@@ -44,7 +44,7 @@ public class RegisterTeacherSubjectActivity extends BaseActivity implements View
     private List<GradeListModel> gradeModels;
     private SelectGradeDialog gradeDialog;
     //默认一年级
-    private int gradeCode = 1;
+    private int gradeCode;
 
     private int subjectId = 0;
     private SubjectModel subjectModel;

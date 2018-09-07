@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_gallery_outer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ctj_bg_2"
+    android:clipChildren="false"
+    android:orientation="vertical"
+    tools:context=".fragment.home.ErrorExercisesFragment">
+
+    <View
+        android:id="@+id/tab_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_24"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:layout_below="@id/tab_view">
+
+        <TextView
+            android:id="@+id/title_bar_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="错题集"
+            android:textColor="@color/white"
+            android:textSize="@dimen/f_21" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/error_fragment_recycler_view"
+            android:layout_width="@dimen/dip_320_pad"
+            android:layout_height="@dimen/dip_400_pad"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/title_height"
+            android:background="@color/trans"/>
+
+        <TextView
+            android:id="@+id/empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="木有内容耶,快去学习吧"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/f_18" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -11,6 +11,7 @@ import com.huisu.iyoox.R;
 import com.huisu.iyoox.activity.base.BaseActivity;
 import com.huisu.iyoox.adapter.VipBuyListAdapter;
 import com.huisu.iyoox.entity.VipCardModel;
+import com.huisu.iyoox.entity.base.BaseVipCardListModel;
 import com.huisu.iyoox.entity.base.BaseVipCardModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
@@ -66,7 +67,7 @@ public class VipBuyActivity extends BaseActivity {
             @Override
             public void onSuccess(Object responseObj) {
                 models.clear();
-                BaseVipCardModel baseModel = (BaseVipCardModel) responseObj;
+                BaseVipCardListModel baseModel = (BaseVipCardListModel) responseObj;
                 if (baseModel.data != null && baseModel.data.size() > 0) {
                     models.addAll(baseModel.data);
                 }
