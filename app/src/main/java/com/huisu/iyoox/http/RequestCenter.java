@@ -839,7 +839,7 @@ public class RequestCenter {
     }
 
     /**
-     * 小升初详情
+     * 小升初列表
      */
     public static void get_xiaoshengchu_vedio(String userId, String id, DisposeDataListener listener) {
         RequestParams params = new RequestParams();
@@ -847,5 +847,16 @@ public class RequestCenter {
         params.put("id", id);
         params.put("student_id", userId);
         RequestCenter.postRequest(HttpConstants.get_xiaoshengchu_vedio, params, listener, BaseGuoxueYishuVodModel.class);
+    }
+
+    /**
+     * 小升初详情
+     */
+    public static void get_vedio_play_info(String userId, String id, String type, DisposeDataListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("student_id", userId);
+        params.put("type", type);
+        RequestCenter.postRequest(HttpConstants.get_vedio_play_info, params, listener, BaseGuoxueYishuVodModel.class);
     }
 }

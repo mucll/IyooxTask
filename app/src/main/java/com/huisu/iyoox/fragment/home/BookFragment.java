@@ -170,9 +170,11 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
      * 请求课本 版本 章节 知识点
      */
     private void postBookDetailsData() {
+        loading = Loading.show(null, getContext(), getContext().getString(R.string.loading_one_hint_text));
         RequestCenter.getOptionlist(gradeId, gradeDetailId, subjectModel.getKemu_id() + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
+                loading.dismiss();
                 BaseBookDetailsModel baseBookDetailsModel = (BaseBookDetailsModel) responseObj;
                 if (baseBookDetailsModel.code == Constant.POST_SUCCESS_CODE
                         && baseBookDetailsModel.data != null && baseBookDetailsModel.data.size() > 0) {
@@ -185,6 +187,7 @@ public class BookFragment extends BaseFragment implements SelectMenuView.OnMenuS
 
             @Override
             public void onFailure(Object reasonObj) {
+                loading.dismiss();
             }
         });
     }

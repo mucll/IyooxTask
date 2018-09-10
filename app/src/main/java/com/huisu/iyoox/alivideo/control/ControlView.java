@@ -375,6 +375,14 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
     }
 
     /**
+     * 隐藏下载
+     */
+    public void showDownLoad() {
+        mDownLoadShow = true;
+        mTitleDownload.setVisibility(View.VISIBLE);
+    }
+
+    /**
      * 设置是否显示标题栏。
      *
      * @param show false:不显示

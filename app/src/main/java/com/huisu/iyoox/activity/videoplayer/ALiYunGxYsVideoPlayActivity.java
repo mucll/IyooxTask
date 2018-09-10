@@ -54,9 +54,12 @@ import com.huisu.iyoox.alivideo.tipsview.ErrorInfo;
 import com.huisu.iyoox.alivideo.utils.Commen;
 import com.huisu.iyoox.alivideo.utils.PlayAuthUtil;
 import com.huisu.iyoox.alivideo.utils.ScreenUtils;
+import com.huisu.iyoox.constant.Constant;
 import com.huisu.iyoox.entity.GuoxueYishuVodModel;
 import com.huisu.iyoox.entity.User;
 import com.huisu.iyoox.entity.VideoTitleModel;
+import com.huisu.iyoox.entity.base.BaseGuoxueYishuVodModel;
+import com.huisu.iyoox.entity.base.BaseVideoTimuModel;
 import com.huisu.iyoox.http.RequestCenter;
 import com.huisu.iyoox.manager.UserManager;
 import com.huisu.iyoox.okhttp.listener.DisposeDataListener;
@@ -189,17 +192,7 @@ public class ALiYunGxYsVideoPlayActivity extends AppCompatActivity implements Vi
 
         if (selectModel != null) {
             userHintView.setText(selectModel.getName());
-            if (!TextUtils.isEmpty(selectModel.getUrl())) {
-                vod = selectModel.getUrl();
-                postPlayAuthHttp(vod);
-                isCollect(selectModel.isIs_shipin_collected());
-                video_hint_layout.setVisibility(View.GONE);
-            } else {
-                TabToast.showMiddleToast(context, "暂无视频");
-                if (wifi) {
-                    video_hint_layout.setVisibility(View.VISIBLE);
-                }
-            }
+            postVideoUrlData();
         }
 
         if (selectModel != null && selectModel.getRelated_vedios().size() > 0) {
@@ -213,6 +206,61 @@ public class ALiYunGxYsVideoPlayActivity extends AppCompatActivity implements Vi
         } else {
             zhangjieContent.setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * 获取视频VOD
+     */
+    private GuoxueYishuVodModel urlModel;
+
+    private void postVideoUrlData() {
+        mAliyunVodPlayerView.hintDownLoad();
+        RequestCenter.get_vedio_play_info(user.getUserId(), selectModel.getId() + "", selectModel.getType() + "", new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                userHintView.setText(selectModel.getName());
+                BaseGuoxueYishuVodModel baseVideoUrlModel = (BaseGuoxueYishuVodModel) responseObj;
+                if (baseVideoUrlModel.code == Constant.POST_SUCCESS_CODE) {
+                    if (baseVideoUrlModel.data != null) {
+                        urlModel = baseVideoUrlModel.data;
+                        //是否收藏
+                        isCollect(urlModel.isIs_shipin_collected());
+                        if (urlModel.getVip_status() == Constant.vip_all_type) {
+                            bipBuyView.setVisibility(View.INVISIBLE);
+                            mAliyunVodPlayerView.showDownLoad();
+                        } else {
+                            bipBuyView.setVisibility(View.VISIBLE);
+                            mAliyunVodPlayerView.hintDownLoad();
+                        }
+                        //视频ID
+                        vod = urlModel.getUrl();
+                        if (!TextUtils.isEmpty(vod)) {
+                            postPlayAuthHttp(vod);
+                            video_hint_layout.setVisibility(View.GONE);
+                        } else {
+                            mAliyunVodPlayerView.hintDownLoad();
+                            TabToast.showMiddleToast(context, "暂无视频");
+                            if (wifi && !MainActivity.vod_init) {
+                                video_hint_layout.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                    } else {
+                        collectTv.setSelected(false);
+                        TabToast.showMiddleToast(context, "暂无视频");
+                        if (wifi) {
+                            video_hint_layout.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                video_hint_layout.setVisibility(View.VISIBLE);
+                collectTv.setEnabled(false);
+            }
+        });
     }
 
     private void scrollToPosition() {
@@ -344,21 +392,15 @@ public class ALiYunGxYsVideoPlayActivity extends AppCompatActivity implements Vi
     public void onItemClick(int position, View view) {
         GuoxueYishuVodModel model = models.get(position);
         if (model.getId() != selectModel.getId()) {
-            if (model != null) {
-                if (!TextUtils.isEmpty(model.getUrl())) {
-                    this.selectModel = model;
-                    userHintView.setText(selectModel.getName());
-                    vod = selectModel.getUrl();
-                    postPlayAuthHttp(vod);
-                    isCollect(selectModel.isIs_shipin_collected());
-                    video_hint_layout.setVisibility(View.GONE);
-                } else {
-                    TabToast.showMiddleToast(context, "暂无视频");
-                    if (wifi && !MainActivity.vod_init) {
-                        video_hint_layout.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
+            this.selectModel = model;
+            mAliyunVodPlayerView.reset();
+            mAliyunVodPlayerView.setCoverResource(R.drawable.video_play_bg);
+            video_hint_layout.setVisibility(View.VISIBLE);
+            userHintView.setText(selectModel.getName());
+            //高亮选中的
+            mAdapter.setSelectId(selectModel.getId());
+            mAdapter.notifyDataSetChanged();
+            postVideoUrlData();
         }
     }
 

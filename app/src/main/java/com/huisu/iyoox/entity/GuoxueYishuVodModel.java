@@ -15,6 +15,7 @@ public class GuoxueYishuVodModel implements Serializable {
     private String name;
     private String url;
     private int type;
+    private int vip_status;
     private List<GuoxueYishuVodModel> related_vedios;
     private boolean is_shipin_collected;
 
@@ -64,5 +65,13 @@ public class GuoxueYishuVodModel implements Serializable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getVip_status() {
+        return vip_status;
+    }
+
+    public void setVip_status(int vip_status) {
+        this.vip_status = vip_status;
     }
 }

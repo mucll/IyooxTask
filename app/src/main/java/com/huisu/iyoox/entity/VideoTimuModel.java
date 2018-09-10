@@ -15,6 +15,7 @@ public class VideoTimuModel implements Serializable{
     private String shipin_url;
     private List<ExercisesModel> timu_list;
     private boolean is_shipin_collected;
+    private int vip_status;
 
     public int getJiaocai_id() {
         return jiaocai_id;
@@ -62,5 +63,13 @@ public class VideoTimuModel implements Serializable{
 
     public void setIs_shipin_collected(boolean is_shipin_collected) {
         this.is_shipin_collected = is_shipin_collected;
+    }
+
+    public int getVip_status() {
+        return vip_status;
+    }
+
+    public void setVip_status(int vip_status) {
+        this.vip_status = vip_status;
     }
 }

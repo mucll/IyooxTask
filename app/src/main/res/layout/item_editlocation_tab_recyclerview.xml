@@ -14,7 +14,15 @@
         android:paddingRight="@dimen/dip_12"
         android:text="客厅"
         android:textColor="@drawable/select_text_maincolor"
-        android:textSize="@dimen/f_15" />
+        android:textSize="@dimen/f_16_pad" />
     <!--android:textColor="@color/select_text_select"-->
-
+    <View
+        android:id="@+id/select_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_2"
+        android:layout_marginLeft="@dimen/dip_2"
+        android:layout_marginRight="@dimen/dip_2"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/dip_2"
+        android:background="@color/main_text_color" />
 </LinearLayout>

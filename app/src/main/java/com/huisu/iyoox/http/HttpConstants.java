@@ -314,9 +314,13 @@ public class HttpConstants {
      */
     public static String xiaoshengchu = ROOT_URL + "/xiaoshengchu/getmodule";
     /**
-     * 小升初
+     * 小升初列表
      */
     public static String get_xiaoshengchu_vedio = ROOT_URL + "/zhishidian/get_xiaoshengchu_vedio";
+    /**
+     * 小升初详情
+     */
+    public static String get_vedio_play_info = ROOT_URL + "/zhishidian/get_vedio_play_info";
 }
 
 

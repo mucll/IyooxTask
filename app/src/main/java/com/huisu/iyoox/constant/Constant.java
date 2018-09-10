@@ -23,6 +23,9 @@ public class Constant {
     public static final int VIDEO_GxYs_TYPE = 2;
     public static final int VIDEO_ordinary_TYPE = 0;
 
+    public static final int vip_all_type = 2;
+    public static final int vip_type = 1;
+
     /**
      * 网络请求成功
      */

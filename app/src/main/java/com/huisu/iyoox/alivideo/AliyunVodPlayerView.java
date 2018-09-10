@@ -82,7 +82,7 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
     //引导页view
     private GuideView mGuideView;
     //封面view
-    private ImageView mCoverView;
+    public ImageView mCoverView;
     //播放器
     private AliyunVodPlayer mAliyunVodPlayer;
     //手势对话框控制
@@ -210,6 +210,10 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
 
     public void hintDownLoad() {
         mControlView.hintDownLoad();
+    }
+
+    public void showDownLoad() {
+        mControlView.showDownLoad();
     }
 
     /**
@@ -650,7 +654,7 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
     /**
      * 重置。包括一些状态值，view的状态等
      */
-    private void reset() {
+    public void reset() {
         isCompleted = false;
         inSeek = false;
 

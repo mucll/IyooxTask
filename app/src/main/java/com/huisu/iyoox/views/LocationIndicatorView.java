@@ -100,6 +100,7 @@ public class LocationIndicatorView extends RecyclerView {
     public void setSelection(int position) {
         if (adapter != null) {
             adapter.setSelectPostion(position);
+            this.smoothScrollToPosition(position);
         }
     }
 }

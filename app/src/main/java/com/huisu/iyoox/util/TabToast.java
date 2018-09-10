@@ -103,7 +103,7 @@ public class TabToast {
      * @param context
      */
     public static void showMiddleToast(Context context, String text) {
-        Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 180);
         toast.show();
     }

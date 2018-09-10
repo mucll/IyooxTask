@@ -2,6 +2,7 @@ package com.huisu.iyoox.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -74,8 +75,10 @@ public class LocationIndicatorAdapter extends RecyclerView.Adapter<LocationIndic
         holder.text.setText(mlist.get(position).getName());
         if (mlist.get(position).isSelect()) {
             holder.text.setSelected(true);
+            holder.selectView.setVisibility(View.VISIBLE);
         } else {
             holder.text.setSelected(false);
+            holder.selectView.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -102,6 +105,8 @@ public class LocationIndicatorAdapter extends RecyclerView.Adapter<LocationIndic
     public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.text)
         TextView text;
+        @Bind(R.id.select_text_view)
+        View selectView;
 
         public CustomViewHolder(View view) {
             super(view);

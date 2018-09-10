@@ -219,6 +219,7 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
             zhangjieCount.setText("共" + videoTitleModels.size() + "讲");
             models.clear();
             models.addAll(videoTitleModels);
+            mAdapter.setSelectId(selectModel.getZhishidian_id());
             mAdapter.notifyDataSetChanged();
             scrollToPosition();
         } else {
@@ -317,6 +318,7 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
      * 获取视频VOD
      */
     private void postVideoUrlData(final int videoId) {
+        mAliyunVodPlayerView.hintDownLoad();
         RequestCenter.getVideoData(user.getUserId(), selectModel.getZhishidian_id() + "", videoId + "", new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -326,22 +328,21 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
                     if (baseVideoUrlModel.data != null) {
                         urlModel = baseVideoUrlModel.data;
                         //是否收藏
-                        if (urlModel.isIs_shipin_collected()) {
-                            isCollect = true;
-                            collectTv.setSelected(true);
+                        isCollect(urlModel.isIs_shipin_collected());
+                        if (urlModel.getVip_status() == Constant.vip_all_type) {
+                            bipBuyView.setVisibility(View.INVISIBLE);
+                            mAliyunVodPlayerView.showDownLoad();
                         } else {
-                            isCollect = false;
-                            collectTv.setSelected(false);
+                            bipBuyView.setVisibility(View.VISIBLE);
+                            mAliyunVodPlayerView.hintDownLoad();
                         }
-                        //高亮选中的
-                        mAdapter.setSelectId(selectModel.getZhishidian_id());
-                        mAdapter.notifyDataSetChanged();
                         //视频ID
                         vod = urlModel.getShipin_url();
                         if (!TextUtils.isEmpty(vod)) {
                             postPlayAuthHttp(vod);
                             video_hint_layout.setVisibility(View.GONE);
                         } else {
+                            mAliyunVodPlayerView.hintDownLoad();
                             TabToast.showMiddleToast(context, "暂无视频");
                             if (wifi && !MainActivity.vod_init) {
                                 video_hint_layout.setVisibility(View.VISIBLE);
@@ -360,8 +361,19 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
             @Override
             public void onFailure(Object reasonObj) {
                 video_hint_layout.setVisibility(View.VISIBLE);
+                collectTv.setEnabled(false);
             }
         });
+    }
+
+    private void isCollect(boolean collect) {
+        //是否收藏
+        this.isCollect = collect;
+        if (collect) {
+            collectTv.setSelected(true);
+        } else {
+            collectTv.setSelected(false);
+        }
     }
 
     /**
@@ -396,6 +408,13 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
         VideoTitleModel model = models.get(position);
         if (model.getZhishidian_id() != selectModel.getZhishidian_id()) {
             this.selectModel = model;
+            mAliyunVodPlayerView.reset();
+            mAliyunVodPlayerView.setCoverResource(R.drawable.video_play_bg);
+            video_hint_layout.setVisibility(View.VISIBLE);
+            userHintView.setText(selectModel.getShipin_name());
+            //高亮选中的
+            mAdapter.setSelectId(selectModel.getZhishidian_id());
+            mAdapter.notifyDataSetChanged();
             postVideoUrlData(model.getShipin_id());
         }
     }
@@ -415,6 +434,7 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
         public void onPrepared() {
             ALiYunVideoPlayActivity activity = activityWeakReference.get();
             if (activity != null) {
+                //准备完成
                 activity.onPrepared();
             }
         }
@@ -425,7 +445,9 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
                 Toast.LENGTH_SHORT).show();
     }
 
-
+    /**
+     * 播放结束
+     */
     private static class MyCompletionListener implements IAliyunVodPlayer.OnCompletionListener {
 
         private WeakReference<ALiYunVideoPlayActivity> activityWeakReference;
@@ -436,12 +458,13 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
 
         @Override
         public void onCompletion() {
-
             ALiYunVideoPlayActivity activity = activityWeakReference.get();
         }
     }
 
-
+    /**
+     * 设置首帧显示事件监听
+     */
     private class MyFrameInfoListener implements IAliyunVodPlayer.OnFirstFrameStartListener {
 
         private WeakReference<ALiYunVideoPlayActivity> activityWeakReference;
@@ -476,7 +499,9 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
         }
     }
 
-
+    /**
+     * 设置改变清晰度事件监听
+     */
     private static class MyChangeQualityListener implements IAliyunVodPlayer.OnChangeQualityListener {
 
         private WeakReference<ALiYunVideoPlayActivity> activityWeakReference;
@@ -513,6 +538,9 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
                 getString(R.string.log_change_quality_fail), Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 设置停止播放监听
+     */
     private static class MyStoppedListener implements IAliyunVodPlayer.OnStoppedListener {
 
         private WeakReference<ALiYunVideoPlayActivity> activityWeakReference;
@@ -685,6 +713,9 @@ public class ALiYunVideoPlayActivity extends AppCompatActivity implements View.O
         }
     }
 
+    /**
+     * 屏幕方向改变监听接口
+     */
     private static class MyOrientationChangeListener implements AliyunVodPlayerView.OnOrientationChangeListener {
 
         private final WeakReference<ALiYunVideoPlayActivity> weakReference;
